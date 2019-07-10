@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="39px" viewBox="0 0 22 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Path 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Главная-Итоговая" transform="translate(-109.000000, -1172.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="-discounts" transform="translate(109.000000, 905.000000)">
+                <g id="slider-arrows" transform="translate(0.000000, 267.000000)">
+                    <path d="M11.01143,26.5862351 L28.2931177,9.31551436 C28.6837659,8.92511404 29.3169309,8.925315 29.7073312,9.31596323 C30.0977315,9.70661145 30.0975305,10.3397764 29.7068823,10.7301767 L11.01143,29.4137649 L-7.70688231,10.7073312 C-8.09753053,10.3169309 -8.0977315,9.68376591 -7.70733118,9.29311769 C-7.31693086,8.90246947 -6.68376591,8.9022685 -6.29311769,9.29266882 L11.01143,26.5862351 Z" id="Path-3" transform="translate(11.000000, 19.206882) scale(-1, 1) rotate(90.000000) translate(-11.000000, -19.206882) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

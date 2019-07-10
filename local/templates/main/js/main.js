@@ -1,0 +1,843 @@
+var progress = new KitProgress("#5F9827", 2);
+
+$(document).ready(function(){	
+    function resize(){
+       if( typeof( window.innerWidth ) == 'number' ) {
+            myWidth = window.innerWidth;
+            myHeight = window.innerHeight;
+        } else if( document.documentElement && ( document.documentElement.clientWidth || 
+        document.documentElement.clientHeight ) ) {
+            myWidth = document.documentElement.clientWidth;
+            myHeight = document.documentElement.clientHeight;
+        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+            myWidth = document.body.clientWidth;
+            myHeight = document.body.clientHeight;
+        }
+    }
+    $(window).resize(resize);
+    resize();
+
+    $.fn.placeholder = function() {
+        if(typeof document.createElement("input").placeholder == 'undefined') {
+            $('[placeholder]').focus(function() {
+                var input = $(this);
+                if (input.val() == input.attr('placeholder')) {
+                    input.val('');
+                    input.removeClass('placeholder');
+                }
+            }).blur(function() {
+                var input = $(this);
+                if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                    input.addClass('placeholder');
+                    input.val(input.attr('placeholder'));
+                }
+            }).blur().parents('form').submit(function() {
+                $(this).find('[placeholder]').each(function() {
+                    var input = $(this);
+                    if (input.val() == input.attr('placeholder')) {
+                        input.val('');
+                    }
+                });
+            });
+        }
+    }
+    $.fn.placeholder();
+
+    $('.b-main-slider').slick({
+        dots: true,
+        dotsClass: "my-dots",
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 5000
+    });
+
+    catalogElementSlick();
+
+    function catalogElementSlick(){
+        $('.b-product-main').slick({
+            dots: false,
+            arrows: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: true,
+            asNavFor: '.b-product-photo-slider',
+            swipe: false
+        });
+
+        $('.b-product-photo-slider').slick({
+            dots: false,
+            arrows: true,
+            prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
+            nextArrow: '<div class="b-product-arrows icon-arrow-right-bold"></div>',
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: false,
+            variableWidth: true,
+            asNavFor: '.b-product-main',
+            focusOnSelect: true
+        });
+    }
+
+    $('.b-item-cards').slick({
+        dots: false,
+        swipe: false,
+        arrows: true,
+        prevArrow: '<div class="icon-arrow-left" style="cursor: pointer; position: absolute; top: calc(50% - 23px); font-size: 40px; left: -42px;"></div>',
+        nextArrow: '<div class="icon-arrow-right" style="cursor: pointer; position: absolute; top: calc(50% - 23px); font-size: 40px; right: -38px;"></div>',
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: false,
+    });
+
+     $('.b-im-block').slick({
+        dots: false,
+        arrows: true,
+        prevArrow: '<div class="icon-arrow-left" style="cursor: pointer; position: absolute; top: calc(50% - 34px); font-size: 70px; right: calc(100% - 150px); z-index: 100";></div>',
+        nextArrow: '<div class="icon-arrow-right" style="cursor: pointer; position: absolute; top: calc(50% - 34px); font-size: 70px; right: calc(0% + 150px);"></div>',
+        infinite: true,
+        slidesToShow: 7,
+        slidesToScroll: 1,
+        autoplay: false,
+        focusOnSelect: true,
+        variableWidth: true
+    });
+
+    $(".b-show-more").click(function(){
+        $(this).addClass("hidden");
+        $(this).prev(2).addClass("visible");
+    });
+
+    $(".b-item-cards.slick-slider").find(".b-item-card").each(function(){
+        var $height = $(this).parents(".slick-track").innerHeight();
+        $(this).innerHeight($height);
+    })
+
+    $(".b-main-article").click(function(){
+        window.location = $(this).find(".article-link").attr("href");
+    });
+
+    $(document).on('beforeChange', '.b-product-photo-slider', function(event, slick, currentSlide, nextSlide){
+        var id = $(".b-product-photo-slider img[data-slick-index='"+nextSlide+"']").attr('data-color-id');
+        
+        $(".colors-select option[data-color-id='"+id+"']").prop('selected', true);
+        $('.colors-select').change().trigger('chosen:updated');
+    });
+
+    function showPhotoColor(id) {
+        $(".b-product-main-color a.show").removeClass("show");
+        $(".b-product-main-color").addClass("show");
+        $(".b-product-main-color a[data-color-id='"+id+"']").addClass("show");
+    }
+
+    function chosenElementInit(){
+        $(".colors-select").chosen({
+            width: "193px",
+            disable_search_threshold: 10000
+        });
+    }
+
+    chosenElementInit();
+
+    $(document).on('change', '.colors-select', function(){
+        
+        // console.log('change');
+
+        var id = Number($(this).find(":selected").attr("data-color-id")),
+            price = Number($(this).find(":selected").attr("data-price")),
+            discountPrice = Number($(this).find(":selected").attr("data-discount-price")),
+            article = $(this).find(":selected").attr("data-article"),
+            quantity = Number($(this).find(":selected").attr("data-quantity"));
+
+        if(price != discountPrice){
+            if (!$('.b-product-params-right').hasClass('has-discount')) {
+                $('.b-product-params-right').addClass('has-discount');
+            }
+        } else {
+            if ($('.b-product-params-right').hasClass('has-discount')) {
+                $('.b-product-params-right').removeClass('has-discount');
+            }
+        }
+
+        $('#price').text(price);
+        $('#discount-price').text(discountPrice);
+        $('#article').text(article);
+        $('#quantity').text(quantity);
+        $('.b-btn-to-cart').attr("data-id", id);
+
+        $(".texture-list img.active").removeClass("active");
+        $(".texture-list img[data-color-id='"+id+"']").addClass("active");
+        if(id > 10 && !$(".texture-list").hasClass("open")){
+            $(".more-colors").click();
+        }
+        $(".b-product-photo-slider img[data-color-id='"+id+"']").click();
+        // showPhotoColor(id);
+    });
+
+    $(document).on('click', '.texture-list img', function(){
+        var id = Number($(this).attr("data-color-id"));
+        $(".texture-list img.active").removeClass("active");
+        $(this).addClass("active");
+        $(".colors-select option[data-color-id='"+id+"']").prop('selected', true);
+        $('.colors-select').change().trigger('chosen:updated');
+        // showPhotoColor(id);
+    });
+
+    $(document).on('click','.more-colors', function() {
+        if($(".texture-list").hasClass("open")){
+            $(".texture-list").removeClass("open");
+            $(this).text("Другие цвета");
+        }else{
+            $(".texture-list").addClass("open");
+            $(this).text("Скрыть");
+        }
+        return false;
+    });
+    $(document).on('click','.show-more', function() {
+        var $block = $(this).parents(".b-filter-toggle").find(".b-filter-more");
+        if($block.hasClass("open")){
+            $block.removeClass("open");
+            $(this).text("смотреть больше");
+        }else{
+            $block.addClass("open");
+            $(this).text("скрыть");
+        }
+        return false;
+    });
+
+    var maxBasketCount = 999;
+    //увеличить количество
+    $(document).on('click', '.b-product-quantity .quantity-add', function(){
+        var $input = $('.quantity-input');
+        var count = parseInt($input.val()) + 1;
+        count = (count > maxBasketCount || isNaN(count) === true) ? maxBasketCount : count;
+        $input.val(count).change();
+        return false;
+    });
+    //уменьшить количество
+    $(document).on('click', '.b-product-quantity .quantity-reduce', function(){
+        var $input = $('.quantity-input');
+        var count = parseInt($input.val()) - 1; 
+        count = (count < 1 || isNaN(count) === true) ? 1 : count;
+        $input.val(count).change();
+        return false;
+    });
+
+    $(document).on('change', '.b-product-quantity .quantity-input', function(){
+        var count = $(this).val()*1;
+        count = (count < 1)? 1 : count;
+        count = (count > maxBasketCount) ? maxBasketCount : count;
+        $(this).val(count);
+    });
+
+    //табы
+    $(".tab").click(function(){
+        var $this = $(this);
+        $this.parent().find(".tab.active").removeClass("active");
+        $this.addClass("active");
+        $(".tabs-content").each(function(){
+            $(this).addClass("hide");
+        });
+        $($this.attr("data-block")).removeClass("hide");
+        return false;
+    });
+
+    $('.lenght-input').on('change', function(){
+        var min = $('.lenght-input:checked').attr('data-min'),
+            max = $('.lenght-input:checked').attr('data-max');
+
+        $('input[name=arrFilter_11_MIN]').val(min);
+        $('input[name=arrFilter_11_MAX]').val(max);
+    })
+
+    $(".rating").hover(function() {
+        $(this).addClass("now-hover");
+    }, function() {
+        $(this).removeClass("now-hover");
+    });
+
+    $(".rating-star").hover(function() {
+        $(this).addClass("highlight-h");
+        $(this).prevAll(".rating-star").addClass("highlight-h");
+    }, function() {
+        $(this).removeClass("highlight-h");
+        $(this).prevAll(".rating-star").removeClass("highlight-h");
+    });
+
+    $(".rating-star").click(function() {
+        var $this = $(this);
+        //здесь будет ajax-запрос
+        $this.parent().find(".rating-star").each(function() {
+            $(this).removeClass("highlight");
+        });
+        $this.addClass("highlight");
+        $this.prevAll(".rating-star").addClass("highlight");
+    });
+
+    if( typeof autosize == "function" )
+        autosize(document.querySelectorAll('textarea'));
+
+    $(".go-tab").click(function() {
+        $($(this).attr("data-tab")).click();
+        $("body, html").animate({scrollTop : $(".b-detail-tabs").offset().top-20}, 300);
+        return false;
+    });
+
+    $(".b-filter-item").each(function() {
+        if(!$(this).hasClass("open")){
+            $(this).children(".b-filter-toggle").slideUp(0);
+        }
+    });
+    $(".b-filter-tab").click(function() {
+        if(!$(this).hasClass("sliding")){
+            var $this = $(this);
+            $this.addClass("sliding");
+            if($this.parent().hasClass("open")){
+                $this.parent().removeClass("open");
+                $this.parents(".b-filter-item").find(".b-filter-toggle").slideUp(300, function(){
+                    $this.removeClass("sliding");
+                });
+            }else{
+                $this.parent().addClass("open");
+                $this.parents(".b-filter-item").find(".b-filter-toggle").slideDown(300, function(){
+                    $this.removeClass("sliding");
+                });
+            }
+        }  
+        return false;
+    });
+
+    $( function() {
+        $(".slider-range").each(function() {
+            var $this = $(this),
+                from = Number($(this).attr("data-range-from")),
+                to = Number($(this).attr("data-range-to"));
+
+            if($this.parent().find(".range-from").val() == '' || $this.parent().find(".range-from").val() == '0'){
+                var fromVal = from,
+                    toVal = to;
+                $this.parent().find(".range-from").val(from);
+                $this.parent().find(".range-to").val(to);
+            } else {
+                var fromVal = $this.parent().find(".range-from").val()*1,
+                    toVal = $this.parent().find(".range-to").val()*1;
+            }
+
+            $this.slider({
+                range: true,
+                min: parseInt(from),
+                max: Math.ceil(to),
+                values: [parseInt(fromVal), Math.ceil(toVal)],
+                slide: function( event, ui ) {
+                    $this.parent().find(".range-from").val(parseInt(ui.values[0]));
+                    $this.parent().find(".range-to").val(Math.ceil(ui.values[1]));
+                },
+                change: function( event, ui ){
+                    $this.parents('form').change();
+                }
+            });
+        });
+    });
+
+    $('.b-filter').on('change', function(){
+
+        window.history.replaceState(null , null, ($(this)).serialize()+"&set_filter=1");
+        ajaxFilter();
+
+    });
+
+    function ajaxFilter(){
+
+        var url = window.location.href,
+            block = $('.b-catalog-list');
+
+        progress.start(1.5);
+        block.removeClass('loaded');
+        $('.b-filter').addClass('load');
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: { partial : true },
+            success: function(msg){
+                block.find('.b-catalog-list-cont').html(msg);
+                cardHeight();
+                bindFancy();
+            },
+            error: function(){
+
+            },
+            complete: function(){
+                progress.end();
+                block.addClass('loaded');
+                $('.b-filter').removeClass('load');
+            }
+        });
+
+    }
+
+    $('.range-from, .range-to').on('change', function(){
+        var count = $(this).val()*1,
+            $slider = $(this).parents(".b-filter-item-range").find(".slider-range");
+            from = Number($slider.attr("data-range-from"));
+            to = Number($slider.attr("data-range-to"));
+        if($(this).hasClass("range-from")){
+            var inputTo = $(this).siblings(".range-to").val()*1;
+            count = (count > inputTo) ? inputTo : count;
+        }else{
+            var inputFrom = $(this).siblings(".range-from").val()*1;
+            count = (count < inputFrom) ? inputFrom : count;
+        }
+        count = (count < from)? from : count;
+        count = (count > to) ? to : count;
+        $(this).val(count);
+        var valCurrent =  $slider.slider( "option", "values" );
+        if($(this).hasClass("range-from")){
+            $slider.slider("option", "values", [count, valCurrent[1]]).trigger('slidechange');
+        }else{
+            $slider.slider("option", "values", [valCurrent[0], count]).trigger('slidechange');
+        }
+    });
+
+    $('.b-btn-address').on('click', function(){
+        if($('.js-order-adress-map-input').val()){
+            var room = "",
+                postalCode = "";
+            if($('#number-room-input').val()){
+                room = ", кв. "+$('#number-room-input').val();
+            }
+            if($('#postal-code').val()){
+                postalCode = $('#postal-code').val() + ", ";
+            }
+            var resString = postalCode + $('.js-order-adress-map-input').val() + room;
+            var $address = $("#app-order textarea[name='address']").val(resString);
+            var e = document.createEvent('HTMLEvents');
+            e.initEvent('textarea', true, true);
+            $address[0].dispatchEvent(e);
+            $.fancybox.close(); 
+        }else{
+            $('.js-order-adress-map-input').addClass("error");
+        }
+        return false;
+    });
+
+    $('.js-order-adress-map-input').on('focus', function(){
+        $('.js-order-adress-map-input').removeClass("error");
+    });
+
+    // добавление в корзину
+
+    var cartTimeout = 0,
+        successTimeout = 0;
+    $("body").on("click", ".b-btn-to-cart", function(){
+        var $this = $(this),
+            $cap = $this.siblings('.b-btn-to-cart-cap'),
+            href = $(this).attr("href"),
+            id = $(this).attr("data-id"),
+            quantity = $(this).parent().find('input[name=count]').val();
+        
+        clearTimeout(cartTimeout);
+        progress.start(1.5);
+        $cap.removeClass('hide');
+        $cap.addClass('after-load');
+        $this.addClass('hide');
+        url = href+"&element_id="+id+"&quantity="+quantity;
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(msg){
+                progress.end();
+                if( isValidJSON(msg) ){
+                    var json = JSON.parse(msg);
+                    if( json.result == "success" ){
+                        if( json.action == "reload" ){
+                            window.location.reload();
+                        }else{
+                            updateBasket(json.count, json.sum);
+                        }
+                        $cap.find('.b-cap-text').text('Товар успешно добавлен');
+                    }
+                }else{
+                    $cap.addClass('error');
+                    $cap.find('.b-cap-text').text('Ошибка!');
+                }
+            },
+            error: function(){
+                $cap.addClass('error');
+            },
+            complete : function(){
+                $this.siblings('.b-btn-to-cart-cap').addClass('loaded');
+                setTimeout(function(){
+                    $cap.removeClass('loaded');
+                    $cap.addClass('hide');
+                    $this.removeClass('hide');
+                }, 2000);
+            }
+        });
+        return false;
+    });
+
+    function isValidJSON(src) {
+        var filtered = src+"";
+        filtered = filtered.replace(/\\["\\\/bfnrtu]/g, '@');
+        filtered = filtered.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']');
+        filtered = filtered.replace(/(?:^|:|,)(?:\s*\[)+/g, '');
+
+        return (/^[\],:{}\s]*$/.test(filtered));
+    }
+
+    function updateBasket(count, sum){
+        $(".b-cart-number").text( count.toLocaleString() );
+        $(".b-cart-price").text( sum.toLocaleString() );
+    }
+
+    function bindFancy(){
+        $(".fancy:not(.fancy-binded)").each(function(){
+            var $popup = $($(this).attr("href")),
+                $this = $(this);
+            $this.fancybox({
+                padding : 0,
+                content : $popup,
+                touch: false,
+                helpers: {
+                    overlay: {
+                        locked: true 
+                    }
+                },
+                beforeShow: function(){
+                    $(".fancybox-wrap").addClass("beforeShow");
+                    $popup.find(".custom-field").remove();
+                    if( $this.attr("data-value") ){
+                        var name = getNextField($popup.find("form"));
+                        $popup.find("form").append("<input type='hidden' class='custom-field' name='"+name+"' value='"+$this.attr("data-value")+"'/><input type='hidden' class='custom-field' name='"+name+"-name' value='"+$this.attr("data-name")+"'/>");
+                    }
+                    if( $popup.attr("data-beforeShow") && customHandlers[$popup.attr("data-beforeShow")] ){
+                        customHandlers[$popup.attr("data-beforeShow")]($popup);
+                    }
+                },
+                afterShow: function(){
+                    $(".fancybox-wrap").removeClass("beforeShow");
+                    $(".fancybox-wrap").addClass("afterShow");
+                    if( $popup.attr("data-afterShow") && customHandlers[$popup.attr("data-afterShow")] ){
+                        customHandlers[$popup.attr("data-afterShow")]($popup);
+                    }
+                    $popup.find("input[type='text'],input[type='number'],textarea").eq(0).focus();
+                },
+                beforeClose: function(){
+                    $(".fancybox-wrap").removeClass("afterShow");
+                    $(".fancybox-wrap").addClass("beforeClose");
+                    if( $popup.attr("data-beforeClose") && customHandlers[$popup.attr("data-beforeClose")] ){
+                        customHandlers[$popup.attr("data-beforeClose")]($popup);
+                    }
+                },
+                afterClose: function(){
+                    $(".fancybox-wrap").removeClass("beforeClose");
+                    $(".fancybox-wrap").addClass("afterClose");
+                    if( $popup.attr("data-afterClose") && customHandlers[$popup.attr("data-afterClose")] ){
+                        customHandlers[$popup.attr("data-afterClose")]($popup);
+                    }
+                }
+            });
+            $this.addClass("fancy-binded");
+        });
+
+        $(".fancy-img:not(.fancy-binded)").each(function(){
+            $(this).fancybox({
+                padding : 0,
+                hash : false,
+                clickContent : false,
+                buttons : [
+                    'fullScreen',
+                    'close'
+                ],
+            });
+            $(this).addClass('fancy-binded');
+        });
+    }
+
+    $(document).on("click", ".element-view", function(){
+        var url = $(this).attr('data-href')+"&element_view=Y";
+
+        progress.start(1.5);
+        
+        $("#element_view .b-popup-element-cont").removeClass('after-load, loaded');
+        $("#element_view .b-popup-element-cont").html('');
+        $("#element_view .b-popup-element-cont").addClass('after-load');
+        
+        console.log('class added');
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(msg){
+                progress.end();
+                $("#element_view .b-popup-element-cont").html(msg);
+                $("#element_view").find('.after-load').addClass('loaded');
+                catalogElementSlick();
+                chosenElementInit();
+                bindFancy();
+            },
+            error: function(){
+
+            }
+        });
+    })
+
+    $('.b-catalog-list .b-product-colors select').on('change', function(){
+        $('.b-filter input[name=SORT_FIELD]').val($(this).find('option:selected').val());
+        $('.b-filter input[name=SORT_TYPE]').val($(this).find('option:selected').attr('data-type'));
+        $('.b-filter').change();
+    });
+
+    $("body").on("click", ".b-order-item-icon .icon-close", function(){
+        var url = $(this).attr('href'),
+            $this = $(this);
+        progress.start(1.5);
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(msg){
+                console.log(msg);
+                progress.end();
+                $this.parents('.b-order-item').remove();
+            },
+            error: function(){
+                progress.end();
+
+            }
+        });
+
+        return false;
+
+    })
+
+    $("body").on("click", ".fav-link", function(){
+        var url = $(this).attr('href')+"&action=FAVOURITE_"+$(this).attr('data-action'),
+            $this = $(this);
+        progress.start(1.5);
+        console.log(url);
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(msg){
+                progress.end();
+                if( isValidJSON(msg) ){
+                    var json = JSON.parse(msg);
+                    if( json.result == "success" ){
+                        if ($this.hasClass("active")){
+                            $this.removeClass("active"); 
+                            $this.attr('data-action', 'ADD');
+                        }else{
+                            $this.addClass("active"); 
+                            $this.attr('data-action', 'REMOVE');
+                        }
+                    }
+                }else{
+                    alert("Ошибка добавления в корзину");
+                }
+            },
+            error: function(){
+                progress.end();
+            }
+        });
+
+        return false;
+
+    });
+
+    if ($('#editForm').length){
+
+        var uploader = new plupload.Uploader({
+            runtimes : 'html5,flash,silverlight,html4',
+            browse_button : 'pickfiles', // you can pass an id...
+            container: document.getElementById('editForm'), // ... or DOM Element itself
+            url : $('#editForm').attr("data-file-action"),
+            multi_selection: true,
+            filters : {
+                max_file_size : '20mb',
+                mime_types: [
+                    {title : "Image files", extensions : "jpg,jpeg,gif,png"},
+                    {title : "Documents", extensions : "doc,docx,pdf,rtf,xls,xlsx"},
+                    {title : "Archive", extensions : "zip,rar,7z"},
+                ]
+            },
+            init: {
+                PostInit: function() {
+                    
+                },
+                FilesAdded: function(up, files) {
+                    progress.start(1.5);
+                    plupload.each(files, function(file) {
+                        
+                    });
+                    up.start();
+                },
+                UploadProgress: function(up, file) {
+                    // $('.b-popup-add-link.icon-add-photo:before').css('content', '\e922');
+                },
+                FileUploaded: function(up, file, res) {
+                    var json = JSON.parse(res.response);
+
+                    $('.current-photo img').attr('src', '/upload/tmp/'+json.filePath);
+
+                    $('<input>',{id:'photo', type:'hidden', name:'user[PERSONAL_PHOTO]', value: json.filePath}).appendTo('#editForm');
+                    // $('<div>',{class:'b-popup-add-photo', style:'background-image:url("/upload/tmp/'+json.filePath+'")'}).appendTo('#b-popup-add-photo-list');
+                },
+                Error: function(up, err) {
+                    // alert("При загрузке файла произошла ошибка.\n" + err.code + ": " + err.message);
+                    if (err.code == -600) {
+                        $("#pickfiles").innerHTML = "Файл слишком большой";
+                        $("#pickfiles").addClass('error');
+                    };
+                    if (err.code == -601) {
+                        $("#pickfiles").innerHTML = "Неверный формат файла";
+                        $("#pickfiles").addClass('error');
+                    };
+                },
+                UploadComplete: function() {
+                    progress.end();
+                }
+            }
+        });
+        uploader.init();
+    }
+
+    $('.fancybox-a').fancybox({'loop': true});
+    $('.b-reviews-list .review-more-a').on('click',function(){
+        var el = $(this).attr('href');
+        var popup = $(el).attr('href');
+        var src = $(this).parents('li').find('.review-img').attr('src');
+        var name = $(this).parents('li').find('.review-name').text();
+        var text = $(this).parents('li').find('.review-text').text();
+        $(popup).find('.popup-review-img').attr('src',src);
+        $(popup).find('.popup-review-name').text(name);
+        $(popup).find('.popup-review-text').text(text);
+        $(el).click();
+        return false;
+    });
+
+    // $(".b-card-top").height($(".b-card-top").width());
+
+
+    // $(".b-step-slider").slick({
+    //     dots: true,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     infinite: true,
+    //     cssEase: 'ease', 
+    //     speed: 500,
+    //     arrows: true,
+    //     prevArrow: '<button type="button" class="slick-prev slick-arrow icon-arrow-left"></button>',
+    //     nextArrow: '<button type="button" class="slick-next slick-arrow icon-arrow-right"></button>',
+    //     touchThreshold: 100
+    // });
+
+    // // Первая анимация элементов в слайде
+    // $(".b-step-slide[data-slick-index='0'] .slider-anim").addClass("show");
+
+    // // Кастомные переключатели (тумблеры)
+    // $(".b-step-slider").on('beforeChange', function(event, slick, currentSlide, nextSlide){
+    //     $(".b-step-tabs li.active").removeClass("active");
+    //     $(".b-step-tabs li").eq(nextSlide).addClass("active");
+    // });
+
+    // // Анимация элементов в слайде
+    // $(".b-step-slider").on('afterChange', function(event, slick, currentSlide, nextSlide){
+    //     $(".b-step-slide .slider-anim").removeClass("show");
+    //     $(".b-step-slide[data-slick-index='"+currentSlide+"'] .slider-anim").addClass("show");
+    // });
+
+
+    
+	// var myPlace = new google.maps.LatLng(56.504379, 84.945910);
+ //    var myOptions = {
+ //        zoom: 16,
+ //        center: myPlace,
+ //        mapTypeId: google.maps.MapTypeId.ROADMAP,
+ //        disableDefaultUI: true,
+ //        scrollwheel: false,
+ //        zoomControl: true
+ //    }
+ //    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions); 
+
+ //    var marker = new google.maps.Marker({
+	//     position: myPlace,
+	//     map: map,
+	//     title: "Моточки-клубочки"
+	// });
+
+    bindFancy();
+    loadBlock(0);
+
+    if ($('.b-product-main').length) {
+        $(".b-product-main a").fancybox({ 
+            animationEffect : 'fade'
+        }).attr('data-fancybox', 'gallery');
+    }
+
+});
+
+window.onload = function(){
+    cardHeight();
+};
+
+function loadBlock(i){
+    var length = $('.after-load').length;
+    if (i > length) {
+        return false;
+    } else {
+        $('.after-load').eq(i).addClass('loaded');
+        i++;
+
+        setTimeout(function(){
+            loadBlock(i);
+        },50);
+    }
+}
+
+function cardHeight(){
+    $(document).find(".b-catalog-list .b-item-card").each(function(){
+
+        if ($(".b-catalog-list .b-item-card").length == 1) {
+            return false;
+        }
+
+        var cardsInString = 3;
+
+        if ($(this).parents('.b-catalog-list').hasClass('b-catalog-list-full')) {
+            cardsInString = 4;
+        }
+
+        var $index = $(this).index() + 1,
+            $height = $(this).height(),
+            $count = $(this).parents('.b-catalog-list').find('.b-item-card').length;
+
+        if ($index == 1) {
+            $maxHeight = 0;
+        }
+
+        if ($height > $maxHeight) {
+            $maxHeight = $height;
+        }
+
+        if ($index % cardsInString == 0) {
+            for (var i = 0; i < cardsInString; i++) {
+                $('.b-catalog-list .b-item-card:nth-child('+($index - i)+')').height(Math.round($maxHeight));   
+            }
+            $maxHeight = 0;
+        } else {
+            if (($count - $index) == 0) {
+                while($index % cardsInString != 0){
+                    $('.b-catalog-list .b-item-card:nth-child('+$index+')').height(Math.round($maxHeight));
+                    $index = $index - 1;
+                }
+            }
+        }
+    });
+}

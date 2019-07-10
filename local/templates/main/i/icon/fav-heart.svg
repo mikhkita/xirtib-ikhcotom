@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="19px" viewBox="0 0 21 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="items" transform="translate(-818.000000, -31.000000)" fill="#000000">
+            <g id="3" transform="translate(560.000000, 0.000000)">
+                <g id="img" transform="translate(19.500000, 22.000000)">
+                    <g id="favorites" transform="translate(231.000000, 0.000000)">
+                        <path d="M27.9669417,14.5449663 C27.6750002,11.331686 25.4006255,9.00038464 22.5542915,9.00038464 C20.6580177,9.00038464 18.921754,10.0208338 17.9447691,11.6563219 C16.9766309,9.99967865 15.3115255,9 13.4456382,9 C10.5996889,9 8.32492952,11.3313014 8.03337261,14.5445816 C8.01029423,14.6865137 7.91567285,15.433484 8.20338337,16.6516381 C8.61802499,18.4086723 9.57577791,20.0068504 10.9724047,21.2723151 L17.9401534,27.5954075 L25.027525,21.2726997 C26.4241518,20.0068504 27.3819047,18.409057 27.7965463,16.6516381 C28.0842568,15.4338687 27.9896355,14.6868983 27.9669417,14.5449663 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

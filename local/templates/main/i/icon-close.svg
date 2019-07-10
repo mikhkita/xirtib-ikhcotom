@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>repeat</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Оформление-заказа" transform="translate(-885.000000, -475.000000)" fill="#564531">
+            <g id="Group-6" transform="translate(150.000000, 446.000000)">
+                <g id="Group-2">
+                    <g id="Group-10">
+                        <g id="Group-5">
+                            <g id="Group-4" transform="translate(97.000000, 13.000000)">
+                                <g id="Group" transform="translate(602.000000, 16.000000)">
+                                    <g id="repeat" transform="translate(36.000000, 0.000000)">
+                                        <path d="M-2.20169364,9.13919698 L18.6473458,9.13919698 C19.5305949,9.13043478 19.5305949,8.21905501 18.6473458,8.21905501 L-2.20169364,8.21905501 C-3.0849427,8.21905501 -3.0849427,9.13043478 -2.20169364,9.13919698 Z" id="Path" transform="translate(8.222826, 8.679126) rotate(45.000000) translate(-8.222826, -8.679126) "></path>
+                                        <path d="M-2.20169364,9.13919698 L18.6473458,9.13919698 C19.5305949,9.13043478 19.5305949,8.21905501 18.6473458,8.21905501 L-2.20169364,8.21905501 C-3.0849427,8.21905501 -3.0849427,9.13043478 -2.20169364,9.13919698 Z" id="Path" transform="translate(8.222826, 8.679126) scale(-1, 1) rotate(45.000000) translate(-8.222826, -8.679126) "></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

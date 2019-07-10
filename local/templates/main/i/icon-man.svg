@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="152px" height="152px" viewBox="0 0 152 152" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Group 32</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="75" cy="75" r="75"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Отзывы" transform="translate(-256.000000, -450.000000)">
+            <g id="Group-3" transform="translate(150.000000, 451.000000)">
+                <g id="Group-2">
+                    <g id="Group-32" transform="translate(107.000000, 0.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Oval" stroke="#77BE32" stroke-width="2" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="black-male-user-symbol" mask="url(#mask-2)" fill-rule="nonzero" stroke="#77BE32" stroke-width="2">
+                            <g transform="translate(40.000000, 33.000000)" id="Shape">
+                                <path d="M69.1694595,64.2694595 L68.8951351,64.5986486 C59.8632432,75.4354054 47.8327027,81.4062162 35.0264865,81.4062162 C22.2183784,81.4062162 10.1897297,75.4372973 1.15594595,64.5986486 L0.883513514,64.2694595 L0.947837838,63.8475676 C2.69216216,52.4697297 8.63648649,43.33 17.6854054,38.1064865 L18.3286486,37.7356757 L18.8413514,38.272973 C23.1151351,42.7567568 28.8627027,45.2237838 35.0245946,45.2237838 C41.1864865,45.2237838 46.9340541,42.7548649 51.2078378,38.272973 L51.7205405,37.7356757 L52.3637838,38.1064865 C61.4127027,43.33 67.357027,52.4697297 69.1032432,63.8475676 L69.1694595,64.2694595 Z M35.0264865,40.6548649 C46.2340541,40.6548649 55.352973,31.5359459 55.352973,20.3283784 C55.352973,9.12081081 46.2340541,0 35.0264865,0 C23.8189189,0 14.7,9.12081081 14.7,20.3264865 C14.7,31.5321622 23.8189189,40.6548649 35.0264865,40.6548649 Z"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
