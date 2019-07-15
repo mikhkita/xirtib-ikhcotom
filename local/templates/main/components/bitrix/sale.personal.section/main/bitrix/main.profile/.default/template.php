@@ -25,7 +25,9 @@ $arUser = $rsUser->Fetch();
 			<? endif; ?>
 		</div>
 		<div class="b-profile-name"><?=$arUser['LAST_NAME']?> <?=$arUser['NAME']?> <?=$arUser['SECOND_NAME']?></div>
-		<div class="b-profile-phone"><span class="b-profile-phone-icon"></span><?=convertPhoneNumber($arUser['PERSONAL_PHONE'])?></div>
+		<? if ($arUser['PERSONAL_PHONE']): ?>
+			<div class="b-profile-phone"><span class="b-profile-phone-icon"></span><?=convertPhoneNumber($arUser['PERSONAL_PHONE'])?></div>
+		<? endif; ?>
 		<div class="b-profile-email"><span class="b-profile-phone-email"></span><?=$arUser['EMAIL']?></div>
 		<div><a href="edit" class="b-btn b-btn-edit">Редактировать профиль</a></div>
 		<div><a href="?action=logout" class="b-btn b-btn-logout">Выйти</a></div>

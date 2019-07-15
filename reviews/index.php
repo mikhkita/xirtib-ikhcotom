@@ -33,7 +33,6 @@ $APPLICATION->SetTitle("Отзывы");?>
 		),
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "3",
-		"IBLOCK_SECTION_ID" => "7",
 		"IBLOCK_TYPE" => "content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
@@ -48,7 +47,7 @@ $APPLICATION->SetTitle("Отзывы");?>
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "main",
 		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
+		"PARENT_SECTION" => "7",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array(

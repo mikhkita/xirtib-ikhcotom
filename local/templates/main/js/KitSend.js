@@ -211,10 +211,34 @@ $(document).ready(function(){
 			yaCounter12345678.reachGoal($(this).attr("data-goal"));
 	});
 
-	$(".ajax").parents("form").submit(function(){
-  		if( $(this).find("input.error,select.error,textarea.error").length == 0 ){
+	$(".ajax, .not-ajax").parents("form").submit(function(){
+		var $form = $(this);
+
+		$(".b-postamat-error").remove();
+
+		if( $form.hasClass("b-data-order-form") && $(".b-pickpoint").is(":visible") && !$(".pickpointaddr").length ){
+			$(".b-add-postamat").after("<p class='red b-postamat-error'>Вам нужно выбрать постамат, в котором вы хотите получить вашу посылку.</p>");
+		}
+
+		if( $form.hasClass("b-data-order-form") && $("#delivery").val() == "120" && $("#cdek_type").val() == "1" && !$(".cdekaddr").length ){
+			$(".b-cdek-punkt").after("<p class='red b-postamat-error'>Вам нужно выбрать пункт самовывоза, в котором вы хотите получить вашу посылку.</p>");
+		}
+
+  		if( $(this).find("input.error,select.error,textarea.error,.b-postamat-error").length == 0 ){
   			var $this = $(this),
   				$thanks = $($this.attr("data-block"));
+
+  			if( $(this).find(".not-ajax").length ){
+  				if( $("select#date").length ){
+  					$("select#date").prop("disabled", false);
+  				}
+  				if( $(this).is("#ORDER_FORM") ){
+  					// alert();
+  					$(".basket-checkout-block-btn").addClass("loading");
+  					$("#b-basket-checkout-button").after("<p class='b-order-submit-message'>Подождите, идет создание заказа</p>");
+  				}
+  				return true;
+  			}
 
   			$this.find(".ajax").attr("onclick", "return false;");
 
@@ -231,19 +255,40 @@ $(document).ready(function(){
 			  	url: $(this).attr("action"),
 			  	data:  $this.serialize(),
 				success: function(msg){
-					var $form;
-					if( msg == "1" ){
-						$link = $this.find(".b-thanks-link");
+
+					if( isValidJSON(msg) && msg != "1" && msg != "0"){
+						var json = JSON.parse(msg);
+
+						if( json.result == "success" ){
+				            switch (json.action) {
+				                case "reload":
+				                    document.location.reload(true);
+				                    $.fancybox.close();
+				                break;
+				            }
+				        }else{
+				        	$form.find(".b-popup-error").html(json.error);
+				        	switch (json.action) {
+				                case "messageError":
+				                    $form.find(".b-popup-error").html(json.message);
+				                break;
+				            }
+				        }
+
 					}else{
-						$link = $(".b-error-link");
-					}
+						if( msg == "1" ){
+							$link = $this.find(".b-thanks-link");
+						}else{
+							$link = $(".b-error-link");
+						}
 
-					if( $this.attr("data-afterAjax") && customHandlers[$this.attr("data-afterAjax")] ){
-						customHandlers[$this.attr("data-afterAjax")]($this);
-					}
+						if( $this.attr("data-afterAjax") && customHandlers[$this.attr("data-afterAjax")] ){
+							customHandlers[$this.attr("data-afterAjax")]($this);
+						}
 
-					$.fancybox.close();
-					$link.click();
+						$.fancybox.close();
+						$link.click();
+					}
 				},
 				error: function(){
 					$.fancybox.close();
@@ -251,7 +296,9 @@ $(document).ready(function(){
 				},
 				complete: function(){
 					$this.find(".ajax").removeAttr("onclick");
-					$this.find("input[type=text],textarea").val("");
+					if( !$this.is("#b-form-auth") ){
+						$this.find("input[type=text],textarea").val("");
+					}
 				}
 			});
   		}else{
@@ -260,8 +307,17 @@ $(document).ready(function(){
   		return false;
   	});
 
-	$("body").on("click", ".ajax", function(){
+	$("body").on("click", ".ajax, .not-ajax", function(){
 		$(this).parents("form").submit();
 		return false;
 	});
+
+	function isValidJSON(src) {
+        var filtered = src;
+        filtered = filtered.replace(/\\["\\\/bfnrtu]/g, '@');
+        filtered = filtered.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']');
+        filtered = filtered.replace(/(?:^|:|,)(?:\s*\[)+/g, '');
+
+        return (/^[\],:{}\s]*$/.test(filtered));
+    }
 });

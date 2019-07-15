@@ -66,9 +66,9 @@ if (isAuth($USER)){
 					<div class="b-discount">Новинка</div>
 
 					<? if (isAuth($USER)): ?>
+						<? $favClass = ""; ?>
+						<? $favAction = "ADD"; ?>
 						<? foreach ($ids as $key => $value) {
-							$favClass = "";
-							$favAction = "ADD";
 							if ($value == $arItem['ID']) {
 								$favClass = "active";
 								$favAction = "REMOVE";

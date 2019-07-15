@@ -12,8 +12,10 @@ if (isAuth()):
 	<div class="b-cabinet-profile">
 		<div class="b-profile-photo">
 			<div class="current-photo" id="pickfiles">
-				<? $photo = CFile::ResizeImageGet($arUser['PERSONAL_PHOTO'], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters ); ?>
-				<img src="<?=$photo['src']?>">
+				<? if ($arUser['PERSONAL_PHOTO']): ?>
+					<? $photo = CFile::ResizeImageGet($arUser['PERSONAL_PHOTO'], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters ); ?>
+					<img src="<?=$photo['src']?>">
+				<? endif; ?>
 				<div class="background-photo">
 					<div class="photo-update-icon"></div>
 				</div>

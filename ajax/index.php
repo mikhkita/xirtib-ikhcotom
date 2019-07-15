@@ -324,7 +324,37 @@ switch ($action) {
 
 		break;
 
-	case 'PHONE':
+	case 'CALLBACK':
+
+		if (empty($_POST["MAIL"])){
+			if (empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['comment'])) {
+				$spam = true;
+			}
+			else {
+				$spam = false;
+			}
+		}else{
+			$spam = true;
+		}
+
+		if (!$spam) {
+
+			$name = $_POST['name'];
+			$phone = $_POST['phone'];
+			$comment = $_POST['comment'];
+
+			if(CEvent::Send("CALLBACK", "s1", array('NAME' => $name, 'PHONE' => $phone, 'COMMENT' => $comment))){
+				echo "1";
+			} else {
+				echo "0";
+			}
+		}else{
+			echo "1";
+		}
+
+		break;
+		
+	case 'ASK':
 
 		if (empty($_POST["MAIL"])){
 			if (empty($_POST['name']) || empty($_POST['phone'])) {
@@ -341,8 +371,9 @@ switch ($action) {
 
 			$name = $_POST['name'];
 			$phone = $_POST['phone'];
+			$comment = $_POST['comment'];
 
-			if(CEvent::Send("NEW_PHONE", "s1", array('NAME' => $name, 'PHONE' => $phone))){
+			if(CEvent::Send("NEW_ASK", "s1", array('NAME' => $name, 'PHONE' => $phone, 'COMMENT' => $comment,))){
 				echo "1";
 			} else {
 				echo "0";
@@ -352,6 +383,7 @@ switch ($action) {
 		}
 
 		break;
+
 	case 'REG':
 
 		if (empty($_POST["MAIL"])){
@@ -372,10 +404,10 @@ switch ($action) {
 				$password = $_POST['password'];
 				$user = new CUser;
 				$hash = md5($email.$hashKey);
-				$link = "https://nevkusno.ru/ajax/?action=CONFIRM_USER&email=".$email."&hash=".$hash;
+				$link = "https://motochki.pro/ajax/?action=CONFIRM_USER&email=".$email."&hash=".$hash;
 
 				$arFields = Array(
-				  // "NAME"              => "Пользователь",
+				  "NAME"              => "Пользователь",
 				  "EMAIL"             => $email,
 				  "LOGIN"             => $email,
 				  "LID"               => "ru",
@@ -472,5 +504,23 @@ switch ($action) {
 		break;
 }
 die();
+
+function returnError( $text ){
+	echo json_encode(array(
+		"result" => "error",
+		"error" => $text
+	));
+	die();
+}
+
+function returnSuccess( $array ){
+	$arResult = array(
+		"result" => "success"
+	);
+	$arResult = $arResult + $array;
+
+	echo json_encode($arResult);
+	die();
+}
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

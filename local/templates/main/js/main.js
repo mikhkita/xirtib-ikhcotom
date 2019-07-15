@@ -1,6 +1,12 @@
 var progress = new KitProgress("#5F9827", 2);
 
 $(document).ready(function(){	
+
+    var isDesktop = false,
+        isTablet = false,
+        isMobile = false,
+        isMobileSmall = false;
+    
     function resize(){
        if( typeof( window.innerWidth ) == 'number' ) {
             myWidth = window.innerWidth;
@@ -13,7 +19,36 @@ $(document).ready(function(){
             myWidth = document.body.clientWidth;
             myHeight = document.body.clientHeight;
         }
+
+        isDesktop = isTablet = isMobile = isMobileSmall = false;
+        if( myWidth > 1188 ){
+            isDesktop = true;
+        }else if( myWidth > 767 ){
+            isTablet = true;
+        }else{
+            isMobile = true;
+            if(myWidth < 664){
+                isMobileSmall = true;
+            }
+        }
+
+        if(isMobile){
+            if($(".b-product-content .b-product-name").length){
+                $(".b-product").prepend($(".b-product-actions-wrap"));
+                $(".b-product").prepend($(".b-product-name"));
+            }
+        }else{
+            if(!$(".b-product-content .b-product-name").length){
+                $(".b-product-content").prepend($(".b-product-actions-wrap"));
+                $(".b-product-content").prepend($(".b-product-name"));
+            }
+        }
+
+        // cardImgHeight();
+        cardHeight();
+
     }
+
     $(window).resize(resize);
     resize();
 
@@ -78,23 +113,68 @@ $(document).ready(function(){
             autoplay: false,
             variableWidth: true,
             asNavFor: '.b-product-main',
-            focusOnSelect: true
+            focusOnSelect: true,
+            responsive: [
+                {
+                  breakpoint: 1188,
+                  settings: {
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 5
+                  }
+                },
+                {
+                  breakpoint: 665,
+                  settings: {
+                    slidesToShow: 4
+                  }
+                },
+                {
+                  breakpoint: 374,
+                  settings: {
+                    slidesToShow: 3
+                  }
+                }
+            ]
         });
     }
 
     $('.b-item-cards').slick({
         dots: false,
-        swipe: false,
         arrows: true,
-        prevArrow: '<div class="icon-arrow-left" style="cursor: pointer; position: absolute; top: calc(50% - 23px); font-size: 40px; left: -42px;"></div>',
-        nextArrow: '<div class="icon-arrow-right" style="cursor: pointer; position: absolute; top: calc(50% - 23px); font-size: 40px; right: -38px;"></div>',
+        prevArrow: '<div class="icon-arrow-left"></div>',
+        nextArrow: '<div class="icon-arrow-right"></div>',
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
     });
 
-     $('.b-im-block').slick({
+    $('.b-im-block').slick({
         dots: false,
         arrows: true,
         prevArrow: '<div class="icon-arrow-left" style="cursor: pointer; position: absolute; top: calc(50% - 34px); font-size: 70px; right: calc(100% - 150px); z-index: 100";></div>',
@@ -104,7 +184,59 @@ $(document).ready(function(){
         slidesToScroll: 1,
         autoplay: false,
         focusOnSelect: true,
-        variableWidth: true
+        variableWidth: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    variableWidth: false,
+                    slidesToShow: 4
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    variableWidth: false,
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    variableWidth: false,
+                    slidesToShow: 2
+                }
+            }
+        ]
+    });
+
+    $('.delivery-methods-list').slick({
+        infinite: true,
+        prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
+        nextArrow: '<div class="b-product-arrows icon-arrow-right-bold"></div>',
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
     });
 
     $(".b-show-more").click(function(){
@@ -620,7 +752,6 @@ $(document).ready(function(){
         var url = $(this).attr('href')+"&action=FAVOURITE_"+$(this).attr('data-action'),
             $this = $(this);
         progress.start(1.5);
-        console.log(url);
 
         $.ajax({
             type: "GET",
@@ -684,6 +815,10 @@ $(document).ready(function(){
                 FileUploaded: function(up, file, res) {
                     var json = JSON.parse(res.response);
 
+                    if ($('.current-photo img').length == 0) {
+                        $('img').insertBefore('.current-photo .background-photo');  
+                    } 
+                    
                     $('.current-photo img').attr('src', '/upload/tmp/'+json.filePath);
 
                     $('<input>',{id:'photo', type:'hidden', name:'user[PERSONAL_PHOTO]', value: json.filePath}).appendTo('#editForm');
@@ -754,23 +889,24 @@ $(document).ready(function(){
     // });
 
 
-    
-	// var myPlace = new google.maps.LatLng(56.504379, 84.945910);
- //    var myOptions = {
- //        zoom: 16,
- //        center: myPlace,
- //        mapTypeId: google.maps.MapTypeId.ROADMAP,
- //        disableDefaultUI: true,
- //        scrollwheel: false,
- //        zoomControl: true
- //    }
- //    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions); 
+    if ($('#map_canvas').length != 0) {
+        var myPlace = new google.maps.LatLng(56.504379, 84.945910);
+        var myOptions = {
+            zoom: 16,
+            center: myPlace,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true,
+            scrollwheel: false,
+            zoomControl: true
+        }
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions); 
 
- //    var marker = new google.maps.Marker({
-	//     position: myPlace,
-	//     map: map,
-	//     title: "Моточки-клубочки"
-	// });
+        var marker = new google.maps.Marker({
+            position: myPlace,
+            map: map,
+            title: "Моточки-клубочки"
+        });
+    }
 
     bindFancy();
     loadBlock(0);
@@ -781,10 +917,56 @@ $(document).ready(function(){
         }).attr('data-fancybox', 'gallery');
     }
 
+    $('.popup-sign-list li a').on('click',function(){
+        var el = $(this).attr('href');
+
+        if ( !$(this).hasClass('active') ){
+            $('.popup-sign-list li a').removeClass('active');
+            $(this).addClass('active');
+            $('.popup-sign-form').removeClass('active');
+            $(el).addClass('active');
+        }
+        return false;
+    });
+
+    $('.catalog-mobile-filter').on('click',function(){
+        if ( $(this).hasClass('active') ){
+            $(this).text('Фильтр');
+        } else {
+            $(this).text('Скрыть фильтр');
+        }
+        $(this).toggleClass('active');
+        $('.b-filter').toggleClass('active');
+        $('body').toggleClass('no-scroll');
+    });
+
+    $('.mobile-btn').on('click',function(){
+        $('.mobile-menu').addClass('active');
+        $('.mobile-menu-bg').addClass('active');
+        $('body').addClass('no-scroll');
+        return false;
+    });
+
+    $('.mobile-menu-close-btn').on('click',function(){
+        $('.mobile-menu').removeClass('active');
+        $('.mobile-menu-bg').removeClass('active');
+        $('body').removeClass('no-scroll');
+        return false;
+    });
+    $('.mobile-menu-bg').on('click',function(){
+        $('.mobile-menu').removeClass('active');
+        $('.mobile-menu-bg').removeClass('active');
+        $('body').removeClass('no-scroll');
+        return false;
+    });
+
+    // cardImgHeight();
+
 });
 
 window.onload = function(){
     cardHeight();
+    // cardImgHeight();
 };
 
 function loadBlock(i){
@@ -802,7 +984,7 @@ function loadBlock(i){
 }
 
 function cardHeight(){
-    $(document).find(".b-catalog-list .b-item-card").each(function(){
+    $(document).find(".b-item-card").each(function(){
 
         if ($(".b-catalog-list .b-item-card").length == 1) {
             return false;
@@ -841,3 +1023,18 @@ function cardHeight(){
         }
     });
 }
+
+function cardImgHeight(){
+    $('.b-item-card').each(function(){
+
+        var $this = $(this).find('.b-card-top img');
+        
+        console.log($this);
+        console.log($this.height());
+        console.log($this.width());
+
+        $this.height($this.width());
+    });
+}
+
+

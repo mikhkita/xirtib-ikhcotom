@@ -142,23 +142,5 @@ function getColors(){
 	return $arColors;
 }
 
-function returnError( $text ){
-	echo json_encode(array(
-		"result" => "error",
-		"error" => $text
-	));
-	die();
-}
-
-function returnSuccess( $array ){
-	$arResult = array(
-		"result" => "success"
-	);
-	$arResult = $arResult + $array;
-
-	echo json_encode($arResult);
-	die();
-}
-
 
 ?>

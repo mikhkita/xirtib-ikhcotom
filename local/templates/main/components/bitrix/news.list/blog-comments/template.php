@@ -16,15 +16,15 @@ if(count($arResult["ITEMS"])):?>
 	<div class="b-detail-review-list">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
 			<div class="b-detail-review" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-				<? $arDate = explode('.', $arItem['CREATED_DATE']); ?>
-				<? $date = $arDate[2].'.'.$arDate[1].'.'.$arDate[0]; ?>
-				<? if( $arItem["PREVIEW_PICTURE"] ): ?>
-					<?
-					$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 558, "height" => 313), BX_RESIZE_IMAGE_EXACT, false, $arFilters );
-					?>
-				<? else: ?>
-					<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/icon-man.svg'?>
-				<? endif; ?>
+				<?
+				$arDate = explode('.', $arItem['CREATED_DATE']);
+				$date = $arDate[2].'.'.$arDate[1].'.'.$arDate[0];
+				if( $arItem["PREVIEW_PICTURE"] ){
+					$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 73, "height" => 73), BX_RESIZE_IMAGE_EXACT, false, $arFilters );
+				} else {
+					$renderImage['src'] = SITE_TEMPLATE_PATH.'/i/icon-man.svg';
+				}
+				?>
 				<div class="b-detail-review-header">
 					<img src="<?=$renderImage['src']?>">
 					<div class="b-detail-review-name">

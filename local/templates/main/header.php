@@ -3,10 +3,13 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 
 $curPage = $APPLICATION->GetCurPage();
 $urlArr = $GLOBALS["urlArr"] = explode("/", $curPage);
-$GLOBALS["isMain"] = $isMain = ( $curPage == "/" )?true:false;
+$page = $GLOBALS["page"] = ( $urlArr[2] == null || $urlArr[2] == "" )?$urlArr[1]:$urlArr[2];
 $GLOBALS["version"] = 45;
 $is404 = defined('ERROR_404') && ERROR_404=='Y' && !defined('ADMIN_SECTION');
 $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[1]];
+
+$isMain = $GLOBALS["isMain"] = ( $curPage == "/" ) ? true : false;
+$isAbout = $GLOBALS["isAbout"] = ($urlArr[1] == "about");
 
 $GLOBALS['partial'] = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 
@@ -34,8 +37,8 @@ CModule::IncludeModule('iblock');
 	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/jquery-ui.min.css" type="text/css">
 	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/layout.css" type="text/css">
 
-	<!-- <link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 1024px)" href="css/layout-tablet.css">
-	<link rel="stylesheet" media="screen and (min-width: 240px) and (max-width: 767px)" href="css/layout-mobile.css"> -->
+	<link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 1188px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-tablet.css">
+	<link rel="stylesheet" media="screen and (min-width: 240px) and (max-width: 767px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-mobile.css">
 
 	<!-- <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"> -->
 </head>
@@ -63,7 +66,7 @@ CModule::IncludeModule('iblock');
 			<div class="b-bottom">
 				<a href="/" class="b-logo"></a>
 				<div class="b-header-catalog-block">
-					<a href="#" class="icon-list">Каталог</a>
+					<a href="#" class="b-header-catalogue icon-list">Каталог</a>
 					<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_catalog", Array(
 							"ADD_SECTIONS_CHAIN" => "N",
 							"CACHE_GROUPS" => "Y",
@@ -117,17 +120,34 @@ CModule::IncludeModule('iblock');
 					);?>
 				</div>
 				<div class="b-control">
-					<a href="/personal/" class="b-profile icon-login"></a>
+					<? if (isAuth()): ?>
+						<a href="/personal/" class="b-profile icon-login"></a>	
+					<? else: ?>
+						<a href="#popup-sign" class="b-profile icon-login fancy"></a>
+					<? endif; ?>
 					<a href="/personal/?tab=favourite" class="b-fav icon-star">
-						<div class="b-fav-round">
-							<span class="b-fav-number"><?=count(getFavourites())?></span>
-						</div>
+						<? $favCount = getFavourites(); ?>
+						<? if ($favCount > 0): ?>
+							<div class="b-fav-round">
+								<span class="b-fav-number"><?=count($favCount)?></span>
+							</div>
+						<? endif; ?>
 					</a>
 				</div>
 			</div>
 		</div>
 		<div class="b-main-menu">
 			<div class="b-block clearfix">
+				<div class="mobile-btn">
+					<div class="mobile-btn-burger">
+						<div class="mobile-btn-burger">
+							<div class="burger-el"></div>
+							<div class="burger-el"></div>
+							<div class="burger-el"></div>
+						</div>
+					</div>
+					<span>Меню</span>
+				</div>
 				<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_categories", Array(
 						"ADD_SECTIONS_CHAIN" => "N",
 						"CACHE_GROUPS" => "Y",
@@ -154,6 +174,34 @@ CModule::IncludeModule('iblock');
 						<span class="b-cart-number"><?=$basketInfo['count']?></span>
 					</span>
 				</a>
+			</div>
+		</div>
+		<div class="mobile-menu-bg"></div>
+		<div class="mobile-menu">
+			<div class="mobile-menu-wrap">
+				<div class="mobile-menu-close-btn">Закрыть</div>
+				<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
+						"ADD_SECTIONS_CHAIN" => "N",
+						"CACHE_GROUPS" => "Y",
+						"CACHE_TIME" => "36000000",
+						"CACHE_TYPE" => "N",
+						"COUNT_ELEMENTS" => "Y",
+						"IBLOCK_ID" => "1",
+						"IBLOCK_TYPE" => "content",
+						"SHOW_PARENT_NAME" => "Y",
+						"TOP_DEPTH" => "1",
+						"VIEW_MODE" => "LINE",
+					),
+					false
+				);?>
+				<ul class="mobile-menu-nav">
+					<li><a href="#">О нас</a></li>
+					<li><a href="#">Доставка и оплата</a></li>
+					<li><a href="#">Услуги</a></li>
+					<li><a href="#">Блог</a></li>
+					<li><a href="#">Отзывы</a></li>
+					<li><a href="#">Контакты</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>

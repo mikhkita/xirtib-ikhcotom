@@ -202,15 +202,22 @@ $this->setFrameMode(true);
 				"COUNT_COMMENT" => "Y",
 			)
 		);?>
+		<?
+		if (isAuth()){
+			$placeholder = 'Поле для комментария';
+		}else{
+			$placeholder = 'Комментарии могут оставлять только зарегистрированные пользователи';
+		} 
+		?>
 		<div class="b-detail-feedback">
-			<h3>Оставьте свой отзыв</h3>
+			<h3>Оставьте свой комментарии</h3>
 			<form class="clearfix" action="/ajax/?action=ADDCOMMENT&ARTICLE_ID=<?=$arResult["ID"]?>" method="POST">
 				<div class="b-textarea">
-					<textarea rows="2" name="comment" required placeholder="Отзывы могут оставлять только зарегистрированные пользователи"></textarea>
+					<textarea rows="2" name="comment" required placeholder="<?=$placeholder?>"></textarea>
 				</div>
 				<input type="text" name="MAIL">
 				<? if (isAuth()): ?>
-					<a href="#" class="b-btn ajax">Оставить отзыв</a>
+					<a href="#" class="b-btn ajax">Оставить комментарий</a>
 				<? else: ?>
 					<a href="#" class="b-btn">Зарегистрироваться</a>
 				<? endif; ?>
