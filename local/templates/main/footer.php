@@ -199,7 +199,7 @@
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/autosize.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-ui.min.js"></script>
 	<!-- Плагины для страницы оформления заказа -->
-	<? if($urlArr[1] == "personal"): ?>
+	<? //if($urlArr[1] == "personal"): ?>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vue.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vee-validate.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.sticky-kit.min.js"></script>
@@ -211,7 +211,7 @@
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/address.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/AddressDeliveryClass.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/app-order.js"></script>
-	<? endif; ?>
+	<? //endif; ?>
 	<!-- \\\\\\\\ -->
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.js"></script>
 </body>
