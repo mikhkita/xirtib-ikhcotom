@@ -84,43 +84,55 @@ $APPLICATION->SetTitle("Оформление заказа");
 		<?
 
 		// CCatalogDiscountCoupon::SetCoupon("zima10");
+		
 
-		$arFavourites = getFavourites();
+		// $arFavourites = getFavourites();
+		// $orders["isAuth"] = isAuth();
 
-		$basket = \Bitrix\Sale\Basket::loadItemsForFUser(
-		   \Bitrix\Sale\Fuser::getId(),
-		   \Bitrix\Main\Context::getCurrent()->getSite()
-		);
+		// $basket = \Bitrix\Sale\Basket::loadItemsForFUser(
+		//    \Bitrix\Sale\Fuser::getId(),
+		//    \Bitrix\Main\Context::getCurrent()->getSite()
+		// );
 
-		$order = Bitrix\Sale\Order::create(
-			\Bitrix\Main\Context::getCurrent()->getSite(),
-			\Bitrix\Sale\Fuser::getId());
-		$order->setPersonTypeId(1);
-		$order->setBasket($basket);
+		// $order = Bitrix\Sale\Order::create(
+		// 	\Bitrix\Main\Context::getCurrent()->getSite(),
+		// 	\Bitrix\Sale\Fuser::getId());
+		// $order->setPersonTypeId(1);
+		// $order->setBasket($basket);
 
-		$arBasket = array();
-		$basketItems = $basket->getBasketItems(); // массив объектов Sale\BasketItem
-		foreach ($basketItems as $basketItem) {
-			$arBasketItem = array();
-			$arBasketItem["id"] = $basketItem->getProductId();
-			$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
-			$arBasketItem["image"] = CFile::GetPath($objElement->getPreviewPicture());
-			$arBasketItem["name"] = $basketItem->getField('NAME');
-			$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
-			$arBasketItem["quantity"] = $basketItem->getQuantity();
-			$arBasketItem["basePriceForOne"] = $basketItem->getBasePrice();
-			$arBasketItem["totalPriceForOne"] = $basketItem->getPrice();
-			$product = \Bitrix\Catalog\ProductTable::getByPrimary($arBasketItem["id"])->fetchObject();
-			$arBasketItem["maxCount"] = $product->getQuantity();
-			//получить id товара по id торгового предложения
-			$productID = CCatalogSku::GetProductInfo($arBasketItem["id"]);
-			$arBasketItem["favorite"] = in_array($productID["ID"], $arFavourites);
-		    $arBasket[] = $arBasketItem;
-		}
-		$orders["items"] = $arBasket;
+		// $orders["orderID"] = $order->getId();
 
-		$discounts = $order->getDiscount();
-		$res = $discounts->getApplyResult();
+		// $arBasket = array();
+		// $basketItems = $basket->getBasketItems(); // массив объектов Sale\BasketItem
+		// foreach ($basketItems as $basketItem) {
+		// 	$arBasketItem = array();
+
+		// 	$arBasketItem["id"] = $basketItem->getProductId();//торговое предложение
+		// 	$productID = CCatalogSku::GetProductInfo($arBasketItem["id"]);//получить id товара по id торгового предложения
+		// 	$arBasketItem["productID"] = $productID["ID"];//товар
+
+		// 	$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
+		// 	$arBasketItem["image"] = CFile::GetPath($objElement->getPreviewPicture());
+		// 	$arBasketItem["name"] = $basketItem->getField('NAME');
+		// 	$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
+		// 	$arBasketItem["quantity"] = $basketItem->getQuantity();
+		// 	$arBasketItem["basePriceForOne"] = $basketItem->getBasePrice();
+		// 	$arBasketItem["totalPriceForOne"] = $basketItem->getPrice();
+		// 	$product = \Bitrix\Catalog\ProductTable::getByPrimary($arBasketItem["id"])->fetchObject();
+		// 	$arBasketItem["maxCount"] = $product->getQuantity();
+		// 	$arBasketItem["favorite"] = in_array($arBasketItem["productID"], $arFavourites);
+		//     $arBasket[] = $arBasketItem;
+		// }
+		// $orders["items"] = $arBasket;
+
+		// $discounts = $order->getDiscount();
+		// $arDiscounts = $discounts->getApplyResult();
+
+		// $arCoupons = Bitrix\Sale\DiscountCouponsManager::get(true, array(), true, true);
+		// print_r($arCoupons);
+		
+		// print_r($arDiscounts);
+
 
 		?>
 

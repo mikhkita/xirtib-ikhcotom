@@ -37,6 +37,7 @@
         data: function () {
             return {
                 orders: [],
+                isAuth: false,
                 show: false,
                 showCatalogRef: false,
                 showPreloader: true,
@@ -54,7 +55,8 @@
                 },
                 delayQuantity: 300,
                 timeoutQuantity: null,
-                countQueue: 0
+                countQueue: 0,
+                pluginsInit: false,
             }
         },
         mounted: function () {
@@ -82,6 +84,9 @@
                         self.form.paymentList = data.payments;
                         self.form.paymentActive = self.form.paymentList[0].value;
                     }
+                    if(data.isAuth){
+                        self.isAuth = data.isAuth;
+                    }
                   }
                 },
                 error: function(){}
@@ -96,6 +101,7 @@
                         @onRemoveItem="removeItem"\
                         @onFavoriteToggle="favoriteToggle"\
                         :orders="orders"\
+                        :isAuth="isAuth"\
                     ></v-order-list>\
                     <form id="b-order-form" class="b-order-form" method="post" action="">\
                         <h3>Данные к заказу</h3>\
@@ -303,13 +309,10 @@
             //     this.couponList.splice(index, 1);
             // },
             updateOrder: function (orders) {
-                this.orders = orders;
+                this.orders = [].concat(orders);
             },
             updateCoupons: function (coupons) {
-                console.log(coupons);
                 this.couponList = coupons;
-                console.log(this.couponList);
-                console.log(app);
             },
             validationForm: function () {
                 if(this.formValid){
@@ -371,7 +374,7 @@
         components: {
             //Список позиций заказа
             'v-order-list': {
-                props: ['orders'],
+                props: ['orders', 'isAuth'],
                 data: function () {
                     return {
 
@@ -392,6 +395,8 @@
                         :_totalPriceForOne="order.totalPriceForOne"\
                         :_maxCount="order.maxCount"\
                         :_favorite="order.favorite"\
+                        :_visible="order.visible"\
+                        :_isAuth="isAuth"\
                         :key="order.id" v-for="order in orders">\
                     </v-order-item>\
                 </div>',
@@ -418,11 +423,13 @@
                             _basePriceForOne: Number,
                             _totalPriceForOne: Number,
                             _maxCount: Number,
-                            _favorite: Boolean
+                            _favorite: Boolean,
+                            _visible: Boolean,
+                            _isAuth: Boolean
                         },
                         data: function () {
                             return {
-                                visible: true,
+                                //visible: true,
                                 //favorite: false
                             }
                         },
@@ -456,16 +463,22 @@
                                 }
                             },
                             basePrice: function () {
-                               return this._basePriceForOne * this.quantity;
+                               return +(this._basePriceForOne * this.quantity).toFixed(2);
                             },
                             totalPrice: function () {
-                               return this._totalPriceForOne * this.quantity;
+                               return +(this._totalPriceForOne * this.quantity).toFixed(2);
                             },
                             maxCount: function () {
                                return this._maxCount;
                             },
                             favorite: function () {
                                 return this._favorite;
+                            },
+                            visible: function () {
+                                return this._visible;
+                            },
+                            isAuth: function () {
+                                return this._isAuth;
                             }
                         },
                         template: '\
@@ -492,6 +505,7 @@
                                     @click.prevent="onFavoriteToggle" \
                                     :class="{active: favorite}" \
                                     class="control-favorite"\
+                                    v-show="isAuth"\
                                 >\
                                     <div class="icon-star-order"></div>\
                                     <div class="icon-star-order-fill"></div>\
@@ -568,9 +582,10 @@
                             v-for="coupon in couponList"\
                             :key="coupon.id"\
                             :class="{\'coupon-success\': coupon.success, \'coupon-error\': !coupon.success}"\
+                            v-show="coupon.visible"\
                         >\
                             <p><b>{{ coupon.name }}</b> - {{ (coupon.success) ? "купон применён" : "купон не найден" }}</p>\
-                            <a href="#" class="dashed" @click.prevent="removeCoupon(coupon.name)">Удалить</a>\
+                            <a href="#" class="dashed" @click.prevent="removeCoupon(coupon.id, coupon.name)">Удалить</a>\
                         </div>\
                       </div>\
                     </div>\
@@ -601,26 +616,15 @@
                             self.ajaxCoupon = true;
                             $.ajax({
                                 type: "get",
-                                url: "send/addCoupon.php",
-                                data: {coupon: self.coupon},
+                                url: "/ajax/index.php",
+                                data: {"COUPON_NAME": self.coupon, "action": "COUPON_ACTION"},
                                 success: function(response){
-                                    var newCoupon;
-                                    if(response){
-                                        var data = JSON.parse(response);
+                                    var data = JSON.parse(response);
+                                    if(data.result === "success"){
                                         self.couponList = [].concat(data.coupons);
-                                        //self.updateCoupons(data.coupons);
-                                        if(data.items){
-                                            self.updateOrder(data.items);
-                                        }
-                                        // var data = JSON.parse(response);
-                                        // newCoupon = {name: self.coupon, success: true};
-                                        // self.couponList.push(newCoupon);
-                                        // if(data.items){
-                                        //     self.updateOrder(data.items);
-                                        // }
+                                        self.updateOrder(data.items);
                                     }else{
-                                        // newCoupon = {name: self.coupon, success: false};
-                                        // self.couponList.push(newCoupon);
+
                                     }
                                 },
                                 error: function(){},
@@ -633,25 +637,26 @@
                             self.validInput = false;
                         }
                     },
-                    removeCoupon: function (name) {
-                        var self = this;
+                    removeCoupon: function (id, name) {
+                        var self = this,
+                            index = self.couponList.map(function(v) {return v.id}).indexOf(id);
+                        self.couponList[index].visible = false;//скрыть элемент
                         $.ajax({
                             type: "get",
-                            url: "send/removeCoupon.php",
-                            data: {coupon: name},
+                            url: "/ajax/index.php",
+                            data: {"COUPON_NAME": name, "action": "COUPON_ACTION", "COUPON_DELETE": "Y"},
                             success: function(response){
-                                if(response){
-                                    // var data = JSON.parse(response),
-                                    //     index = self.couponList.map(function(v) {return v.name}).indexOf(name);
-                                    // self.couponList.splice(index, 1);
-                                    // if(data.items){
-                                    //     self.updateOrder(data.items);
-                                    // }
+                                var data = JSON.parse(response);
+                                if(data.result === "success"){
+                                    self.couponList = [].concat(data.coupons);
+                                    self.updateOrder(data.items);
                                 }else{
-                                    alert("Произошла ошибка при удалении купона.\nПожалуйста, обновите страницу");
+                                    self.couponList[index].visible = true;
                                 }
                             },
-                            error: function(){}
+                            error: function(){
+                                self.couponList[index].visible = true;
+                            }
                         });
                     },
                 },
@@ -659,26 +664,30 @@
                     
                 }
             }
+        },
+        updated: function () {
+          this.$nextTick(function () {
+            if($('#app-order input[name="phone"]').length && !this.pluginsInit){
+                $('#app-order input[name="phone"]').mask('+7 (000) 000 0000');
+                if( typeof autosize == "function" ){
+                    autosize(document.querySelectorAll('#app-order textarea[name="address"], #app-order textarea[name="comment"]'));
+                }
+                window.onresize = windowResize;
+                windowResize();
+                this.pluginsInit = true;
+            }
+          })
         }
     });
 
     var app = new Vue({
         el: '#app-order',
         data: {
-            
+
         },
         mounted: function () {
-           document.onreadystatechange = () => { 
-            if (document.readyState == "complete") { 
-                        $('#app-order input[name="phone"]').mask('+7 (000) 000 0000');
-                        if( typeof autosize == "function" ){
-                            autosize(document.querySelectorAll('#app-order textarea[name="address"], #app-order textarea[name="comment"]'));
-                        }
-                        window.onresize = windowResize;
-                        windowResize();
-                    } 
-            }
-        }
+            
+        },
     });
 
 }());
