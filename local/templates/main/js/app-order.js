@@ -60,37 +60,57 @@
             }
         },
         mounted: function () {
-          var self = this;
+          if(dataOrder){
+            if(dataOrder.items){
+                this.orders = dataOrder.items;
+                this.show = true;
+                this.showPreloader = false;
+            }
+            if(dataOrder.coupons){
+                this.couponList = dataOrder.coupons;
+            }
+            if(dataOrder.delivery){
+                this.form.deliveryList = dataOrder.delivery;
+                this.form.deliveryActive = this.form.deliveryList[0].value;
+            }
+            if(dataOrder.payments){
+                this.form.paymentList = dataOrder.payments;
+                this.form.paymentActive = this.form.paymentList[0].value;
+            }
+            if(dataOrder.isAuth){
+                this.isAuth = dataOrder.isAuth;
+            }
+          }
           //setTimeout(function() { 
-            $.ajax({
-                type: "get",
-                url: "send/getOrderList.php",
-                success: function(response){
-                  if(response){
-                    var data = JSON.parse(response);
-                    if(data.items){
-                        self.orders = data.items;
-                        self.show = true;
-                        self.showPreloader = false;
-                    }
-                    if(data.coupons){
-                        self.couponList = data.coupons;
-                    }
-                    if(data.delivery){
-                        self.form.deliveryList = data.delivery;
-                        self.form.deliveryActive = self.form.deliveryList[0].value;
-                    }
-                    if(data.payments){
-                        self.form.paymentList = data.payments;
-                        self.form.paymentActive = self.form.paymentList[0].value;
-                    }
-                    if(data.isAuth){
-                        self.isAuth = data.isAuth;
-                    }
-                  }
-                },
-                error: function(){}
-            });
+            // $.ajax({
+            //     type: "get",
+            //     url: "send/getOrderList.php",
+            //     success: function(response){
+            //       if(response){
+            //         var data = JSON.parse(response);
+            //         if(data.items){
+            //             self.orders = data.items;
+            //             self.show = true;
+            //             self.showPreloader = false;
+            //         }
+            //         if(data.coupons){
+            //             self.couponList = data.coupons;
+            //         }
+            //         if(data.delivery){
+            //             self.form.deliveryList = data.delivery;
+            //             self.form.deliveryActive = self.form.deliveryList[0].value;
+            //         }
+            //         if(data.payments){
+            //             self.form.paymentList = data.payments;
+            //             self.form.paymentActive = self.form.paymentList[0].value;
+            //         }
+            //         if(data.isAuth){
+            //             self.isAuth = data.isAuth;
+            //         }
+            //       }
+            //     },
+            //     error: function(){}
+            // });
         },
         template: '\
         <div>\

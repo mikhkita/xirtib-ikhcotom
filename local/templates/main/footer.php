@@ -316,7 +316,7 @@
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/autosize.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-ui.min.js"></script>
 	<!-- Плагины для страницы оформления заказа -->
-	<?/* if($urlArr[1] == "personal"): */?>
+	<? if($urlArr[1] == "cart" && $urlArr[2] == "order"): ?>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vue.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vee-validate.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.sticky-kit.min.js"></script>
@@ -327,8 +327,12 @@
 	<script type="text/javascript" src="https://api-maps.yandex.ru/2.1.41/?load=package.full&amp;apikey=dcf82496-06b7-476e-b6f8-0078e5d46b67&amp;lang=ru-RU"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/address.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/AddressDeliveryClass.js"></script>
+	<?$dataOrder = getOrderList();?>
+	<script type="text/javascript">
+		var dataOrder = <?=$dataOrder?>;
+	</script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/app-order.js"></script>
-	<?/* endif; */?>
+	<? endif; ?>
 	<!-- \\\\\\\\ -->
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.js"></script>
 </body>
