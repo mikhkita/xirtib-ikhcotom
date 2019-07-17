@@ -7,25 +7,10 @@
 
 	$orders = array();
 
-	$orders["coupons"][] = array(
-		"id" => 723,
-		"name" => "zima10",
-		"success" => true,
-	);
-	$orders["coupons"][] = array(
-		"id" => 724,
-		"name" => "wefe",
-		"success" => false,
-	);
-	$orders["coupons"][] = array(
-		"id" => 725,
-		"name" => "YTCCTRCT",
-		"success" => false,
-	);
-
 	// =================
 
 	$arFavourites = getFavourites();
+	$orders["isAuth"] = isAuth();
 
 	$basket = \Bitrix\Sale\Basket::loadItemsForFUser(
 	   \Bitrix\Sale\Fuser::getId(),
@@ -38,6 +23,8 @@
 	$order->setPersonTypeId(1);
 	$order->setBasket($basket);
 
+	//$orders["orderID"] = $order->getId();
+
 	$arBasket = array();
 	$basketItems = $basket->getBasketItems(); // массив объектов Sale\BasketItem
 	foreach ($basketItems as $basketItem) {
@@ -48,7 +35,7 @@
 		$arBasketItem["productID"] = $productID["ID"];//товар
 
 		$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
-		$arBasketItem["image"] = CFile::GetPath($objElement->getPreviewPicture());
+		$arBasketItem["image"] = CFile::GetPath($objElement->getDetailPicture());
 		$arBasketItem["name"] = $basketItem->getField('NAME');
 		$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
 		$arBasketItem["quantity"] = $basketItem->getQuantity();
@@ -57,12 +44,43 @@
 		$product = \Bitrix\Catalog\ProductTable::getByPrimary($arBasketItem["id"])->fetchObject();
 		$arBasketItem["maxCount"] = $product->getQuantity();
 		$arBasketItem["favorite"] = in_array($arBasketItem["productID"], $arFavourites);
+		$arBasketItem["visible"] = true;
 	    $arBasket[] = $arBasketItem;
 	}
 	$orders["items"] = $arBasket;
 
 	$discounts = $order->getDiscount();
-	$res = $discounts->getApplyResult();
+	$arDiscounts = $discounts->getApplyResult();
+
+	// =================
+
+	$arCoupons = Bitrix\Sale\DiscountCouponsManager::get(true, array(), true, true);
+	$orders["coupons"] = array();
+	$i = 0;
+	foreach ($arCoupons as $value) {
+		if ($value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_NOT_FOUND 
+			|| $value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_FREEZE
+			|| $value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_NOT_APPLYED 
+			|| $value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_ENTERED){
+			$status = false;
+		}
+		else{
+			$status = true;
+		}
+		$orders["coupons"][] = array(
+			"id" => $i,
+			"name" => $value["COUPON"],
+			"success" => $status,
+			"visible" => true
+		);
+		$i++;
+	}
+
+	// $orders["coupons"][] = array(
+	// 	"id" => 723,
+	// 	"name" => "zima10",
+	// 	"success" => true,
+	// );
 
 	// =================
 

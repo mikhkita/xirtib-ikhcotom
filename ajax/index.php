@@ -500,6 +500,82 @@ switch ($action) {
 			}
 		}
 		break;
+	case 'COUPON_ACTION':
+		if( !isset($_REQUEST['COUPON_NAME']) ){
+			returnError("Не указан купон");
+		}
+		$coupon = $_REQUEST['COUPON_NAME'];
+		
+		$arFavourites = getFavourites();
+		$res["isAuth"] = isAuth();
+
+		$basket = \Bitrix\Sale\Basket::loadItemsForFUser(
+		   \Bitrix\Sale\Fuser::getId(),
+		   \Bitrix\Main\Context::getCurrent()->getSite()
+		);
+
+		$order = Bitrix\Sale\Order::create(
+			\Bitrix\Main\Context::getCurrent()->getSite(),
+			\Bitrix\Sale\Fuser::getId());
+		$order->setPersonTypeId(1);
+		$order->setBasket($basket);
+
+		if(isset($_REQUEST['COUPON_DELETE']) && $_REQUEST['COUPON_DELETE'] == "Y"){
+			Bitrix\Sale\DiscountCouponsManager::delete($coupon);
+		}else{
+			Bitrix\Sale\DiscountCouponsManager::add($coupon);
+		}
+		$discounts = $order->getDiscount();
+		$discounts->calculate();
+		$basket->refresh();
+
+		$arCoupons = Bitrix\Sale\DiscountCouponsManager::get(true, array(), true, true);
+		$res["coupons"] = array();
+		$i = 0;
+		foreach ($arCoupons as $value) {
+			if ($value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_NOT_FOUND 
+				|| $value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_FREEZE
+				|| $value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_NOT_APPLYED 
+				|| $value['STATUS'] == Bitrix\Sale\DiscountCouponsManager::STATUS_ENTERED){
+				$status = false;
+			}
+			else{
+				$status = true;
+			}
+			$res["coupons"][] = array(
+				"id" => $i,
+				"name" => $value["COUPON"],
+				"success" => $status,
+				"visible" => true
+			);
+			$i++;
+		}
+
+		$arBasket = array();
+		$basketItems = $basket->getBasketItems(); // массив объектов Sale\BasketItem
+		foreach ($basketItems as $basketItem) {
+			$arBasketItem = array();
+
+			$arBasketItem["id"] = $basketItem->getProductId();//торговое предложение
+			$productID = CCatalogSku::GetProductInfo($arBasketItem["id"]);//получить id товара по id торгового предложения
+			$arBasketItem["productID"] = $productID["ID"];//товар
+
+			$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
+			$arBasketItem["image"] = CFile::GetPath($objElement->getDetailPicture());
+			$arBasketItem["name"] = $basketItem->getField('NAME');
+			$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
+			$arBasketItem["quantity"] = $basketItem->getQuantity();
+			$arBasketItem["basePriceForOne"] = $basketItem->getBasePrice();
+			$arBasketItem["totalPriceForOne"] = $basketItem->getPrice();
+			$product = \Bitrix\Catalog\ProductTable::getByPrimary($arBasketItem["id"])->fetchObject();
+			$arBasketItem["maxCount"] = $product->getQuantity();
+			$arBasketItem["favorite"] = in_array($arBasketItem["productID"], $arFavourites);
+			$arBasketItem["visible"] = true;
+		    $arBasket[] = $arBasketItem;
+		}
+		$res["items"] = $arBasket;
+		returnSuccess($res);
+		break;
 	default:
 		break;
 }

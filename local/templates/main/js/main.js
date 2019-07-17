@@ -588,8 +588,7 @@ $(document).ready(function(){
             }
             var resString = postalCode + $('.js-order-adress-map-input').val() + room;
             var $address = $("#app-order textarea[name='address']").val(resString);
-            var e = document.createEvent('HTMLEvents');
-            e.initEvent('textarea', true, true);
+            var e = new Event("input");
             $address[0].dispatchEvent(e);
             $.fancybox.close(); 
         }else{
