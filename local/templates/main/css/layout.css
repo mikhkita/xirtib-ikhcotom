@@ -215,6 +215,12 @@ h3.b-title{
 .hide{
 	display: none !important;
 }
+.b-page{
+	overflow: hidden;
+}
+.no-scroll .b-page{
+	height: 100vh;
+}
 .after-load{
 	position: relative;
 	opacity: 1;
@@ -336,7 +342,7 @@ h3.b-title{
 		font-family: 'DINPro-Medium';
 	}
 	.b-text a{
-		display: inline-block;
+		display: inline;
 		line-height: 18px;
 		border-bottom: 1px solid #564531;
 	}
@@ -349,6 +355,14 @@ h3.b-title{
 	}
 	.b-text table{
 		margin: 20px 0;
+		width: 100%;
+	}
+	.b-table-wrap{
+	    max-width: calc(100% + 48px);
+	    overflow: auto;
+	    width: calc(100% + 48px);
+	    margin-left: -24px;
+	    box-sizing: border-box;
 	}
 	.b-text tr{
 		border-top: 1px solid transparent;
@@ -477,12 +491,33 @@ h3.b-title{
 			-o-transform: translateY(-50%);
 			transform: translateY(-50%);
 		}
+		div.title-search-result{
+			border: unset;
+			min-width: unset;
+		}
+		.bx_item_block.all_result .all_result_title{
+			font-size: 16px;
+			line-height: 22px;
+			font-family: 'DINPro-Regular';
+		}
 		.bx_searche{
 		    border: 1px solid #77be32;
    			border-radius: 5px;
    			box-sizing: border-box;
    			background-color: #fff;
 		}
+			.bx_searche .bx_img_element{
+				background: transparent;
+			}
+				.bx_searche .bx_image{
+					position: absolute;
+					top: 50%;
+					-webkit-transform: translateY(-50%);
+					-ms-transform: translateY(-50%);
+					-o-transform: translateY(-50%);
+					transform: translateY(-50%);
+					border: unset;
+				}
 			.bx_searche .bx_item_block{
 				padding: 10px 20px;
 				border-bottom: 1px solid #77be32;
@@ -888,6 +923,7 @@ h3.b-title{
 			}
 .b-stock{
 	text-align: center;
+	overflow: hidden;
 	margin-bottom: 25px;
 }
 	.b-stock h2.b-title{
@@ -989,6 +1025,9 @@ h3.b-title{
 					left: 0px;
 					top: 0px;
 					opacity: 0;
+					-webkit-transition: opacity .1s;
+					-o-transition: opacity .1s;
+					transition: opacity .1s;
 				}
 			.b-item-card:hover{
 				z-index: 10;
@@ -1036,7 +1075,7 @@ h3.b-title{
 					color: #564531;
 					letter-spacing: 0;
 					padding: 3px 13px;
-					z-index: 100;
+					z-index: 1;
 				}
 				.b-card-fav{
 					position: absolute;
@@ -1048,7 +1087,7 @@ h3.b-title{
 					color: transparent;
 					width: 36px;
 					height: 36px;
-					z-index: 100;
+					z-index: 1;
 				}
 					.b-card-fav:hover{
 						color: #FFF !important;
@@ -1343,12 +1382,18 @@ h3.b-title{
 			cursor: pointer;
 		}
 			.main-texture + label img {
+				-webkit-transition: border .1s;
+				-o-transition: border .1s;
+				transition: border .1s;
 				border: 3px solid transparent;
 			}
 			.main-texture:hover + label img{
 				border: 3px solid #77BE32;
 			}
 		.main-texture:checked + label img {
+		 	border: 3px solid #5f9828;
+		}
+		.main-texture:checked:hover + label img {
 		 	border: 3px solid #77BE32;
 		}
 	.wool-input,
@@ -2284,23 +2329,67 @@ h3.b-title{
 							display: none;
 						}
 						.b-share-link .ya-share2{
-							opacity: 0;
-							visibility: hidden;
-							-webkit-transition: opacity .1s, visibility .1s;
-							-o-transition: opacity .1s, visibility .1s;
-							transition: opacity .1s, visibility .1s;
+						    z-index: 2;
+						    opacity: 0;
+					        width: 152px;
+						    visibility: hidden;
+						    background: #fff;
+						    padding: 10px 20px;
+						    border: 1px solid #D8D8D8;
+						    -webkit-transition: opacity .1s, visibility .1s;
+						    -o-transition: opacity .1s, visibility .1s;
+						    transition: opacity .1s, visibility .1s;
+						    position: absolute;
+						    border-radius: 3px;
+					        top: 30px;
+					        left: 0;
+					        box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15);
+						}
+						.b-share-link .ya-share2:before{
+							content: '';
 							position: absolute;
+							width: 100%;
+							height: 10px;
+							left: 0;
+							top: -10px;
+						}
+						.b-share-link .ya-share2:after{
+							content: '';
+							position: absolute;
+							width: 10px;
+							height: 10px;
+							background: #fff;
+						    top: -6px;
+						    left: 23px;
+						    border-top-left-radius: 2px;
+							border-left: 1px solid #D8D8D8;
+							border-top: 1px solid #D8D8D8;
+							-webkit-transform: rotate(45deg);
+							-ms-transform: rotate(45deg);
+							-o-transform: rotate(45deg);
+							transform: rotate(45deg);
 						}
 						.b-share-link:hover .ya-share2{
 							opacity: 1;
 							visibility: visible;
 						}
+							.ya-share2__container_size_m .ya-share2__icon{
+								height: 30px!important;
+    							width: 30px!important;
+							}
 							.ya-share2__list_direction_horizontal > .ya-share2__item{
 								display: block!important;
 								padding-left: 0!important;
-								margin-top: 5px!important;
     							z-index: 10!important;
+    							margin-right: 10px!important;
     							width: auto;
+							}
+							.ya-share2__list_direction_horizontal > .ya-share2__item:nth-child(-n+3){
+								margin-bottom: 10px!important;
+							}
+							.ya-share2__list_direction_horizontal > .ya-share2__item:last-child,
+							.ya-share2__list_direction_horizontal > .ya-share2__item:nth-child(3n){
+								margin-right: 0!important;
 							}
 						/*.b-product-actions li a:hover .icon-share-green{
 							display: block;
@@ -2499,10 +2588,15 @@ h3.b-title{
 					.b-product-quantity{
 						margin-bottom: 35px;
 					}
+						.b-product-quantity-info{
+							color: #cb6163;
+						}
 						.b-product-quantity span{
 							font-size: 18px;
 							line-height: 22px;
 							font-family: 'DINPro-Medium';
+							display: inline-block;
+							vertical-align: middle;
 						}
 						.product-quantity{
 							position: relative;
@@ -3106,6 +3200,16 @@ h3.b-title{
 				    height: calc( 100% + 10px );
 				    left: -5px;
 				    top: -5px;
+				    z-index: 999;
+			    }
+			    .load .b-filter-item-range:after{
+			    	content: '';
+				    position: absolute;
+				    width: calc( 100% + 10px );
+				    height: calc( 100% + 30px );
+				    left: -5px;
+				    top: -15px;
+				    z-index: 999;
 			    }
 			    .load .range-inputs input[type=text]{
 			    	color: #c6c2be;
@@ -3808,7 +3912,9 @@ h3.b-title{
 	padding-left: 61px;
 	padding-right: 61px;
 }
-
+.fancybox-container{
+	font-family: 'DINPro-Regular';
+}
 .fancybox-close-small {
     position: absolute;
     right: 22px;

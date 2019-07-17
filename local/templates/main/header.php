@@ -44,6 +44,40 @@ CModule::IncludeModule('iblock');
 </head>
 <body>
 	<?$APPLICATION->ShowPanel();?>
+	<div class="b-left-menu">
+		<div class="mobile-menu-bg"></div>
+		<div class="mobile-menu">
+			<div class="mobile-menu-wrap">
+				<div class="mobile-menu-close-btn">Закрыть</div>
+				<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
+						"ADD_SECTIONS_CHAIN" => "N",
+						"CACHE_GROUPS" => "Y",
+						"CACHE_TIME" => "36000000",
+						"CACHE_TYPE" => "N",
+						"COUNT_ELEMENTS" => "Y",
+						"IBLOCK_ID" => "1",
+						"IBLOCK_TYPE" => "content",
+						"SHOW_PARENT_NAME" => "Y",
+						"TOP_DEPTH" => "1",
+						"VIEW_MODE" => "LINE",
+					),
+					false
+				);?>
+				<?$APPLICATION->IncludeComponent("bitrix:menu", "mobile_menu", array(
+					"ROOT_MENU_TYPE" => "main",
+					"MAX_LEVEL" => "1",
+					"MENU_CACHE_TYPE" => "A",
+					"CACHE_SELECTED_ITEMS" => "N",
+					"MENU_CACHE_TIME" => "36000000",
+					"MENU_CACHE_USE_GROUPS" => "Y",
+					"MENU_CACHE_GET_VARS" => array(),
+				),
+					false
+				);?>
+			</div>
+		</div>
+	</div>
+	<div class="b-page">
 	<div class="b b-header">
 		<div class="b-top">
 			<div class="b-block">
@@ -168,40 +202,12 @@ CModule::IncludeModule('iblock');
 					<? $basketInfo['sum'] = number_format( $basketInfo['sum'], 0, ',', ' ' ); ?>
 				<? endif; ?>
 
-				<a href='#' class="b-price-button">
+				<a href='/cart/order/' class="b-price-button">
 					<span class="b-cart-price icon-ruble"><?=$basketInfo['sum']?></span>
 					<span class="b-cart-number-container">
 						<span class="b-cart-number"><?=$basketInfo['count']?></span>
 					</span>
 				</a>
-			</div>
-		</div>
-		<div class="mobile-menu-bg"></div>
-		<div class="mobile-menu">
-			<div class="mobile-menu-wrap">
-				<div class="mobile-menu-close-btn">Закрыть</div>
-				<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
-						"ADD_SECTIONS_CHAIN" => "N",
-						"CACHE_GROUPS" => "Y",
-						"CACHE_TIME" => "36000000",
-						"CACHE_TYPE" => "N",
-						"COUNT_ELEMENTS" => "Y",
-						"IBLOCK_ID" => "1",
-						"IBLOCK_TYPE" => "content",
-						"SHOW_PARENT_NAME" => "Y",
-						"TOP_DEPTH" => "1",
-						"VIEW_MODE" => "LINE",
-					),
-					false
-				);?>
-				<ul class="mobile-menu-nav">
-					<li><a href="#">О нас</a></li>
-					<li><a href="#">Доставка и оплата</a></li>
-					<li><a href="#">Услуги</a></li>
-					<li><a href="#">Блог</a></li>
-					<li><a href="#">Отзывы</a></li>
-					<li><a href="#">Контакты</a></li>
-				</ul>
 			</div>
 		</div>
 	</div>

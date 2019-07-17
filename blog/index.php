@@ -20,6 +20,9 @@ $APPLICATION->SetTitle("Блог");
 	<? endif; ?>
 	<li><a href="/blog/" class="<?=$class?>">Всё</a></li>
 	<? foreach($arSections as $section): ?>
+		<? if ($section['ELEMENT_CNT'] == 0): ?>
+			<? continue; ?>
+		<? endif; ?>
 		<? $class = ""; ?>
 		<? if ($section['CODE'] == $_REQUEST['SECTION_CODE']): ?>
 			<? $class = "active"; ?>

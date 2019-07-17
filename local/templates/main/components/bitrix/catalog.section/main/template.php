@@ -61,7 +61,11 @@ if (isAuth($USER)){
 			<div class="b-item-card">
 				<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-hover-frame"></a>
 				<div class="b-card-top">
-					<? $renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+					<? if ($arItem['OFFERS']): ?>
+						<? $renderImage = CFile::ResizeImageGet($arItem['OFFERS'][0]["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+					<? else: ?>
+						<? $renderImage = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+					<? endif; ?>
 					<img src="<?=$renderImage['src']?>">
 					<div class="b-discount">Новинка</div>
 

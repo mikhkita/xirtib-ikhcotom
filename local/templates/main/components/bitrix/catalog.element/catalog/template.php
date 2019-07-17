@@ -29,9 +29,12 @@ $modelsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPage
 $arFilter = Array("IBLOCK_ID" => 3, "IBLOCK_SECTION_ID" => 8, "ACTIVE"=>"Y", 'PROPERTY_PRODUCT_ID' => $arResult['ID']);
 $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPageSize"=>50), array());
 
+$id = $arResult['OFFERS'] ? $arResult['OFFERS'][0]['ID'] : $arResult['ID'];
+$quantity = $arResult['OFFERS'] ? $arResult['OFFERS'][0]["PRODUCT"]["QUANTITY"] : $arResult["PRODUCT"]["QUANTITY"];
+$article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']['VALUE'] : $arResult['PROPERTIES']['ARTICLE']['VALUE'];
+
+
 ?>
-<script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-<script src="https://yastatic.net/share2/share.js"></script>
 <div class="b-detail">
 	<? if ($_REQUEST['element_view'] == "Y"): ?>
 		<? $GLOBALS['APPLICATION']->RestartBuffer(); ?>
@@ -40,97 +43,73 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 		<div class="b-product-photo">
 			<div class="main-photo">
 				<div class="icon-zoom"></div>
-				<? if ($arResult["OFFERS"]): ?>
-					<div class="b-product-main-color">
-					<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-						<? if ($offer["DETAIL_PICTURE"]) {
-							$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-							$bigImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-						} else {
-							foreach($arColors as $color){
-								if ($offer['PROPERTIES']['COLOR']['VALUE'] == $color["UF_XML_ID"]) {
-									$renderImage = CFile::ResizeImageGet($color["UF_FILE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-									$bigImage = CFile::ResizeImageGet($color["UF_FILE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-									break;
-								}
-							}
-						} ?>
+				<div class="b-product-main after-load">
+					<? if ($arResult["OFFERS"]): ?>
+						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
+							<? if ($offer["DETAIL_PICTURE"]):
+								$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+								$bigImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
+								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+									<img src="<?=$renderImage['src']?>">
+								</a>
+							<?endif;?>
 
-						<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-							<img src="<?=$renderImage['src']?>">
-						</a>
+							<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
+								<? $class = "has-discount"; ?>
+							<? endif; ?>
 
-						<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
+							<? if ($key == 0): ?>
+								<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 1000): ?>
+									<? $price = number_format( $offer["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
+									<? $discountPrice = number_format( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
+								<? else: ?>
+									<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
+									<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
+								<? endif; ?>
+								<? $priceType = $offer["ITEM_MEASURE"]["ID"]; ?>
+							<? endif; ?>
+						<? endforeach; ?>
+					<? else: ?>
+						<? if ($arResult["DETAIL_PICTURE"]):
+								$renderImage = CFile::ResizeImageGet($arResult["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+								$bigImage = CFile::ResizeImageGet($arResult["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
+								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+									<img src="<?=$renderImage['src']?>">
+								</a>
+						<?endif;?>
+						<? if( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arResult["PRICES"]["PRICE"]["VALUE"] ): ?>
 							<? $class = "has-discount"; ?>
 						<? endif; ?>
-
-						<? if ($key == 0): ?>
-							<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 1000): ?>
-								<? $price = number_format( $offer["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-								<? $discountPrice = number_format( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-							<? else: ?>
-								<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-								<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-							<? endif; ?>
-							<? $priceType = $offer["ITEM_MEASURE"]["ID"]; ?>
-						<? endif; ?>
-
-					<? endforeach; ?>
-					</div>
-				<? else: ?>
-					<? if( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arResult["PRICES"]["PRICE"]["VALUE"] ): ?>
-						<? $class = "has-discount"; ?>
+						<? $price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
+						<? $discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
 					<? endif; ?>
-					<? $price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-					<? $discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-				<? endif; ?>
+				</div>
+
 				<? if ($price != $discountPrice): ?>
 					<? $discount = true; ?>
 				<? endif; ?>
-				<div class="b-product-main after-load">
-					<a class="fancy-img" href="<?=$img['src']?>" data-fancybox="gallery">
-					    <img src="<?=$img['src']?>?>">
-					</a>
-				<? foreach($arResult["OFFERS"] as $key => $offer): ?>
-					<? if ($offer["DETAIL_PICTURE"]) {
-						$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-						$bigImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-					} else {
-						foreach($arColors as $color){
-							if ($offer['PROPERTIES']['COLOR']['VALUE'] == $color["UF_XML_ID"]) {
-								$renderImage = CFile::ResizeImageGet($color["UF_FILE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-								$bigImage = CFile::ResizeImageGet($color["UF_FILE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-								break;
-							}
-						}
-					} ?>
-					<a class="fancy-img" href="<?=$bigImage['src']?>" data-fancybox="gallery">
-					    <img src="<?=$renderImage['src']?>">
-					</a>
-				<? endforeach; ?>
-                </div>
 			</div>
-			<div class="b-product-photo-slider">
-				<img src="<?=$img['src']?>">
-				<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-					<? if ($offer["DETAIL_PICTURE"]) {
-						$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-					} else {
-						foreach($arColors as $color){
-							if ($offer['PROPERTIES']['COLOR']['VALUE'] == $color["UF_XML_ID"]) {
-								$renderImage = CFile::ResizeImageGet($color["UF_FILE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-								break;
+
+			<? if ($arResult["OFFERS"] > 3): ?>
+				<? $sliderClass = "no-slider"; ?>
+			<? endif; ?>
+
+			<? if ($arResult["OFFERS"]): ?>
+				<div class="b-product-photo-slider <?=$sliderClass?>">
+					<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
+						<? if ($offer["DETAIL_PICTURE"]) {
+							$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+							if ($key == 0){
+								$class = 'active';
+							}else{
+								$class = '';
 							}
-						}
-					} ?>
-					<? if ($key == 0): ?>
-						<? $class = 'active'; ?>
-					<? else: ?>
-						<? $class = ''; ?>
-					<? endif; ?>
-					<img data-color-id="<?=$offer['ID']?>" src="<?=$renderImage['src']?>" class="<?=$class?>">
-				<? endforeach; ?>
-			</div>
+							?>
+							<img data-color-id="<?=$offer['ID']?>" src="<?=$renderImage['src']?>" class="<?=$class?>">
+						<? } ?>
+					<? endforeach; ?>
+				</div>
+			<? endif; ?>
 		</div>
 		<div class="b-product-content">
 			<h2 class="b-product-name"><?=$arResult['NAME']?></h2>
@@ -159,6 +138,8 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 							<span class="icon icon-share"></span>
 							<span class="icon icon-share-green"></span>Поделиться
 						</a>
+						<script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+						<script src="https://yastatic.net/share2/share.js"></script>
 						<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>
 					</li>
 					<li>
@@ -199,7 +180,7 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 								data-color-id="<?=$offer['ID']?>" 
 								data-price="<?=$offer["PRICES"]["PRICE"]["VALUE"]?>" 
 								data-discount-price="<?=$offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]?>" 
-								data-article="<?=$offer['PROPERTIES']['ARTICLE']['VALUE']?>" 
+								data-article="<?=$article?>" 
 								data-quantity="<?=$offer["PRODUCT"]["QUANTITY"]?>" 
 								<?=$selected?> ><?=$offer['PROPERTIES']['COLOR']['NAME']?></option>
 							<? endforeach; ?>
@@ -209,19 +190,15 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 						<div class="texture-list clearfix">
 							<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 								<? 
-								foreach($arColors as $color){
-									if ($offer['PROPERTIES']['COLOR']['VALUE'] == $color["UF_XML_ID"]) {
-										$renderImage = CFile::ResizeImageGet($color["UF_FILE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-										break;
-									}
-								}
-								?>
-								<? if ($key == 0): ?>
-									<? $class = 'active'; ?>
-								<? else: ?>
-									<? $class = ''; ?>
-								<? endif; ?>
-								<img data-color-id="<?=$offer['ID']?>" src="<?=$renderImage['src']?>" class="<?=$class?>">
+								if ($offer["PREVIEW_PICTURE"]) {
+									$renderImage = CFile::ResizeImageGet($offer["PREVIEW_PICTURE"], Array("width" => 98, "height" => 98), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+									if ($key == 0){
+										$class = 'active';
+									}else{
+										$class = '';
+									}?>
+									<img data-color-id="<?=$offer['ID']?>" src="<?=$renderImage['src']?>" class="<?=$class?>">
+								<?}?>
 							<? endforeach; ?>
 						</div>
 						<? if (count($arResult["OFFERS"]) > 10): ?>
@@ -230,8 +207,8 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 					</div>
 					<? endif; ?>
 					<div class="b-product-info">
-						<p><b>Артикул:</b> <span id="article"><?=$arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']['VALUE']?></span></p>
-						<p><b>В наличии:</b> <span id="quantity"><?=$arResult["OFFERS"][0]["PRODUCT"]["QUANTITY"]?></span></p>
+						<p><b>Артикул:</b> <span id="article"><?=$article?></span></p>
+						<p><b>В наличии:</b> <span id="quantity"><?=$quantity?></span></p>
 						<?php if ($arResult["PROPERTIES"]["TYPE"]["VALUE"]): ?>
 							<p><b>Вид:</b> 
 							<? foreach($arResult["PROPERTIES"]["TYPE"]["VALUE"] as $key => $type):
@@ -298,11 +275,11 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 						<span>Количество:</span>
 						<div class="product-quantity">
 							<a href="#" class="icon-minus quantity-reduce"></a>
-							<input type="text" name="count" class="quantity-input" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" value="1">
+							<input type="text" name="count" class="quantity-input" data-quantity="<?=$quantity?>" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" value="1">
 							<a href="#" class="icon-plus quantity-add"></a>
 						</div>
+						<div class="b-product-quantity-info hide"><span>В наличии:&nbsp;</span><span id="quantity-info"><?=$quantity?></span></div>
 					</div>
-					<? $id = $arResult['OFFERS'][0]['ID'] ? $arResult['OFFERS'][0]['ID'] : $arResult['ID'] ?>
 					<a href="/ajax/?action=ADD2BASKET" data-id="<?=$id?>" class="b-btn b-btn-to-cart">
 						<span class="icon-cart"></span>
 						Добавить в корзину
@@ -566,7 +543,7 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 			"ACTION_VARIABLE" => "action",
 			"ADD_PICT_PROP" => "MORE_PHOTO",
 			"ADD_PROPERTIES_TO_BASKET" => "Y",
-			"ADD_SECTIONS_CHAIN" => "Y",
+			"ADD_SECTIONS_CHAIN" => "N",
 			"ADD_TO_BASKET_ACTION" => "ADD",
 			"AJAX_MODE" => "N",
 			"AJAX_OPTION_ADDITIONAL" => "",

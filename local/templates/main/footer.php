@@ -116,6 +116,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<div style="display:none;">
 		<a href="#b-popup-error" class="b-error-link fancy" style="display:none;"></a>
 		
@@ -244,13 +245,9 @@
 		                <input type="hidden" name="Login" value="Войти">
 
 						<input type="text" name="USER_LOGIN" placeholder="Электронная почта" required>
-						<input type="text" name="USER_PASSWORD" placeholder="Пароль" required>
+						<input type="password" name="USER_PASSWORD" placeholder="Пароль" required>
 
 						<div class="clearfix">
-							<!-- <div class="popup-sign-checkbox left">
-								<input type="checkbox" id="remember" name="remember" checked>
-								<label for="remember"><b></b>Запомнить</label>
-							</div> -->
 							<a href="#" class="popup-sign-pass-a underline right">Забыли пароль?</a>
 						</div>
 						<div class="b-btn-container">
@@ -263,8 +260,8 @@
 				<form action="/ajax/?action=REG" method="POST">
 					<div class="b-popup-error"></div>
 					<div class="b-popup-form">
-						<input type="text" name="email" placeholder="Электронная почта">
-						<input type="text" name="password" placeholder="Пароль">
+						<input type="text" name="email" placeholder="Электронная почта" required>
+						<input type="text" name="password" placeholder="Пароль" required>
 						<input type="text" name="MAIL">
 						<div class="b-btn-container">
 							<a href="#" class="b-btn b-btn-sign-up ajax">Зарегистрироваться</a>

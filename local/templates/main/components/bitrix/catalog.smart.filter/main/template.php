@@ -81,7 +81,11 @@ if (isset($templateData['TEMPLATE_THEME']))
 				$prices[$last] = preg_replace("/\s+/", "", $prices[$last]);
 
 				?>
-				<div class="b-filter-item">
+				<?if(intval($arItem["VALUES"]["MIN"]["HTML_VALUE"]) != intval($arItem["VALUES"]["MIN"]["VALUE"]) || intval($arItem["VALUES"]["MAX"]["HTML_VALUE"]) != intval($arItem["VALUES"]["MAX"]["VALUE"])):?>
+					<? $class = "open"; ?>
+				<?endif;?>
+
+				<div class="b-filter-item <?=$class?>">
 					<div class="b-filter-tab">
 						<div class="b-filter-item-name">
 							<h3><?=$arItem["NAME"]?></h3>
@@ -131,21 +135,28 @@ if (isset($templateData['TEMPLATE_THEME']))
 		//not prices
 		foreach($arResult["ITEMS"] as $key=>$arItem)
 		{
-			if(
-				empty($arItem["VALUES"])
-				|| isset($arItem["PRICE"])
-			)
+			if(empty($arItem["VALUES"])|| isset($arItem["PRICE"]))
 				continue;
 
-			if (
-				$arItem["DISPLAY_TYPE"] == "A"
-				&& (
-					$arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0
-				)
-			)
+			if ($arItem["DISPLAY_TYPE"] == "A"&& ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0))
 				continue;
 			?>
-			<div class="b-filter-item">
+			<? $class = ''; ?>
+			<? foreach($arItem["VALUES"] as $item): ?>
+				<? if ($item["CHECKED"]):?>
+					<? $class = 'open';?>
+					<? break; ?>
+				<?endif;?>
+			<? endforeach; ?>
+	
+	
+			<?if(!empty($arItem["VALUES"]["MIN"]["HTML_VALUE"]) && !empty($arItem["VALUES"]["MAX"]["HTML_VALUE"])):?>
+				<?if(intval($arItem["VALUES"]["MIN"]["HTML_VALUE"]) != intval($arItem["VALUES"]["MIN"]["VALUE"]) || intval($arItem["VALUES"]["MAX"]["HTML_VALUE"]) != intval($arItem["VALUES"]["MAX"]["VALUE"])):?>
+					<? $class = "open"; ?>
+				<?endif;?>
+			<?endif;?>
+
+			<div class="b-filter-item <?=$class?>">
 				<div class="b-filter-tab">
 					<div class="b-filter-item-name">
 						<h3><?=$arItem["NAME"]?></h3>
@@ -162,7 +173,6 @@ if (isset($templateData['TEMPLATE_THEME']))
 				{
 					case "A"://NUMBERS_WITH_SLIDER
 						?>
-
 						<div class="b-filter-toggle b-filter-item-range">
 							<div class="range-inputs">
 								<input

@@ -92,17 +92,26 @@ $(document).ready(function(){
     catalogElementSlick();
 
     function catalogElementSlick(){
+
+        var asNavFor = '.b-product-photo-slider';
+
+        if ($('.b-product-photo-slider').hasClass('no-slider')) {
+            asNavFor = '';
+        }
+
         $('.b-product-main').slick({
             dots: false,
             arrows: false,
             slidesToShow: 1,
             slidesToScroll: 1,
+            asNavFor: asNavFor,
+            swipe: false,
+            cssEase: 'linear',
+            speed: 100,
             fade: true,
-            asNavFor: '.b-product-photo-slider',
-            swipe: false
         });
 
-        $('.b-product-photo-slider').slick({
+        $('.b-product-photo-slider:not(.no-slider)').slick({
             dots: false,
             arrows: true,
             prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
@@ -177,8 +186,8 @@ $(document).ready(function(){
     $('.b-im-block').slick({
         dots: false,
         arrows: true,
-        prevArrow: '<div class="icon-arrow-left" style="cursor: pointer; position: absolute; top: calc(50% - 34px); font-size: 70px; right: calc(100% - 150px); z-index: 100";></div>',
-        nextArrow: '<div class="icon-arrow-right" style="cursor: pointer; position: absolute; top: calc(50% - 34px); font-size: 70px; right: calc(0% + 150px);"></div>',
+        prevArrow: '<div class="icon-arrow-left" style="cursor: pointer; position: absolute; top: calc(50% - 34px); font-size: 70px; left: 35px; z-index: 100";></div>',
+        nextArrow: '<div class="icon-arrow-right" style="cursor: pointer; position: absolute; top: calc(50% - 34px); font-size: 70px; right: 35px;"></div>',
         infinite: true,
         slidesToShow: 7,
         slidesToScroll: 1,
@@ -261,9 +270,8 @@ $(document).ready(function(){
     });
 
     function showPhotoColor(id) {
-        $(".b-product-main-color a.show").removeClass("show");
-        $(".b-product-main-color").addClass("show");
-        $(".b-product-main-color a[data-color-id='"+id+"']").addClass("show");
+        var slickID = $('.b-product-main a[data-color-id='+id+']').index();
+        $('.b-product-main').slick('slickGoTo',parseInt(slickID));
     }
 
     function chosenElementInit(){
@@ -273,11 +281,23 @@ $(document).ready(function(){
         });
     }
 
+    $('.b-product-photo-slider.no-slider img').on('click', function(){
+
+        var id = $(this).attr('data-color-id');
+        $('.texture-list img[data-color-id='+id+']').click();
+        showPhotoColor(id);
+    })
+
     chosenElementInit();
 
     $(document).on('change', '.colors-select', function(){
         
-        // console.log('change');
+        console.log('change');
+
+        if ($('.b-btn-to-cart').hasClass('hide')) {
+            $('.b-btn-to-cart').removeClass('hide');
+            $('.b-btn-to-cart-cap').addClass('hide');
+        }
 
         var id = Number($(this).find(":selected").attr("data-color-id")),
             price = Number($(this).find(":selected").attr("data-price")),
@@ -299,24 +319,29 @@ $(document).ready(function(){
         $('#discount-price').text(discountPrice);
         $('#article').text(article);
         $('#quantity').text(quantity);
+        $('#quantity-info').text(quantity);
+        $('input[name=count]').attr('data-quantity', quantity);
         $('.b-btn-to-cart').attr("data-id", id);
+        $('input[name=count]').change();
 
         $(".texture-list img.active").removeClass("active");
         $(".texture-list img[data-color-id='"+id+"']").addClass("active");
         if(id > 10 && !$(".texture-list").hasClass("open")){
             $(".more-colors").click();
         }
-        $(".b-product-photo-slider img[data-color-id='"+id+"']").click();
-        // showPhotoColor(id);
+        $(".b-product-photo-slider:not(.no-slider) img[data-color-id='"+id+"']").click();
+        showPhotoColor(id);
     });
 
     $(document).on('click', '.texture-list img', function(){
+
         var id = Number($(this).attr("data-color-id"));
         $(".texture-list img.active").removeClass("active");
         $(this).addClass("active");
         $(".colors-select option[data-color-id='"+id+"']").prop('selected', true);
         $('.colors-select').change().trigger('chosen:updated');
-        // showPhotoColor(id);
+        showPhotoColor(id);
+
     });
 
     $(document).on('click','.more-colors', function() {
@@ -329,6 +354,7 @@ $(document).ready(function(){
         }
         return false;
     });
+
     $(document).on('click','.show-more', function() {
         var $block = $(this).parents(".b-filter-toggle").find(".b-filter-more");
         if($block.hasClass("open")){
@@ -339,6 +365,21 @@ $(document).ready(function(){
             $(this).text("скрыть");
         }
         return false;
+    });
+
+    $(document).on('change', 'input[name=count]',function(){
+        console.log($(this).val()*1);
+        console.log($(this).attr('data-quantity')*1);
+        if($(this).val()*1 >= $(this).attr('data-quantity')*1){
+            $(this).val($(this).attr('data-quantity'));
+            if ($('.b-product-quantity-info').hasClass('hide')) {
+                $('.b-product-quantity-info').removeClass('hide');
+            }
+        } else {
+            if (!$('.b-product-quantity-info').hasClass('hide')) {
+                $('.b-product-quantity-info').addClass('hide');
+            }
+        }
     });
 
     var maxBasketCount = 999;
@@ -577,6 +618,7 @@ $(document).ready(function(){
         $cap.removeClass('hide');
         $cap.addClass('after-load');
         $this.addClass('hide');
+
         url = href+"&element_id="+id+"&quantity="+quantity;
         $.ajax({
             type: "GET",
@@ -607,7 +649,7 @@ $(document).ready(function(){
                     $cap.removeClass('loaded');
                     $cap.addClass('hide');
                     $this.removeClass('hide');
-                }, 2000);
+                }, 1500);
             }
         });
         return false;
@@ -958,6 +1000,10 @@ $(document).ready(function(){
         $('.mobile-menu-bg').removeClass('active');
         $('body').removeClass('no-scroll');
         return false;
+    });
+
+    $('.b-text table').each(function(){
+        $(this).wrap("<div class='b-table-wrap'></div>");
     });
 
     // cardImgHeight();
