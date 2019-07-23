@@ -276,6 +276,10 @@
                 var self = this,
                     index = self.orders.map(function(v) {return v.id}).indexOf(id);
                 self.orders[index].visible = false;//скрыть элемент
+                var selfBase = self.orders[index].basePriceForOne,
+                    selfTotal = self.orders[index].totalPriceForOne;
+                self.orders[index].basePriceForOne = 0;//обнулить стоимость (чтобы сразу обновить общую стоимость)
+                self.orders[index].totalPriceForOne = 0;
                 $.ajax({
                     type: "get",
                     url: "/ajax/index.php",
@@ -290,11 +294,15 @@
                           }
                       }else{
                           self.orders[index].visible = true;//вернуть элемент
+                          self.orders[index].basePriceForOne = selfBase;
+                          self.orders[index].totalPriceForOne = selfTotal;
                           alert("Не удалось удалить товар из корзины");
                       }
                     },
                     error: function(){
                         self.orders[index].visible = true;
+                        self.orders[index].basePriceForOne = selfBase;
+                        self.orders[index].totalPriceForOne = selfTotal;
                         alert("Не удалось удалить товар из корзины");
                     }
                 });
