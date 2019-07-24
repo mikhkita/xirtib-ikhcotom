@@ -17,38 +17,53 @@ $this->setFrameMode(true);?>
 			<div class="b-order-list">
 				<? foreach ($arResult["ITEMS"] as $arItem): ?>
 					<? $class = "";?>
-				<? if ($arItem["OFFERS"]): ?>
-					<? foreach ($arItem["OFFERS"] as $offer): ?>
-						<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
+					<? if ($arItem["OFFERS"]): ?>
+						<? foreach ($arItem["OFFERS"] as $offer): ?>
+							<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
+								<? $class = "has-discount"; ?>
+							<? endif; ?>
+
+							<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
+								<? $price = number_format( $offer["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
+								<? $discountPrice = number_format( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
+							<? else: ?>
+								<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
+								<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
+							<? endif; ?>
+						<? endforeach; ?>
+					<? else: ?>
+
+						<? if( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arItem["PRICES"]["PRICE"]["VALUE"] ): ?>
 							<? $class = "has-discount"; ?>
 						<? endif; ?>
 
-						<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
-							<? $price = number_format( $offer["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-							<? $discountPrice = number_format( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
+						<? if ($arItem["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
+							<? $price = number_format( $arItem["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
+							<? $discountPrice = number_format( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
 						<? else: ?>
 							<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
 							<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
 						<? endif; ?>
-					<? endforeach; ?>
-				<? else: ?>
-
-					<? if( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arItem["PRICES"]["PRICE"]["VALUE"] ): ?>
-						<? $class = "has-discount"; ?>
-					<? endif; ?>
-
-					<? if ($arItem["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
-						<? $price = number_format( $arItem["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-						<? $discountPrice = number_format( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-					<? else: ?>
-						<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-						<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-					<? endif; ?>
 
 				<? endif; ?>
+				
+				<? if ($arItem['OFFERS']): ?>
+					<? if ($arItem['OFFERS'][0]["DETAIL_PICTURE"]): ?>
+						<? $renderImage = CFile::ResizeImageGet($arItem['OFFERS'][0]["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+					<? else: ?>
+						<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
+					<? endif; ?>
+				<? else: ?>
+					<? if ($arItem["DETAIL_PICTURE"]): ?>
+						<? $renderImage = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+					<? else: ?>
+						<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
+					<? endif; ?>
+				<? endif; ?>
+
 				<div class="b-order-item clearfix">
 					<div class="b-order-item-left">
-						<img src="<?=$arItem["PREVIEW_PICTURE"]['SRC']?>">
+						<img src="<?=$renderImage['src']?>">
 						<div class="b-order-item-name">
 							<a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><?=$arItem['NAME']?></a>
 							<div class="meters">
@@ -74,9 +89,8 @@ $this->setFrameMode(true);?>
 	<?endif;?>
 <? else: ?>
 	<div class="b-not-result b-text">
-		<br>
 		<? if( $arParams["CUSTOM_MESSAGE"] ): ?>
-			<h3><?=$arParams["CUSTOM_MESSAGE"]?></h3>
+			<p class="b-order-empty"><?=$arParams["CUSTOM_MESSAGE"]?></p>
 		<? else: ?>
 		<h3>По Вашему запросу товаров не найдено.</h3>
 		<? endif; ?>

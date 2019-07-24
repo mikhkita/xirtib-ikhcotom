@@ -61,7 +61,10 @@ function getFavourites(){
 
 		foreach ($arElements as $id => $state) {
 			if( $state == "Y" ){
-				array_push($ids, $id);
+				$res = CCatalogProduct::GetByID($id);
+				if($res){
+					array_push($ids, $id);
+				}
 			}
 		}
 	}

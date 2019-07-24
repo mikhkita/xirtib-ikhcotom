@@ -3,8 +3,6 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $APPLICATION->SetTitle("Любимые товары");
 
-// addFavourites(array(17236, 17235, 16216));
-
 $ids = getFavourites();
 
 if( empty($ids) || !count($ids) ){
@@ -42,7 +40,7 @@ if( !isset($_REQUEST["ORDER_TYPE"]) ){
 			"ACTION_VARIABLE" => "action",
 			"ADD_PICT_PROP" => "MORE_PHOTO",
 			"ADD_PROPERTIES_TO_BASKET" => "Y",
-			"ADD_SECTIONS_CHAIN" => "Y",
+			"ADD_SECTIONS_CHAIN" => "N",
 			"ADD_TO_BASKET_ACTION" => "ADD",
 			"AJAX_MODE" => "N",
 			"AJAX_OPTION_ADDITIONAL" => "",

@@ -3,64 +3,30 @@
 ShowMessage($arParams["~AUTH_RESULT"]);
 
 ?>
-<form name="bform" method="post" target="_top" action="<?=$arResult["AUTH_URL"]?>">
-<?
+<div class="b-btn-container">
+	<div class="b-popup popup-sign" style="display: inline-block;">
+		<img src="/local/templates/main/i/popup-logo.svg" alt="" class="popup-img">
+		<p>Если вы забыли пароль, введите ваш E-Mail.<br>На него будет выслана ссылка для смены пароля.</p>
+		<div class="popup-sign-form active" id="form-sign-in">
+			<form name="bform" method="post" target="_top" action="<?=$arResult["AUTH_URL"]?>">
+				<div class="b-popup-form">
+					<input type="hidden" name="AUTH_FORM" value="Y">
+					<input type="hidden" name="TYPE" value="SEND_PWD">
 
-if (strlen($arResult["BACKURL"]) > 0)
-{
-?>
-	<input type="hidden" name="backurl" value="<?=$arResult["BACKURL"]?>" />
-<?
-}
-?>
-	<input type="hidden" name="AUTH_FORM" value="Y">
-	<input type="hidden" name="TYPE" value="SEND_PWD">
-	<p>Если вы забыли пароль, введите ваш E-Mail.<br>На него будет выслана ссылка для смены пароля.</p>
+					<input type="text" name="USER_EMAIL" placeholder="Электронная почта" required=""/>
 
-<table class="data-table bx-forgotpass-table">
-	<thead>
-		<tr> 
-			<td colspan="2"></td>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><?=GetMessage("AUTH_LOGIN")?></td>
-			<td><input type="text" name="USER_LOGIN" maxlength="50" value="<?=$arResult["LAST_LOGIN"]?>" />&nbsp;<?=GetMessage("AUTH_OR")?>
-			</td>
-		</tr>
-		<tr> 
-			<td><?=GetMessage("AUTH_EMAIL")?></td>
-			<td>
-				<input type="text" name="USER_EMAIL" maxlength="255" />
-			</td>
-		</tr>
-	<?if($arResult["USE_CAPTCHA"]):?>
-		<tr>
-			<td></td>
-			<td>
-				<input type="hidden" name="captcha_sid" value="<?=$arResult["CAPTCHA_CODE"]?>" />
-				<img src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHA_CODE"]?>" width="180" height="40" alt="CAPTCHA" />
-			</td>
-		</tr>
-		<tr>
-			<td><?echo GetMessage("system_auth_captcha")?></td>
-			<td><input type="text" name="captcha_word" maxlength="50" value="" /></td>
-		</tr>
-	<?endif?>
-	</tbody>
-	<tfoot>
-		<tr> 
-			<td colspan="2">
-				<input type="submit" name="send_account_info" value="<?=GetMessage("AUTH_SEND")?>" />
-			</td>
-		</tr>
-	</tfoot>
-</table>
-<p>
-<a href="<?=$arResult["AUTH_AUTH_URL"]?>"><b><?=GetMessage("AUTH_AUTH")?></b></a>
-</p> 
-</form>
+					<div class="clearfix">
+						<a href="/personal/" class="popup-sign-pass-a underline right">Авторизация</a>
+					</div>
+
+					<div class="b-btn-container">
+						<input type="submit" name="send_account_info" value="Отправить" class="b-btn b-btn-submit"/>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
-document.bform.USER_LOGIN.focus();
+	document.bform.USER_LOGIN.focus();
 </script>

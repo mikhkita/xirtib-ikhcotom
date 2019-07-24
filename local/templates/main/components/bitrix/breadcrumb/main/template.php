@@ -10,6 +10,12 @@ global $APPLICATION;
 if(empty($arResult))
 	return "";
 
+foreach ($arResult as $key => $arItem) {
+	if (empty($arItem["TITLE"]) && empty($arItem["LINK"])) {
+		unset($arResult[$key]);
+	}
+}
+
 $strReturn = '<ul class="b-breadcrumbs clearfix">';
 
 $itemSize = count($arResult);
@@ -24,9 +30,7 @@ for($index = 0; $index < $itemSize; $index++)
 	{
 		$strReturn .= '
 			<li id="bx_breadcrumb_'.$index.'" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"'.$child.$nextRef.'>
-				<a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" itemprop="url">
-					'.$title.'
-				</a>
+				<a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" itemprop="url">'.$title.'</a>
 			</li>';
 	}
 	else

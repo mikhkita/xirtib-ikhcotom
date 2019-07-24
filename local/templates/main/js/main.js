@@ -281,7 +281,12 @@ $(document).ready(function(){
         });
     }
 
-    $('.b-product-photo-slider.no-slider img').on('click', function(){
+    $(".sort-select").chosen({
+        width: "193px",
+        disable_search_threshold: 10000
+    });
+
+    $(document).on('click', '.b-product-photo-slider.no-slider img', function(){
 
         var id = $(this).attr('data-color-id');
         $('.texture-list img[data-color-id='+id+']').click();
@@ -291,8 +296,6 @@ $(document).ready(function(){
     chosenElementInit();
 
     $(document).on('change', '.colors-select', function(){
-        
-        console.log('change');
 
         if ($('.b-btn-to-cart').hasClass('hide')) {
             $('.b-btn-to-cart').removeClass('hide');
@@ -303,7 +306,8 @@ $(document).ready(function(){
             price = Number($(this).find(":selected").attr("data-price")),
             discountPrice = Number($(this).find(":selected").attr("data-discount-price")),
             article = $(this).find(":selected").attr("data-article"),
-            quantity = Number($(this).find(":selected").attr("data-quantity"));
+            quantity = Number($(this).find(":selected").attr("data-quantity")),
+            inputVal = 1;
 
         if(price != discountPrice){
             if (!$('.b-product-params-right').hasClass('has-discount')) {
@@ -315,11 +319,23 @@ $(document).ready(function(){
             }
         }
 
+        if (quantity == 0) {
+            inputVal = 0;
+            $('.b-btn-to-cart').addClass('unavailable');
+            $('.b-product-quantity').addClass('unavailable');
+            $('.b-btn-to-cart-text').text('Товара нет в наличии');
+        } else {
+            $('.b-btn-to-cart').removeClass('unavailable');
+            $('.b-product-quantity').removeClass('unavailable');
+            $('.b-btn-to-cart-text').text('Добавить в корзину');
+        }
+
         $('#price').text(price);
         $('#discount-price').text(discountPrice);
         $('#article').text(article);
         $('#quantity').text(quantity);
         $('#quantity-info').text(quantity);
+        $('input[name=count]').val(inputVal);
         $('input[name=count]').attr('data-quantity', quantity);
         $('.b-btn-to-cart').attr("data-id", id);
         $('input[name=count]').change();
@@ -331,6 +347,7 @@ $(document).ready(function(){
         }
         $(".b-product-photo-slider:not(.no-slider) img[data-color-id='"+id+"']").click();
         showPhotoColor(id);
+
     });
 
     $(document).on('click', '.texture-list img', function(){
@@ -367,28 +384,18 @@ $(document).ready(function(){
         return false;
     });
 
-    $(document).on('change', 'input[name=count]',function(){
-        console.log($(this).val()*1);
-        console.log($(this).attr('data-quantity')*1);
-        if($(this).val()*1 >= $(this).attr('data-quantity')*1){
-            $(this).val($(this).attr('data-quantity'));
-            if ($('.b-product-quantity-info').hasClass('hide')) {
-                $('.b-product-quantity-info').removeClass('hide');
-            }
-        } else {
-            if (!$('.b-product-quantity-info').hasClass('hide')) {
-                $('.b-product-quantity-info').addClass('hide');
-            }
-        }
-    });
-
     var maxBasketCount = 999;
     //увеличить количество
     $(document).on('click', '.b-product-quantity .quantity-add', function(){
         var $input = $('.quantity-input');
-        var count = parseInt($input.val()) + 1;
-        count = (count > maxBasketCount || isNaN(count) === true) ? maxBasketCount : count;
-        $input.val(count).change();
+
+        if ($input.attr('data-quantity') != 0) {
+            var count = parseInt($input.val()) + 1;
+            count = (count > maxBasketCount || isNaN(count) === true) ? maxBasketCount : count;
+            $input.val(count);
+        }
+
+        $input.change();
         return false;
     });
     //уменьшить количество
@@ -401,10 +408,18 @@ $(document).ready(function(){
     });
 
     $(document).on('change', '.b-product-quantity .quantity-input', function(){
-        var count = $(this).val()*1;
-        count = (count < 1)? 1 : count;
-        count = (count > maxBasketCount) ? maxBasketCount : count;
-        $(this).val(count);
+        
+        if($(this).val()*1 >= $(this).attr('data-quantity')*1){
+            $(this).val(Number($(this).attr('data-quantity')));
+            if ($('.b-product-quantity-info').hasClass('hide')) {
+                $('.b-product-quantity-info').removeClass('hide');
+            }
+        } else {
+            if (!$('.b-product-quantity-info').hasClass('hide')) {
+                $('.b-product-quantity-info').addClass('hide');
+            }
+        }
+
     });
 
     //табы
@@ -523,6 +538,10 @@ $(document).ready(function(){
 
     });
 
+    $(document).on('change', '.sort-select', function(){
+       $('.b-filter').change();
+    });
+
     function ajaxFilter(){
 
         var url = window.location.href,
@@ -606,6 +625,11 @@ $(document).ready(function(){
     var cartTimeout = 0,
         successTimeout = 0;
     $("body").on("click", ".b-btn-to-cart", function(){
+
+        if ($(this).hasClass('unavailable')) {
+            return false;
+        }
+
         var $this = $(this),
             $cap = $this.siblings('.b-btn-to-cart-cap'),
             href = $(this).attr("href"),
@@ -740,8 +764,6 @@ $(document).ready(function(){
         $("#element_view .b-popup-element-cont").removeClass('after-load, loaded');
         $("#element_view .b-popup-element-cont").html('');
         $("#element_view .b-popup-element-cont").addClass('after-load');
-        
-        console.log('class added');
 
         $.ajax({
             type: "GET",
@@ -763,7 +785,7 @@ $(document).ready(function(){
     $('.b-catalog-list .b-product-colors select').on('change', function(){
         $('.b-filter input[name=SORT_FIELD]').val($(this).find('option:selected').val());
         $('.b-filter input[name=SORT_TYPE]').val($(this).find('option:selected').attr('data-type'));
-        $('.b-filter').change();
+        // $('.b-filter').change();
     });
 
     $("body").on("click", ".b-order-item-icon .icon-close", function(){
@@ -775,7 +797,6 @@ $(document).ready(function(){
             type: "GET",
             url: url,
             success: function(msg){
-                console.log(msg);
                 progress.end();
                 $this.parents('.b-order-item').remove();
             },
@@ -856,11 +877,11 @@ $(document).ready(function(){
                 FileUploaded: function(up, file, res) {
                     var json = JSON.parse(res.response);
 
-                    if ($('.current-photo img').length == 0) {
-                        $('img').insertBefore('.current-photo .background-photo');  
-                    } 
+                    // if ($('.current-photo img').length == 0) {
+                    //     $('img').insertBefore('.current-photo .background-photo');  
+                    // } 
                     
-                    $('.current-photo img').attr('src', '/upload/tmp/'+json.filePath);
+                    $('.current-photo').css('background-image', 'url("/upload/tmp/'+json.filePath+'")');
 
                     $('<input>',{id:'photo', type:'hidden', name:'user[PERSONAL_PHOTO]', value: json.filePath}).appendTo('#editForm');
                     // $('<div>',{class:'b-popup-add-photo', style:'background-image:url("/upload/tmp/'+json.filePath+'")'}).appendTo('#b-popup-add-photo-list');
@@ -962,9 +983,9 @@ $(document).ready(function(){
         var el = $(this).attr('href');
 
         if ( !$(this).hasClass('active') ){
-            $('.popup-sign-list li a').removeClass('active');
+            $(this).parents('.popup-sign-list').find('a').removeClass('active');
             $(this).addClass('active');
-            $('.popup-sign-form').removeClass('active');
+            $(this).parents('.popup-sign').find('.popup-sign-form').removeClass('active');
             $(el).addClass('active');
         }
         return false;
@@ -1073,10 +1094,6 @@ function cardImgHeight(){
     $('.b-item-card').each(function(){
 
         var $this = $(this).find('.b-card-top img');
-        
-        console.log($this);
-        console.log($this.height());
-        console.log($this.width());
 
         $this.height($this.width());
     });

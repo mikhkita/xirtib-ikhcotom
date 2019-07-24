@@ -10,7 +10,6 @@
 				<div class="b-footer-top-text">
 					<h3>Видео-магазин в WhatsApp</h3>
 					<p>Если вы сомневаетесь в выборе того или иного товара, мы можем провести его полный обзор с помощью видео-связи в приложении WhatsApp. Просто оставьте свой номер телефона и мы перезвоним вам для записи.</p>
-					<?=SITE_SERVER_NAME?>
 				</div>
 				<div class="b-footer-top-input">
 					<form action="/ajax/?action=WHATSAPP" method="POST" class="b-footer-inputs clearfix">
@@ -20,6 +19,7 @@
 						<a href="#" class="b-btn ajax">Записаться</a>
 						<div class="politics">Отправляя форму, я даю согласие на обработку моих персональных данных в соответствии с <a href="/docs/politics/" class="underlined">политикой конфиденциальности</a></div>
 						<a href="#b-popup-success" class="b-thanks-link fancy" style="display:none;"></a>
+						<a href="#b-popup-error" class="b-error-link fancy" style="display:none;"></a>
 					</form>
 				</div>
 			</div>
@@ -69,37 +69,22 @@
 				<div class="b-footer-bottom-right">
 					<div class="b-subscribe">
 						<h3 class="b-subscribe-us">Будьте в курсе новинок, подпишитесь на рассылку!</h3>
-						<?
-						/*
-						$APPLICATION->IncludeComponent("bitrix:sender.subscribe","",Array(
-						        "COMPONENT_TEMPLATE" => ".default",
-						        "USE_PERSONALIZATION" => "Y",
-						        "CONFIRMATION" => "Y",
-						        "SHOW_HIDDEN" => "Y",
-						        "AJAX_MODE" => "Y",
-						        "AJAX_OPTION_JUMP" => "Y",
-						        "AJAX_OPTION_STYLE" => "Y",
-						        "AJAX_OPTION_HISTORY" => "Y",
-						        "CACHE_TYPE" => "A",
-						        "CACHE_TIME" => "3600",
-						        "SET_TITLE" => "Y"
-						    )
-						);
-						*/
-						?>
-						<form class="b-footer-inputs clearfix">
+						<form action="ajax/?action=SUBSCRIBE" method="POST" class="b-footer-inputs clearfix">
 							<input type="text" name="name" placeholder="Имя" required>
 							<input type="text" name="email" placeholder="E-mail" required>
+							<input type="text" name="MAIL">
 							<a href="#" class="b-btn ajax">Подписаться</a>
 							<div class="politics">Отправляя форму, я даю согласие на обработку моих персональных данных в соответствии с <a href="/docs/politics/">политикой конфиденциальности</a></div>
+							<a href="#b-popup-subscribe-success" class="b-thanks-link fancy" style="display:none;"></a>
+							<a href="#b-popup-error" class="b-error-link fancy" style="display:none;"></a>
 						</form>
 					</div>
 					<div class="b-social">
 						<p>Присоединяйтесь к нам в соцсетях:</p>
 						<div class="b-footer-social">
-							<a href="https://vk.com/mkv70" class="icon-vk"></a>
-							<a href="https://www.instagram.com/motochkiklubochki/" class="icon-im"></a>
-							<a href="#" class="icon-yt"></a>
+							<a href="https://vk.com/mkv70" class="icon-vk" target="_blank"></a>
+							<a href="https://www.instagram.com/motochkiklubochki/" class="icon-im" target="_blank"></a>
+							<a href="#" class="icon-yt" target="_blank"></a>
 						</div>
 					</div>
 					<div class="b-all-politics">
@@ -111,7 +96,7 @@
 				</div>
 				<div class="b-copyright">
 					<p>© Моточки-Клубочки. Все права защищены</p>
-					<a href="http://redder.pro" class="b-redder">Разработка сайта: REDDER</a>
+					<a href="http://redder.pro" target="_blank" class="b-redder">Разработка сайта: REDDER</a>
 				</div>
 			</div>
 		</div>
@@ -151,9 +136,17 @@
 			</div>
 		</div>
 
-		<div class="b-thanks b-popup" id="b-popup-error">
-			<h3>Ошибка отправки!</h3>
-			<h4>Приносим свои извинения. Пожалуйста, попробуйте отправить Вашу заявку позже.</h4>
+		<div class="b-thanks b-popup" id="b-popup-subscribe-success">
+			<h3>Спасибо!</h3>
+			<p>Вы успешно подписались на рассылку новостей.</p>
+			<div class="b-btn-container">
+				<input type="submit" class="b-btn" onclick="$.fancybox.close(); return false;" value="Закрыть">
+			</div>
+		</div>
+
+		<div class="b-thanks b-popup" id="b-popup-review-success">
+			<h3>Спасибо!</h3>
+			<p>Ваш отзыв будет опубликован после модерации.</p>
 			<div class="b-btn-container">
 				<input type="submit" class="b-btn" onclick="$.fancybox.close(); return false;" value="Закрыть">
 			</div>
@@ -162,6 +155,21 @@
 		<div class="b-thanks b-popup" id="b-popup-success-reg">
 			<h3>Спасибо!</h3>
 			<p>Письмо для подтверждения регистрации отправлено на ваш e-mail.</p>
+			<div class="b-btn-container">
+				<input type="submit" class="b-btn" onclick="$.fancybox.close(); return false;" value="Закрыть">
+			</div>
+		</div>
+
+		<div class="b-thanks b-popup" id="b-popup-save-success">
+			<h3>Изменения успешно сохранены!</h3>
+			<div class="b-btn-container">
+				<input type="submit" class="b-btn" onclick="$.fancybox.close(); return false;" value="Закрыть">
+			</div>
+		</div>
+
+		<div class="b-thanks b-popup" id="b-popup-error">
+			<h3>Ошибка отправки!</h3>
+			<h4>Приносим свои извинения. Пожалуйста, попробуйте отправить Вашу заявку позже.</h4>
 			<div class="b-btn-container">
 				<input type="submit" class="b-btn" onclick="$.fancybox.close(); return false;" value="Закрыть">
 			</div>
@@ -181,18 +189,21 @@
 			<form method="POST" action="/ajax/?action=ADDREVIEW">
 				<div class="b-inputs-2 clearfix">
 					<div class="b-input">
-						<input type="text" name="name" placeholder="Ваше имя">
+						<input type="text" name="name" placeholder="Ваше имя" required>
 					</div>
 					<div class="b-input">
-						<input type="text" name="phone" placeholder="Номер телефона">
+						<input type="text" name="phone" placeholder="Номер телефона" required>
 					</div>
 					<input type="text" name="MAIL" required="">
 				</div>
 				<div class="b-textarea">
-					<textarea rows="3" name="comment" placeholder="Ваш отзыв"></textarea>
+					<textarea rows="3" name="comment" placeholder="Ваш отзыв" required></textarea>
 				</div>
 				<div class="politics">Отправляя форму, я даю согласие на обработку моих персональных данных в соответствии с <a href="/docs/politics/" class="underlined">политикой&nbsp;конфиденциальности</a></div>
 				<a href="#" class="b-btn b-btn-callback ajax">Отправить отзыв</a>
+
+				<a href="#b-popup-review-success" class="b-thanks-link fancy" style="display:none;"></a>
+				<a href="#b-popup-error-reg" class="b-error-link fancy" style="display:none;"></a>
 			</form>
 		</div>
 
@@ -257,11 +268,11 @@
 				</form>
 			</div>
 			<div class="popup-sign-form" id="popup-form-sign-up">
-				<form action="/ajax/?action=REG" method="POST">
+				<form action="/ajax/?action=REG" method="POST" id="regForm">
 					<div class="b-popup-error"></div>
 					<div class="b-popup-form">
 						<input type="text" name="email" placeholder="Электронная почта" required>
-						<input type="text" name="password" placeholder="Пароль" required>
+						<input type="password" name="password" placeholder="Пароль" required>
 						<input type="text" name="MAIL">
 						<div class="b-btn-container">
 							<a href="#" class="b-btn b-btn-sign-up ajax">Зарегистрироваться</a>

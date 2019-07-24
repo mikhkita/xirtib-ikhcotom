@@ -6,16 +6,18 @@ $APPLICATION->SetTitle("Редактирование профиля");?>
 if (isAuth()): 
 	$rsUser = CUser::GetByID($USER->GetID());
 	$arUser = $rsUser->Fetch();
+	if ($arUser['PERSONAL_PHOTO']){
+		$photo = CFile::ResizeImageGet($arUser['PERSONAL_PHOTO'], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters );
+	}
+	$fullName = trim($arUser['NAME']);
 ?>
+
+
 <h2 class="b-title"><?$APPLICATION->ShowTitle();?></h2>
 <div class="b-cabinet">
 	<div class="b-cabinet-profile">
 		<div class="b-profile-photo">
-			<div class="current-photo" id="pickfiles">
-				<? if ($arUser['PERSONAL_PHOTO']): ?>
-					<? $photo = CFile::ResizeImageGet($arUser['PERSONAL_PHOTO'], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters ); ?>
-					<img src="<?=$photo['src']?>">
-				<? endif; ?>
+			<div class="current-photo" id="pickfiles" style="background-image: url(<?=$photo['src']?>);">
 				<div class="background-photo">
 					<div class="photo-update-icon"></div>
 				</div>
@@ -27,7 +29,7 @@ if (isAuth()):
 			<div class="b-inputs-3 clearfix">
 				<div class="b-input">
 					<p>Ф.И.О.</p>
-					<input type="text" name="user[NAME]" placeholder="Фамилия Имя Отчество" value="<?=$arUser['LAST_NAME']?> <?=$arUser['NAME']?> <?=$arUser['SECOND_NAME']?>">
+					<input type="text" name="user[NAME]" placeholder="Фамилия Имя Отчество" value="<?=$fullName?>">
 				</div>
 				<div class="b-input">
 					<p>Номер телефона</p>
@@ -39,6 +41,8 @@ if (isAuth()):
 				</div>
 			</div>
 			<a href="#" class="b-btn b-btn-save ajax">Сохранить изменения</a>
+			<a href="#b-popup-save-success" class="b-thanks-link fancy" style="display:none;"></a>
+			<a href="#b-popup-error-reg" class="b-error-link fancy" style="display:none;"></a>
 		</form>
 	</div>
 </div>

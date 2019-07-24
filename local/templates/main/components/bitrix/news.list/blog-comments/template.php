@@ -26,7 +26,7 @@ if(count($arResult["ITEMS"])):?>
 				}
 				?>
 				<div class="b-detail-review-header">
-					<img src="<?=$renderImage['src']?>">
+					<div class="b-detail-review-header-img" style="background-image: url(<?=$renderImage['src']?>);"></div>
 					<div class="b-detail-review-name">
 						<h3><?=$arItem['NAME']?></h3>
 						<div class="b-detail-review-date"><?=$date?></div>

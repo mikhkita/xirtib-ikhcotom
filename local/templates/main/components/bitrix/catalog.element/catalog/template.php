@@ -49,10 +49,13 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 							<? if ($offer["DETAIL_PICTURE"]):
 								$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 								$bigImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
-								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-									<img src="<?=$renderImage['src']?>">
-								</a>
+							<?else:?>
+								<? $bigImage['src'] = $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
 							<?endif;?>
+
+							<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+								<img src="<?=$renderImage['src']?>">
+							</a>
 
 							<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
 								<? $class = "has-discount"; ?>
@@ -76,7 +79,10 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
 									<img src="<?=$renderImage['src']?>">
 								</a>
-						<?endif;?>
+						<? else: ?>
+							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
+							<img src="<?=$renderImage['src']?>">
+						<? endif; ?>
 						<? if( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arResult["PRICES"]["PRICE"]["VALUE"] ): ?>
 							<? $class = "has-discount"; ?>
 						<? endif; ?>
@@ -117,15 +123,22 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 				<ul class="b-product-actions clearfix">
 					<li>
 						<? if (isAuth($USER)): ?>
-							<? foreach ($ids as $key => $value) {
-								$favClass = "";
-								$favAction = "ADD";
-								if ($value == $arResult['ID']) {
-									$favClass = "active";
-									$favAction = "REMOVE";
-									break;
-								} 
-							} ?>
+							<? if ($ids != 0): ?>
+								<? foreach ($ids as $key => $value) {
+									$favClass = "";
+									$favAction = "ADD";
+									if ($value == $arResult['ID']) {
+										$favClass = "active";
+										$favAction = "REMOVE";
+										break;
+									} 
+								} ?>
+							<? else: ?>
+								<?
+									$favClass = "";
+									$favAction = "ADD";
+								?>
+							<? endif; ?>
 							<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-action="<?=$favAction?>">
 								<span class="icon icon-star"></span>
 								В избранное
@@ -157,14 +170,11 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 					<div class="b-product-colors">
 						<span>Цвет:</span>
 						<select name="colors" class="colors-select">
-							<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
+							<? foreach ($arResult["OFFERS"] as $key => $offer):
 
-								<? 
-								
 								if ($key == 0){
 									$selected = 'selected';
-								}
-								else{
+								} else {
 									$selected = '';
 								}
 
@@ -271,18 +281,30 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 						</div>
 						<? endif; ?>
 				<? endif; ?>
-					<div class="b-product-quantity">
+					<?if($quantity == 0){
+						$inputVal = 0;
+						$btnClass = "unavailable";
+					} else {
+						$inputVal = 1;
+					}?>
+					<div class="b-product-quantity <?=$btnClass?>">
 						<span>Количество:</span>
 						<div class="product-quantity">
 							<a href="#" class="icon-minus quantity-reduce"></a>
-							<input type="text" name="count" class="quantity-input" data-quantity="<?=$quantity?>" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" value="1">
+							<input type="text" name="count" class="quantity-input" data-quantity="<?=$quantity?>" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '')" value="<?=$inputVal?>">
 							<a href="#" class="icon-plus quantity-add"></a>
 						</div>
 						<div class="b-product-quantity-info hide"><span>В наличии:&nbsp;</span><span id="quantity-info"><?=$quantity?></span></div>
 					</div>
-					<a href="/ajax/?action=ADD2BASKET" data-id="<?=$id?>" class="b-btn b-btn-to-cart">
+					<a href="/ajax/?action=ADD2BASKET" data-id="<?=$id?>" class="b-btn b-btn-to-cart <?=$btnClass?>">
 						<span class="icon-cart"></span>
-						Добавить в корзину
+						<span class="b-btn-to-cart-text">
+						<? if ($quantity == 0): ?>
+							Товара нет в наличии
+						<? else: ?>
+							Добавить в корзину
+						<? endif; ?>
+						</span>
 					</a>
 					<div href="#" onclick="return false;" class="b-btn b-btn-to-cart-cap hide">
 						<span class="icon-checked"></span>
@@ -291,7 +313,7 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 					</div>
 					<ul class="b-product-advantages">
 						<li><img src="<?=SITE_TEMPLATE_PATH?>/i/icon-delivery.svg">Быстрая доставка.</li>
-						<li><img src="<?=SITE_TEMPLATE_PATH?>/i/icon-pay.svg">Оплата банковской картой без комиссии. <a href="#">Подробнее...</a></li>
+						<li><img src="<?=SITE_TEMPLATE_PATH?>/i/icon-pay.svg">Оплата банковской картой без комиссии. <a href="/delivery">Подробнее...</a></li>
 					</ul>
 				</div>
 			</div>
@@ -522,14 +544,16 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 					<h3>Оставьте свой отзыв</h3>
 					<form class="clearfix" action="/ajax/?action=ADDREVIEW&PRODUCT_ID=<?=$arResult["ID"]?>" method="POST">
 						<div class="b-textarea">
-							<textarea rows="2" name="comment" required placeholder="Отзывы могут оставлять только зарегистрированные пользователи"></textarea>
+							<textarea rows="2" name="comment" required placeholder="Отзывы могут оставлять только авторизованные пользователи"></textarea>
 						</div>
 						<input type="text" name="MAIL">
 						<? if (isAuth()): ?>
 							<a href="#" class="b-btn ajax">Оставить отзыв</a>
 						<? else: ?>
-							<a href="#" class="b-btn">Зарегистрироваться</a>
+							<a href="#popup-sign" class="b-btn fancy">Войти</a>
 						<? endif; ?>
+						<a href="#b-popup-review-success" class="b-thanks-link fancy" style="display:none;"></a>
+						<a href="#b-popup-error-reg" class="b-error-link fancy" style="display:none;"></a>
 					</form>
 				</div>
 			</div>

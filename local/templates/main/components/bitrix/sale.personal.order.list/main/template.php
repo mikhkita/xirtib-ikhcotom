@@ -37,63 +37,24 @@ else
 			if ($_REQUEST["show_canceled"] == 'Y')
 			{
 				?>
-				<p class="b-order-empty"><?= Loc::getMessage('SPOL_TPL_EMPTY_CANCELED_ORDER')?></p>
+				<p class="b-order-empty">У вас ещё не было покупок</p>
 				<?
 			}
 			else
 			{
 				?>
-				<p class="b-order-empty"><?= Loc::getMessage('SPOL_TPL_EMPTY_HISTORY_ORDER_LIST')?></p>
+				<p class="b-order-empty">У вас ещё не было покупок</p>
 				<?
 			}
 		}
 		else
 		{
 			?>
-			<p class="b-order-empty"><?= Loc::getMessage('SPOL_TPL_EMPTY_ORDER_LIST')?></p>
+			<p class="b-order-empty">У вас ещё не было покупок</p>
 			<?
 		}
 	}
 	?>
-	<!-- <div class="row col-md-12 col-sm-12">
-		<?
-		$nothing = !isset($_REQUEST["filter_history"]) && !isset($_REQUEST["show_all"]);
-		$clearFromLink = array("filter_history","filter_status","show_all", "show_canceled");
-
-		if ($nothing || $_REQUEST["filter_history"] == 'N')
-		{
-			?>
-			<a class="sale-order-history-link" href="<?=$APPLICATION->GetCurPageParam("filter_history=Y", $clearFromLink, false)?>">
-				<?echo Loc::getMessage("SPOL_TPL_VIEW_ORDERS_HISTORY")?>
-			</a>
-			<?
-		}
-		if ($_REQUEST["filter_history"] == 'Y')
-		{
-			?>
-			<a class="sale-order-history-link" href="<?=$APPLICATION->GetCurPageParam("", $clearFromLink, false)?>">
-				<?echo Loc::getMessage("SPOL_TPL_CUR_ORDERS")?>
-			</a>
-			<?
-			if ($_REQUEST["show_canceled"] == 'Y')
-			{
-				?>
-				<a class="sale-order-history-link" href="<?=$APPLICATION->GetCurPageParam("filter_history=Y", $clearFromLink, false)?>">
-					<?echo Loc::getMessage("SPOL_TPL_VIEW_ORDERS_HISTORY")?>
-				</a>
-				<?
-			}
-			else
-			{
-				?>
-				<a class="sale-order-history-link" href="<?=$APPLICATION->GetCurPageParam("filter_history=Y&show_canceled=Y", $clearFromLink, false)?>">
-					<?echo Loc::getMessage("SPOL_TPL_VIEW_ORDERS_CANCELED")?>
-				</a>
-				<?
-			}
-		}
-		?>
-	</div> -->
 	<?
 	if (!count($arResult['ORDERS']))
 	{
@@ -154,6 +115,7 @@ else
 						<?
 						$class = "";
 						$tmp = GetIBlockElement($item["PRODUCT_ID"]);
+
 						$img = CFile::ResizeImageGet($tmp['PREVIEW_PICTURE'], Array("width" => 73, "height" => 73), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 						if ($item['PRICE'] != $item['BASE_PRICE']):
 							$class = 'has-discount';
@@ -162,7 +124,7 @@ else
 
 						<div class="b-order-item clearfix">
 							<div class="b-order-item-left">
-								<img src="<?=$img['src']?>">
+								<div class="b-order-item-image" style="background-image: url('<?=$img['src']?>');"></div>
 								<div class="b-order-item-name">
 									<a href="<?=$item["DETAIL_PAGE_URL"]?>"><?=$item['NAME']?></a>
 									<div class="meters"><?=$item['QUANTITY']?> шт.</div>

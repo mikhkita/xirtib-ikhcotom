@@ -324,6 +324,35 @@ switch ($action) {
 
 		break;
 
+	case 'SUBSCRIBE':
+
+		if (empty($_POST["MAIL"])){
+			if (empty($_POST['name']) || empty($_POST['email'])) {
+				$spam = true;
+			}
+			else {
+				$spam = false;
+			}
+		}else{
+			$spam = true;
+		}
+
+		if (!$spam) {
+
+			$name = $_POST['name'];
+			$email = $_POST['email'];
+
+			if(CEvent::Send("WHATSAPP", "s1", array('NAME' => $name, 'EMAIL' => $email,))){
+				echo "1";
+			} else {
+				echo "0";
+			}
+		}else{
+			echo "1";
+		}
+
+		break;
+
 	case 'CALLBACK':
 
 		if (empty($_POST["MAIL"])){
@@ -404,10 +433,9 @@ switch ($action) {
 				$password = $_POST['password'];
 				$user = new CUser;
 				$hash = md5($email.$hashKey);
-				$link = "https://motochki.pro/ajax/?action=CONFIRM_USER&email=".$email."&hash=".$hash;
+				$link = "http://motochki.redder.pro/ajax/?action=CONFIRM_USER&email=".$email."&hash=".$hash;
 
 				$arFields = Array(
-				  "NAME"              => "Пользователь",
 				  "EMAIL"             => $email,
 				  "LOGIN"             => $email,
 				  "LID"               => "ru",
