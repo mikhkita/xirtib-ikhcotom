@@ -140,11 +140,6 @@ if( isset($_REQUEST["action"]) ){
 
 			$user = new CUser;
 			$arFields = $_REQUEST['user'];
-			$name = explode(' ', $arFields['NAME']);
-
-			$arFields['LAST_NAME'] = $name[0];
-			$arFields['NAME'] = $name[1];
-			$arFields['SECOND_NAME'] = $name[2];
 
 			if ($arFields['PERSONAL_PHOTO']) {
 				$arFile = CFile::MakeFileArray($_SERVER['DOCUMENT_ROOT'].'/upload/tmp/'.$arFields['PERSONAL_PHOTO']);
@@ -155,16 +150,18 @@ if( isset($_REQUEST["action"]) ){
 			}
 
 			if( $user->Update($userID, $arFields) ){
-				echo json_encode(array(
-					"success" => 1,
-					"message" => "Данные успешно сохранены"
-				));
+				echo "1";
+				// echo json_encode(array(
+				// 	"success" => 1,
+				// 	"message" => "Данные успешно сохранены"
+				// ));
 			}else{
-				echo json_encode(array(
-					"error" => 1,
-					"message" => $arResult["MESSAGE"],
-					"message" => "Ошибка."
-				));
+				echo "0";
+				// echo json_encode(array(
+				// 	"error" => 1,
+				// 	"message" => $arResult["MESSAGE"],
+				// 	"message" => "Ошибка."
+				// ));
 			}
 
 			break;
@@ -255,16 +252,16 @@ if( isset($_REQUEST["confirm_registration"]) && $_REQUEST["confirm_registration"
 		"SEF_MODE" => "Y",
 		"SEF_URL_TEMPLATES" => Array("account"=>"account/","index"=>"index.php","order_cancel"=>"cancel/#ID#","order_detail"=>"orders/#ID#","orders"=>"orders/","private"=>"private/","profile"=>"profiles/","profile_detail"=>"profiles/#ID#","subscribe"=>"subscribe/"),
 		"SEND_INFO_PRIVATE" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_ACCOUNT_COMPONENT" => "Y",
-		"SHOW_ACCOUNT_PAGE" => "Y",
-		"SHOW_ACCOUNT_PAY_COMPONENT" => "Y",
-		"SHOW_BASKET_PAGE" => "Y",
+		"SET_TITLE" => "Y",
+		"SHOW_ACCOUNT_COMPONENT" => "N",
+		"SHOW_ACCOUNT_PAGE" => "N",
+		"SHOW_ACCOUNT_PAY_COMPONENT" => "N",
+		"SHOW_BASKET_PAGE" => "N",
 		"SHOW_CONTACT_PAGE" => "N",
-		"SHOW_ORDER_PAGE" => "Y",
+		"SHOW_ORDER_PAGE" => "N",
 		"SHOW_PRIVATE_PAGE" => "Y",
-		"SHOW_PROFILE_PAGE" => "Y",
-		"SHOW_SUBSCRIBE_PAGE" => "Y",
+		"SHOW_PROFILE_PAGE" => "N",
+		"SHOW_SUBSCRIBE_PAGE" => "N",
 		"USER_PROPERTY_PRIVATE" => array(),
 		"USE_AJAX_LOCATIONS_PROFILE" => "N"
 	)

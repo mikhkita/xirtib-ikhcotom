@@ -56,6 +56,7 @@ $(document).ready(function(){
 			rules: {
 				email: 'email',
 				phone: 'customPhone',
+				'user[PERSONAL_PHONE]': 'customPhone',
 				ORDER_PROP_3: 'email',
 				ORDER_PROP_4: 'customPhone',
 			},
@@ -73,8 +74,8 @@ $(document).ready(function(){
 			    $(element).removeClass("error").parents(".b-input").removeClass("error");
 			}
 		});
-		if( $(this).find("input[name=phone], input[name=tel], input[name=addressee-phone], input[name=ORDER_PROP_4], input[name=PERSONAL_PHONE]").length ){
-			$(this).find("input[name=phone], input[name=tel], input[name=addressee-phone], input[name=ORDER_PROP_4], input[name=PERSONAL_PHONE]").each(function(){
+		if( $(this).find("input[name=phone], input[name=tel], input[name=addressee-phone], input[name=ORDER_PROP_4], input[name=PERSONAL_PHONE], input[name='user[PERSONAL_PHONE]']").length ){
+			$(this).find("input[name=phone], input[name=tel], input[name=addressee-phone], input[name=ORDER_PROP_4], input[name=PERSONAL_PHONE], input[name='user[PERSONAL_PHONE]']").each(function(){
 				if (typeof IMask == 'function') {
 					var phoneMask = new IMask($(this)[0], {
 			        	mask: '+{7} (000) 000-00-00',
@@ -292,11 +293,11 @@ $(document).ready(function(){
 				},
 				error: function(){
 					$.fancybox.close();
-					$(".b-error-link").click();
+					// $(".b-error-link").click();
 				},
 				complete: function(){
 					$this.find(".ajax").removeAttr("onclick");
-					if( !$this.is("#b-form-auth") ){
+					if( !$this.is("#b-form-auth") && !$this.is("#editForm") && !$this.is("#regForm") ){
 						$this.find("input[type=text],textarea").val("");
 					}
 				}

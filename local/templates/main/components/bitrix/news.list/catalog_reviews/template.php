@@ -19,14 +19,12 @@ if(count($arResult["ITEMS"])): ?>
 			<? $date = $arDate[2].'.'.$arDate[1].'.'.$arDate[0]; ?>
 			<div class="b-detail-review" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 				<? if( $arItem["PREVIEW_PICTURE"] ): ?>
-					<?
-					$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters );
-					?>
+					<?$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters );?>
 				<? else: ?>
 					<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/icon-man.svg'?>
 				<? endif; ?>
 				<div class="b-detail-review-header">
-					<img src="<?=$renderImage['src']?>">
+					<div class="b-detail-review-header-img" style="background-image: url(<?=$renderImage['src']?>);"></div>
 					<div class="b-detail-review-name">
 						<h3><?=$arItem['NAME']?></h3>
 						<div class="b-detail-review-date"><?=$date?></div>

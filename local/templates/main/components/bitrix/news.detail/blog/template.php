@@ -219,7 +219,7 @@ $this->setFrameMode(true);
 				<? if (isAuth()): ?>
 					<a href="#" class="b-btn ajax">Оставить комментарий</a>
 				<? else: ?>
-					<a href="#" class="b-btn">Зарегистрироваться</a>
+					<a href="#popup-sign" class="fancy b-btn">Войти</a>
 				<? endif; ?>
 			</form>
 		</div>

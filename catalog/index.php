@@ -54,6 +54,7 @@ $APPLICATION->SetTitle("Каталог");?>
 				"FILTER_VIEW_MODE" => "horizontal",
 				"HIDE_NOT_AVAILABLE" => "N",
 				"IBLOCK_ID" => "1",
+				"CUSTOM_SECTION_CODE" => $_REQUEST["SECTION_CODE"],
 				"IBLOCK_TYPE" => "content",
 				"INSTANT_RELOAD" => "Y",
 				"PAGER_PARAMS_NAME" => "arrPager",
@@ -78,7 +79,7 @@ $APPLICATION->SetTitle("Каталог");?>
 			<div class="clearfix">
 				<div class="b-product-colors">
 					<span>Сортировать:</span>
-					<select name="colors" class="colors-select">
+					<select name="colors" class="sort-select">
 						<? foreach( $sortList as $sort): ?>
 							<? 
 							$attr = '';

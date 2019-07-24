@@ -25,7 +25,6 @@ if (isAuth($USER)){
 ?>
 <? if(count($arResult["ITEMS"])): ?>
 	<div class="b-catalog-inner clearfix">
-		<? for ($i=0; $i < 3; $i++): ?>
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
 			<? $class = "";?>
 			<? if ($arItem["OFFERS"]): ?>
@@ -62,23 +61,37 @@ if (isAuth($USER)){
 				<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-hover-frame"></a>
 				<div class="b-card-top">
 					<? if ($arItem['OFFERS']): ?>
-						<? $renderImage = CFile::ResizeImageGet($arItem['OFFERS'][0]["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+						<? if ($arItem['OFFERS'][0]["DETAIL_PICTURE"]): ?>
+							<? $renderImage = CFile::ResizeImageGet($arItem['OFFERS'][0]["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+						<? else: ?>
+							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
+						<? endif; ?>
 					<? else: ?>
-						<? $renderImage = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+						<? if ($arItem["DETAIL_PICTURE"]): ?>
+							<? $renderImage = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
+						<? else: ?>
+							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
+						<? endif; ?>
 					<? endif; ?>
+
 					<img src="<?=$renderImage['src']?>">
 					<div class="b-discount">Новинка</div>
 
 					<? if (isAuth($USER)): ?>
-						<? $favClass = ""; ?>
-						<? $favAction = "ADD"; ?>
-						<? foreach ($ids as $key => $value) {
-							if ($value == $arItem['ID']) {
-								$favClass = "active";
-								$favAction = "REMOVE";
-								break;
-							} 
-						} ?>
+						<? if ($ids != 0): ?>
+							<? $favClass = ""; ?>
+							<? $favAction = "ADD"; ?>
+							<? foreach ($ids as $key => $value) {
+								if ($value == $arItem['ID']) {
+									$favClass = "active";
+									$favAction = "REMOVE";
+									break;
+								} 
+							}
+						else:
+							$favClass = "";
+							$favAction = "ADD";
+						endif; ?>
 						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>"></a>
 					<? endif; ?>
 
@@ -113,7 +126,6 @@ if (isAuth($USER)){
 				</div>
 			</div>
 		<? endforeach; ?>
-		<? endfor; ?>
 	</div>
 	<? if ($arParams["DISPLAY_BOTTOM_PAGER"]): ?>
 		<?=$arResult["NAV_STRING"];?>

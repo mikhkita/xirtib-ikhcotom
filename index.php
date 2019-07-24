@@ -354,6 +354,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 					"FILTER_VIEW_MODE" => "horizontal",
 					"HIDE_NOT_AVAILABLE" => "N",
 					"IBLOCK_ID" => "1",
+					"CUSTOM_SECTION_CODE" => 'pryazha',
 					"IBLOCK_TYPE" => "content",
 					"INSTANT_RELOAD" => "Y",
 					"PAGER_PARAMS_NAME" => "arrPager",
@@ -388,7 +389,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 			<a href="https://www.instagram.com/motochkiklubochki/" target="_blank"><img src="<?=SITE_TEMPLATE_PATH?>/i/im-post-3.jpg"></a>
 		</div>
 		<div class="b-block">
-			<a href="https://www.instagram.com/motochkiklubochki/" class="b-btn">Подписаться</a>
+			<a href="https://www.instagram.com/motochkiklubochki/" class="b-btn" target="_blank">Подписаться</a>
 		</div>
 	</div>
 	<div class="b b-main-articles-block">
