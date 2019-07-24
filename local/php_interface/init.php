@@ -173,7 +173,8 @@ function getOrderList(){
 		$arBasketItem["productID"] = $productID["ID"];//товар
 
 		$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
-		$arBasketItem["image"] = CFile::GetPath($objElement->getDetailPicture());
+		$img = CFile::ResizeImageGet($objElement->getDetailPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
+		$arBasketItem["image"] = $img["src"];
 		$arBasketItem["name"] = $basketItem->getField('NAME');
 		$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
 		$arBasketItem["quantity"] = $basketItem->getQuantity();

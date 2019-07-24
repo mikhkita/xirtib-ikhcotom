@@ -92,8 +92,8 @@ ymaps.ready(['AddressDelivery']).then(function init() {
 
         //если пользователь покинул input
         $('#js-order-adress-map-input').change(function(){
-            if(addressList[0].label){
-                ymaps.geocode(addressList[0].label, {
+            if(addressList.length && addressList[0].label){
+                ymaps.geocode('Россия, ' + addressList[0].label.replace(/[Рр]оссия\S?\s?/g, ''), {
                     results: 1,
                 }).then(function (res) {
                     if(res.geoObjects.properties._data.metaDataProperty.GeocoderResponseMetaData.found > 0){
@@ -115,7 +115,7 @@ ymaps.ready(['AddressDelivery']).then(function init() {
         if($.fn.autocomplete){
             $('#js-order-adress-map-input').autocomplete({
                 source: function(req, autocompleteRes){
-                    ymaps.geocode(req.term, {
+                    ymaps.geocode('Россия, ' + req.term.replace(/[Рр]оссия\S?\s?/g, ''), {
                         results: 6
                     }).then(function (res) {
                         var result = [];
@@ -143,6 +143,7 @@ ymaps.ready(['AddressDelivery']).then(function init() {
             });
         }
         mapNew.events.add('adress-changed', function(e){
+            addressList = [];
             var address = e.get('geocode').properties._data.metaDataProperty.GeocoderMetaData.Address;
             $input = $('#js-order-adress-map-input');
             $input.val(getAddressLine(address.Components)).trigger("focusout");

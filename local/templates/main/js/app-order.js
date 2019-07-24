@@ -81,6 +81,10 @@
                 this.isAuth = dataOrder.isAuth;
             }
           }
+          if(this.orders.length === 0){
+              this.show = false;
+              this.showCatalogRef = true;
+          }
           //setTimeout(function() { 
             // $.ajax({
             //     type: "get",
@@ -123,7 +127,7 @@
                         :orders="orders"\
                         :isAuth="isAuth"\
                     ></v-order-list>\
-                    <form id="b-order-form" class="b-order-form" method="post" action="">\
+                    <form id="b-order-form" class="b-order-form" method="post" action="success.php">\
                         <h3>Данные к заказу</h3>\
                         <div class="b-inputs-3 clearfix">\
                             <div class="b-input">\
@@ -231,7 +235,7 @@
             </div>\
             \
             <div v-if="showCatalogRef">\
-              <span>Ваша корзина пуста. </span><a class="dashed" href="catalog.html">Перейти в каталог</a>\
+              <span>Ваша корзина пуста. </span><a class="dashed" href="/catalog/">Перейти в каталог</a>\
             </div>\
             \
             <div v-if="showPreloader" class="b-order-preloader">\
