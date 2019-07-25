@@ -205,14 +205,16 @@ switch ($action) {
 			CModule::IncludeModule("iblock");
 			$el = new CIBlockElement;
 
+			$userID = $USER->GetID()?$USER->GetID():"";
 			$PROP = array();
 
-			$PROP["PHONE"]['VALUE'] = $_POST["phone"];
-
-			$userID = $USER->GetID()?$USER->GetID():"";
 			if (!empty($userID)) {
 				$rsUser = CUser::GetByID($userID);
     			$arUser = $rsUser->Fetch();
+
+    			$PROP["PHONE"]['VALUE'] = isset($_POST["phone"]) ? $_POST["phone"] : $arUser['PERSONAL_PHONE'];
+    			$name = isset($_POST["name"]) ? $_POST["name"] : $arUser['NAME'];
+
 			}
 
 			$productID = (isset($_GET["PRODUCT_ID"])) ? $_GET["PRODUCT_ID"] : NULL;
@@ -227,7 +229,7 @@ switch ($action) {
 			  "IBLOCK_ID"         => 3,
 			  "IBLOCK_SECTION_ID" => $sectionID,
 			  "PROPERTY_VALUES"   => $PROP,
-			  "NAME"              => $_POST["name"],
+			  "NAME"              => $name,
 			  "CODE"		      => $userID,
 			  "ACTIVE"            => "N",
 			  "PREVIEW_TEXT"      => $_POST['comment'],
@@ -235,16 +237,15 @@ switch ($action) {
 			  "PREVIEW_PICTURE"   => CFile::MakeFileArray($arUser["PERSONAL_PHOTO"])
 			);
 
-			if (isAuth()) {
-				$arLoadProductArray['MODIFIED_BY'] = $USER->GetID();
-				$arLoadProductArray['NAME'] = $USER->GetFullName();
-				if (isset($_POST["phone"])) {
-					$arLoadProductArray['NAME'] = $arUser['PERSONAL_PHONE'];
-				}
-			}
-			
 			if ($id = $el->Add($arLoadProductArray)) {
-				echo "1";
+				$link = 'http://motochki.redder.pro/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=3&type=content&ID='.$id.'&lang=ru&find_section_section='.$sectionID.'&WF=Y';
+				if(CEvent::Send("NEW_REVIEW", "s1", array('NAME' => $name, 'PHONE' => $phone, 'LINK' => $link))){
+					echo "1";
+				} else {
+					echo "0";
+				}
+			} else {
+				echo "0";
 			}
 		}else{
 			echo "0";

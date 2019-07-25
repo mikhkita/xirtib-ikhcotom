@@ -99,56 +99,60 @@ $(document).ready(function(){
             asNavFor = '';
         }
 
-        $('.b-product-main').slick({
-            dots: false,
-            arrows: false,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            asNavFor: asNavFor,
-            swipe: false,
-            cssEase: 'linear',
-            speed: 100,
-            fade: true,
-        });
+        $('.b-product-main:not(.slick-initialized)').each(function(){
+            $(this).slick({
+                dots: false,
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                asNavFor: asNavFor,
+                swipe: false,
+                cssEase: 'linear',
+                speed: 100,
+                fade: true,
+            });
+        })
 
-        $('.b-product-photo-slider:not(.no-slider)').slick({
-            dots: false,
-            arrows: true,
-            prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
-            nextArrow: '<div class="b-product-arrows icon-arrow-right-bold"></div>',
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: false,
-            variableWidth: true,
-            asNavFor: '.b-product-main',
-            focusOnSelect: true,
-            responsive: [
-                {
-                  breakpoint: 1188,
-                  settings: {
-                    slidesToShow: 3
-                  }
-                },
-                {
-                  breakpoint: 768,
-                  settings: {
-                    slidesToShow: 5
-                  }
-                },
-                {
-                  breakpoint: 665,
-                  settings: {
-                    slidesToShow: 4
-                  }
-                },
-                {
-                  breakpoint: 374,
-                  settings: {
-                    slidesToShow: 3
-                  }
-                }
-            ]
+        $('.b-product-photo-slider:not(.no-slider)').each(function(){
+            $(this).slick({
+                dots: false,
+                arrows: true,
+                prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
+                nextArrow: '<div class="b-product-arrows icon-arrow-right-bold"></div>',
+                infinite: true,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: false,
+                variableWidth: true,
+                asNavFor: '.b-product-main',
+                focusOnSelect: true,
+                responsive: [
+                    {
+                      breakpoint: 1188,
+                      settings: {
+                        slidesToShow: 3
+                      }
+                    },
+                    {
+                      breakpoint: 768,
+                      settings: {
+                        slidesToShow: 5
+                      }
+                    },
+                    {
+                      breakpoint: 665,
+                      settings: {
+                        slidesToShow: 4
+                      }
+                    },
+                    {
+                      breakpoint: 374,
+                      settings: {
+                        slidesToShow: 3
+                      }
+                    }
+                ]
+            });
         });
     }
 

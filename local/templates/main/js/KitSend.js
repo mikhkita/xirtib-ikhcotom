@@ -257,7 +257,8 @@ $(document).ready(function(){
 			  	data:  $this.serialize(),
 				success: function(msg){
 
-					if( isValidJSON(msg) && msg != "1" && msg != "0"){
+					if( isValidJSON(msg) && msg != "1" && msg != "0" && msg !=''){
+
 						var json = JSON.parse(msg);
 
 						if( json.result == "success" ){
@@ -280,7 +281,7 @@ $(document).ready(function(){
 						if( msg == "1" ){
 							$link = $this.find(".b-thanks-link");
 						}else{
-							$link = $(".b-error-link");
+							$link = $this.find(".b-error-link");
 						}
 
 						if( $this.attr("data-afterAjax") && customHandlers[$this.attr("data-afterAjax")] ){
@@ -293,7 +294,7 @@ $(document).ready(function(){
 				},
 				error: function(){
 					$.fancybox.close();
-					// $(".b-error-link").click();
+					$this.find(".b-error-link").click();
 				},
 				complete: function(){
 					$this.find(".ajax").removeAttr("onclick");

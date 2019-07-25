@@ -1,9 +1,37 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Каталог");?>
 
-<? if($_REQUEST["SECTION_CODE"]): ?>
-	
-	<? 
+<? if($_REQUEST["SECTION_CODE"] || $_REQUEST['TAGS'] || $_REQUEST['SEO_SECTION_CODE']):
+
+	if ($_REQUEST['TAGS'] && CModule::IncludeModule('search')) {
+		$rsTags = CSearchTags::GetList(array(),array("MODULE_ID" => "iblock"), array("CNT" => "DESC"));
+	    $arTag = Array();
+	    while($arTag = $rsTags->Fetch()){
+	    	
+	    	if( $_REQUEST['TAGS'] == Cutil::translit($arTag['NAME'],"ru") ){
+			    $tagName = mb_strtoupper(mb_substr($arTag['NAME'], 0, 1)).mb_substr($arTag['NAME'], 1);
+	    		$APPLICATION->SetTitle($tagName);
+	    		$GLOBALS['arrFilter'] = array("?TAGS" => $arTag['NAME']);
+	    		break;
+	    	}
+	    }
+	}
+
+	if ($_REQUEST['SEO_SECTION_CODE']) {
+
+		$arSelect = Array("ID", "IBLOCK_ID", "NAME", "DATE_ACTIVE_FROM","PROPERTY_*", 'PREVIEW_TEXT');
+		$arFilter = Array("IBLOCK_ID"=>8, "ACTIVE_DATE"=>"Y", "ACTIVE"=>"Y", 'CODE' => $_REQUEST['SEO_SECTION_CODE']);
+		$res = CIBlockElement::GetList(Array(), $arFilter, false, Array("nPageSize"=>50), $arSelect);
+		
+		while($ob = $res->GetNextElement()){ 
+			$arFields = $ob->GetFields();  
+			$seoText = $arFields['PREVIEW_TEXT'];
+			$arProps = $ob->GetProperties();
+			$APPLICATION->SetTitle($arFields['NAME']);
+			$GLOBALS['arrFilter'] = array("ID" => $arProps['ITEMS']['VALUE']);
+		}
+
+	}
 
 	$sortList = array(
 		0 => array(
@@ -37,8 +65,8 @@ $APPLICATION->SetTitle("Каталог");?>
 	} ?>
 
 	<h2 class="b-title"><?$APPLICATION->ShowTitle();?></h2>
-	<div class="b-catalog clearfix" id="b-catalog">
 
+	<div class="b-catalog clearfix" id="b-catalog">
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.smart.filter",
 			"main",
@@ -54,7 +82,7 @@ $APPLICATION->SetTitle("Каталог");?>
 				"FILTER_VIEW_MODE" => "horizontal",
 				"HIDE_NOT_AVAILABLE" => "N",
 				"IBLOCK_ID" => "1",
-				"CUSTOM_SECTION_CODE" => $_REQUEST["SECTION_CODE"],
+				// "CUSTOM_SECTION_CODE" => $_REQUEST["SECTION_CODE"],
 				"IBLOCK_TYPE" => "content",
 				"INSTANT_RELOAD" => "Y",
 				"PAGER_PARAMS_NAME" => "arrPager",
@@ -62,10 +90,9 @@ $APPLICATION->SetTitle("Каталог");?>
 				"PREFILTER_NAME" => "smartPreFilter",
 				"PRICE_CODE" => array(0=>"PRICE",),
 				"SAVE_IN_SESSION" => "N",
-				"SECTION_CODE" => "",
+				"SECTION_CODE" => $_REQUEST["SECTION_CODE"],
 				"SECTION_CODE_PATH" => "",
 				"SECTION_DESCRIPTION" => "-",
-				"SECTION_ID" => "1",
 				"SECTION_TITLE" => "-",
 				"SEF_MODE" => "N",
 				"SEF_RULE" => "/catalog/#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
@@ -197,6 +224,7 @@ $APPLICATION->SetTitle("Каталог");?>
 						"USE_PRODUCT_QUANTITY" => "N",
 						"WITH_REVIEWS" => ($isFirst)?"Y":"N",
 						"WITH_CALLBACK" => ($isLast)?"Y":"N",
+						"TAGS" => ($_REQUEST['TAGS'])?"Y":"N",
 					),
 				false,
 				Array(
@@ -210,6 +238,15 @@ $APPLICATION->SetTitle("Каталог");?>
 			</div>
 		</div>
 	</div>
+	<? if ($seoText): ?>
+	<div class="b-text b-seo">
+		<br>
+		<br>
+		<p><?=$seoText?></p>
+		<br>
+		<br>
+	</div>
+	<? endif; ?>
 <? else: ?>
 	<div class="b-catalog-section">
 		<h2 class="b-title"><?$APPLICATION->ShowTitle();?></h2>

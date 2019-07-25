@@ -22,8 +22,7 @@ if (isAuth($USER)){
 	}
 }
 
-?>
-<? if(count($arResult["ITEMS"])): ?>
+if(count($arResult["ITEMS"])): ?>
 	<div class="b-catalog-inner clearfix">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
 			<? $class = "";?>
@@ -73,8 +72,8 @@ if (isAuth($USER)){
 							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
 						<? endif; ?>
 					<? endif; ?>
+					<div class="b-card-top-img" style="background-image: url('<?=$renderImage['src']?>');"></div>
 
-					<img src="<?=$renderImage['src']?>">
 					<div class="b-discount">Новинка</div>
 
 					<? if (isAuth($USER)): ?>

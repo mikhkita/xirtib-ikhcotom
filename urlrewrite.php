@@ -1,11 +1,27 @@
 <?php
 $arUrlRewrite=array (
+  9 => 
+  array (
+    'CONDITION' => '#^/catalog/pryazha-illaria/(\\\\?(.*))?#',
+    'RULE' => 'SEO_SECTION_CODE=pryazha-illaria',
+    'ID' => '',
+    'PATH' => '/catalog/index.php',
+    'SORT' => 100,
+  ),
   4 => 
   array (
     'CONDITION' => '#^/catalog/(.+)/(.+)/(\\\\?(.*))?#',
     'RULE' => 'SECTION_CODE=$1&ELEMENT_CODE=$2&$3',
     'ID' => '',
     'PATH' => '/catalog/detail.php',
+    'SORT' => 100,
+  ),
+  8 => 
+  array (
+    'CONDITION' => '#^/catalog-tag/(.+)/(\\\\?(.*))?#',
+    'RULE' => 'TAGS=$1&$2',
+    'ID' => '',
+    'PATH' => '/catalog/index.php',
     'SORT' => 100,
   ),
   0 => 
