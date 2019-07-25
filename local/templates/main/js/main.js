@@ -606,6 +606,9 @@ $(document).ready(function(){
             $('.js-order-adress-map-input').addClass("error");
         }
         if($('#postal-code').val()){
+            $('#postal-code-vue').val($('#postal-code').val());
+            var e = new Event("change");
+            $('#postal-code-vue')[0].dispatchEvent(e);
             $('#postal-code').removeClass("error");
         }else{
             $('#postal-code').addClass("error");

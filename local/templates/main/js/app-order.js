@@ -72,6 +72,10 @@
             if(dataOrder.delivery){
                 this.form.deliveryList = dataOrder.delivery;
                 this.form.deliveryActive = this.form.deliveryList[0].value;
+                //обнулить стоимость доставок
+                for (i = 0; i < this.form.deliveryList.length; i++) {
+                    this.form.deliveryList[i].cost = 0;
+                }
             }
             if(dataOrder.payments){
                 this.form.paymentList = dataOrder.payments;
@@ -222,6 +226,8 @@
                                     </div>\
                                 </div>\
                             </div>\
+                            <input id="postal-code-vue" type="hidden" name="postal-code-vue" @change="calcDelivery">\
+                            <input id="delivery-cost" type="text" name="delivery-cost" @change="changeCost">\
                             <div class="b-textarea">\
                                 <p>Комментарий к заказу</p>\
                                 <textarea rows="1" name="comment" placeholder="Введите комментарий" v-model="form.comment"></textarea>\
@@ -370,24 +376,30 @@
                     index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active),
                     zip = $('#postal-code').val();
                 var self = this;
-                $.ajax({
-                    type: "get",
-                    url: "/ajax/index.php",
-                    data: {"delivery_id": this.form.deliveryList[index].id, "zip": zip ,"action": "DELIVERY"},
-                    success: function(response){
-                        var data = JSON.parse(response);
-                        if(data.result === "success"){
-                            //изменить стоимость
-                            var cost = parseFloat(data.cost);
-                            if(cost > 0){
-                                self.form.deliveryList[index].cost = cost;
+                if($('#postal-code-vue').val()){
+                    $.ajax({
+                        type: "get",
+                        url: "/ajax/index.php",
+                        data: {"delivery_id": this.form.deliveryList[index].id, "zip": zip ,"action": "DELIVERY"},
+                        success: function(response){
+                            var data = JSON.parse(response);
+                            if(data.result === "success"){
+                                $('#delivery-cost').val(data.cost);
+                                var e = new Event("change");
+                                $('#delivery-cost')[0].dispatchEvent(e);
+                            }else{
+                                alert(data.error);
                             }
-                        }else{
-                            alert(data.error);
-                        }
-                    },
-                    error: function(){},
-                });
+                        },
+                        error: function(){},
+                    });
+                }
+            },
+            changeCost: function () {
+                //console.log("changeCost = " + $('#delivery-cost').val());
+                var active = this.form.deliveryActive,
+                    index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active);
+                this.form.deliveryList[index].cost = parseFloat($('#delivery-cost').val());
             }
         },
         computed: {
