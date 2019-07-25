@@ -211,7 +211,7 @@
                           </div>\
                         </div>\
                         <div class="b-order-form-bottom">\
-                            <div class="b-order-sdek-map" v-if="form.deliveryActive == \'delivery-3\'">\
+                            <div class="b-order-sdek-map" v-if="form.deliveryActive == \'delivery-15\'">\
                                 <p>Карта для СДЭКа (класс .b-order-sdek-map)</p>\
                             </div>\
                             <div class="b-order-address-input" v-else>\
