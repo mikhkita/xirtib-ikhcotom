@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Моточки - клубочки");?><?$APPLICATION->IncludeComponent(
+$APPLICATION->SetTitle("Моточки - клубочки");?><a href='#' class="b-cdek">выбрать пункт</a><?$APPLICATION->IncludeComponent(
 	"bitrix:sale.order.ajax",
 	"",
 	Array(

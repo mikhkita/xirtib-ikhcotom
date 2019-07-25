@@ -5,7 +5,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 	global $APPLICATION;
 	if($arParams['NOMAPS']!='Y')
 		$APPLICATION->AddHeadString('<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>');
-	// $APPLICATION->AddHeadString('<link href="/bitrix/js/'.CDeliverySDEK::$MODULE_ID.'/jquery.jscrollpane.css" type="text/css"  rel="stylesheet" />');
+	$APPLICATION->AddHeadString('<link href="/bitrix/js/'.CDeliverySDEK::$MODULE_ID.'/jquery.jscrollpane.css" type="text/css"  rel="stylesheet" />');
 
 	$order = ($arParams['CNT_DELIV'] == 'Y') ? CUtil::PhpToJSObject($arResult['ORDER']) : 'false';
 
@@ -30,7 +30,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 	?>
 		<script>
 			var IPOLSDEK_pvz = {
-				city: 'Томск',
+				city: '<?=$arResult['city']?>',
 				
 				cityId: '<?=$arParams['CITY_ID']?>',
 
@@ -60,8 +60,6 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 				
 				paysystem: '<?=$arParams['PAYSYSTEM']?>',
 
-				isMobile: false,
-
 				init: function(){
 					IPOLSDEK_pvz.punctMode = (IPOLSDEK_pvz.profiles.length == 1) ? IPOLSDEK_pvz.profiles[0] : 'ALL';
 					$('#SDEK_modController').css('display','none');
@@ -74,55 +72,16 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 						$('#SDEK_map').css('display','none');
 						$('#SDEK_info').css('display','none');
 					<?}?>
-
-					$(window).resize(function(){
-						this.resize();
-					});
-					this.resize();
-				},
-
-				resize: function(){
-					var myWidth = myHeight = 0;
-
-			       	if( typeof( window.innerWidth ) == 'number' ) {
-			            myWidth = window.innerWidth;
-			            myHeight = window.innerHeight;
-			        } else if( document.documentElement && ( document.documentElement.clientWidth || 
-			        document.documentElement.clientHeight ) ) {
-			            myWidth = document.documentElement.clientWidth;
-			            myHeight = document.documentElement.clientHeight;
-			        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-			            myWidth = document.body.clientWidth;
-			            myHeight = document.body.clientHeight;
-			        }
-
-			        if( myWidth > 600 ){
-			            this.isMobile = false;
-			        }else{
-			            this.isMobile = true;
-			        }
 				},
 
 				chooseCity: function(city){
-					var found = false;
-
-					$(".basket-checkout-block-btn").addClass("loading");
-
-					$("#no_price_to_pocikpoint").remove();
 					$('#SDEK_citySel a').each(function(){
 						$(this).css('display','');
 						if($(this).attr('onclick').indexOf(city)!==-1){
 							$(this).css('display','none');
 							$('#SDEK_cityName').html($(this).text());
-							found = true;
 						}
 					});
-
-					if( !found ){
-						if( $("#city").val() != "" && $("#city").val() != "Не выбрано" ){
-							$(".b-delivery-price").after('<span id="no_price_to_pocikpoint" class="red">По вашему адресу стоимость рассчитывается оператором</span>' );
-						}
-					}
 					$('#SDEK_citySel').css('display','none');
 					IPOLSDEK_pvz.city = city;
 					IPOLSDEK_pvz.switchMode();
@@ -168,8 +127,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 						}else
 							html+='<p id="PVZ_'+i+'" onclick="IPOLSDEK_pvz.markChosenPVZ(\''+i+'\')" onmouseover="IPOLSDEK_pvz.Y_blinkPVZ(\''+i+'\',true)" onmouseout="IPOLSDEK_pvz.Y_blinkPVZ(\''+i+'\')" >'+IPOLSDEK_pvz.paintPVZ(i)+'</p>';
 					$('#SDEK_wrapper').html(html);
-					
-					// IPOLSDEK_pvz.scrollPVZ=$('#SDEK_wrapper').jScrollPane({autoReinitialise:true});
+					IPOLSDEK_pvz.scrollPVZ=$('#SDEK_wrapper').jScrollPane({autoReinitialise:true});
 				},
 
 				paintPVZ: function(ind){ //painting PVZ-address, if color if given
@@ -199,7 +157,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 				},
 
 				makeScrollHint: function(){
-					// $('.sdek_baloonInfo').jScrollPane({contentWidth: '0px',autoReinitialise:true});
+					$('.sdek_baloonInfo').jScrollPane({contentWidth: '0px',autoReinitialise:true});
 					IPOLSDEK_pvz.scrollHintInited = false;
 				},
 
@@ -223,7 +181,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 					$('#SDEK_citySel').css('display','');
 				},
 
-				// ðåæèìû
+				// ������
 				switchMode: function(mode,doLoad){
 					$('.SDEK_mC_block').removeClass('active');
 					if(typeof(mode) != 'undefined' && mode)
@@ -252,9 +210,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 					}).then(function (res) {
 							var firstGeoObject = res.geoObjects.get(0);
 							var coords = firstGeoObject.geometry.getCoordinates();
-							if( !this.isMobile ){
-								coords[1]-=0.2;
-							}
+							coords[1]-=0.2;
 							if(!IPOLSDEK_pvz.Y_map){
 								IPOLSDEK_pvz.Y_map = new ymaps.Map("SDEK_map",{
 									zoom:10,
@@ -329,10 +285,6 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 				Y_selectPVZ: function(wat){
 					IPOLSDEK_pvz.cityPVZ[wat].placeMark.balloon.open();
 					IPOLSDEK_pvz.Y_map.setCenter([IPOLSDEK_pvz.cityPVZ[wat].cY,IPOLSDEK_pvz.cityPVZ[wat].cX]);
-
-					$(".cdekaddr, .b-postamat-error").remove();
-					console.log(IPOLSDEK_pvz);
-					$("#b-cdek-punk-addr").html(IPOLSDEK_pvz.cityPVZ[wat].Address).after( '<input type="hidden" class="cdekaddr" name="ORDER_PROP_21" value="Внутренний код ПВЗ : ' + wat + '<br>Название ПВЗ : ' + IPOLSDEK_pvz.cityPVZ[wat].Name + '<br>Адрес ПВЗ : ' + IPOLSDEK_pvz.cityPVZ[wat].Address + '<br>Город ПВЗ : ' + IPOLSDEK_pvz.city + '<br>" />' );
 				},
 
 				Y_readyToBlink: false,
@@ -398,38 +350,12 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 				},
 
 				setPrices: function(){
-					var price = IPOLSDEK_pvz.prices.pickup[0],
-						date = IPOLSDEK_pvz.prices.pickup[1];
-					if( $("#cdek_type").val() == 2 ){
-						price = IPOLSDEK_pvz.prices.courier[0],
-						date = IPOLSDEK_pvz.prices.courier[1];
-					}
-
-					$('#SDEK_pPrice').html(price);
-					$('#SDEK_pDate').html(date);
-
-					if( $("#delivery").val() == "120" ){
-						var intPrice = price.substr( 0, price.length - 5).replace(/[\D\.]+/g,"");
-						// if( $("#b-delivery-price-input").val() != intPrice ){
-							$("#b-delivery-price-input").val( (intPrice)?intPrice:0 ).trigger("change");
-							if( date === "Нет доставки." ){
-								$(".b-srok-delivery").hide();
-							}else{
-								$("#b-srok-delivery").text(date);
-								$(".b-srok-delivery").show();
-							}
-							$(".b-srok-delivery").show();
-						// }
-					}
-
-					$(".cdekaddr, .b-postamat-error").remove();
-					$("#b-cdek-punk-addr").html("не выбран");
-
-					// $('#SDEK_cPrice').html(IPOLSDEK_pvz.prices.courier[0]);
-					// $('#SDEK_cDate').html(IPOLSDEK_pvz.prices.courier[1]);
+					$('#SDEK_cPrice').html(IPOLSDEK_pvz.prices.courier[0]);
+					$('#SDEK_cDate').html(IPOLSDEK_pvz.prices.courier[1]);
 
 					if(IPOLSDEK_pvz.punctMode != 'ALL'){ // Profiler
-						
+						$('#SDEK_pPrice').html(IPOLSDEK_pvz.prices.pickup[0]);
+						$('#SDEK_pDate').html(IPOLSDEK_pvz.prices.pickup[1]);
 					}else
 						$('.IPOLSDEK_subPunct_detail_PVZ').each(function(){$(this).html(IPOLSDEK_pvz.prices.pickup[0]+" &nbsp;"+IPOLSDEK_pvz.prices.pickup[1]);});
 				},
@@ -474,7 +400,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 			}
 			IPOLSDEK_pvz.ymapsBidner();
 			IPOL_JSloader.checkScript('',"/bitrix/js/<?=CDeliverySDEK::$MODULE_ID?>/jquery.mousewheel.js");
-			// IPOL_JSloader.checkScript('$("body").jScrollPane',"/bitrix/js/<?=CDeliverySDEK::$MODULE_ID?>/jquery.jscrollpane.js",IPOLSDEK_pvz.jquiready);
+			IPOL_JSloader.checkScript('$("body").jScrollPane',"/bitrix/js/<?=CDeliverySDEK::$MODULE_ID?>/jquery.jscrollpane.js",IPOLSDEK_pvz.jquiready);
 		</script>
 		<div id='SDEK_pvz'>
 			<div id='SDEK_title'>
