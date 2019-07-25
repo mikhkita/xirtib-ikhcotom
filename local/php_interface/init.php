@@ -269,4 +269,25 @@ function getOrderList(){
 	return json_encode($orders);
 }
 
+function getLocationByZIP($zip){
+	$res = \Bitrix\Sale\Location\ExternalTable::getList(array(
+        'filter' => array(
+            // '=SERVICE.CODE' => self::ZIP_EXT_SERVICE_CODE,
+            '=XML_ID' => $zip
+        ),
+        'select' => array(
+            'LOCATION_ID',
+        ),
+        'limit' => 1
+    ));
+
+    if($item = $res->fetch()){
+    	$res = \Bitrix\Sale\Location\LocationTable::getByPrimary($item["LOCATION_ID"]);
+    	if($item = $res->fetch()) {
+		    return $item["CODE"];
+		}
+    }
+    return false;
+}
+
 ?>
