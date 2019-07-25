@@ -151,9 +151,10 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 							<span class="icon icon-share"></span>
 							<span class="icon icon-share-green"></span>Поделиться
 						</a>
+						<? $shareLink = 'http://motochki.redder.pro'.$arResult["DETAIL_PAGE_URL"]; ?>
 						<script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
 						<script src="https://yastatic.net/share2/share.js"></script>
-						<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>
+						<div class="ya-share2" data-url="<?=$shareLink?>"  data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>
 					</li>
 					<li>
 						<a class="go-tab" data-tab=".tab-reviews" href="#">

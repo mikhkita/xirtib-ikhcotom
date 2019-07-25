@@ -3284,7 +3284,9 @@ h3.b-title{
 						width: 13px;
 					}
 			.b-filter-toggle{
-
+			    padding-left: 10px;
+    			padding-right: 10px;
+	    		margin: 0 -10px;
 			}
 			.b-filter-texture-list{
 				max-height: 144px;

@@ -605,6 +605,66 @@ switch ($action) {
 		$res["items"] = $arBasket;
 		returnSuccess($res);
 		break;
+	case 'DELIVERY':
+		$deliveryId = $_REQUEST["delivery_id"];
+		$zip = $_REQUEST["zip"];
+
+		// Получаем текущую корзину пользователя
+		$basket = \Bitrix\Sale\Basket::loadItemsForFUser(
+		   \Bitrix\Sale\Fuser::getId(),
+		   \Bitrix\Main\Context::getCurrent()->getSite()
+		);
+
+		// Создаем заказ и добавляем в него корзину
+		$order = Bitrix\Sale\Order::create(
+			\Bitrix\Main\Context::getCurrent()->getSite(),
+			\Bitrix\Sale\Fuser::getId());
+		$order->setPersonTypeId(1);
+		$order->setBasket($basket);
+
+		// Получаем коллекцию отгрузок и добавляем в нее новую отгрузку
+		$shipmentCollection = $order->getShipmentCollection(); 
+		$shipment = $shipmentCollection->createItem();
+		$shipment->setFields(array(
+			'CURRENCY' => $order->getCurrency()
+		));
+
+		// Добавляем к отгрузке всю корзину
+		$shipmentItemCollection = $shipment->getShipmentItemCollection(); 
+		foreach ($order->getBasket() as $item) {
+			$shipmentItem = $shipmentItemCollection->createItem($item);
+			$shipmentItem->setQuantity($item->getQuantity());
+		}
+
+		// Получаем ID местоположения по ZIP коду
+		$locationId = getLocationByZIP($zip);
+
+		// Если ID нашли, то записываем его в свойство типа «Местоположение» к заказу
+		if( $locationId ){
+			$propertyCollection = $order->getPropertyCollection();//получаем коллекцию свойств заказа
+			$property = $propertyCollection->getDeliveryLocation();//выбираем ту что отвечает за местоположение
+			$property->setValue($locationId);//передаем местоположение
+		}
+
+		// Получаем службу доставки
+		$deliveryObj = \Bitrix\Sale\Delivery\Services\Manager::getObjectById($deliveryId);
+
+		// Какой-то костыль
+		$shipment->setField('CUSTOM_PRICE_DELIVERY', 'N');
+
+		// Рассчитываем стоимость доставки для отгрузки
+		$shipment->setField('DELIVERY_ID', $deliveryObj->getId());
+		$order->getShipmentCollection()->calculateDelivery();
+		$calcResult = $deliveryObj->calculate($shipment);
+		if ($calcResult->isSuccess()) {
+			$price = \Bitrix\Sale\PriceMaths::roundByFormatCurrency($calcResult->getPrice(), $order->getCurrency());
+			returnSuccess(array(
+				"cost" => $price
+			));
+		}else{
+			returnError("Не удалось рассчитать стоимость доставки. Наш оператор свяжется с вами после оформления заказа и поможет рассчитать стоимость доставки.");
+		}
+		break;
 	default:
 		break;
 }

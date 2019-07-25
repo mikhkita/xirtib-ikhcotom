@@ -548,8 +548,10 @@ $(document).ready(function(){
             block = $('.b-catalog-list');
 
         progress.start(1.5);
-        block.removeClass('loaded');
-        $('.b-filter').addClass('load');
+        if (block.hasClass('loaded')) {
+            block.removeClass('loaded');
+        }
+        // $('.b-filter').addClass('load');
 
         $.ajax({
             type: "GET",
@@ -565,8 +567,10 @@ $(document).ready(function(){
             },
             complete: function(){
                 progress.end();
-                block.addClass('loaded');
-                $('.b-filter').removeClass('load');
+                if (!block.hasClass('loaded')) {
+                    block.addClass('loaded');
+                }
+                // $('.b-filter').removeClass('load');
             }
         });
 
