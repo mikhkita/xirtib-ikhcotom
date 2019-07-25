@@ -226,34 +226,19 @@ function getOrderList(){
 
 	// =================
 
-	$orders["delivery"][] = array(
-		"id" => 512,
-		"name" => "Почта России",
-		"value"=>"post",
-        "cost"=> 350,
-        "text"=> "1. Без объявленной ценности. Если хотите ценную посылку, пишите в примечании к заказу, какую ценность указать, и мы пересчитаем доставку."
-	);
-	$orders["delivery"][] = array(
-		"id" => 513,
-		"name"=> "СДЭК",
-		"value"=> "SDEC",
-        "cost"=> 550,
-        "text"=> "2. Без объявленной ценности. Если хотите ценную посылку, пишите в примечании к заказу, какую ценность указать, и мы пересчитаем доставку."
-	);
-	$orders["delivery"][] = array(
-		"id" => 514,
-		"name"=> "Курьер по Томску",
-		"value"=> "courier",
-        "cost"=> 700,
-        "text"=> "3. Без объявленной ценности. Если хотите ценную посылку, пишите в примечании к заказу, какую ценность указать, и мы пересчитаем доставку."
-	);
-	$orders["delivery"][] = array(
-		"id" => 515,
-		"name"=> "Самовывоз из офиса",
-		"value"=>"pickup",
-        "cost"=> 0,
-        "text"=>"4. Без объявленной ценности. Если хотите ценную посылку, пишите в примечании к заказу, какую ценность указать, и мы пересчитаем доставку."
-	);
+	$deliveryList = \Bitrix\Sale\Delivery\Services\Manager::getActiveList();
+	$orders["delivery"] = array();
+	foreach ($deliveryList as $item) {
+		if($item["ID"] != 1 && $item["ACTIVE"] == "Y"){
+			$orders["delivery"][] = array(
+				"id" => $item["ID"],
+				"name" => $item["NAME"],
+				"value"=>"delivery-".$item["ID"],
+		        "cost"=> (int)$item["CONFIG"]["MAIN"]["PRICE"],
+		        "text"=> $item["DESCRIPTION"],
+			);
+		}
+	}
 
 	$orders["payments"][] = array(
 		"id" => 4234,
