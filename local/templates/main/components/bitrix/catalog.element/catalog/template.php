@@ -33,6 +33,35 @@ $id = $arResult['OFFERS'] ? $arResult['OFFERS'][0]['ID'] : $arResult['ID'];
 $quantity = $arResult['OFFERS'] ? $arResult['OFFERS'][0]["PRODUCT"]["QUANTITY"] : $arResult["PRODUCT"]["QUANTITY"];
 $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']['VALUE'] : $arResult['PROPERTIES']['ARTICLE']['VALUE'];
 
+$tabClass = 'active';
+$tabBlockClass = '';
+
+$reviewTabClass = '';
+$reviewTabBlockClass = 'hide';
+
+if ($_GET['review'] == 'Y'){
+	$tabClass = '';
+	$reviewTabClass = 'active';
+
+	$tabBlockClass = 'hide';
+	$reviewTabBlockClass = '';
+}
+
+
+if ($arResult["OFFERS"]){
+	foreach ($arResult["OFFERS"] as $key => $offer){
+		$zoomClass = 'hide';
+		if ($offer["DETAIL_PICTURE"]){
+			$zoomClass = '';
+			break;
+		}
+	}
+	
+} else {
+	if (!$arResult["DETAIL_PICTURE"]) {
+		$zoomClass = 'hide';
+	}
+}
 
 ?>
 <div class="b-detail">
@@ -42,20 +71,22 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 	<div class="b-product">
 		<div class="b-product-photo">
 			<div class="main-photo">
-				<div class="icon-zoom"></div>
+				<div class="icon-zoom <?=$zoomClass?>"></div>
 				<div class="b-product-main after-load">
 					<? if ($arResult["OFFERS"]): ?>
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 							<? if ($offer["DETAIL_PICTURE"]):
 								$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 								$bigImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
+								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+									<img src="<?=$renderImage['src']?>">
+								</a>
 							<?else:?>
 								<? $bigImage['src'] = $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
+								<a href="#" onclick="return false;">
+									<img src="<?=$renderImage['src']?>">
+								</a>
 							<?endif;?>
-
-							<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-								<img src="<?=$renderImage['src']?>">
-							</a>
 
 							<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
 								<? $class = "has-discount"; ?>
@@ -157,11 +188,19 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 						<div class="ya-share2" data-url="<?=$shareLink?>"  data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>
 					</li>
 					<li>
-						<a class="go-tab" data-tab=".tab-reviews" href="#">
-							<span class="icon icon-reviews"></span>
-							<span class="icon icon-reviews-green"></span>
-							Отзывов: <span class="review-count"><?=$reviewsCount?></span>
-						</a>
+						<? if ($_REQUEST['element_view'] == "Y"): ?>
+							<a href="<?=$arResult["DETAIL_PAGE_URL"]?>?review=Y#element-tabs">
+								<span class="icon icon-reviews"></span>
+								<span class="icon icon-reviews-green"></span>
+								Отзывов: <span class="review-count"><?=$reviewsCount?></span>
+							</a>
+						<? else: ?>
+							<a class="go-tab" data-tab=".tab-reviews" href="#">
+								<span class="icon icon-reviews"></span>
+								<span class="icon icon-reviews-green"></span>
+								Отзывов: <span class="review-count"><?=$reviewsCount?></span>
+							</a>
+						<? endif; ?>
 					</li>
 				</ul>
 			</div>
@@ -323,17 +362,18 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 	<? if ($_REQUEST['element_view'] == "Y"): ?>
 		<? die(); ?>
 	<? endif; ?>
-	<div class="b-detail-tabs">
+	<div class="b-detail-tabs" id="element-tabs">
 		<div class="tabs clearfix">
-			<div class="tab tab-desc active" data-block=".desc-block"><span>Описание</span></div>
+			<div class="tab tab-desc <?=$tabClass?>" data-block=".desc-block"><span>Описание</span></div>
 			<div class="tab tab-spec" data-block=".spec-block"><span>Характеристики</span></div>
 			<? if ($modelsCount != '0'): ?>
 				<div class="tab tab-models" data-block=".models-block"><span>Модели</span></div>
 			<? endif; ?>
-			<div class="tab tab-reviews" data-block=".reviews-block"><span>Отзывы</span></div>
+			<div class="tab tab-reviews <?=$reviewTabClass?>" data-block=".reviews-block"><span>Отзывы</span></div>
 		</div>
 		<div class="b-detail-tabs-content">
-			<div class="tabs-content desc-block b-text">
+
+			<div class="tabs-content desc-block b-text <?=$tabBlockClass?>">
 				<p><?=$arResult['DETAIL_TEXT']?></p>
 			</div>
 			<div class="tabs-content spec-block b-text hide">
@@ -396,7 +436,8 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 						<? $arTags = explode(',', $arResult["TAGS"]); ?>
 						<ul>
 							<? foreach($arTags as $tag): ?>
-								<li><a href="/search/?q=<?=$tag?>"><?=$tag?></a></li>
+								<? $trnsTag = Cutil::translit($tag,"ru"); ?>
+								<li><a href="/catalog-tag/<?=$trnsTag?>/"><?=$tag?></a></li>
 							<? endforeach; ?>
 						</ul>
 					</div>
@@ -469,7 +510,7 @@ $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']
 				),
 				false
 			);?> 
-			<div class="tabs-content reviews-block hide">
+			<div class="tabs-content reviews-block <?=$reviewTabBlockClass?>">
 				
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:news.list", 

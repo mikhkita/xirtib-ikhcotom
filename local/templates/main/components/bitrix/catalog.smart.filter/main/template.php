@@ -22,7 +22,9 @@ if (isset($templateData['TEMPLATE_THEME']))
 }
 // $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 // $this->addExternalCss("/bitrix/css/main/font-awesome.css");
+
 ?>
+
 
 <form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="b-filter">
 	<? $isSortField = false; ?>
@@ -46,7 +48,6 @@ if (isset($templateData['TEMPLATE_THEME']))
 	<? if (!$isSortType): ?>
 		<input type="hidden" name="SORT_TYPE" value="ASC"/>
 	<? endif ?>
-
 		<?//prices
 		foreach($arResult["ITEMS"] as $key=>$arItem)
 		{

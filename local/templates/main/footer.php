@@ -188,11 +188,21 @@
 			<div class="popup-title"></div>
 			<form method="POST" action="/ajax/?action=ADDREVIEW">
 				<div class="b-inputs-2 clearfix">
+					<? 
+					if (isAuth()){
+			    		$rsUser = CUser::GetByID($USER->GetID());
+			    		$arUser = $rsUser->Fetch();
+					}
+
+					$name = isset($arUser['NAME']) ? $arUser['NAME'] : '';
+		    		$phone = isset($arUser['PERSONAL_PHONE']) ? $arUser['PERSONAL_PHONE'] : '';
+
+					?>
 					<div class="b-input">
-						<input type="text" name="name" placeholder="Ваше имя" required>
+						<input type="text" name="name" placeholder="Ваше имя" required value="<?=trim($name)?>">
 					</div>
 					<div class="b-input">
-						<input type="text" name="phone" placeholder="Номер телефона" required>
+						<input type="text" name="phone" placeholder="Номер телефона" required value="<?=trim($phone)?>">
 					</div>
 					<input type="text" name="MAIL" required="">
 				</div>

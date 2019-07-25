@@ -74,7 +74,13 @@ body {
 	display: inline-block;
 	font-size: 16px;
 }
-
+.b-card-top img{
+	width: auto;
+	height: auto;
+}
+.b-card-top-img{
+	height: 200px;
+}
 .b-blog-filter {
 	margin-bottom: 15px;
 }
@@ -1177,6 +1183,9 @@ body {
 	}
 	.b-blog-filter li:nth-child(2n){
 		margin-right: 0;
+	}
+	.b-card-top-img{
+		height: 250px;
 	}
 }
 
