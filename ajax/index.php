@@ -608,6 +608,14 @@ switch ($action) {
 		$deliveryId = $_REQUEST["delivery_id"];
 		$zip = $_REQUEST["zip"];
 
+		if( empty($deliveryId) ){
+			returnError("Не передан ID доставки");
+		}
+
+		if( empty($zip) ){
+			returnError("Не передан индекс");
+		}
+
 		// Получаем текущую корзину пользователя
 		$basket = \Bitrix\Sale\Basket::loadItemsForFUser(
 		   \Bitrix\Sale\Fuser::getId(),
