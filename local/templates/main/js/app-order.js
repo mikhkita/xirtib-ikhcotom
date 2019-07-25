@@ -178,6 +178,7 @@
                                         :checked="form.deliveryActive == delivery.value"\
                                         v-model="form.deliveryActive"\
                                         :value="delivery.value"\
+                                        @change="calcDelivery"\
                                     >\
                                     <label :for="getLabel(\'delivery\', delivery.id)">{{ delivery.name }}</label>\
                                 </li>\
@@ -206,13 +207,20 @@
                           </div>\
                         </div>\
                         <div class="b-order-form-bottom">\
-                            <div class="b-textarea" v-if="form.deliveryActive != \'pickup\'">\
-                                <p>Адрес доставки</p>\
-                                <textarea rows="1" name="address" placeholder="Введите адрес" v-model="form.address"\
-                                    v-validate="\'required\'"\
-                                    :class="{ error: errors.first(\'address\')}"\
-                                    @click="openMap"\
-                                ></textarea>\
+                            <div class="b-order-sdek-map" v-if="form.deliveryActive == \'delivery-3\'">\
+                                <p>Карта для СДЭКа (класс .b-order-sdek-map)</p>\
+                            </div>\
+                            <div class="b-order-address-input" v-else>\
+                                <div v-if="form.deliveryActive != \'delivery-5\'">\
+                                    <div class="b-textarea">\
+                                        <p>Адрес доставки</p>\
+                                        <textarea rows="1" name="address" placeholder="Введите адрес" v-model="form.address"\
+                                            v-validate="\'required\'"\
+                                            :class="{ error: errors.first(\'address\')}"\
+                                            @click="openMap"\
+                                        ></textarea>\
+                                    </div>\
+                                </div>\
                             </div>\
                             <div class="b-textarea">\
                                 <p>Комментарий к заказу</p>\
@@ -356,6 +364,30 @@
                 console.log(this.form.address);
                 // console.log(event.target);
                 // event.target.blur();
+            },
+            calcDelivery: function () {
+                var active = this.form.deliveryActive,
+                    index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active),
+                    zip = $('#postal-code').val();
+                var self = this;
+                $.ajax({
+                    type: "get",
+                    url: "/ajax/index.php",
+                    data: {"delivery_id": this.form.deliveryList[index].id, "zip": zip ,"action": "DELIVERY"},
+                    success: function(response){
+                        var data = JSON.parse(response);
+                        if(data.result === "success"){
+                            //изменить стоимость
+                            var cost = parseFloat(data.cost);
+                            if(cost > 0){
+                                self.form.deliveryList[index].cost = cost;
+                            }
+                        }else{
+                            alert(data.error);
+                        }
+                    },
+                    error: function(){},
+                });
             }
         },
         computed: {

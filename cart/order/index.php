@@ -83,6 +83,9 @@ $APPLICATION->SetTitle("Оформление заказа");
 		</div>
 		<?
 
+		// $res = getOrderList();
+		// print_r($res);
+
 		// CCatalogDiscountCoupon::SetCoupon("zima10");
 		
 
