@@ -238,7 +238,7 @@
 							        </div>
 							        <div class="b-input">
 							        	<p>Индекс</p>
-							        	<input type="text" id="postal-code" class="postal-code">
+							        	<input type="text" id="postal-code" class="postal-code" required>
 							        </div>
 							        <a href="#" class="b-btn b-btn-buy b-btn-address">Принять</a>
 								</div>
