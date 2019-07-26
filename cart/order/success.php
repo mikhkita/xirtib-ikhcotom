@@ -41,6 +41,9 @@ $APPLICATION->SetTitle("Оформление заказа");
 	   \Bitrix\Main\Context::getCurrent()->getSite()
 	);
 
+	var_dump($basket);
+	die();
+
 	$order = Bitrix\Sale\Order::create(
 		\Bitrix\Main\Context::getCurrent()->getSite(),
 		\Bitrix\Sale\Fuser::getId());
@@ -66,6 +69,24 @@ $APPLICATION->SetTitle("Оформление заказа");
 	    'PAY_SYSTEM_ID' => $paySystemService->getField("ID"),
 	    'PAY_SYSTEM_NAME' => $paySystemService->getField("NAME"),
 	));
+
+
+
+	// $paySystemService = PaySystem\Manager::getObjectById($payment->getPaymentSystemId());
+	// $arPaySysAction = $paySystemService->getFieldsValues();
+
+	// if ($paySystemService->getField('NEW_WINDOW') === 'N' || $paySystemService->getField('ID') == PaySystem\Manager::getInnerPaySystemId())
+	// {
+	// 	$initResult = $paySystemService->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
+	// 	if ($initResult->isSuccess())
+	// 		$arPaySysAction['BUFFERED_OUTPUT'] = $initResult->getTemplate();
+	// 	else
+	// 		$arPaySysAction["ERROR"] = $initResult->getErrorMessages();
+	// }
+
+
+
+
 
 	// Устанавливаем свойства
 	$propertyCollection = $order->getPropertyCollection();
