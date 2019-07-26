@@ -717,7 +717,6 @@
                         this.$emit('onUpdateCoupons', coupons);
                     },
                     sendCoupon: function () {
-                        console.log("!!");
                         var self = this;
                         if(self.coupon && !self.ajaxCoupon){
                             self.ajaxCoupon = true;
@@ -741,7 +740,10 @@
                                 },
                             });
                         }else{
-                            self.validInput = false;
+                            if(!self.coupon){
+                                self.validInput = false;
+                            }
+                           
                         }
                     },
                     removeCoupon: function (id, name) {
