@@ -354,12 +354,6 @@
                     error: function(){}
                 });
             },
-            // addCoupon: function (coupon) {
-            //     this.couponList.push(coupon);
-            // },
-            // removeCoupon: function (index) {
-            //     this.couponList.splice(index, 1);
-            // },
             updateOrder: function (orders) {
                 this.orders = [].concat(orders);
             },
@@ -660,6 +654,7 @@
                         <p>Купон</p>\
                         <input\
                             @keyup.enter="sendCoupon"\
+                            @change="sendCoupon"\
                             @input="validInput = true"\
                             v-model="coupon"\
                             :class="{error: !validInput}"\
@@ -716,7 +711,7 @@
                                         self.couponList = [].concat(data.coupons);
                                         self.updateOrder(data.items);
                                     }else{
-
+                                        alert(data.error);
                                     }
                                 },
                                 error: function(){},
@@ -744,6 +739,7 @@
                                     self.updateOrder(data.items);
                                 }else{
                                     self.couponList[index].visible = true;
+                                    alert(data.error);
                                 }
                             },
                             error: function(){

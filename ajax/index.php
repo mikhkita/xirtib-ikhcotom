@@ -52,6 +52,8 @@ switch ($action) {
 	    		);
 
 	    		if( $USER->Update($idUser, Array("UF_FAVOURITE" => serialize($arElements))) ){
+	    			$arFavourites = getFavourites();
+		    		$arResult['COUNT'] = count($arFavourites);
 	    			returnSuccess($arResult);
 	    		}else{
 					returnError("Ошибка удаления товара из избранного");
@@ -77,6 +79,8 @@ switch ($action) {
 	    		);
 
 	    		if( $USER->Update($idUser, array("UF_FAVOURITE" => serialize($arElements))) ){
+	    			$arFavourites = getFavourites();
+		    		$arResult['COUNT'] = count($arFavourites);
 	    			returnSuccess($arResult);
 	    		}else{
 					returnError("Ошибка удаления товара из избранного");
