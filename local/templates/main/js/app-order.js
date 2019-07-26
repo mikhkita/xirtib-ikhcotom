@@ -73,9 +73,11 @@
             if(dataOrder.delivery){
                 this.form.deliveryList = dataOrder.delivery;
                 this.form.deliveryActive = this.form.deliveryList[0].value;
-                //обнулить стоимость доставок
+                //обнулить стоимость доставки для всех типов кроме "Настраиваемая служба доставки"
                 for (i = 0; i < this.form.deliveryList.length; i++) {
-                    this.form.deliveryList[i].cost = 0;
+                    if(!this.form.deliveryList[i].fixedCost){
+                        this.form.deliveryList[i].cost = 0;
+                    }
                 }
             }
             if(dataOrder.payments){
@@ -378,7 +380,7 @@
                     index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active),
                     zip = $('#postal-code').val();
                 var self = this;
-                if($('#postal-code-vue').val()){
+                if($('#postal-code-vue').val() && !this.form.deliveryList[index].fixedCost){
                     //заблочить кнопку
                     this.form.blockedSubmit = true;
                     $.ajax({
@@ -401,6 +403,10 @@
                             self.form.blockedSubmit = false;
                         },
                     });
+                }else{
+                    $('#delivery-cost').val(this.form.deliveryList[index].cost);
+                    var e = new Event("change");
+                    $('#delivery-cost')[0].dispatchEvent(e);
                 }
             },
             changeCost: function () {

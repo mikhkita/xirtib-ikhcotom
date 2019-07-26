@@ -233,6 +233,7 @@ function getOrderList(){
 			$orders["delivery"][] = array(
 				"id" => $item["ID"],
 				"name" => $item["NAME"],
+				"fixedCost" => ($item["CLASS_NAME"] == "\Bitrix\Sale\Delivery\Services\Configurable"),
 				"value"=>"delivery-".$item["ID"],
 		        "cost"=> (int)$item["CONFIG"]["MAIN"]["PRICE"],
 		        "text"=> $item["DESCRIPTION"],
