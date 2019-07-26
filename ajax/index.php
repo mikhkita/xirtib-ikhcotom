@@ -65,10 +65,6 @@ switch ($action) {
 	case 'FAVOURITE_ADD':
 		if( intval($_REQUEST['ID']) > 0 ){
 	    	$itemID = intval($_REQUEST['ID']);
-
-	    	if( empty($itemID) ){
-	    		die("param ID not found");
-	    	}
 	    	               
 	    	if( $USER->IsAuthorized() ){
 	    		$idUser = $USER->GetID();
@@ -80,14 +76,14 @@ switch ($action) {
 	    			'ID' => $itemID
 	    		);
 
-	    		if( $USER->Update($idUser, Array("UF_FAVOURITE" => serialize($arElements))) ){
+	    		if( $USER->Update($idUser, array("UF_FAVOURITE" => serialize($arElements))) ){
 	    			returnSuccess($arResult);
 	    		}else{
 					returnError("Ошибка удаления товара из избранного");
 	    		}
 	    	}      
 	   	} else {
-	   		
+	   		returnError("Ошибка добавления в избранное: не передан ID товара");
 	   	}
 		break;
 

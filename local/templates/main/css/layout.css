@@ -5310,6 +5310,11 @@ textarea:-moz-placeholder {
 	margin-bottom: 0;
 }
 
+.b-btn-blocked{
+	pointer-events: none;
+	opacity: 0.25;
+}
+
 @media screen and (max-width: 1024px){
 	.icon-arrow-right{
 		cursor: pointer; 

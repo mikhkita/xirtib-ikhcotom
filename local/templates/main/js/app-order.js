@@ -52,6 +52,7 @@
                     paymentList: [],
                     address: "",
                     comment: "",
+                    blockedSubmit: false
                 },
                 delayQuantity: 300,
                 timeoutQuantity: null,
@@ -211,7 +212,7 @@
                           </div>\
                         </div>\
                         <div class="b-order-form-bottom">\
-                            <div class="b-order-sdek-map" v-if="form.deliveryActive == \'delivery-3\'">\
+                            <div class="b-order-sdek-map" v-if="form.deliveryActive == \'delivery-15\'">\
                                 <p>Карта для СДЭКа (класс .b-order-sdek-map)</p>\
                             </div>\
                             <div class="b-order-address-input" v-else>\
@@ -234,7 +235,8 @@
                             </div>\
                         </div>\
                     </form>\
-                    <a href="#" class="b-btn" @click.prevent="validationForm">Оформить заказ</a>\
+                    <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit">Оформить заказ</a>\
+                    <span class="b-btn b-btn-blocked" v-else>Оформить заказ</span>\
                 </div>\
                 <v-totals\
                     @onUpdateOrder="updateOrder"\
@@ -377,6 +379,8 @@
                     zip = $('#postal-code').val();
                 var self = this;
                 if($('#postal-code-vue').val()){
+                    //заблочить кнопку
+                    this.form.blockedSubmit = true;
                     $.ajax({
                         type: "get",
                         url: "/ajax/index.php",
@@ -392,6 +396,10 @@
                             }
                         },
                         error: function(){},
+                        complete: function(){
+                            //вернуть кнопку
+                            self.form.blockedSubmit = false;
+                        },
                     });
                 }
             },
