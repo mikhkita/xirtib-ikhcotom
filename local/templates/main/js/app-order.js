@@ -58,6 +58,7 @@
                 timeoutQuantity: null,
                 countQueue: 0,
                 pluginsInit: false,
+                sdekInit: false
             }
         },
         mounted: function () {
@@ -73,9 +74,11 @@
             if(dataOrder.delivery){
                 this.form.deliveryList = dataOrder.delivery;
                 this.form.deliveryActive = this.form.deliveryList[0].value;
-                //обнулить стоимость доставок
+                //обнулить стоимость доставки для всех типов кроме "Настраиваемая служба доставки"
                 for (i = 0; i < this.form.deliveryList.length; i++) {
-                    this.form.deliveryList[i].cost = 0;
+                    if(!this.form.deliveryList[i].fixedCost){
+                        this.form.deliveryList[i].cost = 0;
+                    }
                 }
             }
             if(dataOrder.payments){
@@ -212,11 +215,11 @@
                           </div>\
                         </div>\
                         <div class="b-order-form-bottom">\
-                            <div class="b-order-sdek-map" v-if="form.deliveryActive == \'delivery-15\'">\
-                                <p>Карта для СДЭКа (класс .b-order-sdek-map)</p>\
+                            <div class="b-order-sdek-map" v-show="form.deliveryActive == \'delivery-15\'">\
+                                <p>Карта для СДЭКа</p>\
                             </div>\
-                            <div class="b-order-address-input" v-else>\
-                                <div v-if="form.deliveryActive != \'delivery-5\'">\
+                            <div class="b-order-address-input" v-show="form.deliveryActive != \'delivery-15\'">\
+                                <div v-show="form.deliveryActive != \'delivery-5\'">\
                                     <div class="b-textarea">\
                                         <p>Адрес доставки</p>\
                                         <textarea rows="1" name="address" placeholder="Введите адрес" v-model="form.address"\
@@ -345,6 +348,7 @@
                         var data = JSON.parse(response);
                         if(data.result === "error"){
                             self.orders[index].favorite = !self.orders[index].favorite;
+                            alert(data.error);
                         }
                     },
                     error: function(){}
@@ -378,7 +382,7 @@
                     index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active),
                     zip = $('#postal-code').val();
                 var self = this;
-                if($('#postal-code-vue').val()){
+                if($('#postal-code-vue').val() && !this.form.deliveryList[index].fixedCost){
                     //заблочить кнопку
                     this.form.blockedSubmit = true;
                     $.ajax({
@@ -401,6 +405,10 @@
                             self.form.blockedSubmit = false;
                         },
                     });
+                }else{
+                    $('#delivery-cost').val(this.form.deliveryList[index].cost);
+                    var e = new Event("change");
+                    $('#delivery-cost')[0].dispatchEvent(e);
                 }
             },
             changeCost: function () {
@@ -759,6 +767,10 @@
                 window.onresize = windowResize;
                 windowResize();
                 this.pluginsInit = true;
+            }
+            if($(".b-order-sdek-map").length && $(".b-cdek-map-cont").length && !this.sdekInit){
+                $(".b-order-sdek-map").append($(".b-cdek-map-cont"));
+                this.sdekInit = true;
             }
           })
         }
