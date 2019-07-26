@@ -53,7 +53,7 @@ function getFavourites(){
 	global $USER;
 
 	$ids = array();
-	if( $USER->IsAuthorized() ){
+	if( $USER->IsAuthorized() && CModule::IncludeModule("catalog") ){
 		$idUser = $USER->GetID();
 		$rsUser = CUser::GetByID($idUser);
 		$arUser = $rsUser->Fetch();

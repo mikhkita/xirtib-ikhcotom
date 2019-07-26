@@ -818,7 +818,28 @@ $(document).ready(function(){
             url: url,
             success: function(msg){
                 progress.end();
-                $this.parents('.b-order-item').remove();
+                if( isValidJSON(msg) ){
+                    var json = JSON.parse(msg);
+                    if( json.result == "success" ){
+                        
+                        if (Number($('.b-fav-number').text()) != 0) {
+                            $('.b-fav-number').text(Number($('.b-fav-number').text()) - 1);
+                        }
+
+                        $this.parents('.b-order-item').remove();
+
+                        if (Number($('.b-fav-number').text()) == 0) {
+                            $('.b-fav-round').addClass('hide');
+                        } else {
+                            $('.b-fav-round').removeClass('hide');
+                        }
+                        
+                    } else {
+                        alert("Ошибка удаления");
+                    }
+                }else{
+                    alert("Ошибка удаления");
+                }
             },
             error: function(){
                 progress.end();
@@ -846,13 +867,23 @@ $(document).ready(function(){
                         if ($this.hasClass("active")){
                             $this.removeClass("active"); 
                             $this.attr('data-action', 'ADD');
+                            if (Number($('.b-fav-number').text()) != 0) {
+                                $('.b-fav-number').text(Number($('.b-fav-number').text()) - 1);
+                            }
                         }else{
                             $this.addClass("active"); 
                             $this.attr('data-action', 'REMOVE');
+                            $('.b-fav-number').text(Number($('.b-fav-number').text()) + 1);
+                        }
+
+                        if (Number($('.b-fav-number').text()) == 0) {
+                            $('.b-fav-round').addClass('hide');
+                        } else {
+                            $('.b-fav-round').removeClass('hide');
                         }
                     }
                 }else{
-                    alert("Ошибка добавления в корзину");
+                    alert("Ошибка добавления в избранное");
                 }
             },
             error: function(){
