@@ -376,6 +376,13 @@
                     index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active),
                     zip = $('#postal-code').val();
                 var self = this;
+
+                if( this.form.deliveryActive == "delivery-15" ){
+                    if( typeof IPOLSDEK_pvz == "object" ){
+                        IPOLSDEK_pvz.setPrices();
+                    }
+                }
+
                 if($('#postal-code-vue').val() && !this.form.deliveryList[index].fixedCost){
                     //заблочить кнопку
                     this.form.blockedSubmit = true;

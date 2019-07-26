@@ -5315,6 +5315,27 @@ textarea:-moz-placeholder {
 	opacity: 0.25;
 }
 
+#SDEK_pvz{
+	padding: 0px;
+	font-family: inherit;
+}
+#SDEK_title > div, #SDEK_cityPicker > div{
+	font-family: inherit;	
+	font-size: 18px;
+	line-height: 22px;
+}
+.SDEK_mark{
+	display: none !important;
+}
+#SDEK_wrapper p{
+	font-size: 16px;
+}
+#SDEK_pvz,
+#SDEK_map,
+#SDEK_title{
+	width: 100%;
+}
+
 @media screen and (max-width: 1024px){
 	.icon-arrow-right{
 		cursor: pointer; 
