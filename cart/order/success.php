@@ -66,6 +66,8 @@ $APPLICATION->SetTitle("Оформление заказа");
 		$paymentItem->setFields(array(
 		    'PAY_SYSTEM_ID' => $paySystemService->getField("ID"),
 		    'PAY_SYSTEM_NAME' => $paySystemService->getField("NAME"),
+		    "SUM" => $order->getPrice(),
+		    "CURRENCY" => $order->getCurrency(),
 		));
 
 		// Устанавливаем свойства
@@ -119,18 +121,24 @@ $APPLICATION->SetTitle("Оформление заказа");
 		}
 
 		// if(  ){
-			$paySystemService = PaySystem\Manager::getObjectById($paymentItem->getPaymentSystemId());
-			$arPaySysAction = $paySystemService->getFieldsValues();
+		// $order = $
+		$paymentCollection = $order->getPaymentCollection();
+		foreach ($paymentCollection as $payment) {
+			if (intval($payment->getPaymentSystemId()) > 0 && !$payment->isPaid()) {
+				$paySystemService = PaySystem\Manager::getObjectById($payment->getPaymentSystemId());
+				$arPaySysAction = $paySystemService->getFieldsValues();
 
-			if ($paySystemService->getField('NEW_WINDOW') === 'N' || $paySystemService->getField('ID') == PaySystem\Manager::getInnerPaySystemId()) {
-				$initResult = $paySystemService->initiatePay($paymentItem, null, PaySystem\BaseServiceHandler::STRING);
-				if ($initResult->isSuccess())
-					$arPaySysAction['BUFFERED_OUTPUT'] = $initResult->getTemplate();
-				else
-					$arPaySysAction["ERROR"] = $initResult->getErrorMessages();
+				if ($paySystemService->getField('NEW_WINDOW') === 'N' || $paySystemService->getField('ID') == PaySystem\Manager::getInnerPaySystemId()) {
+					$initResult = $paySystemService->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
+					if ($initResult->isSuccess())
+						$arPaySysAction['BUFFERED_OUTPUT'] = $initResult->getTemplate();
+					else
+						$arPaySysAction["ERROR"] = $initResult->getErrorMessages();
+
+					var_dump($arPaySysAction);
+				}
 			}
-			var_dump($arPaySysAction);
-		// }
+		}
 
 		// LocalRedirect("/cart/order/success/?ORDER_ID=".$orderId);
 	}else{
