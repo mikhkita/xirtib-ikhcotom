@@ -777,7 +777,7 @@
                 this.pluginsInit = true;
             }
             if($(".b-order-sdek-map").length && $(".b-cdek-map-cont").length && !this.sdekInit){
-                $(".b-order-sdek-map").append($(".b-cdek-map-cont"));
+                $(".b-order-sdek-map").append($(".b-cdek-map"));
                 this.sdekInit = true;
             }
           })

@@ -23,6 +23,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 	$email = $_REQUEST["email"];
 	$address = $_REQUEST["address"];
 	$comment = $_REQUEST["comment"];
+	$payment = $_REQUEST["payment"];
 
 	$siteId = Context::getCurrent()->getSite();
 	$currencyCode = CurrencyManager::getBaseCurrency();
@@ -57,14 +58,14 @@ $APPLICATION->SetTitle("Оформление заказа");
 	// $shipmentItem = $shipmentItemCollection->createItem($item);
 	// $shipmentItem->setQuantity($item->getQuantity());
 
-	// // Создаём оплату со способом #1
-	// $paymentCollection = $order->getPaymentCollection();
-	// $payment = $paymentCollection->createItem();
-	// $paySystemService = PaySystem\Manager::getObjectById(1);
-	// $payment->setFields(array(
-	//     'PAY_SYSTEM_ID' => $paySystemService->getField("PAY_SYSTEM_ID"),
-	//     'PAY_SYSTEM_NAME' => $paySystemService->getField("NAME"),
-	// ));
+	// Способ оплаты
+	$paymentCollection = $order->getPaymentCollection();
+	$paymentItem = $paymentCollection->createItem();
+	$paySystemService = \Bitrix\Sale\PaySystem\Manager::getObjectById($payment);
+	$paymentItem->setFields(array(
+	    'PAY_SYSTEM_ID' => $paySystemService->getField("ID"),
+	    'PAY_SYSTEM_NAME' => $paySystemService->getField("NAME"),
+	));
 
 	// Устанавливаем свойства
 	$propertyCollection = $order->getPropertyCollection();
