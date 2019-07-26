@@ -81,6 +81,28 @@ $APPLICATION->SetTitle("Оформление заказа");
 				<v-order></v-order>
 			</div>
 		</div>
+
+		<div class="b-cdek-map-cont">
+			<?$APPLICATION->IncludeComponent(
+			    "ipol:ipol.sdekPickup",
+			    "cdek",
+			    Array(
+			        "CITIES" => "",
+			        "CNT_BASKET" => "N",
+			        "CNT_DELIV" => "N",
+			        "COUNTRIES" => array(
+			            0 => "rus",
+			        ),
+			        "FORBIDDEN" => array(
+			            0 => "inpost",
+			        ),
+			        "NOMAPS" => "N",
+			        "PAYER" => "1",
+			        "PAYSYSTEM" => "2",
+			    ),
+			    false
+			);?>
+		</div>
 		<?
 
 		// $res = getOrderList();
