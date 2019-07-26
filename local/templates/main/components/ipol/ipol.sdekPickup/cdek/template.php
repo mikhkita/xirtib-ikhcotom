@@ -350,10 +350,16 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 				},
 
 				setPrices: function(){
-					$('#SDEK_cPrice').html(IPOLSDEK_pvz.prices.courier[0]);
-					$('#SDEK_cDate').html(IPOLSDEK_pvz.prices.courier[1]);
+					// $('#SDEK_cPrice').html(IPOLSDEK_pvz.prices.courier[0]);
+					// $('#SDEK_cDate').html(IPOLSDEK_pvz.prices.courier[1]);
 
+					// console.log(IPOLSDEK_pvz);
 					if(IPOLSDEK_pvz.punctMode != 'ALL'){ // Profiler
+						$('#delivery-cost').val(IPOLSDEK_pvz.prices.pickup[0].replace(/[\D\.]+/g,""));
+                        var e = new Event("change");
+                        $('#delivery-cost')[0].dispatchEvent(e);
+
+
 						$('#SDEK_pPrice').html(IPOLSDEK_pvz.prices.pickup[0]);
 						$('#SDEK_pDate').html(IPOLSDEK_pvz.prices.pickup[1]);
 					}else
