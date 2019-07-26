@@ -36,10 +36,6 @@ switch ($action) {
 	case 'FAVOURITE_REMOVE':
 		if( intval($_REQUEST['ID']) > 0 ){
 	    	$itemID = intval($_REQUEST['ID']);
-
-	    	if( empty($itemID) ){
-	    		die("param ID not found");
-	    	}
 	    	               
 	    	if( $USER->IsAuthorized() ){
 	    		$idUser = $USER->GetID();
@@ -60,7 +56,7 @@ switch ($action) {
 	    		}
 	    	}      
 	   	} else {
-	   		
+	   		returnError("Ошибка добавления в избранное: не передан ID товара");
 	   	}
 		break;
 
@@ -83,7 +79,7 @@ switch ($action) {
 		    		$arResult['COUNT'] = count($arFavourites);
 	    			returnSuccess($arResult);
 	    		}else{
-					returnError("Ошибка удаления товара из избранного");
+					returnError("Ошибка добавления товара в избранное");
 	    		}
 	    	}      
 	   	} else {

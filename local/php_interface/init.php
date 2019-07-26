@@ -158,11 +158,23 @@ function getColors(){
 
 function getOrderList(){
 	CModule::IncludeModule("sale");
+	global $USER;
 
 	$orders = array();
 
 	$arFavourites = getFavourites();
-	$orders["isAuth"] = isAuth();
+	$orders["isAuth"] = false;
+	$orders["user"] = array();
+	if(isAuth()){
+		$orders["isAuth"] = true;
+		//получить ФИО, телефон, email
+		$idUser = $USER->GetID();
+		$rsUser = CUser::GetByID($idUser);
+		$arUser = $rsUser->Fetch();
+		$orders["user"]["name"] = $arUser['NAME'];
+		$orders["user"]["phone"] = $arUser['PERSONAL_PHONE'];
+		$orders["user"]["email"] = $arUser['EMAIL'];
+	}
 
 	$basket = \Bitrix\Sale\Basket::loadItemsForFUser(
 	   \Bitrix\Sale\Fuser::getId(),
@@ -244,28 +256,28 @@ function getOrderList(){
 	$deliveryList = \Bitrix\Sale\Delivery\Services\Manager::getActiveList();
 	$orders["delivery"] = array();
 	foreach ($deliveryList as $item) {
-		if($item["ID"] != 1 && $item["ACTIVE"] == "Y"){
+		if($item["ID"] != 1 && $item["ACTIVE"] == "Y" && !in_array($item["CLASS_NAME"], array("\Bitrix\Sale\Delivery\Services\Group", "\Sale\Handlers\Delivery\AdditionalHandler", "\Bitrix\Sale\Delivery\Services\Automatic"))){
 			$orders["delivery"][] = array(
 				"id" => $item["ID"],
 				"name" => $item["NAME"],
 				"fixedCost" => ($item["CLASS_NAME"] == "\Bitrix\Sale\Delivery\Services\Configurable"),
-				"value"=>"delivery-".$item["ID"],
 		        "cost"=> (int)$item["CONFIG"]["MAIN"]["PRICE"],
 		        "text"=> $item["DESCRIPTION"],
 			);
 		}
 	}
 
-	$orders["payments"][] = array(
-		"id" => 4234,
-		"name"=> "Онлайн-оплата картой",
-		"value"=> "online",
-	);
-	$orders["payments"][] = array(
-		"id" => 4235,
-		"name"=>"Сбербанк.Онлайн",
-		"value"=> "sber",
-	);
+	$paySystemResult = \Bitrix\Sale\PaySystem\Manager::getList(array(
+	    'filter'  => array(
+	        'ACTIVE' => 'Y',
+	    )
+	));
+	while ($paySystem = $paySystemResult->fetch()){
+		$orders["payments"][] = array(
+			"id" => $paySystem["ID"],
+			"name"=> $paySystem["NAME"],
+		);                   
+	}
 
 	return json_encode($orders);
 }
