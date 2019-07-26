@@ -318,7 +318,6 @@
 		</div>
 
 	</div>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.fancybox.min.js"></script>
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false&key=AIzaSyD6Sy5r7sWQAelSn-4mu2JtVptFkEQ03YI"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.touch.min.js"></script>
@@ -342,6 +341,7 @@
 	<!-- <script type="text/javascript" src="js/axios.min.js"></script> -->
 	<!-- <script type="text/javascript" src="js/vue-resource.min.js"></script> -->
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.mask.min.js"></script>
+	<script type="text/javascript" src="https://api-maps.yandex.ru/2.1.41/?load=package.full&amp;apikey=dcf82496-06b7-476e-b6f8-0078e5d46b67&amp;lang=ru-RU"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/address.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/AddressDeliveryClass.js"></script>
 	<?$dataOrder = getOrderList();?>

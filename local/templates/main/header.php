@@ -29,6 +29,7 @@ if ($arFav > 0){
 <html>
 <head>
 	<title><?$APPLICATION->ShowTitle()?></title>
+	
 	<?$APPLICATION->ShowHead();?>
 
 	<meta name="keywords" content=''>
@@ -49,7 +50,7 @@ if ($arFav > 0){
 	<link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 1188px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-tablet.css">
 	<link rel="stylesheet" media="screen and (min-width: 240px) and (max-width: 767px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-mobile.css">
 
-	
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-3.2.1.min.js"></script>
 	<!-- <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"> -->
 </head>
 <body>
