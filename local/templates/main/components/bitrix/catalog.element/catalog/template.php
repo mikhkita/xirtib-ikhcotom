@@ -426,8 +426,8 @@ if ($arResult["OFFERS"]){
 					<? if ($arResult["PROPERTIES"]["DENSITY"]["VALUE"]): ?>
 						<p><span>Плотность вязания:</span> <?=$arResult["PROPERTIES"]["DENSITY"]["VALUE"]?></p>
 					<? endif; ?>
-					<? if ($arResult["PREVIEW_TEXT"]): ?>
-						<p><span>Уход:</span> <?=$arResult["PREVIEW_TEXT"]?></p>
+					<? if ($arResult['PROPERTIES']['CARE']['VALUE']): ?>
+						<p><span>Уход:</span> <?=$arResult['PROPERTIES']['CARE']['VALUE']?></p>
 					<? endif; ?>
 				</div>
 				<? if ($arResult["TAGS"]): ?>
