@@ -173,7 +173,11 @@ function getOrderList(){
 
 		$arBasketItem["id"] = $basketItem->getProductId();//торговое предложение
 		$productID = CCatalogSku::GetProductInfo($arBasketItem["id"]);//получить id товара по id торгового предложения
-		$arBasketItem["productID"] = $productID["ID"];//товар
+		if(is_array($productID)){
+			$arBasketItem["productID"] = $productID["ID"];
+		}else{
+			$arBasketItem["productID"] = $arBasketItem["id"];
+		}
 
 		$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
 		$img = CFile::ResizeImageGet($objElement->getDetailPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);

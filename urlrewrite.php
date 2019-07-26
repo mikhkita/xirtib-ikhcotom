@@ -1,13 +1,5 @@
 <?php
 $arUrlRewrite=array (
-  9 => 
-  array (
-    'CONDITION' => '#^/catalog/nosochnaya-pryazha/\\??(.*)(.*)(.*)(.*)(.*)(.*)(.*)?#',
-    'RULE' => 'SECTION_CODE_CUSTOM=nosochnaya-pryazha&SECTION_CODE=pryazha&seo_section=Y&arrFilter_22_4252452532=Y&set_filter=1&$1',
-    'ID' => '',
-    'PATH' => '/catalog/index.php',
-    'SORT' => 100,
-  ),
   4 => 
   array (
     'CONDITION' => '#^/catalog/(.+)/(.+)/(\\\\?(.*))?#',
