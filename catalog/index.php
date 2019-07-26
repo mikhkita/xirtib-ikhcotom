@@ -1,7 +1,7 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Каталог");?>
 
-<? if($_REQUEST["SECTION_CODE"] || $_REQUEST['TAGS'] || $_REQUEST['SEO_SECTION_CODE']):
+<? if($_REQUEST["SECTION_CODE"] || $_REQUEST['TAGS'] || $_REQUEST['SECTION_CODE_CUSTOM']):
 
 	if ($_REQUEST['TAGS'] && CModule::IncludeModule('search')) {
 		$rsTags = CSearchTags::GetList(array(),array("MODULE_ID" => "iblock"), array("CNT" => "DESC"));
@@ -17,18 +17,16 @@ $APPLICATION->SetTitle("Каталог");?>
 	    }
 	}
 
-	if ($_REQUEST['SEO_SECTION_CODE']) {
+	if ($_REQUEST['SECTION_CODE_CUSTOM']) {
 
 		$arSelect = Array("ID", "IBLOCK_ID", "NAME", "DATE_ACTIVE_FROM","PROPERTY_*", 'PREVIEW_TEXT');
-		$arFilter = Array("IBLOCK_ID"=>8, "ACTIVE_DATE"=>"Y", "ACTIVE"=>"Y", 'CODE' => $_REQUEST['SEO_SECTION_CODE']);
-		$res = CIBlockElement::GetList(Array(), $arFilter, false, Array("nPageSize"=>50), $arSelect);
+		$arFilter = Array("IBLOCK_ID"=>1, "ACTIVE_DATE"=>"Y", "ACTIVE"=>"Y", 'CODE' => $_REQUEST['SECTION_CODE_CUSTOM']);
+		$res = CIBlockSection::GetList(Array(), $arFilter, false, Array("nPageSize"=>50), $arSelect);
 		
 		while($ob = $res->GetNextElement()){ 
-			$arFields = $ob->GetFields();  
-			$seoText = $arFields['PREVIEW_TEXT'];
-			$arProps = $ob->GetProperties();
-			$APPLICATION->SetTitle($arFields['NAME']);
-			$GLOBALS['arrFilter'] = array("ID" => $arProps['ITEMS']['VALUE']);
+			$arFields = $ob->GetFields(); 
+			$seoSectoinTitle = $arFields['NAME'];
+			$seoText = $arFields['DESCRIPTION'];
 		}
 
 	}
@@ -239,12 +237,11 @@ $APPLICATION->SetTitle("Каталог");?>
 		</div>
 	</div>
 	<? if ($seoText): ?>
+		<?$APPLICATION->SetTitle($seoSectoinTitle);?>
 	<div class="b-text b-seo">
 		<br>
 		<br>
 		<p><?=$seoText?></p>
-		<br>
-		<br>
 	</div>
 	<? endif; ?>
 <? else: ?>

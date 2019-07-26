@@ -15,6 +15,15 @@ $GLOBALS['partial'] = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERV
 
 CModule::IncludeModule('iblock');
 
+$arFav = getFavourites();
+$favClass = 'hide';
+$favCount = 0;
+
+if ($arFav > 0){
+	$favClass = '';
+	$favCount = count($arFav);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -160,12 +169,9 @@ CModule::IncludeModule('iblock');
 						<a href="#popup-sign" class="b-profile icon-login fancy"></a>
 					<? endif; ?>
 					<a href="/personal/?tab=favourite" class="b-fav icon-star">
-						<? $favCount = getFavourites(); ?>
-						<? if ($favCount > 0): ?>
-							<div class="b-fav-round">
-								<span class="b-fav-number"><?=count($favCount)?></span>
-							</div>
-						<? endif; ?>
+						<div class="b-fav-round <?=$favClass?>">
+							<span class="b-fav-number"><?=$favCount?></span>
+						</div>
 					</a>
 				</div>
 			</div>
