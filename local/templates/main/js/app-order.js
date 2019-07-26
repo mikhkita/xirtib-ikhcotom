@@ -220,9 +220,7 @@
                           </div>\
                         </div>\
                         <div class="b-order-form-bottom">\
-                            <div class="b-order-sdek-map" v-show="form.deliveryActive == \'15\'">\
-                                <p>Карта для СДЭКа</p>\
-                            </div>\
+                            <div class="b-order-sdek-map" v-show="form.deliveryActive == \'15\'"></div>\
                             <div class="b-order-address-input" v-show="form.deliveryActive != \'15\'">\
                                 <div v-show="form.deliveryActive != \'5\'">\
                                     <div class="b-textarea">\
@@ -236,7 +234,7 @@
                                 </div>\
                             </div>\
                             <input id="postal-code-vue" type="hidden" name="postal-code-vue" @change="calcDelivery">\
-                            <input id="delivery-cost" type="text" name="delivery-cost" @change="changeCost">\
+                            <input id="delivery-cost" type="hidden" name="delivery-cost" @change="changeCost">\
                             <div class="b-textarea">\
                                 <p>Комментарий к заказу</p>\
                                 <textarea rows="1" name="comment" placeholder="Введите комментарий" v-model="form.comment"></textarea>\
@@ -389,7 +387,7 @@
                     zip = $('#postal-code').val();
                 var self = this;
 
-                if( this.form.deliveryActive == "delivery-15" ){
+                if( active == "15" ){
                     if( typeof IPOLSDEK_pvz == "object" ){
                         IPOLSDEK_pvz.setPrices();
                     }

@@ -4587,7 +4587,7 @@ textarea:-moz-placeholder {
     position: relative;
     padding-left: 36px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
 }
 
@@ -5320,15 +5320,17 @@ textarea:-moz-placeholder {
 	font-family: inherit;
 }
 #SDEK_title > div, #SDEK_cityPicker > div{
-	font-family: inherit;	
-	font-size: 18px;
+	font-family: inherit;
+	font-size: 16px;
 	line-height: 22px;
 }
 .SDEK_mark{
 	display: none !important;
 }
 #SDEK_wrapper p{
-	font-size: 16px;
+	font-size: 14px;
+	margin: 0px 6px;
+	padding: 7px 6px;
 }
 #SDEK_pvz,
 #SDEK_map,

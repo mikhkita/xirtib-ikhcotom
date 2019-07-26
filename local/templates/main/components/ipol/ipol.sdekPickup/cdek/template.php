@@ -355,10 +355,11 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 					// console.log(IPOLSDEK_pvz);
 					if(IPOLSDEK_pvz.punctMode != 'ALL'){ // Profiler
-						$('#delivery-cost').val(IPOLSDEK_pvz.prices.pickup[0].replace(/[\D\.]+/g,""));
-                        var e = new Event("change");
-                        $('#delivery-cost')[0].dispatchEvent(e);
-
+						if( $("#label-delivery-15").prop("checked") ){
+							$('#delivery-cost').val(IPOLSDEK_pvz.prices.pickup[0].replace(/[\D\.]+/g,""));
+	                        var e = new Event("change");
+	                        $('#delivery-cost')[0].dispatchEvent(e);
+						}
 
 						$('#SDEK_pPrice').html(IPOLSDEK_pvz.prices.pickup[0]);
 						$('#SDEK_pDate').html(IPOLSDEK_pvz.prices.pickup[1]);

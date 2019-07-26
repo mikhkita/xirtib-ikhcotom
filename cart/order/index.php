@@ -83,7 +83,6 @@ $APPLICATION->SetTitle("Оформление заказа");
 		</div>
 
 		<div class="b-cdek-map-cont">
-			<h3>Контейнер с картой</h3>
 			<?$APPLICATION->IncludeComponent(
 			    "ipol:ipol.sdekPickup",
 			    "cdek",
