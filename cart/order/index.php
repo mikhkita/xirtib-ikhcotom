@@ -82,7 +82,8 @@ $APPLICATION->SetTitle("Оформление заказа");
 			</div>
 		</div>
 
-		<div class="b-cdek-map-cont">
+		<div style="display: none;" class="b-cdek-map-cont">
+			<div class="b-cdek-map">
 			<?$APPLICATION->IncludeComponent(
 			    "ipol:ipol.sdekPickup",
 			    "cdek",
@@ -102,6 +103,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 			    ),
 			    false
 			);?>
+			</div>
 		</div>
 		<?
 
