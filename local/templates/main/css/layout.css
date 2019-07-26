@@ -4593,7 +4593,7 @@ textarea:-moz-placeholder {
 
 .b-radio input[type="radio"] + span + label:before,
 .b-radio input[type="radio"] + label:before {
-    top: 5px;
+    top: 3px;
     left: 0;
     width: 20px;
 	height: 20px;
@@ -4614,7 +4614,7 @@ textarea:-moz-placeholder {
 
 .b-radio input[type="radio"] + span + label:after,
 .b-radio input[type="radio"] + label:after  {
-    top: 9px;
+    top: 7px;
     left: 4px;
     height: 12px;
     width: 12px;
@@ -5377,7 +5377,7 @@ textarea:-moz-placeholder {
 
 	.b-radio input[type="radio"] + span + label:hover:after,
 	.b-radio input[type="radio"] + label:hover:after{
-	    top: 9px;
+	    top: 7px;
 	    left: 4px;
 	    height: 12px;
 	    width: 12px;
