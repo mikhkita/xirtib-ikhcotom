@@ -73,7 +73,7 @@
             }
             if(dataOrder.delivery){
                 this.form.deliveryList = dataOrder.delivery;
-                this.form.deliveryActive = this.form.deliveryList[0].value;
+                this.form.deliveryActive = this.form.deliveryList[0].id;
                 //обнулить стоимость доставки для всех типов кроме "Настраиваемая служба доставки"
                 for (i = 0; i < this.form.deliveryList.length; i++) {
                     if(!this.form.deliveryList[i].fixedCost){
@@ -83,10 +83,15 @@
             }
             if(dataOrder.payments){
                 this.form.paymentList = dataOrder.payments;
-                this.form.paymentActive = this.form.paymentList[0].value;
+                this.form.paymentActive = this.form.paymentList[0].id;
             }
             if(dataOrder.isAuth){
                 this.isAuth = dataOrder.isAuth;
+                if(dataOrder.user){
+                    this.form.name = dataOrder.user.name;
+                    this.form.phone = dataOrder.user.phone;
+                    this.form.email = dataOrder.user.email;
+                }
             }
           }
           if(this.orders.length === 0){
@@ -156,7 +161,7 @@
                                     name="phone" \
                                     placeholder="+7 (999) 999 0000"\
                                     v-model="form.phone"\
-                                    v-validate="{ required: true, regex: /^\\+\\d \\(\\d{3}\\) \\d{3} \\d{4}$/ }"\
+                                    v-validate="{ required: true, regex: /^\\+\\d \\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}$/ }"\
                                     :class="{ error: errors.first(\'phone\')}"\
                                 >\
                                 \
@@ -183,16 +188,16 @@
                                         :id="getLabel(\'delivery\', delivery.id)"\
                                         type="radio"\
                                         name="delivery"\
-                                        :checked="form.deliveryActive == delivery.value"\
+                                        :checked="form.deliveryActive == delivery.id"\
                                         v-model="form.deliveryActive"\
-                                        :value="delivery.value"\
+                                        :value="delivery.id"\
                                         @change="calcDelivery"\
                                     >\
                                     <label :for="getLabel(\'delivery\', delivery.id)">{{ delivery.name }}</label>\
                                 </li>\
                             </ul>\
                             <ul class="b-delivery-tabs">\
-                                <li v-for="delivery in form.deliveryList" :key="delivery.id" v-show="form.deliveryActive == delivery.value">\
+                                <li v-for="delivery in form.deliveryList" :key="delivery.id" v-show="form.deliveryActive == delivery.id">\
                                     {{delivery.text}}\
                                 </li>\
                             </ul>\
@@ -205,9 +210,9 @@
                                         :id="getLabel(\'payment\', payment.id)"\
                                         type="radio"\
                                         name="payment"\
-                                        :checked="form.paymentActive == payment.value"\
+                                        :checked="form.paymentActive == payment.id"\
                                         v-model="form.paymentActive"\
-                                        :value="payment.value"\
+                                        :value="payment.id"\
                                     >\
                                     <label :for="getLabel(\'payment\', payment.id)">{{ payment.name }}</label>\
                                 </li>\
@@ -215,11 +220,11 @@
                           </div>\
                         </div>\
                         <div class="b-order-form-bottom">\
-                            <div class="b-order-sdek-map" v-show="form.deliveryActive == \'delivery-15\'">\
+                            <div class="b-order-sdek-map" v-show="form.deliveryActive == \'15\'">\
                                 <p>Карта для СДЭКа</p>\
                             </div>\
-                            <div class="b-order-address-input" v-show="form.deliveryActive != \'delivery-15\'">\
-                                <div v-show="form.deliveryActive != \'delivery-5\'">\
+                            <div class="b-order-address-input" v-show="form.deliveryActive != \'15\'">\
+                                <div v-show="form.deliveryActive != \'5\'">\
                                     <div class="b-textarea">\
                                         <p>Адрес доставки</p>\
                                         <textarea rows="1" name="address" placeholder="Введите адрес" v-model="form.address"\
@@ -346,7 +351,14 @@
                     data: dataAjax,
                     success: function(response){
                         var data = JSON.parse(response);
-                        if(data.result === "error"){
+                        if(data.result === "success"){
+                            $('.b-fav-number').text(data.COUNT);
+                            if (data.COUNT == 0) {
+                                $('.b-fav-round').addClass('hide');
+                            } else {
+                                $('.b-fav-round').removeClass('hide');
+                            }
+                        }else{
                             self.orders[index].favorite = !self.orders[index].favorite;
                             alert(data.error);
                         }
@@ -373,7 +385,7 @@
             },
             calcDelivery: function () {
                 var active = this.form.deliveryActive,
-                    index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active),
+                    index = this.form.deliveryList.map(function(v) {return v.id}).indexOf(active),
                     zip = $('#postal-code').val();
                 var self = this;
                 if($('#postal-code-vue').val() && !this.form.deliveryList[index].fixedCost){
@@ -408,7 +420,7 @@
             changeCost: function () {
                 //console.log("changeCost = " + $('#delivery-cost').val());
                 var active = this.form.deliveryActive,
-                    index = this.form.deliveryList.map(function(v) {return v.value}).indexOf(active);
+                    index = this.form.deliveryList.map(function(v) {return v.id}).indexOf(active);
                 this.form.deliveryList[index].cost = parseFloat($('#delivery-cost').val());
             }
         },
@@ -433,7 +445,7 @@
             },
             delivery: function () {
                 var active = this.form.deliveryActive;
-                return this.form.deliveryList.filter(function(v) {return v.value === active})[0].cost;
+                return this.form.deliveryList.filter(function(v) {return v.id === active})[0].cost;
             },
             total: function () {
                 return +((this.rawTotal + this.delivery).toFixed(2));
@@ -756,7 +768,7 @@
         updated: function () {
           this.$nextTick(function () {
             if($('#app-order input[name="phone"]').length && !this.pluginsInit){
-                $('#app-order input[name="phone"]').mask('+7 (000) 000 0000');
+                $('#app-order input[name="phone"]').mask('+7 (000) 000-00-00');
                 if( typeof autosize == "function" ){
                     autosize(document.querySelectorAll('#app-order textarea[name="address"], #app-order textarea[name="comment"]'));
                 }
