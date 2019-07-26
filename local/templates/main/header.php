@@ -15,11 +15,21 @@ $GLOBALS['partial'] = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERV
 
 CModule::IncludeModule('iblock');
 
+$arFav = getFavourites();
+$favClass = 'hide';
+$favCount = 0;
+
+if ($arFav > 0){
+	$favClass = '';
+	$favCount = count($arFav);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title><?$APPLICATION->ShowTitle()?></title>
+	
 	<?$APPLICATION->ShowHead();?>
 
 	<meta name="keywords" content=''>
@@ -40,6 +50,7 @@ CModule::IncludeModule('iblock');
 	<link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 1188px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-tablet.css">
 	<link rel="stylesheet" media="screen and (min-width: 240px) and (max-width: 767px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-mobile.css">
 
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-3.2.1.min.js"></script>
 	<!-- <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"> -->
 </head>
 <body>
@@ -160,12 +171,9 @@ CModule::IncludeModule('iblock');
 						<a href="#popup-sign" class="b-profile icon-login fancy"></a>
 					<? endif; ?>
 					<a href="/personal/?tab=favourite" class="b-fav icon-star">
-						<? $favCount = getFavourites(); ?>
-						<? if ($favCount > 0): ?>
-							<div class="b-fav-round">
-								<span class="b-fav-number"><?=count($favCount)?></span>
-							</div>
-						<? endif; ?>
+						<div class="b-fav-round <?=$favClass?>">
+							<span class="b-fav-number"><?=$favCount?></span>
+						</div>
 					</a>
 				</div>
 			</div>

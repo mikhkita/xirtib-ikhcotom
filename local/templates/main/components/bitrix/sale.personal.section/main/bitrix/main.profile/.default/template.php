@@ -26,7 +26,7 @@ if ($_GET['tab'] == 'favourite') {
 				<div class="current-photo" style="background-image: url(<?=$photo['src']?>);"></div>
 			<? endif; ?>
 		</div>
-		<div class="b-profile-name"><?=$arUser['LAST_NAME']?> <?=$arUser['NAME']?> <?=$arUser['SECOND_NAME']?></div>
+		<div class="b-profile-name"><?=$arUser['NAME']?></div>
 		<? if ($arUser['PERSONAL_PHONE']): ?>
 			<div class="b-profile-phone"><span class="b-profile-phone-icon"></span><?=convertPhoneNumber($arUser['PERSONAL_PHONE'])?></div>
 		<? endif; ?>
