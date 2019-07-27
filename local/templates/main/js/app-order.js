@@ -197,8 +197,7 @@
                                 </li>\
                             </ul>\
                             <ul class="b-delivery-tabs">\
-                                <li v-for="delivery in form.deliveryList" :key="delivery.id" v-show="form.deliveryActive == delivery.id">\
-                                    {{delivery.text}}\
+                                <li v-for="delivery in form.deliveryList" :key="delivery.id" v-show="form.deliveryActive == delivery.id" v-html="delivery.text">\
                                 </li>\
                             </ul>\
                           </div>\
@@ -222,7 +221,7 @@
                         <div class="b-order-form-bottom">\
                             <div class="b-order-sdek-map" v-show="form.deliveryActive == \'15\'"></div>\
                             <div class="b-order-address-input" v-show="form.deliveryActive != \'15\'">\
-                                <div v-show="form.deliveryActive != \'5\'">\
+                                <div v-if="form.deliveryActive != \'5\' && form.deliveryActive != \'15\'">\
                                     <div class="b-textarea">\
                                         <p>Адрес доставки</p>\
                                         <textarea rows="1" name="address" placeholder="Введите адрес" v-model="form.address"\
@@ -242,7 +241,10 @@
                         </div>\
                     </form>\
                     <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit">Оформить заказ</a>\
-                    <span class="b-btn b-btn-blocked" v-else>Оформить заказ</span>\
+                    <div class="b-btn-blocked-cont" v-else>\
+                        <span class="b-btn b-btn-blocked">Оформить заказ</span>\
+                        <img src="/local/templates/main/i/preloader.svg">\
+                    </div>\
                 </div>\
                 <v-totals\
                     @onUpdateOrder="updateOrder"\
@@ -261,7 +263,7 @@
             </div>\
             \
             <div v-if="showPreloader" class="b-order-preloader">\
-              <img src="i/preloader.svg">\
+              <img src="/local/templates/main/i/preloader.svg">\
             </div>\
         </div>\
         ',
@@ -738,7 +740,10 @@
                                 },
                             });
                         }else{
-                            self.validInput = false;
+                            if(!self.coupon){
+                                self.validInput = false;
+                            }
+                           
                         }
                     },
                     removeCoupon: function (id, name) {

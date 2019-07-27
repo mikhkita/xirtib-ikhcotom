@@ -41,92 +41,102 @@ $APPLICATION->SetTitle("Оформление заказа");
 	   \Bitrix\Main\Context::getCurrent()->getSite()
 	);
 
-	$order = Bitrix\Sale\Order::create(
-		\Bitrix\Main\Context::getCurrent()->getSite(),
-		\Bitrix\Sale\Fuser::getId());
-	$order->setBasket($basket);
+	if( count($basket) ){
+		$order = Bitrix\Sale\Order::create(
+			\Bitrix\Main\Context::getCurrent()->getSite(),
+			\Bitrix\Sale\Fuser::getId());
+		$order->setBasket($basket);
 
-	// Создаём одну отгрузку и устанавливаем способ доставки - "Без доставки" (он служебный)
-	// $shipmentCollection = $order->getShipmentCollection();
-	// $shipment = $shipmentCollection->createItem();
-	// $service = Delivery\Services\Manager::getById(Delivery\Services\EmptyDeliveryService::getEmptyDeliveryServiceId());
-	// $shipment->setFields(array(
-	//     'DELIVERY_ID' => $service['ID'],
-	//     'DELIVERY_NAME' => $service['NAME'],
-	// ));
-	// $shipmentItemCollection = $shipment->getShipmentItemCollection();
-	// $shipmentItem = $shipmentItemCollection->createItem($item);
-	// $shipmentItem->setQuantity($item->getQuantity());
+		// Создаём одну отгрузку и устанавливаем способ доставки - "Без доставки" (он служебный)
+		// $shipmentCollection = $order->getShipmentCollection();
+		// $shipment = $shipmentCollection->createItem();
+		// $service = Delivery\Services\Manager::getById(Delivery\Services\EmptyDeliveryService::getEmptyDeliveryServiceId());
+		// $shipment->setFields(array(
+		//     'DELIVERY_ID' => $service['ID'],
+		//     'DELIVERY_NAME' => $service['NAME'],
+		// ));
+		// $shipmentItemCollection = $shipment->getShipmentItemCollection();
+		// $shipmentItem = $shipmentItemCollection->createItem($item);
+		// $shipmentItem->setQuantity($item->getQuantity());
 
-	// Способ оплаты
-	$paymentCollection = $order->getPaymentCollection();
-	$paymentItem = $paymentCollection->createItem();
-	$paySystemService = \Bitrix\Sale\PaySystem\Manager::getObjectById($payment);
-	$paymentItem->setFields(array(
-	    'PAY_SYSTEM_ID' => $paySystemService->getField("ID"),
-	    'PAY_SYSTEM_NAME' => $paySystemService->getField("NAME"),
-	));
+		// Способ оплаты
+		$paymentCollection = $order->getPaymentCollection();
+		$paymentItem = $paymentCollection->createItem();
+		$paySystemService = \Bitrix\Sale\PaySystem\Manager::getObjectById($payment);
+		$paymentItem->setFields(array(
+		    'PAY_SYSTEM_ID' => $paySystemService->getField("ID"),
+		    'PAY_SYSTEM_NAME' => $paySystemService->getField("NAME"),
+		));
 
-	// Устанавливаем свойства
-	$propertyCollection = $order->getPropertyCollection();
-	$nameProp = $propertyCollection->getPayerName();
-	$nameProp->setValue($name);
-	$phoneProp = $propertyCollection->getPhone();
-	$phoneProp->setValue($phone);
-	$emailProp = $propertyCollection->getUserEmail();
-	$emailProp->setValue($email);
-	$addrProp = $propertyCollection->getAddress();
-	$addrProp->setValue($address);
+		// Устанавливаем свойства
+		$propertyCollection = $order->getPropertyCollection();
+		$nameProp = $propertyCollection->getPayerName();
+		$nameProp->setValue($name);
+		$phoneProp = $propertyCollection->getPhone();
+		$phoneProp->setValue($phone);
+		$emailProp = $propertyCollection->getUserEmail();
+		$emailProp->setValue($email);
+		$addrProp = $propertyCollection->getAddress();
+		$addrProp->setValue($address);
 
-	// Сохраняем
-	$order->doFinalAction(true);
-	$result = $order->save();
-	$orderId = $order->getId();
+		// Сохраняем
+		$order->doFinalAction(true);
+		$result = $order->save();
+		$orderId = $order->getId();
 
-	if ($orderId > 0) {
+		if ($orderId > 0) {
 
-		if (!isAuth()) {
-			
-			$rsUser = CUser::GetByLogin($email);
-			$arUser = $rsUser->Fetch();
+			if (!isAuth()) {
+				
+				$rsUser = CUser::GetByLogin($email);
+				$arUser = $rsUser->Fetch();
 
-			if (!is_object($user)) $user = new CUser;
+				if (!is_object($user)) $user = new CUser;
 
-			if (!$arUser) {
+				if (!$arUser) {
 
-				$password = randomPassword();
-				$arFields = Array(
-				  "EMAIL"             => $email,
-				  "LOGIN"             => $email,
-				  "LID"               => "ru",
-				  "ACTIVE"            => "Y",
-				  "PASSWORD"          => $password,
-				  "CONFIRM_PASSWORD"  => $password,
-				);
+					$password = randomPassword();
+					$arFields = Array(
+					  "EMAIL"             => $email,
+					  "LOGIN"             => $email,
+					  "LID"               => "ru",
+					  "ACTIVE"            => "Y",
+					  "PASSWORD"          => $password,
+					  "CONFIRM_PASSWORD"  => $password,
+					);
 
-				if ($id = $user->Add($arFields)){
-					CEvent::Send("NEW_USER_FROM_ORDER", "s1", array('EMAIL' => $email, "PASS" => $password));
+					if ($id = $user->Add($arFields)){
+						CEvent::Send("NEW_USER_FROM_ORDER", "s1", array('EMAIL' => $email, "PASS" => $password));
 
-					$user->Authorize($arUser['ID']);
-					
-					$tmpOrder = \Bitrix\Sale\Order::load($orderId);
-					$tmpOrder->setFieldNoDemand('USER_ID', $arUser['ID']);
-					$tmpOrder->save();
+						$user->Authorize($arUser['ID']);
+						
+						$tmpOrder = \Bitrix\Sale\Order::load($orderId);
+						$tmpOrder->setFieldNoDemand('USER_ID', $arUser['ID']);
+						$tmpOrder->save();
+					}
 				}
 			}
 		}
+
+		// if(  ){
+			$paySystemService = PaySystem\Manager::getObjectById($paymentItem->getPaymentSystemId());
+			$arPaySysAction = $paySystemService->getFieldsValues();
+
+			if ($paySystemService->getField('NEW_WINDOW') === 'N' || $paySystemService->getField('ID') == PaySystem\Manager::getInnerPaySystemId()) {
+				$initResult = $paySystemService->initiatePay($paymentItem, null, PaySystem\BaseServiceHandler::STRING);
+				if ($initResult->isSuccess())
+					$arPaySysAction['BUFFERED_OUTPUT'] = $initResult->getTemplate();
+				else
+					$arPaySysAction["ERROR"] = $initResult->getErrorMessages();
+			}
+			var_dump($arPaySysAction);
+		// }
+
+		// LocalRedirect("/cart/order/success/?ORDER_ID=".$orderId);
+	}else{
+		LocalRedirect("/cart/order/");
 	}
 
-	LocalRedirect("/cart/order/success/?ID=".$orderId);
-
 ?>
-
-<!-- <div class="b-block">
-	<?if($orderID > 0):?>
-		<h2 class="b-title">Ваш заказ №<?=$orderID?> успешно оформлен</h2>
-	<?else:?>
-		<h2 class="b-title">Не удалось создать заказ</h2>
-	<?endif;?>
-</div> -->
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
