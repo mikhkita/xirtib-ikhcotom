@@ -149,7 +149,7 @@ if ($arResult["OFFERS"]){
 			<? endif; ?>
 		</div>
 		<div class="b-product-content">
-			<h2 class="b-product-name"><?=$arResult['NAME']?></h2>
+			<h1 class="b-product-name"><?=$arResult['NAME']?></h1>
 			<div class="b-product-actions-wrap">
 				<ul class="b-product-actions clearfix">
 					<li>

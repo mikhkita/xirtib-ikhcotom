@@ -75,7 +75,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 // 	)
 // );
 ?>
-		<h2 class="b-title"><?$APPLICATION->ShowTitle()?></h2>
+		<h1 class="b-title"><?$APPLICATION->ShowTitle()?></h1>
 		<div class="b-order-parent clearfix">
 			<div id="app-order">
 				<v-order></v-order>

@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("О магазине");
 ?>
 
-	<h2 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h2>
+	<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
 	</div>
 	<div class="b b-about-face">
 		<div class="b-block">

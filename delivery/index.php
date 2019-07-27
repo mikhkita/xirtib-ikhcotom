@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Доставка и оплата");
 ?>
 
-	<h2 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h2>
+	<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
 	<div class="b-delivery-info">
 		<div class="delivery-info-item">
 			<div class="delivery-info-item-title">Совершить покупку<br> в нашем магазине очень просто</div>

@@ -21,7 +21,7 @@ if($_REQUEST["q"]){
 <? else: ?>
 	<? $title = $APPLICATION->GetTitle(); ?>
 <? endif; ?>
-<h2 class="b-title"><?=$title?></h2>
+<h1 class="b-title"><?=$title?></h1>
 
 <div class="b-search-form b-search-inner-form">
 	<?$APPLICATION->IncludeComponent("bitrix:search.title", "header", Array(

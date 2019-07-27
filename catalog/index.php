@@ -61,7 +61,7 @@ $APPLICATION->SetTitle("Каталог");?>
 		$_REQUEST['SORT_TYPE'] = "ASC";
 	} ?>
 
-	<h2 class="b-title"><?$APPLICATION->ShowTitle();?></h2>
+	<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
 
 	<div class="b-catalog clearfix" id="b-catalog">
 		<?$APPLICATION->IncludeComponent(
@@ -245,7 +245,7 @@ $APPLICATION->SetTitle("Каталог");?>
 	<? endif; ?>
 	<? else: ?>
 		<div class="b-catalog-section">
-			<h2 class="b-title"><?$APPLICATION->ShowTitle();?></h2>
+			<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
 			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "main", Array(
 				"ADD_SECTIONS_CHAIN" => "N",
 				"CACHE_GROUPS" => "Y",
