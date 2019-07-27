@@ -5,7 +5,9 @@
     function isNumeric(n) {
       return !isNaN(parseFloat(n)) && isFinite(n);
     }
-
+    function formatNumberExternal(number) {
+        return String(number).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+    }
     function windowResize (event) {
         if( typeof( window.innerWidth ) == 'number' ) {
             myWidth = window.innerWidth;
@@ -137,6 +139,7 @@
                         @onChangeQuantity="changeQuantity"\
                         @onRemoveItem="removeItem"\
                         @onFavoriteToggle="favoriteToggle"\
+                        @onRemoveWarning="removeWarning"\
                         :orders="orders"\
                         :isAuth="isAuth"\
                     ></v-order-list>\
@@ -429,6 +432,10 @@
                 var active = this.form.deliveryActive,
                     index = this.form.deliveryList.map(function(v) {return v.id}).indexOf(active);
                 this.form.deliveryList[index].cost = parseFloat($('#delivery-cost').val());
+            },
+            removeWarning: function (id) {
+                index = this.orders.map(function(v) {return v.id}).indexOf(id);
+                this.orders[index].limitWarning = false;
             }
         },
         computed: {
@@ -437,25 +444,25 @@
                 this.orders.forEach(function(item, i, arr) {
                     res += item.basePriceForOne * item.quantity;
                 });
-                return +res.toFixed(2);
+                return +res.toFixed(1);
             },
             rawTotal: function () {
                 var res = 0;
                 this.orders.forEach(function(item, i, arr) {
                     res += item.totalPriceForOne * item.quantity;
                 });
-                return +res.toFixed(2);
+                return +res.toFixed(1);
             },
             discount: function () {
                 var res = this.rawBase - this.rawTotal;
-                return (res > 0) ? +res.toFixed(2) : 0;
+                return (res > 0) ? +res.toFixed(1) : 0;
             },
             delivery: function () {
                 var active = this.form.deliveryActive;
                 return this.form.deliveryList.filter(function(v) {return v.id === active})[0].cost;
             },
             total: function () {
-                return +((this.rawTotal + this.delivery).toFixed(2));
+                return +((this.rawTotal + this.delivery).toFixed(1));
             },
             formValid: function() {
                 this.$validator.validate();
@@ -491,6 +498,7 @@
                         @onRemoveItem="removeItem"\
                         @onChangeQuantity="changeQuantity"\
                         @onFavoriteToggle="favoriteToggle"\
+                        @onRemoveWarning="removeWarning"\
                         :_id="order.id"\
                         :_image="order.image"\
                         :_name="order.name"\
@@ -499,6 +507,7 @@
                         :_basePriceForOne="order.basePriceForOne"\
                         :_totalPriceForOne="order.totalPriceForOne"\
                         :_maxCount="order.maxCount"\
+                        :_limitWarning="order.limitWarning"\
                         :_favorite="order.favorite"\
                         :_visible="order.visible"\
                         :_isAuth="isAuth"\
@@ -515,6 +524,9 @@
                     favoriteToggle: function (id, fav) {
                         this.$emit('onFavoriteToggle', id, fav);
                     },
+                    removeWarning: function (id) {
+                        this.$emit('onRemoveWarning', id);
+                    }
                 },
                 components: {
                     //Позиция заказа
@@ -528,6 +540,7 @@
                             _basePriceForOne: Number,
                             _totalPriceForOne: Number,
                             _maxCount: Number,
+                            _limitWarning: Boolean,
                             _favorite: Boolean,
                             _visible: Boolean,
                             _isAuth: Boolean
@@ -568,13 +581,16 @@
                                 }
                             },
                             basePrice: function () {
-                               return +(this._basePriceForOne * this.quantity).toFixed(2);
+                               return +(this._basePriceForOne * this.quantity).toFixed(1);
                             },
                             totalPrice: function () {
-                               return +(this._totalPriceForOne * this.quantity).toFixed(2);
+                               return +(this._totalPriceForOne * this.quantity).toFixed(1);
                             },
                             maxCount: function () {
                                return this._maxCount;
+                            },
+                            limitWarning: function () {
+                                return this._limitWarning;
                             },
                             favorite: function () {
                                 return this._favorite;
@@ -587,37 +603,46 @@
                             }
                         },
                         template: '\
-                        <div class="b-order-item" v-show="visible">\
-                            <a :href="url" class="item-field b-order-item-img">\
-                                <img :src="image">\
-                            </a>\
-                            <a :href="url" class="item-field b-order-item-name">\
-                                <p>{{ name }}</p>\
-                            </a>\
-                            <div class="item-field b-order-item-quantity">\
-                                <div class="product-quantity">\
-                                    <a href="#" @click.prevent="quantityReduce" class="icon-minus quantity-reduce"></a>\
-                                    <input v-model.number="quantity" type="text" name="quantity" class="quantity-input" maxlength="3">\
-                                    <a href="#" @click.prevent="quantityAdd" class="icon-plus quantity-add"></a>\
+                        <div class="b-order-item-cont" v-show="visible">\
+                            <div class="b-order-item">\
+                                <a :href="url" class="item-field b-order-item-img">\
+                                    <img :src="image">\
+                                </a>\
+                                <a :href="url" class="item-field b-order-item-name">\
+                                    <p>{{ name }}</p>\
+                                </a>\
+                                <div class="item-field b-order-item-quantity">\
+                                    <div class="product-quantity">\
+                                        <a href="#" @click.prevent="quantityReduce" class="icon-minus quantity-reduce"></a>\
+                                        <input v-model.number="quantity" type="text" name="quantity" class="quantity-input" maxlength="3">\
+                                        <a href="#" @click.prevent="quantityAdd" class="icon-plus quantity-add"></a>\
+                                    </div>\
+                                </div>\
+                                <div class="item-field b-order-item-price has-discount">\
+                                    <div v-show="basePrice != totalPrice" class="price-base">{{ formatNumber(basePrice) }}<span class="icon-ruble"></span></div>\
+                                    <div class="price-total">{{ formatNumber(totalPrice) }}<span class="icon-ruble"></span></div>\
+                                </div>\
+                                <div class="item-field b-order-item-controls">\
+                                    <div \
+                                        @click.prevent="onFavoriteToggle" \
+                                        :class="{active: favorite}" \
+                                        class="control-favorite"\
+                                        v-show="isAuth"\
+                                    >\
+                                        <div class="icon-star-order"></div>\
+                                        <div class="icon-star-order-fill"></div>\
+                                    </div>\
+                                    <a href="#" \
+                                        @click.prevent="onRemoveItem" \
+                                        class="control-delete icon-close"\
+                                    ></a>\
                                 </div>\
                             </div>\
-                            <div class="item-field b-order-item-price has-discount">\
-                                <div v-show="basePrice != totalPrice" class="price-base">{{ basePrice }}<span class="icon-ruble"></span></div>\
-                                <div class="price-total">{{ totalPrice }}<span class="icon-ruble"></span></div>\
-                            </div>\
-                            <div class="item-field b-order-item-controls">\
-                                <div \
-                                    @click.prevent="onFavoriteToggle" \
-                                    :class="{active: favorite}" \
-                                    class="control-favorite"\
-                                    v-show="isAuth"\
-                                >\
-                                    <div class="icon-star-order"></div>\
-                                    <div class="icon-star-order-fill"></div>\
-                                </div>\
+                            <div v-if="limitWarning" class="quantity-warning">\
+                                <span>Извините, но указанное ранее количество товара недоступно. Установлено ближайшее доступное значение.</span>\
                                 <a href="#" \
-                                    @click.prevent="onRemoveItem" \
-                                    class="control-delete icon-close"\
+                                    @click.prevent="onRemoveWarning"\
+                                    class="icon-close"\
                                 ></a>\
                             </div>\
                         </div>',
@@ -635,8 +660,15 @@
                                 this.$emit('onRemoveItem', this.id);
                             },
                             onChangeQuantity: function (id, value) {
+                                this.onRemoveWarning();
                                 this.$emit('onChangeQuantity', id, value);
-                            } 
+                            },
+                            onRemoveWarning: function () {
+                                this.$emit('onRemoveWarning', this.id);
+                            },
+                            formatNumber: function (number) {
+                                return formatNumberExternal(number);
+                            }
                         }
                     }
                 }
@@ -664,8 +696,8 @@
                     <div class="b-price-string b-price-raw clearfix">\
                       <span class="explanation">Стоимость заказа:</span>\
                       <div class="b-price-total has-discount">\
-                        <div v-show="_rawBase != _rawTotal" class="price-base">{{ _rawBase }}<span class="icon-ruble"></span></div>\
-                        <div class="price-total">{{ _rawTotal }}<span class="icon-ruble"></span></div>\
+                        <div v-show="_rawBase != _rawTotal" class="price-base">{{ formatNumber(_rawBase) }}<span class="icon-ruble"></span></div>\
+                        <div class="price-total">{{ formatNumber(_rawTotal) }}<span class="icon-ruble"></span></div>\
                       </div>\
                     </div>\
                     <div class="b-order-coupon">\
@@ -697,15 +729,15 @@
                     </div>\
                     <div v-show="_discount > 0" class="b-price-string clearfix">\
                       <span class="explanation">Размер скидки:</span>\
-                      <div class="price-total">{{ _discount }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_discount) }}<span class="icon-ruble"></span></div>\
                     </div>\
                     <div class="b-price-string clearfix">\
                       <span class="explanation">Стоимость доставки:</span>\
-                      <div class="price-total">{{ _delivery }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_delivery) }}<span class="icon-ruble"></span></div>\
                     </div>\
                     <div class="b-price-string clearfix price-final">\
                       <span class="explanation">Итого:</span>\
-                      <div class="price-total">{{ _total }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_total) }}<span class="icon-ruble"></span></div>\
                     </div>\
                   </div>\
                 ',
@@ -769,6 +801,9 @@
                             }
                         });
                     },
+                    formatNumber: function (number) {
+                        return formatNumberExternal(number);
+                    }
                 },
                 mounted: function () {
                     

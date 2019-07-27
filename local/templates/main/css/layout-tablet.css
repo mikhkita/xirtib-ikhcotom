@@ -334,7 +334,7 @@ body {
 		padding-bottom: 0;
 	    border-bottom: 0;
 	}
-	.b-order .b-order-list .b-order-item {
+	.b-order .b-order-list .b-order-item-cont{
 	    margin-bottom: 14px;
 	    padding-bottom: 14px;
 	    border-bottom: 1px solid #d8d8d8;
@@ -453,6 +453,11 @@ body {
 
 	.delivery-methods-list {
 		padding: 0 40px;
+	}
+
+	.quantity-warning{
+		width: 100%;
+		margin-top: 5px;
 	}
 }
 

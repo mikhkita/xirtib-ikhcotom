@@ -44,7 +44,8 @@ function getBasketCount(){
 
 	return array(
 		"count" => array_sum($basket->getQuantityList()),
-		"sum" => number_format( $order->getPrice(), 0, ',', ' ' )
+		//"sum" => number_format( $order->getPrice(), 0, ',', ' ' )
+		"sum" => rtrim(rtrim(number_format($order->getPrice(), 1, '.', ' '),"0"),".")
 	);
 }
 
@@ -212,6 +213,14 @@ function getOrderList(){
 		$arBasketItem["totalPriceForOne"] = $basketItem->getPrice();
 		$product = \Bitrix\Catalog\ProductTable::getByPrimary($arBasketItem["id"])->fetchObject();
 		$arBasketItem["maxCount"] = $product->getQuantity();
+		$arBasketItem["limitWarning"] = false;
+		if((int)$arBasketItem["quantity"] > (int)$arBasketItem["maxCount"]){
+			//$arBasketItem["limitWarning"] = "Товар в количестве ".$arBasketItem["quantity"]." шт. недоступен. В наличии ".$arBasketItem["maxCount"]." шт.";
+			$arBasketItem["limitWarning"] = true;
+			$basketItem->setField('QUANTITY', $arBasketItem["maxCount"]);
+			$basketItem->save();
+			$arBasketItem["quantity"] = $arBasketItem["maxCount"];
+		}
 		$arBasketItem["favorite"] = in_array($arBasketItem["productID"], $arFavourites);
 		$arBasketItem["visible"] = true;
 	    $arBasket[] = $arBasketItem;
