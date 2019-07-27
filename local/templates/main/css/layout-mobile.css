@@ -833,7 +833,7 @@ body {
 		padding-bottom: 0;
 	    border-bottom: 0;
 	}
-	.b-order .b-order-list .b-order-item {
+	.b-order .b-order-list .b-order-item-cont{
 	    margin-bottom: 14px;
 	    padding-bottom: 14px;
 	    border-bottom: 1px solid #d8d8d8;
@@ -865,6 +865,10 @@ body {
 	}
 	.b-product-advantages li:nth-child(2) img {
 	    top: 0;
+	}
+	.quantity-warning{
+		width: 100%;
+		margin-top: 5px;
 	}
 }
 
@@ -1033,7 +1037,7 @@ body {
 	    padding-top: 0;
 	    display: inline-block;
 	}
-	.b-order-item {
+	.b-cabinet .b-order-item {
 	    margin-bottom: 24px;
 	    padding-bottom: 24px;
 	    border-bottom: 1px solid #D8D8D8;
