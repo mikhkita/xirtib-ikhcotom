@@ -191,10 +191,8 @@ input.error,textarea.error{
 input[name=MAIL]{
 	display: none!important;
 }
+h2.b-title,
 h1.b-title{
-
-}
-h2.b-title{
 	font-family: DINPro-Medium;
 	font-size: 42px;
 	line-height: 50px;
@@ -203,6 +201,9 @@ h2.b-title{
 	color: #564531;
 	letter-spacing: 0;
 	text-align: center;
+}
+h1.b-title{
+	text-align: left;
 }
 h3.b-title{
 	font-family: DINPro-Medium;
