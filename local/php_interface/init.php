@@ -188,45 +188,6 @@ function getOrderList(){
 	$order->setPersonTypeId(1);
 	$order->setBasket($basket);
 
-	//$orders["orderID"] = $order->getId();
-
-	$arBasket = array();
-	$basketItems = $basket->getBasketItems(); // массив объектов Sale\BasketItem
-	foreach ($basketItems as $basketItem) {
-		$arBasketItem = array();
-
-		$arBasketItem["id"] = $basketItem->getProductId();//торговое предложение
-		$productID = CCatalogSku::GetProductInfo($arBasketItem["id"]);//получить id товара по id торгового предложения
-		if(is_array($productID)){
-			$arBasketItem["productID"] = $productID["ID"];
-		}else{
-			$arBasketItem["productID"] = $arBasketItem["id"];
-		}
-
-		$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
-		$img = CFile::ResizeImageGet($objElement->getDetailPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
-		$arBasketItem["image"] = $img["src"];
-		$arBasketItem["name"] = $basketItem->getField('NAME');
-		$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
-		$arBasketItem["quantity"] = $basketItem->getQuantity();
-		$arBasketItem["basePriceForOne"] = $basketItem->getBasePrice();
-		$arBasketItem["totalPriceForOne"] = $basketItem->getPrice();
-		$product = \Bitrix\Catalog\ProductTable::getByPrimary($arBasketItem["id"])->fetchObject();
-		$arBasketItem["maxCount"] = $product->getQuantity();
-		$arBasketItem["limitWarning"] = false;
-		if((int)$arBasketItem["quantity"] > (int)$arBasketItem["maxCount"]){
-			//$arBasketItem["limitWarning"] = "Товар в количестве ".$arBasketItem["quantity"]." шт. недоступен. В наличии ".$arBasketItem["maxCount"]." шт.";
-			$arBasketItem["limitWarning"] = true;
-			$basketItem->setField('QUANTITY', $arBasketItem["maxCount"]);
-			$basketItem->save();
-			$arBasketItem["quantity"] = $arBasketItem["maxCount"];
-		}
-		$arBasketItem["favorite"] = in_array($arBasketItem["productID"], $arFavourites);
-		$arBasketItem["visible"] = true;
-	    $arBasket[] = $arBasketItem;
-	}
-	$orders["items"] = $arBasket;
-
 	// $discounts = $order->getDiscount();
 	// $arDiscounts = $discounts->getApplyResult();
 
@@ -287,6 +248,53 @@ function getOrderList(){
 			"name"=> $paySystem["NAME"],
 		);                   
 	}
+
+
+	// vardump($order->getPrice());
+
+	// $discount = $order->getDiscount();
+	// \Bitrix\Sale\DiscountCouponsManager::clearByOrder($order);
+	// $discount->setOrderRefresh(true);
+	// $basket = $order->getBasket();
+	// $basket->refreshData(array('PRICE', 'COUPONS'));
+	// $discount->calculate();
+
+	$arBasket = array();
+	$basketItems = $basket->getBasketItems(); // массив объектов Sale\BasketItem
+	foreach ($basketItems as $basketItem) {
+		$arBasketItem = array();
+
+		$arBasketItem["id"] = $basketItem->getProductId();//торговое предложение
+		$productID = CCatalogSku::GetProductInfo($arBasketItem["id"]);//получить id товара по id торгового предложения
+		if(is_array($productID)){
+			$arBasketItem["productID"] = $productID["ID"];
+		}else{
+			$arBasketItem["productID"] = $arBasketItem["id"];
+		}
+
+		$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
+		$img = CFile::ResizeImageGet($objElement->getDetailPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
+		$arBasketItem["image"] = $img["src"];
+		$arBasketItem["name"] = $basketItem->getField('NAME');
+		$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
+		$arBasketItem["quantity"] = $basketItem->getQuantity();
+		$arBasketItem["basePriceForOne"] = $basketItem->getBasePrice();
+		$arBasketItem["totalPriceForOne"] = $basketItem->getPrice();
+		$product = \Bitrix\Catalog\ProductTable::getByPrimary($arBasketItem["id"])->fetchObject();
+		$arBasketItem["maxCount"] = $product->getQuantity();
+		$arBasketItem["limitWarning"] = false;
+		if((int)$arBasketItem["quantity"] > (int)$arBasketItem["maxCount"]){
+			//$arBasketItem["limitWarning"] = "Товар в количестве ".$arBasketItem["quantity"]." шт. недоступен. В наличии ".$arBasketItem["maxCount"]." шт.";
+			$arBasketItem["limitWarning"] = true;
+			$basketItem->setField('QUANTITY', $arBasketItem["maxCount"]);
+			$basketItem->save();
+			$arBasketItem["quantity"] = $arBasketItem["maxCount"];
+		}
+		$arBasketItem["favorite"] = in_array($arBasketItem["productID"], $arFavourites);
+		$arBasketItem["visible"] = true;
+	    $arBasket[] = $arBasketItem;
+	}
+	$orders["items"] = $arBasket;
 
 	return json_encode($orders);
 }

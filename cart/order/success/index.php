@@ -12,10 +12,22 @@ if( !$order || $order->getUserId() != $USER->GetID() || !isset($_REQUEST["ORDER_
 }
 
 $paymentId = array_pop($order->getPaymentSystemId());
-$payment = \Bitrix\Sale\PaySystem\Manager::getById($paymentId);
+if( $paymentId ){
+	$payment = \Bitrix\Sale\PaySystem\Manager::getById($paymentId);
+}else{
+	$payment = array(
+		"NAME" => "Не указан"
+	);
+}
 
 $deliveryId = array_pop($order->getDeliverySystemId());
-$delivery = \Bitrix\Sale\Delivery\Services\Manager::getById($deliveryId);
+if( $deliveryId ){
+	$delivery = \Bitrix\Sale\Delivery\Services\Manager::getById($deliveryId);
+}else{
+	$delivery = array(
+		"NAME" => "Не указан"
+	);
+}
 
 // var_dump($payment);
 
@@ -32,8 +44,8 @@ $delivery = \Bitrix\Sale\Delivery\Services\Manager::getById($deliveryId);
 		<ul>
 			<li><b>Способ доставки:</b> <?=$delivery["NAME"]?></li>
 			<li><b>Способ оплаты:</b> <?=$payment["NAME"]?></li>
-			<li><b>Стоимость доставки:</b> <?=$order->getDeliveryPrice()?> руб.</li>
-			<li><b>Сумма к оплате:</b> <?=$order->getPrice()?> руб.</li>
+			<? /* ?><li><b>Стоимость доставки:</b> <?=rtrim(rtrim(number_format($order->getDeliveryPrice(), 1, '.', ' '),"0"),".")?> руб.</li><? */ ?>
+			<li><b>Сумма к оплате:</b> <?=rtrim(rtrim(number_format($order->getPrice(), 1, '.', ' '),"0"),".")?> руб.</li>
 		</ul>
 	<? endif; ?>
 </div>
