@@ -44,7 +44,8 @@ function getBasketCount(){
 
 	return array(
 		"count" => array_sum($basket->getQuantityList()),
-		"sum" => number_format( $order->getPrice(), 0, ',', ' ' )
+		//"sum" => number_format( $order->getPrice(), 0, ',', ' ' )
+		"sum" => rtrim(rtrim(number_format($order->getPrice(), 1, '.', ' '),"0"),".")
 	);
 }
 

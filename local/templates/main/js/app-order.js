@@ -5,7 +5,9 @@
     function isNumeric(n) {
       return !isNaN(parseFloat(n)) && isFinite(n);
     }
-
+    function formatNumberExternal(number) {
+        return String(number).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+    }
     function windowResize (event) {
         if( typeof( window.innerWidth ) == 'number' ) {
             myWidth = window.innerWidth;
@@ -442,25 +444,25 @@
                 this.orders.forEach(function(item, i, arr) {
                     res += item.basePriceForOne * item.quantity;
                 });
-                return +res.toFixed(2);
+                return +res.toFixed(1);
             },
             rawTotal: function () {
                 var res = 0;
                 this.orders.forEach(function(item, i, arr) {
                     res += item.totalPriceForOne * item.quantity;
                 });
-                return +res.toFixed(2);
+                return +res.toFixed(1);
             },
             discount: function () {
                 var res = this.rawBase - this.rawTotal;
-                return (res > 0) ? +res.toFixed(2) : 0;
+                return (res > 0) ? +res.toFixed(1) : 0;
             },
             delivery: function () {
                 var active = this.form.deliveryActive;
                 return this.form.deliveryList.filter(function(v) {return v.id === active})[0].cost;
             },
             total: function () {
-                return +((this.rawTotal + this.delivery).toFixed(2));
+                return +((this.rawTotal + this.delivery).toFixed(1));
             },
             formValid: function() {
                 this.$validator.validate();
@@ -579,10 +581,10 @@
                                 }
                             },
                             basePrice: function () {
-                               return +(this._basePriceForOne * this.quantity).toFixed(2);
+                               return +(this._basePriceForOne * this.quantity).toFixed(1);
                             },
                             totalPrice: function () {
-                               return +(this._totalPriceForOne * this.quantity).toFixed(2);
+                               return +(this._totalPriceForOne * this.quantity).toFixed(1);
                             },
                             maxCount: function () {
                                return this._maxCount;
@@ -617,8 +619,8 @@
                                     </div>\
                                 </div>\
                                 <div class="item-field b-order-item-price has-discount">\
-                                    <div v-show="basePrice != totalPrice" class="price-base">{{ basePrice }}<span class="icon-ruble"></span></div>\
-                                    <div class="price-total">{{ totalPrice }}<span class="icon-ruble"></span></div>\
+                                    <div v-show="basePrice != totalPrice" class="price-base">{{ formatNumber(basePrice) }}<span class="icon-ruble"></span></div>\
+                                    <div class="price-total">{{ formatNumber(totalPrice) }}<span class="icon-ruble"></span></div>\
                                 </div>\
                                 <div class="item-field b-order-item-controls">\
                                     <div \
@@ -663,6 +665,9 @@
                             },
                             onRemoveWarning: function () {
                                 this.$emit('onRemoveWarning', this.id);
+                            },
+                            formatNumber: function (number) {
+                                return formatNumberExternal(number);
                             }
                         }
                     }
@@ -691,8 +696,8 @@
                     <div class="b-price-string b-price-raw clearfix">\
                       <span class="explanation">Стоимость заказа:</span>\
                       <div class="b-price-total has-discount">\
-                        <div v-show="_rawBase != _rawTotal" class="price-base">{{ _rawBase }}<span class="icon-ruble"></span></div>\
-                        <div class="price-total">{{ _rawTotal }}<span class="icon-ruble"></span></div>\
+                        <div v-show="_rawBase != _rawTotal" class="price-base">{{ formatNumber(_rawBase) }}<span class="icon-ruble"></span></div>\
+                        <div class="price-total">{{ formatNumber(_rawTotal) }}<span class="icon-ruble"></span></div>\
                       </div>\
                     </div>\
                     <div class="b-order-coupon">\
@@ -724,15 +729,15 @@
                     </div>\
                     <div v-show="_discount > 0" class="b-price-string clearfix">\
                       <span class="explanation">Размер скидки:</span>\
-                      <div class="price-total">{{ _discount }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_discount) }}<span class="icon-ruble"></span></div>\
                     </div>\
                     <div class="b-price-string clearfix">\
                       <span class="explanation">Стоимость доставки:</span>\
-                      <div class="price-total">{{ _delivery }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_delivery) }}<span class="icon-ruble"></span></div>\
                     </div>\
                     <div class="b-price-string clearfix price-final">\
                       <span class="explanation">Итого:</span>\
-                      <div class="price-total">{{ _total }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_total) }}<span class="icon-ruble"></span></div>\
                     </div>\
                   </div>\
                 ',
@@ -796,6 +801,9 @@
                             }
                         });
                     },
+                    formatNumber: function (number) {
+                        return formatNumberExternal(number);
+                    }
                 },
                 mounted: function () {
                     
