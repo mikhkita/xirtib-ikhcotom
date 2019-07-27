@@ -120,8 +120,6 @@ $APPLICATION->SetTitle("Оформление заказа");
 			}
 		}
 
-		// if(  ){
-		// $order = $
 		$paymentCollection = $order->getPaymentCollection();
 		foreach ($paymentCollection as $payment) {
 			if (intval($payment->getPaymentSystemId()) > 0 && !$payment->isPaid()) {
@@ -135,12 +133,27 @@ $APPLICATION->SetTitle("Оформление заказа");
 					else
 						$arPaySysAction["ERROR"] = $initResult->getErrorMessages();
 
-					var_dump($arPaySysAction);
+					// var_dump($arPaySysAction);
 				}
 			}
 		}
 
-		// LocalRedirect("/cart/order/success/?ORDER_ID=".$orderId);
+		if( !empty($arPaySysAction["BUFFERED_OUTPUT"]) ){
+			$GLOBALS['APPLICATION']->RestartBuffer();?>
+			<div style="display: none;">
+			<?
+				$_SESSION['SALE_ORDER_ID'] = array($orderId);
+				echo $arPaySysAction["BUFFERED_OUTPUT"];
+			?>
+			</div>
+			<script>
+				document.getElementsByClassName("btn-buy")[0].click();
+			</script>
+			<?
+			die();
+		}
+
+		LocalRedirect("/cart/order/success/?ORDER_ID=".$orderId);
 	}else{
 		LocalRedirect("/cart/order/");
 	}
