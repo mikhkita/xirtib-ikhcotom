@@ -116,7 +116,7 @@ else
 						$class = "";
 						$tmp = GetIBlockElement($item["PRODUCT_ID"]);
 
-						$img = CFile::ResizeImageGet($tmp['PREVIEW_PICTURE'], Array("width" => 73, "height" => 73), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+						$img = CFile::ResizeImageGet($tmp['DETAIL_PICTURE'], Array("width" => 73, "height" => 73), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 						if ($item['PRICE'] != $item['BASE_PRICE']):
 							$class = 'has-discount';
 						endif;
