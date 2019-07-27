@@ -16,7 +16,7 @@ $this->setFrameMode(true);
 <? if ($arResult): ?>
 	<? $arDate = explode('.', $arResult['CREATED_DATE']); ?>
 	<? $date = $arDate[2].'.'.$arDate[1].'.'.$arDate[0]; ?>
-	<h2 class="b-title b-title-left"><?=$arResult['NAME']?></h2>
+	<h1 class="b-title b-title-left"><?=$arResult['NAME']?></h1>
 	<div class="blog-more-article">
 		<div class="blog-more-date">Дата публикации: <?=$date?></div>
 		<div class="blog-more-author">Автор: <?=$arResult['PROPERTIES']['AUTHOR']['VALUE']?></div>
