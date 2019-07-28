@@ -5323,14 +5323,24 @@ textarea:-moz-placeholder {
 		pointer-events: none;
 		opacity: 0.25;
 	}
-	.b-btn-blocked-cont img{
-		margin-left: 20px;
-		margin-top: 10px;
+	.b-btn-blocked-preloader{
 		display: inline-block;
-		vertical-align: top;
-		width: 50px;
-		height: 50px;
+		margin-left: 20px;
 	}
+		.b-btn-blocked-preloader img{
+			margin-top: 10px;
+			display: inline-block;
+			vertical-align: top;
+			width: 50px;
+			height: 50px;
+		}
+		.b-btn-blocked-preloader span{
+			margin-left: 10px;
+			margin-top: 12px;
+			display: inline-block;
+			vertical-align: top;
+			width: 250px
+		}
 
 #SDEK_pvz{
 	padding: 0px;

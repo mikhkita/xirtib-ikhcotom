@@ -246,7 +246,9 @@
                     <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit">Оформить заказ</a>\
                     <div class="b-btn-blocked-cont" v-else>\
                         <span class="b-btn b-btn-blocked">Оформить заказ</span>\
-                        <img src="/local/templates/main/i/preloader.svg">\
+                        <div class="b-btn-blocked-preloader">\
+                            <img src="/local/templates/main/i/preloader.svg">\
+                        </div>\
                     </div>\
                 </div>\
                 <v-totals\
@@ -299,6 +301,9 @@
                         },
                         error: function(){
                             self.countQueue--;
+                        },
+                        complete: function(){
+                            self.calcDelivery();//пересчет суммы доставки
                         }
                     });
                 }, self.delayQuantity);
@@ -335,6 +340,9 @@
                         self.orders[index].basePriceForOne = selfBase;
                         self.orders[index].totalPriceForOne = selfTotal;
                         alert("Не удалось удалить товар из корзины");
+                    },
+                    complete: function(){
+                        self.calcDelivery();//пересчет суммы доставки
                     }
                 });
             },

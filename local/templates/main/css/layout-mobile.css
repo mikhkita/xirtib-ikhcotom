@@ -870,6 +870,10 @@ body {
 		width: 100%;
 		margin-top: 5px;
 	}
+	.b-btn-blocked-preloader {
+	    display: block;
+	    margin-left: 0;
+	}
 }
 
 @media screen and (max-width: 600px){
@@ -1234,5 +1238,8 @@ body {
 		display: block;
 		width: 100%;
 		text-align: center;
+	}
+	.b-btn-blocked-preloader span{
+		width: 200px
 	}
 }
