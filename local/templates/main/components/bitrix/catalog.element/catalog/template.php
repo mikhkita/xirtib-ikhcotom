@@ -232,7 +232,7 @@ if ($arResult["OFFERS"]){
 								data-discount-price="<?=$offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]?>" 
 								data-article="<?=$article?>" 
 								data-quantity="<?=$offer["PRODUCT"]["QUANTITY"]?>" 
-								<?=$selected?> ><?=$offer['PROPERTIES']['COLOR']['NAME']?></option>
+								<?=$selected?> ><?=$offer['NAME']?></option>
 							<? endforeach; ?>
 						</select>
 					</div>
@@ -374,7 +374,7 @@ if ($arResult["OFFERS"]){
 		<div class="b-detail-tabs-content">
 
 			<div class="tabs-content desc-block b-text <?=$tabBlockClass?>">
-				<p><?=$arResult['DETAIL_TEXT']?></p>
+				<?=$arResult['DETAIL_TEXT']?>
 			</div>
 			<div class="tabs-content spec-block b-text hide">
 				<div class="spec-block-left">
