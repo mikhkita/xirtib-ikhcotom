@@ -1,0 +1,4 @@
+<?php 
+$MESS["FRED_DISCOUNT_UNSTEP_BEFORE"] = "Модуль";
+$MESS["FRED_DISCOUNT_UNSTEP_AFTER"] = "удален";
+$MESS["FRED_DISCOUNT_UNSTEP_SUBMIT_BACK"] = "Вернуться в список";

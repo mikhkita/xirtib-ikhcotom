@@ -58,6 +58,7 @@ function addNewProduct($data, $product = false){
 		        "VAT_INCLUDED" => "Y",
 		        "MEASURE" => $product["MEASURE"],
 		        "QUANTITY" => $product["QUANTITY"],
+		        "WEIGHT" => $product["WEIGHT"]
 		    );
 
 		    if(CCatalogProduct::Add($arFields)) {
