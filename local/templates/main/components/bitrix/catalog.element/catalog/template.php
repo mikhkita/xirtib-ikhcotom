@@ -127,7 +127,7 @@ if ($arResult["OFFERS"]){
 				<? endif; ?>
 			</div>
 
-			<? if ($arResult["OFFERS"] > 3): ?>
+			<? if (count($arResult["OFFERS"]) < 5): ?>
 				<? $sliderClass = "no-slider"; ?>
 			<? endif; ?>
 
@@ -316,7 +316,7 @@ if ($arResult["OFFERS"]){
 							</div>
 						<? else: ?>
 						<div class="b-product-price-total">
-							<span id="price"><?=$price?></span>
+							<span id="discount-price"><?=$price?></span>
 							<span class="icon-ruble-bold"></span>
 						</div>
 						<? endif; ?>
