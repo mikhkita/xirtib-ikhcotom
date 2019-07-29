@@ -54,7 +54,8 @@
                     paymentList: [],
                     address: "",
                     comment: "",
-                    blockedSubmit: false
+                    blockedSubmit: false,
+                    nowSubmit: false
                 },
                 delayQuantity: 300,
                 timeoutQuantity: null,
@@ -243,11 +244,13 @@
                             </div>\
                         </div>\
                     </form>\
-                    <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit">Оформить заказ</a>\
+                    <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit && !form.nowSubmit">Оформить заказ</a>\
                     <div class="b-btn-blocked-cont" v-else>\
                         <span class="b-btn b-btn-blocked">Оформить заказ</span>\
                         <div class="b-btn-blocked-preloader">\
                             <img src="/local/templates/main/i/preloader.svg">\
+                            <span v-if="!form.nowSubmit">Идет расчет стоимости доставки, пожалуйста, подождите</span>\
+                            <span v-else>Выполняется оформление заказа, пожалуйста, подождите</span>\
                         </div>\
                     </div>\
                 </div>\
@@ -385,6 +388,7 @@
             },
             validationForm: function () {
                 if(this.formValid){
+                    this.form.nowSubmit = true;
                     document.getElementById('b-order-form').submit();
                 }
             },
@@ -626,7 +630,7 @@
                                         <a href="#" @click.prevent="quantityAdd" class="icon-plus quantity-add"></a>\
                                     </div>\
                                 </div>\
-                                <div class="item-field b-order-item-price has-discount">\
+                                <div class="item-field b-order-item-price" :class="{ \'has-discount\': basePrice != totalPrice }">\
                                     <div v-show="basePrice != totalPrice" class="price-base">{{ formatNumber(basePrice) }}<span class="icon-ruble"></span></div>\
                                     <div class="price-total">{{ formatNumber(totalPrice) }}<span class="icon-ruble"></span></div>\
                                 </div>\
@@ -703,7 +707,7 @@
                   <div class="b-order-totals">\
                     <div class="b-price-string b-price-raw clearfix">\
                       <span class="explanation">Стоимость заказа:</span>\
-                      <div class="b-price-total has-discount">\
+                      <div class="b-price-total" :class="{ \'has-discount\': _rawBase != _rawTotal }">\
                         <div v-show="_rawBase != _rawTotal" class="price-base">{{ formatNumber(_rawBase) }}<span class="icon-ruble"></span></div>\
                         <div class="price-total">{{ formatNumber(_rawTotal) }}<span class="icon-ruble"></span></div>\
                       </div>\
