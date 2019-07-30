@@ -4,17 +4,21 @@ $APPLICATION->SetTitle("Каталог");?>
 <? if($_REQUEST["SECTION_CODE"] || $_REQUEST['TAGS'] || $_REQUEST['SECTION_CODE_CUSTOM']):
 
 	if ($_REQUEST['TAGS'] && CModule::IncludeModule('search')) {
-		$rsTags = CSearchTags::GetList(array(),array("MODULE_ID" => "iblock"), array("CNT" => "DESC"));
-		$arTag = Array();
-		while($arTag = $rsTags->Fetch()){
+		// $rsTags = CSearchTags::GetList(array(),array("MODULE_ID" => "iblock"), array("CNT" => "DESC"));
+		// $arTag = Array();
+		// while($arTag = $rsTags->Fetch()){
 			
-			if( $_REQUEST['TAGS'] == Cutil::translit($arTag['NAME'],"ru") ){
-				$tagName = mb_strtoupper(mb_substr($arTag['NAME'], 0, 1)).mb_substr($arTag['NAME'], 1);
-				$APPLICATION->SetTitle($tagName);
-				$GLOBALS['arrFilter'] = array("?TAGS" => $arTag['NAME']);
-				break;
-			}
-		}
+		// 	if( $_REQUEST['TAGS'] == Cutil::translit($arTag['NAME'],"ru") ){
+		// 		$tagName = mb_strtoupper(mb_substr($arTag['NAME'], 0, 1)).mb_substr($arTag['NAME'], 1);
+		// 		$APPLICATION->SetTitle($tagName);
+		// 		$GLOBALS['arrFilter'] = array("?TAGS" => $arTag['NAME']);
+		// 		break;
+		// 	}
+		// }
+		$tagName = mb_strtoupper(mb_substr($_REQUEST['TAGS'], 0, 1)).mb_substr($_REQUEST['TAGS'], 1);
+		$APPLICATION->SetTitle($tagName);
+
+		$GLOBALS['arrFilter'] = array("?TAGS" => $_REQUEST['TAGS']);
 	}
 
 	$code = isset($_REQUEST['SECTION_CODE_CUSTOM']) ? $_REQUEST['SECTION_CODE_CUSTOM'] : $_REQUEST['SECTION_CODE'];
