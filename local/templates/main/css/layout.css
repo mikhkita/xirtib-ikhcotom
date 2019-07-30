@@ -2291,7 +2291,7 @@ h3.b-title{
 						display: none;
 					}
 			.b-product-photo-slider{
-				padding: 0 34px;
+				padding: 0 48px;
 				text-align: center;
 				font-size: 0px;
 			}
@@ -2300,6 +2300,12 @@ h3.b-title{
 					width: 73px;
 					height: 73px;
 					margin: 0 12px;
+				}
+				.b-product-photo-slider img:first-child{
+					margin-left: 0px;
+				}
+				.b-product-photo-slider img:last-child{
+					margin-right: 0px;
 				}
 		.b-product-content{
 			display: inline-block;

@@ -404,6 +404,10 @@ function getBasketCount(){
 	);
 }
 
+function convertPrice($price){
+	return rtrim(rtrim(number_format($price, 1, '.', ' '),"0"),".");
+}
+
 function convertPhoneNumber($str){
 	if (strlen($str) == 11) {
 	$str = '+7 ('.substr($str, 1, 3).') '.substr($str, 4, 3).'-'.substr($str, 7, 2).'-'.substr($str, 9, 2);

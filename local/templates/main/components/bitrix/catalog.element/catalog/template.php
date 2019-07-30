@@ -437,8 +437,10 @@ if ($arResult["OFFERS"]){
 						<? $arTags = explode(',', $arResult["TAGS"]); ?>
 						<ul>
 							<? foreach($arTags as $tag): ?>
-								<? $trnsTag = Cutil::translit($tag,"ru"); ?>
-								<li><a href="/catalog-tag/<?=$trnsTag?>/"><?=$tag?></a></li>
+								<? 
+								// $trnsTag = Cutil::translit($tag,"ru"); 
+								?>
+								<li><a href="/catalog-tag/<?=urlencode($tag)?>/"><?=$tag?></a></li>
 							<? endforeach; ?>
 						</ul>
 					</div>
