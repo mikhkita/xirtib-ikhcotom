@@ -2059,6 +2059,7 @@ h3.b-title{
 							padding-top: 12px;
 						}
 							.b-order-item-name-offer{
+								display: block;
 								color: #9E9891;
 							}
 							.b-order-item-name a{

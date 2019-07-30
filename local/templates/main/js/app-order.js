@@ -629,7 +629,7 @@
                                 </a>\
                                 <a :href="url" class="item-field b-order-item-name">\
                                     <p v-if="productName">\
-                                        {{ productName }} <span class=\'b-order-item-name-offer\'>({{ name }})</span>\
+                                        {{ productName }} <span class=\'b-order-item-name-offer\'>{{ name }}</span>\
                                     </p>\
                                     <p v-else>{{ name }}</p>\
                                 </a>\
