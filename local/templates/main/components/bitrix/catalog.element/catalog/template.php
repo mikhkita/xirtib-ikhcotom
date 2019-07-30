@@ -72,6 +72,7 @@ if ($arResult["OFFERS"]){
 		<div class="b-product-photo">
 			<div class="main-photo">
 				<div class="icon-zoom <?=$zoomClass?>"></div>
+				
 				<div class="b-product-main after-load">
 					<? if ($arResult["OFFERS"]): ?>
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
