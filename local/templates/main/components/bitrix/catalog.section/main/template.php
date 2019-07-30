@@ -26,10 +26,25 @@ if(count($arResult["ITEMS"])): ?>
 	<div class="b-catalog-inner clearfix">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
 			<? $class = "";?>
+			<? $minVal = 0; ?>
+			<? $maxVal = 0; ?>
 			<? if ($arItem["OFFERS"]): ?>
+				<? $minVal = 100000; ?>
+				<? $maxVal = 0; ?>
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
 					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
 						<? $class = "has-discount"; ?>
+					<? endif; ?>
+
+					<? if( $offer["PRICES"]["PRICE"]["VALUE"] < $minVal): ?>
+						<? $minVal = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
+						<? if ($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]): ?>
+							<? $minVal = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
+						<? endif; ?>
+					<? endif; ?>
+
+					<? if( $offer["PRICES"]["PRICE"]["VALUE"] > $maxVal): ?>
+						<? $maxVal = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
 					<? endif; ?>
 
 					<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
@@ -115,6 +130,12 @@ if(count($arResult["ITEMS"])): ?>
 				<div class="b-card-bottom">
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=$arItem['NAME']?></a>
 				</div>
+				<? if ($minVal != $maxVal): ?>
+					<? $minVal = $minVal >= 100 ? number_format( $minVal, 0, ',', ' ' ) : $minVal; ?>
+					<? $maxVal = $maxVal >= 100 ? number_format( $maxVal, 0, ',', ' ' ) : $maxVal; ?>
+					<? $price = $minVal.'</span> - <span class="icon-ruble">'.$maxVal ?>
+					<? $class = ''; ?>
+				<? endif; ?>
 				<div class="b-price-container <?=$class?>">
 					<div class="b-price">
 						<span class="icon-ruble"><?=$price?></span>
