@@ -2058,6 +2058,9 @@ h3.b-title{
 							vertical-align: top;
 							padding-top: 12px;
 						}
+							.b-order-item-name-offer{
+								color: #9E9891;
+							}
 							.b-order-item-name a{
 								display: inline-block;
 								font-size: 18px;

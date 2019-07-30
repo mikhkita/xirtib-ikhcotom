@@ -101,6 +101,8 @@
               this.show = false;
               this.showCatalogRef = true;
           }
+
+          console.log(this.orders);
           //setTimeout(function() { 
             // $.ajax({
             //     type: "get",
@@ -514,6 +516,7 @@
                         :_id="order.id"\
                         :_image="order.image"\
                         :_name="order.name"\
+                        :_productName="order.productName"\
                         :_url="order.url"\
                         :_quantity="order.quantity"\
                         :_basePriceForOne="order.basePriceForOne"\
@@ -547,6 +550,7 @@
                             _id: [String, Number],
                             _image: String,
                             _name: String,
+                            _productName: String,
                             _url: String,
                             _quantity: Number,
                             _basePriceForOne: Number,
@@ -572,6 +576,9 @@
                             },
                             name: function () {
                                return this._name;
+                            },
+                            productName: function () {
+                               return this._productName;
                             },
                             url: function () {
                                return this._url;
@@ -621,7 +628,10 @@
                                     <img :src="image">\
                                 </a>\
                                 <a :href="url" class="item-field b-order-item-name">\
-                                    <p>{{ name }}</p>\
+                                    <p v-if="productName">\
+                                        {{ productName }} <span class=\'b-order-item-name-offer\'>({{ name }})</span>\
+                                    </p>\
+                                    <p v-else>{{ name }}</p>\
                                 </a>\
                                 <div class="item-field b-order-item-quantity">\
                                     <div class="product-quantity">\
