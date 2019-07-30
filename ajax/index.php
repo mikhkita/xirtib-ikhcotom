@@ -599,7 +599,16 @@ switch ($action) {
 			}
 
 			$objElement = \Bitrix\Iblock\ElementTable::getByPrimary($arBasketItem["id"])->fetchObject();
-			$img = CFile::ResizeImageGet($objElement->getDetailPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
+			if(empty($objElement)){
+				$basketItem->delete();
+				$basket->save();
+				continue;
+			}
+			if($objElement->getDetailPicture()){
+				$img = CFile::ResizeImageGet($objElement->getDetailPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
+			}else{
+				$img = CFile::ResizeImageGet($objElement->getPreviewPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
+			}
 			$arBasketItem["image"] = $img["src"];
 			$arBasketItem["name"] = $basketItem->getField('NAME');
 			$arBasketItem["url"] = $basketItem->getField('DETAIL_PAGE_URL');
