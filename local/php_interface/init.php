@@ -4,6 +4,24 @@
 function getFileArray($url){
 	return CFile::MakeFileArray($url);
 }
+function addNewSection($item){
+	CModule::IncludeModule("iblock");
+	
+	$section = new CIBlockSection;
+    $arLoadSectionArray = Array(
+        "IBLOCK_ID" => 1,
+        "NAME" => $item->name,
+        "IBLOCK_SECTION_ID" => 1,
+        "CODE" => getUniqueCode($item->slug),
+        "DESCRIPTION" => $item->description,
+    );
+    if($PRODUCT_ID = $section->Add($arLoadSectionArray)){
+        return $PRODUCT_ID;
+    }else{
+        echo "Error: ".$section->LAST_ERROR."<br>";
+        return false;
+    }
+}
 function addNewProduct($data, $product = false){
 	// $intSKUIBlock = 2; // ID инфоблока предложений (должен быть торговым каталогом)
 	// $arCatalog = CCatalog::GetByID($intSKUIBlock);

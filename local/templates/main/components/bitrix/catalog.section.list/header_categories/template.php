@@ -16,7 +16,7 @@ $this->setFrameMode(true);
 <?if( count($arResult["SECTIONS"]) ): ?>
 	<ul class="b-menu-items">
 		<?foreach($arResult["SECTIONS"] as $key => $arItem):?>
-			<? if ($arItem['ID'] != 5): ?>
+			<? if ($arItem['ID'] != 116): ?>
 				<li class="b-menu-item"><a href="<?=$arItem["SECTION_PAGE_URL"]?>" class="<? if( $isSectionActive ): ?>active <? endif; ?>"><?=$arItem["NAME"]?></a></li>
 			<? endif;?>
 		<?endforeach;?>
