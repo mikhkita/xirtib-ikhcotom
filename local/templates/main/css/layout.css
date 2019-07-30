@@ -2291,8 +2291,9 @@ h3.b-title{
 						display: none;
 					}
 			.b-product-photo-slider{
-				padding: 0 48px;
+				padding: 0 34px;
 				text-align: center;
+				font-size: 0px;
 			}
 				.b-product-photo-slider img{
 					cursor: pointer;

@@ -334,6 +334,9 @@ $(document).ready(function(){
             $('.b-btn-to-cart-text').text('Добавить в корзину');
         }
 
+        console.log(price);
+        console.log(discountPrice);
+
         $('#price').text(price);
         $('#discount-price').text(discountPrice);
         $('#article').text(article);
