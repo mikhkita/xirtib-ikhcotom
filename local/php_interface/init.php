@@ -93,7 +93,7 @@ function addNewProduct($data, $product = false){
 		}
 		return $PRODUCT_ID;
 	}else{
-		file_put_contents("log.txt", "Error: ".$el->LAST_ERROR."\n", FILE_APPEND);
+		file_put_contents("log.txt", "Error: ".$el->LAST_ERROR." | ".print_r($arLoadProductArray, true)."\n", FILE_APPEND);
 		return false;
 	}
 
