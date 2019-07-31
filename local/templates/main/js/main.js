@@ -294,6 +294,8 @@ $(document).ready(function(){
 
         var id = $(this).attr('data-color-id');
         $('.texture-list img[data-color-id='+id+']').click();
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
         showPhotoColor(id);
     })
 

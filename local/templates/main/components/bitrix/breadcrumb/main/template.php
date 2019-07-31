@@ -19,6 +19,7 @@ foreach ($arResult as $key => $arItem) {
 $strReturn = '<ul class="b-breadcrumbs clearfix">';
 
 $itemSize = count($arResult);
+
 for($index = 0; $index < $itemSize; $index++)
 {
 	$title = htmlspecialcharsex($arResult[$index]["TITLE"]);

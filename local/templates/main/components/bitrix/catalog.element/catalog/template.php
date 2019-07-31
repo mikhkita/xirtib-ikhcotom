@@ -31,7 +31,8 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 
 $id = $arResult['OFFERS'] ? $arResult['OFFERS'][0]['ID'] : $arResult['ID'];
 $quantity = $arResult['OFFERS'] ? $arResult['OFFERS'][0]["PRODUCT"]["QUANTITY"] : $arResult["PRODUCT"]["QUANTITY"];
-$article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['PROPERTIES']['ARTICLE']['VALUE'] : $arResult['PROPERTIES']['ARTICLE']['VALUE'];
+$article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['CODE'] : $arResult['CODE'];
+$arImg = getElementImages($arResult);
 
 $tabClass = 'active';
 $tabBlockClass = '';
@@ -49,6 +50,7 @@ if ($_GET['review'] == 'Y'){
 
 
 if ($arResult["OFFERS"]){
+
 	foreach ($arResult["OFFERS"] as $key => $offer){
 		$zoomClass = 'hide';
 		if ($offer["DETAIL_PICTURE"]){
@@ -58,6 +60,7 @@ if ($arResult["OFFERS"]){
 	}
 	
 } else {
+
 	if (!$arResult["DETAIL_PICTURE"]) {
 		$zoomClass = 'hide';
 	}
@@ -76,16 +79,13 @@ if ($arResult["OFFERS"]){
 				<div class="b-product-main after-load">
 					<? if ($arResult["OFFERS"]): ?>
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-							<? if ($offer["DETAIL_PICTURE"]):
-								$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-								$bigImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
-								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-									<div class="catalog-element-img" style="background-image: url('<?=$renderImage["src"]?>');"></div>
+							<? if ($offer["DETAIL_PICTURE"]):?>
+								<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+									<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>');"></div>
 								</a>
 							<?else:?>
-								<? $bigImage['src'] = $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
 								<a href="#" onclick="return false;">
-									<img src="<?=$renderImage['src']?>">
+									<img src="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>">
 								</a>
 							<?endif;?>
 
@@ -100,15 +100,12 @@ if ($arResult["OFFERS"]){
 							<? endif; ?>
 						<? endforeach; ?>
 					<? else: ?>
-						<? if ($arResult["DETAIL_PICTURE"]):
-								$renderImage = CFile::ResizeImageGet($arResult["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-								$bigImage = CFile::ResizeImageGet($arResult["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
-								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+						<? if ($arResult["DETAIL_PICTURE"]): ?>
+								<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
 									<div class="catalog-element-img" style="background-image: url('<?=$renderImage["src"]?>');"></div>
 								</a>
 						<? else: ?>
-							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
-							<img src="<?=$renderImage['src']?>">
+							<img src="<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>">
 						<? endif; ?>
 						<? if( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arResult["PRICES"]["PRICE"]["VALUE"] ): ?>
 							<? $class = "has-discount"; ?>
@@ -130,16 +127,14 @@ if ($arResult["OFFERS"]){
 			<? if ($arResult["OFFERS"]): ?>
 				<div class="b-product-photo-slider <?=$sliderClass?>">
 					<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-						<? if ($offer["DETAIL_PICTURE"]) {
-							$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-							if ($key == 0){
-								$class = 'active';
-							}else{
-								$class = '';
-							}
-							?>
-							<img data-color-id="<?=$offer['ID']?>" src="<?=$renderImage['src']?>" class="<?=$class?>">
-						<? } ?>
+						<?
+						if ($key == 0){
+							$class = 'active';
+						}else{
+							$class = '';
+						}
+						?>
+						<img data-color-id="<?=$offer['ID']?>" src="<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>" class="<?=$class?>">
 					<? endforeach; ?>
 				</div>
 			<? endif; ?>
@@ -203,8 +198,25 @@ if ($arResult["OFFERS"]){
 			<div class="b-product-params">
 				<div class="b-product-params-left">
 					<? if ($arResult["OFFERS"]): ?>
+						<? 
+							$arr = $arResult["OFFERS"][0]["PROPERTIES"];
+							unset($arr["CML2_LINK"]);
+							foreach ($arr as $key => $value) {
+								if (!empty($value['VALUE'])) {
+									$name = $value['NAME'];
+									break;
+								}
+							}
+							if (!isset($name)) {
+								if ($arResult["ORIGINAL_PARAMETERS"]["SECTION_CODE"] == 'pryazha') {
+									$name = 'Цвет';
+								} else {
+									$name = 'Опция';
+								}
+							}
+						?>
 					<div class="b-product-colors">
-						<span>Цвет:</span>
+						<span><?=$name?>:</span>
 						<select name="colors" class="colors-select">
 							<? foreach ($arResult["OFFERS"] as $key => $offer):
 
@@ -236,19 +248,17 @@ if ($arResult["OFFERS"]){
 						<div class="texture-list clearfix">
 							<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 								<? 
-								if ($offer["PREVIEW_PICTURE"]) {
-									$renderImage = CFile::ResizeImageGet($offer["PREVIEW_PICTURE"], Array("width" => 98, "height" => 98), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 									if ($key == 0){
 										$class = 'active';
 									}else{
 										$class = '';
-									}?>
-									<img data-color-id="<?=$offer['ID']?>" src="<?=$renderImage['src']?>" class="<?=$class?>">
-								<?}?>
+									}
+								?>
+								<img data-color-id="<?=$offer['ID']?>" src="<?=$arImg["COLOR_PHOTO"][$key]["SMALL"]?>" class="<?=$class?>">
 							<? endforeach; ?>
 						</div>
 						<? if (count($arResult["OFFERS"]) > 10): ?>
-							<div class="center"><a href="#" class="dashed more-colors">Другие цвета</a></div>
+							<div class="center"><a href="#" class="dashed more-colors">Показать больше</a></div>
 						<? endif; ?>
 					</div>
 					<? endif; ?>
@@ -410,14 +420,7 @@ if ($arResult["OFFERS"]){
 						</p>
 					<? endif; ?>
 					<? if ($arResult["PROPERTIES"]["NEEDLES_SIZE"]["VALUE"]): ?>
-						<p><span>Рекомендуемый размер спиц:</span> 
-							<?
-							$count = count($arResult["PROPERTIES"]["NEEDLES_SIZE"]["VALUE"]);
-							if ($count != 1):
-								echo $arResult["PROPERTIES"]["NEEDLES_SIZE"]["VALUE"][0]."-".$arResult["PROPERTIES"]["NEEDLES_SIZE"]["VALUE"][$count-1]." мм";
-							endif;
-							?>
-						</p>
+						<p><span>Рекомендуемый размер спиц:</span><?=$arResult["PROPERTIES"]["NEEDLES_SIZE"]["VALUE"]?> мм</p>
 					<? endif; ?>
 					<? if ($arResult["PROPERTIES"]["DENSITY"]["VALUE"]): ?>
 						<p><span>Плотность вязания:</span> <?=$arResult["PROPERTIES"]["DENSITY"]["VALUE"]?></p>
