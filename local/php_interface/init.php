@@ -697,4 +697,71 @@ function getLocationByZIP($zip){
     return false;
 }
 
+function getElementImages($arResult){
+	
+	$arImg = array(
+		'DETAIL_PHOTO' => array(),
+		'COLOR_PHOTO' => array(),
+	);
+
+	if ($arResult["OFFERS"]){
+		$flag = false;
+		foreach ($arResult["OFFERS"] as $key => $offer) {
+			
+			if ($offer["DETAIL_PICTURE"]){
+				$arDetailPhoto = resizePhotos($offer["DETAIL_PICTURE"]);
+				$flag = true;
+			} else {
+				if ($offer["PREVIEW_PICTURE"]) {
+					$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"]);
+				} else {
+					$arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+				}
+			}
+
+			if ($offer["PREVIEW_PICTURE"]) {
+				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"]);
+			} else {
+				$arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+			}	
+
+			array_push($arImg['DETAIL_PHOTO'], $arDetailPhoto);
+			array_push($arImg['COLOR_PHOTO'], $arColorPhoto);
+		}
+
+		if ($flag && $arResult["DETAIL_PICTURE"]) {
+			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"]);
+			$arImg['DETAIL_PHOTO'] = $arPhoto;
+		}
+	} else {
+		if ($arResult["DETAIL_PICTURE"]){
+			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"]);
+		} else {
+			$arPhoto['BIG'] = $arPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+		}
+		array_push($arImg['DETAIL_PHOTO'], $arPhoto);
+	}
+	
+	return $arImg;
+}
+function resizePhotos($photo){
+	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+	$tmpSmall = CFile::ResizeImageGet($photo, Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+	$arPhoto['BIG'] = $tmpBig['src'];
+	$arPhoto['SMALL'] = $tmpSmall['src'];
+	return $arPhoto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

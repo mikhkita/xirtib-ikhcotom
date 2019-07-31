@@ -294,6 +294,8 @@ $(document).ready(function(){
 
         var id = $(this).attr('data-color-id');
         $('.texture-list img[data-color-id='+id+']').click();
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
         showPhotoColor(id);
     })
 
@@ -334,11 +336,8 @@ $(document).ready(function(){
             $('.b-btn-to-cart-text').text('Добавить в корзину');
         }
 
-        console.log(price);
-        console.log(discountPrice);
-
-        $('#price').text(price);
-        $('#discount-price').text(discountPrice);
+        $('#price').text((new Intl.NumberFormat('ru-RU').format(price)).replace(/,/, '.'));
+        $('#discount-price').text((new Intl.NumberFormat('ru-RU').format(discountPrice)).replace(/,/, '.'));
         $('#article').text(article);
         $('#quantity').text(quantity);
         $('#quantity-info').text(quantity);

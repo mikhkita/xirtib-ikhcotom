@@ -33,13 +33,9 @@ if (isAuth($USER)){
 						<? $class = "has-discount"; ?>
 					<? endif; ?>
 
-					<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
-						<? $price = number_format( $offer["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-						<? $discountPrice = number_format( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-					<? else: ?>
-						<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-						<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-					<? endif; ?>
+					<? $price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]); ?>
+					<? $discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
+					
 				<? endforeach; ?>
 			<? else: ?>
 
@@ -47,13 +43,8 @@ if (isAuth($USER)){
 					<? $class = "has-discount"; ?>
 				<? endif; ?>
 
-				<? if ($arItem["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
-					<? $price = number_format( $arItem["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-					<? $discountPrice = number_format( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-				<? else: ?>
-					<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-					<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-				<? endif; ?>
+				<? $price = convertPrice($arItem["PRICES"]["PRICE"]["VALUE"]); ?>
+				<? $discountPrice = convertPrice($arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
 
 			<? endif; ?>
 
