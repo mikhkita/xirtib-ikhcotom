@@ -2291,6 +2291,13 @@ h3.b-title{
 						width: 100%;
 					    height: 100%;
 					}
+					.catalog-element-img{
+						width: 100%;
+						height: 100%;
+					    background-size: contain;
+					    background-position: 50% 50%;
+    					background-repeat: no-repeat;
+					}
 					.main-photo .b-product-main:not(.loaded) a:not(:first-child){
 						display: none;
 					}

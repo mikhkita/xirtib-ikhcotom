@@ -80,7 +80,7 @@ if ($arResult["OFFERS"]){
 								$renderImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 								$bigImage = CFile::ResizeImageGet($offer["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
 								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-									<img src="<?=$renderImage['src']?>">
+									<div class="catalog-element-img" style="background-image: url('<?=$renderImage["src"]?>');"></div>
 								</a>
 							<?else:?>
 								<? $bigImage['src'] = $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
@@ -94,13 +94,8 @@ if ($arResult["OFFERS"]){
 							<? endif; ?>
 
 							<? if ($key == 0): ?>
-								<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 1000): ?>
-									<? $price = number_format( $offer["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-									<? $discountPrice = number_format( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-								<? else: ?>
-									<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-									<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-								<? endif; ?>
+								<? $price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]); ?>
+								<? $discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
 								<? $priceType = $offer["ITEM_MEASURE"]["ID"]; ?>
 							<? endif; ?>
 						<? endforeach; ?>
@@ -109,7 +104,7 @@ if ($arResult["OFFERS"]){
 								$renderImage = CFile::ResizeImageGet($arResult["DETAIL_PICTURE"], Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 								$bigImage = CFile::ResizeImageGet($arResult["DETAIL_PICTURE"], Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
 								<a class="fancy-img" href="<?=$bigImage['src']?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-									<img src="<?=$renderImage['src']?>">
+									<div class="catalog-element-img" style="background-image: url('<?=$renderImage["src"]?>');"></div>
 								</a>
 						<? else: ?>
 							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>

@@ -32,6 +32,7 @@ if(count($arResult["ITEMS"])): ?>
 				<? $minVal = 100000; ?>
 				<? $maxVal = 0; ?>
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
+
 					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
 						<? $class = "has-discount"; ?>
 					<? endif; ?>
@@ -47,13 +48,9 @@ if(count($arResult["ITEMS"])): ?>
 						<? $maxVal = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
 					<? endif; ?>
 
-					<? if ($offer["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
-						<? $price = number_format( $offer["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-						<? $discountPrice = number_format( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-					<? else: ?>
-						<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-						<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-					<? endif; ?>
+					<? $price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]); ?>
+					<? $discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
+
 				<? endforeach; ?>
 			<? else: ?>
 
@@ -61,13 +58,8 @@ if(count($arResult["ITEMS"])): ?>
 					<? $class = "has-discount"; ?>
 				<? endif; ?>
 
-				<? if ($arItem["PRICES"]["PRICE"]["VALUE"] >= 100): ?>
-					<? $price = number_format( $arItem["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-					<? $discountPrice = number_format( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
-				<? else: ?>
-					<? $price = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-					<? $discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-				<? endif; ?>
+				<? $price = convertPrice($arItem["PRICES"]["PRICE"]["VALUE"]); ?>
+				<? $discountPrice = convertPrice($arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
 
 			<? endif; ?>
 
@@ -131,8 +123,8 @@ if(count($arResult["ITEMS"])): ?>
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=$arItem['NAME']?></a>
 				</div>
 				<? if ($minVal != $maxVal): ?>
-					<? $minVal = $minVal >= 100 ? number_format( $minVal, 0, ',', ' ' ) : $minVal; ?>
-					<? $maxVal = $maxVal >= 100 ? number_format( $maxVal, 0, ',', ' ' ) : $maxVal; ?>
+					<? $minVal = convertPrice($minVal); ?>
+					<? $maxVal = convertPrice($maxVal); ?>
 					<? $price = $minVal.'</span> - <span class="icon-ruble">'.$maxVal ?>
 					<? $class = ''; ?>
 				<? endif; ?>
