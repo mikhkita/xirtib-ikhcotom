@@ -714,6 +714,7 @@ function getElementImages($arResult){
 			} else {
 				if ($offer["PREVIEW_PICTURE"]) {
 					$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"]);
+					$flag = true;
 				} else {
 					$arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 				}
@@ -741,7 +742,7 @@ function getElementImages($arResult){
 		}
 		array_push($arImg['DETAIL_PHOTO'], $arPhoto);
 	}
-	
+
 	return $arImg;
 }
 function resizePhotos($photo){
