@@ -858,6 +858,14 @@ $(document).ready(function(){
             $this = $(this);
         progress.start(1.5);
 
+        if ($this.hasClass("active")){
+            $this.attr('data-action', 'ADD');
+            $this.removeClass("active");
+        }else{
+            $this.attr('data-action', 'REMOVE');
+            $this.addClass("active");
+        }
+
         $.ajax({
             type: "GET",
             url: url,
@@ -867,14 +875,10 @@ $(document).ready(function(){
                     var json = JSON.parse(msg);
                     if( json.result == "success" ){
                         if ($this.hasClass("active")){
-                            $this.removeClass("active"); 
-                            $this.attr('data-action', 'ADD');
                             if (Number($('.b-fav-number').text()) != 0) {
                                 $('.b-fav-number').text(Number($('.b-fav-number').text()) - 1);
                             }
                         }else{
-                            $this.addClass("active"); 
-                            $this.attr('data-action', 'REMOVE');
                             $('.b-fav-number').text(Number($('.b-fav-number').text()) + 1);
                         }
 
@@ -885,6 +889,13 @@ $(document).ready(function(){
                         }
                     }
                 }else{
+                    if ($this.hasClass("active")){
+                        $this.removeClass("active");
+                        $this.attr('data-action', 'ADD');
+                    }else{
+                        $this.addClass("active");
+                        $this.attr('data-action', 'REMOVE');
+                    }
                     alert("Ошибка добавления в избранное");
                 }
             },
