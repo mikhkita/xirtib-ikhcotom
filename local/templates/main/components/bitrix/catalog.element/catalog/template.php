@@ -55,7 +55,7 @@ foreach ($arImg['DETAIL_PHOTO'] as $img) {
 	}
 }
 
-vardump($isSliderImg);
+// vardump($isSliderImg);
 
 $tabClass = 'active';
 $tabBlockClass = '';
