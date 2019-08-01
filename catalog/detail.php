@@ -58,7 +58,7 @@ $APPLICATION->SetTitle("Каталог");
 		"MESS_NOT_AVAILABLE" => "Нет в наличии",
 		"META_DESCRIPTION" => "-",
 		"META_KEYWORDS" => "-",
-		"OFFERS_FIELD_CODE" => array("NAME"),
+		"OFFERS_FIELD_CODE" => array("NAME", "CODE"),
 		"OFFERS_PROPERTY_CODE" => array("PROPERTY_COLOR"),
 		"OFFERS_LIMIT" => "0",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",

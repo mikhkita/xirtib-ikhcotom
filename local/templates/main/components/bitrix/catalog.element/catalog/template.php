@@ -44,7 +44,8 @@ $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPag
 
 $id = $arResult['OFFERS'] ? $arResult['OFFERS'][0]['ID'] : $arResult['ID'];
 $quantity = $arResult['OFFERS'] ? $arResult['OFFERS'][0]["PRODUCT"]["QUANTITY"] : $arResult["PRODUCT"]["QUANTITY"];
-$article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['CODE'] : $arResult['CODE'];
+$article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['CODE'] : $arResult["PROPERTIES"]["ARTICLE"]["VALUE"];
+
 $arImg = getElementImages($arResult);
 $bigImage = $arImg['DETAIL_PHOTO'][0]['BIG'];
 $isSliderImg = false;
@@ -54,8 +55,6 @@ foreach ($arImg['DETAIL_PHOTO'] as $img) {
 		$isSliderImg = true;	
 	}
 }
-
-vardump($isSliderImg);
 
 $tabClass = 'active';
 $tabBlockClass = '';
@@ -205,13 +204,12 @@ if (count($arResult["OFFERS"]) < 5){
 										$offer['PROPERTIES']['COLOR']['NAME'] = $color['UF_NAME'];
 									}
 								}
-
 					            ?>
 								<option 
 								data-color-id="<?=$offer['ID']?>" 
 								data-price="<?=$offer["PRICES"]["PRICE"]["VALUE"]?>" 
 								data-discount-price="<?=$offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]?>" 
-								data-article="<?=$article?>" 
+								data-article="<?=$offer["PRODUCT"]["CODE"]?>" 
 								data-quantity="<?=$offer["PRODUCT"]["QUANTITY"]?>" 
 								<?=$selected?> ><?=$offer['NAME']?></option>
 							<? endforeach; ?>

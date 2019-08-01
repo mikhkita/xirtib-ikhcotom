@@ -38,12 +38,12 @@ $APPLICATION->SetTitle("Каталог");?>
 	$sortList = array(
 		0 => array(
 			'NAME' => 'По возрастанию цены',
-			'FIELD' => 'catalog_price_1',
+			'FIELD' => 'CATALOG_PRICE_1',
 			'TYPE' => 'ASC'
 		),
 		1 => array(
 			'NAME' => 'По убыванию цены',
-			'FIELD' => 'catalog_price_1',
+			'FIELD' => 'CATALOG_PRICE_1',
 			'TYPE' => 'DESC'
 		),
 		2 => array(

@@ -1980,7 +1980,9 @@ h3.b-title{
 
 	}
 		.b-cabinet-order{
-			margin-bottom: 64px;
+			border-bottom: 1px solid #D8D8D8;
+		    margin-bottom: 34px;
+			padding-bottom: 30px;
 		}
 			.b-order-header{
 				margin-bottom: 24px;
@@ -3229,14 +3231,19 @@ h3.b-title{
 			}
 
 			.b-filter-checkbox-list{
-				max-height: 159px;
     			overflow: hidden;
     			margin-bottom: 12px;
     			padding-top: 3px;
 			}
 			.b-filter-checkbox-list.open{
 				max-height: 1500px;
-			}
+			}	
+				.b-filter-checkbox-list li:nth-child(n+6){
+					display: none;
+				}
+				.b-filter-checkbox-list.open li:nth-child(n+6){
+					display: block;
+				}
 				.b-filter-checkbox-list li{
 					margin-bottom: 10px;
 				}
