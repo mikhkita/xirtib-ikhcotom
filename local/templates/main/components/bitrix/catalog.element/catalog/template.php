@@ -46,6 +46,16 @@ $id = $arResult['OFFERS'] ? $arResult['OFFERS'][0]['ID'] : $arResult['ID'];
 $quantity = $arResult['OFFERS'] ? $arResult['OFFERS'][0]["PRODUCT"]["QUANTITY"] : $arResult["PRODUCT"]["QUANTITY"];
 $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['CODE'] : $arResult['CODE'];
 $arImg = getElementImages($arResult);
+$bigImage = $arImg['DETAIL_PHOTO'][0]['BIG'];
+$isSliderImg = false;
+
+foreach ($arImg['DETAIL_PHOTO'] as $img) {
+	if ($bigImage != $img['BIG']) {
+		$isSliderImg = true;	
+	}
+}
+
+vardump($isSliderImg);
 
 $tabClass = 'active';
 $tabBlockClass = '';
@@ -74,6 +84,22 @@ if ($arResult["OFFERS"]){
 		}
 		if($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"]){
 			$class = "has-discount";
+		}
+	}
+
+	$arr = $arResult["OFFERS"][0]["PROPERTIES"];
+	unset($arr["CML2_LINK"]);
+	foreach ($arr as $key => $value) {
+		if (!empty($value['VALUE'])) {
+			$name = $value['NAME'];
+			break;
+		}
+	}
+	if (!isset($name)) {
+		if ($arResult["ORIGINAL_PARAMETERS"]["SECTION_CODE"] == 'pryazha') {
+			$name = 'Цвет';
+		} else {
+			$name = 'Опция';
 		}
 	}
 } else {
@@ -119,7 +145,7 @@ if (count($arResult["OFFERS"]) < 5){
 					<? endif; ?>
 				</div>
 			</div>
-			<? if ($arResult["OFFERS"]): ?>
+			<? if ($arResult["OFFERS"] && $isSliderImg): ?>
 				<div class="b-product-photo-slider <?=$sliderClass?>">
 					<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 						<? $class = ($key == 0) ? 'active' : ''; ?>
@@ -169,34 +195,11 @@ if (count($arResult["OFFERS"]) < 5){
 			<div class="b-product-params">
 				<div class="b-product-params-left">
 					<? if ($arResult["OFFERS"]): ?>
-						<? 
-							$arr = $arResult["OFFERS"][0]["PROPERTIES"];
-							unset($arr["CML2_LINK"]);
-							foreach ($arr as $key => $value) {
-								if (!empty($value['VALUE'])) {
-									$name = $value['NAME'];
-									break;
-								}
-							}
-							if (!isset($name)) {
-								if ($arResult["ORIGINAL_PARAMETERS"]["SECTION_CODE"] == 'pryazha') {
-									$name = 'Цвет';
-								} else {
-									$name = 'Опция';
-								}
-							}
-						?>
 					<div class="b-product-colors">
 						<span><?=$name?>:</span>
 						<select name="colors" class="colors-select">
 							<? foreach ($arResult["OFFERS"] as $key => $offer):
-
-								if ($key == 0){
-									$selected = 'selected';
-								} else {
-									$selected = '';
-								}
-
+								$selected = ($key == 0) ? 'selected' : '';
 								foreach ($arColors as $color) {
 									if ($color['UF_XML_ID'] == $offer['PROPERTIES']['COLOR']['VALUE']) {
 										$offer['PROPERTIES']['COLOR']['NAME'] = $color['UF_NAME'];
@@ -204,7 +207,6 @@ if (count($arResult["OFFERS"]) < 5){
 								}
 
 					            ?>
-
 								<option 
 								data-color-id="<?=$offer['ID']?>" 
 								data-price="<?=$offer["PRICES"]["PRICE"]["VALUE"]?>" 
@@ -215,28 +217,24 @@ if (count($arResult["OFFERS"]) < 5){
 							<? endforeach; ?>
 						</select>
 					</div>
-					<div class="b-product-texture">
-						<div class="texture-list clearfix">
-							<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-								<? 
-									if ($key == 0){
-										$class = 'active';
-									}else{
-										$class = '';
-									}
-								?>
-								<img data-color-id="<?=$offer['ID']?>" src="<?=$arImg["COLOR_PHOTO"][$key]["SMALL"]?>" class="<?=$class?>">
-							<? endforeach; ?>
+						<? if (isset($arImg["COLOR_PHOTO"])): ?>
+						<div class="b-product-texture">
+							<div class="texture-list clearfix">
+								<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
+									<? $class = ($key == 0) ? 'active' : ''; ?>
+									<img data-color-id="<?=$offer['ID']?>" src="<?=$arImg["COLOR_PHOTO"][$key]["SMALL"]?>" class="<?=$class?>">
+								<? endforeach; ?>
+							</div>
+							<? if (count($arResult["OFFERS"]) > 10): ?>
+								<div class="center"><a href="#" class="dashed more-colors">Показать больше</a></div>
+							<? endif; ?>
 						</div>
-						<? if (count($arResult["OFFERS"]) > 10): ?>
-							<div class="center"><a href="#" class="dashed more-colors">Показать больше</a></div>
 						<? endif; ?>
-					</div>
 					<? endif; ?>
 					<div class="b-product-info">
 						<p><b>Артикул:</b> <span id="article"><?=$article?></span></p>
 						<p><b>В наличии:</b> <span id="quantity"><?=$quantity?></span></p>
-						<?php if ($arResult["PROPERTIES"]["TYPE"]["VALUE"]): ?>
+						<? if ($arResult["PROPERTIES"]["TYPE"]["VALUE"]): ?>
 							<p><b>Вид:</b> 
 							<? foreach($arResult["PROPERTIES"]["TYPE"]["VALUE"] as $key => $type):
 								echo mb_strtolower($type);
@@ -244,9 +242,9 @@ if (count($arResult["OFFERS"]) < 5){
 									echo ', ';
 								endif;
 							endforeach; ?>
-						</p>
-						<?php endif ?>
-						<?php if ($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] != 0): ?>
+							</p>
+						<? endif; ?>
+						<? if ($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] != 0): ?>
 							<p><b>Состав:</b> 
 								<? foreach($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] as $key => $structure):
 									echo mb_strtolower($structure);
@@ -255,7 +253,7 @@ if (count($arResult["OFFERS"]) < 5){
 									endif;
 								endforeach; ?>
 							</p>
-						<?php endif ?>
+						<? endif; ?>
 						<? if ($_REQUEST['element_view'] != "Y"): ?>
 						<a href="#" class="dashed go-tab" data-tab=".tab-spec">Все характеристики</a>
 						<? endif; ?>

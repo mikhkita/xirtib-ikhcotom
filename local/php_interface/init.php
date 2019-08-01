@@ -722,6 +722,7 @@ function getElementImages($arResult){
 
 			if ($offer["PREVIEW_PICTURE"]) {
 				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"]);
+				$colorFlag = true;
 			} else {
 				$arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 			}	
@@ -730,9 +731,15 @@ function getElementImages($arResult){
 			array_push($arImg['COLOR_PHOTO'], $arColorPhoto);
 		}
 
-		if ($flag && $arResult["DETAIL_PICTURE"]) {
+		if (!$flag && $arResult["DETAIL_PICTURE"]) {
 			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"]);
-			$arImg['DETAIL_PHOTO'] = $arPhoto;
+			foreach ($arImg['DETAIL_PHOTO'] as $key => $value) {
+				$arImg['DETAIL_PHOTO'][$key] = $arPhoto;
+			}
+		}
+
+		if (!$colorFlag) {
+			unset($arImg['COLOR_PHOTO']);
 		}
 	} else {
 		if ($arResult["DETAIL_PICTURE"]){
