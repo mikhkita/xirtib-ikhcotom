@@ -354,7 +354,15 @@ if (count($arResult["OFFERS"]) < 5){
 			</div>
 			<div class="tabs-content spec-block b-text hide">
 				<div class="spec-block-left">
-					<? if ($arResult["PROPERTIES"]["COUNTRY"]["VALUE"]): ?>
+					<? foreach ($arResult["PROPERTIES"] as $key => $arProp) {
+						if( empty($arProp["VALUE"]) || in_array($arProp["CODE"], array("ARTICLE")) ){
+							continue;
+						}
+						?>
+						<p><span><?=$arProp["NAME"]?>:</span> <? if( is_array($arProp["VALUE"]) ): ?><?=implode(", ", mb_strtolower($arProp["VALUE"], "UTF-8"))?><? else: ?><?=$arProp["VALUE"]?><? endif; ?></p>
+						<?
+					} ?>
+					<? /* ?><? if ($arResult["PROPERTIES"]["COUNTRY"]["VALUE"]): ?>
 						<p><span>Страна:</span> <?=$arResult["PROPERTIES"]["COUNTRY"]["VALUE"]?></p>
 					<? endif; ?>
 					<? if ($arResult["PROPERTIES"]["FACTORY"]["VALUE"]): ?>
@@ -398,6 +406,7 @@ if (count($arResult["OFFERS"]) < 5){
 					<? if ($arResult['PROPERTIES']['CARE']['VALUE']): ?>
 						<p><span>Уход:</span> <?=$arResult['PROPERTIES']['CARE']['VALUE']?></p>
 					<? endif; ?>
+					<? */ ?>
 				</div>
 				<? if ($arResult["TAGS"]): ?>
 					<div class="spec-block-right">

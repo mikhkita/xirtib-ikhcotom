@@ -94,7 +94,7 @@ if($arResult["bDescPageNumbering"] === true):
 		endif;
 	
 ?>
-		<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]-1)?>" class="b-nav-right icon-arrow-right"></a>
+		<!-- <a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]-1)?>" class="b-nav-right"></a> -->
 <?
 	endif; 
 
@@ -135,7 +135,7 @@ else:
 			<span class="modern-page-dots">...</span>
 <?*/
 ?>
-			<!-- <a class="modern-page-dots" href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=round($arResult["nStartPage"] / 2)?>">...</a> -->
+			<a class="modern-page-dots" href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=round($arResult["nStartPage"] / 2)?>">...</a>
 <?
 			endif;
 		endif;
@@ -167,7 +167,7 @@ else:
 		<span class="modern-page-dots">...</span>
 <?*/
 ?>
-		<!-- <a class="modern-page-dots" href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=round($arResult["nEndPage"] + ($arResult["NavPageCount"] - $arResult["nEndPage"]) / 2)?>">...</a> -->
+		<a class="modern-page-dots" href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=round($arResult["nEndPage"] + ($arResult["NavPageCount"] - $arResult["nEndPage"]) / 2)?>">...</a>
 <?
 			endif;
 ?>	
@@ -175,7 +175,7 @@ else:
 <?
 		endif;
 ?>
-		<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]+1)?>" class="b-nav-right icon-arrow-right"></a>
+		<!-- <a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]+1)?>" class="b-nav-right icon-arrow-right"></a> -->
 <?
 	endif;
 endif;

@@ -763,7 +763,7 @@ function getElementImages($arResult){
 	return $arImg;
 }
 function resizePhotos($photo){
-	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 2048, "height" => 2048), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 	$tmpSmall = CFile::ResizeImageGet($photo, Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 	$arPhoto['BIG'] = $tmpBig['src'];
 	$arPhoto['SMALL'] = $tmpSmall['src'];

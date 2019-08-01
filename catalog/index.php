@@ -252,21 +252,21 @@ $APPLICATION->SetTitle("Каталог");?>
 		<div class="b-catalog-section">
 			<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
 			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "main", Array(
-				"ADD_SECTIONS_CHAIN" => "N",
-				"CACHE_GROUPS" => "Y",
-				"CACHE_TIME" => "36000000",
-				"CACHE_TYPE" => "N",
-				"COUNT_ELEMENTS" => "Y",
-				"IBLOCK_ID" => "1",
-				"IBLOCK_TYPE" => "content",
-				"SHOW_PARENT_NAME" => "Y",
-				"TOP_DEPTH" => "1",
-				"VIEW_MODE" => "LINE",
-			),
-			false
-		);?>
-	</div>
-	<div class="b-stock">
+					"ADD_SECTIONS_CHAIN" => "N",
+					"CACHE_GROUPS" => "Y",
+					"CACHE_TIME" => "36000000",
+					"CACHE_TYPE" => "N",
+					"COUNT_ELEMENTS" => "Y",
+					"IBLOCK_ID" => "1",
+					"IBLOCK_TYPE" => "content",
+					"SHOW_PARENT_NAME" => "Y",
+					"TOP_DEPTH" => "1",
+					"VIEW_MODE" => "LINE",
+				),
+				false
+			);?>
+		</div>
+	<? /* ?><div class="b-stock">
 		<h3 class="b-title">Вам может понравиться</h3>
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.section",
@@ -379,5 +379,6 @@ $APPLICATION->SetTitle("Каталог");?>
 		<br>
 		<br>
 	</div>
+	<? */ ?>
 <? endif; ?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
