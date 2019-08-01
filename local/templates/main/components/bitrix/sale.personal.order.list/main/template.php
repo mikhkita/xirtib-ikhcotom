@@ -142,7 +142,6 @@ else
 					<? endforeach; ?>
 				</div>
 				<div class="b-order-total">
-					<div class="total-border"></div>
 					<div class="b-order-total-inner">
 						<p>Итого:</p>
 						<div class="total"><?=number_format((float)$order['ORDER']["PRICE"], 2, '.', '')?><span class="icon-ruble"></span></div>
