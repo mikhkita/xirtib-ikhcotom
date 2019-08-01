@@ -296,7 +296,7 @@ if (count($arResult["OFFERS"]) < 5){
 						</div>
 						<? endif; ?>
 				<? endif; ?>
-					<?if($quantity == 0){
+					<?if($quantity <= 0){
 						$inputVal = 0;
 						$btnClass = "unavailable";
 					} else {
@@ -314,13 +314,16 @@ if (count($arResult["OFFERS"]) < 5){
 					<a href="/ajax/?action=ADD2BASKET" data-id="<?=$id?>" class="b-btn b-btn-to-cart <?=$btnClass?>">
 						<span class="icon-cart"></span>
 						<span class="b-btn-to-cart-text">
-						<? if ($quantity == 0): ?>
+						<? if ($quantity <= 0): ?>
 							Товара нет в наличии
 						<? else: ?>
 							Добавить в корзину
 						<? endif; ?>
 						</span>
 					</a>
+					<? if ($quantity <= 0): ?>
+						<p>Попробуйте выбрать другую опцию</p>
+					<? endif; ?>
 					<div href="#" onclick="return false;" class="b-btn b-btn-to-cart-cap hide">
 						<span class="icon-checked"></span>
 						<span class="icon-close"></span>

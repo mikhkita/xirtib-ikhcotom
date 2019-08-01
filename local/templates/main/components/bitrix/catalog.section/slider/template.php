@@ -87,6 +87,7 @@ if (isAuth($USER)){
 						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>"></a>
 					<? endif; ?>
 
+					<? /* ?>
 					<? $text = "Нет в наличии" ?>
 					<? if ($arItem['OFFERS']): ?>
 						<? foreach ($arItem['OFFERS'] as $offer): ?>
@@ -102,6 +103,7 @@ if (isAuth($USER)){
 					<? endif ?>
 
 					<div class="b-in-stock"><?=$text?></div>
+					<? */ ?>
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-top-dark"></a>
 					<a href="#element_view" data-href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="element-view b-card-top-hover fancy">Быстрый просмотр</a>
 				</div>

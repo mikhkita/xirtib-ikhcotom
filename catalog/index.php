@@ -223,7 +223,7 @@ $APPLICATION->SetTitle("Каталог");?>
 						"TEMPLATE_THEME" => "site",
 						"USE_MAIN_ELEMENT_SECTION" => "N",
 						"USE_PRICE_COUNT" => "N",
-						"USE_PRODUCT_QUANTITY" => "N",
+						"USE_PRODUCT_QUANTITY" => "Y",
 						"WITH_REVIEWS" => ($isFirst)?"Y":"N",
 						"WITH_CALLBACK" => ($isLast)?"Y":"N",
 						"TAGS" => ($_REQUEST['TAGS'])?"Y":"N",
@@ -365,7 +365,7 @@ $APPLICATION->SetTitle("Каталог");?>
 				"TEMPLATE_THEME" => "site",
 				"USE_MAIN_ELEMENT_SECTION" => "N",
 				"USE_PRICE_COUNT" => "N",
-				"USE_PRODUCT_QUANTITY" => "N",
+				"USE_PRODUCT_QUANTITY" => "Y",
 			),
 			false,
 			Array(

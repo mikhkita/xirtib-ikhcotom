@@ -10,6 +10,7 @@ $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[
 
 $isMain = $GLOBALS["isMain"] = ( $curPage == "/" ) ? true : false;
 $isAbout = $GLOBALS["isAbout"] = ($urlArr[1] == "about");
+$isDetail = $GLOBALS["isDetail"] = ($urlArr[1] == "catalog" && isset($urlArr[4]));
 
 $GLOBALS['partial'] = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 

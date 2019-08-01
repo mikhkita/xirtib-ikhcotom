@@ -697,6 +697,16 @@ function getLocationByZIP($zip){
     return false;
 }
 
+function getItemLabel($arItem){
+	$days = 14; // Если товар выложен меньше, чем столько дней назад, то это новинка
+
+	if( time() - strtotime($arItem["DATE_CREATE"]) <= $days*24*60*60 ){
+		return "Новинка";
+	}else{
+		return false;
+	}
+}
+
 function getElementImages($arResult){
 	
 	$arImg = array(
