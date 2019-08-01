@@ -81,7 +81,9 @@ if(count($arResult["ITEMS"])): ?>
 					<? endif; ?>
 					<div class="b-card-top-img" style="background-image: url('<?=$renderImage['src']?>');"></div>
 
-					<div class="b-discount">Новинка</div>
+					<? if( $label = getItemLabel($arItem) ): ?>
+						<div class="b-discount"><?$label?></div>
+					<? endif;?>
 
 					<? if (isAuth($USER)): ?>
 						<? if ($ids != 0): ?>
@@ -101,6 +103,7 @@ if(count($arResult["ITEMS"])): ?>
 						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>"></a>
 					<? endif; ?>
 
+					<? /* ?>
 					<? $text = "Нет в наличии" ?>
 					<? if ($arItem['OFFERS']): ?>
 						<? foreach ($arItem['OFFERS'] as $offer): ?>
@@ -116,6 +119,7 @@ if(count($arResult["ITEMS"])): ?>
 					<? endif ?>
 
 					<div class="b-in-stock"><?=$text?></div>
+					<? */ ?>
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-top-dark"></a>
 					<a href="#element_view" data-href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="element-view b-card-top-hover fancy">Быстрый просмотр</a>
 				</div>

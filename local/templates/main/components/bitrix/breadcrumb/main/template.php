@@ -36,10 +36,12 @@ for($index = 0; $index < $itemSize; $index++)
 	}
 	else
 	{
-		$strReturn .= '
-			<li class="bx-breadcrumb-item">
-				<span>'.$title.'</span>
-			</li>';
+		if( !$GLOBALS["isDetail"] ){
+			$strReturn .= '
+				<li class="bx-breadcrumb-item">
+					<span>'.$title.'</span>
+				</li>';
+		}
 	}
 }
 
