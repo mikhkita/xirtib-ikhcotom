@@ -5,9 +5,7 @@ global $APPLICATION;
 $this->setFrameMode(true);
 $APPLICATION->SetPageProperty('title', $arResult["NAME"]); ?>
 
-<? $img = CFile::ResizeImageGet($arResult['DETAIL_PICTURE']['ID'], Array("width" => 1000, "height" => 1000), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters ); ?>
-
-<?
+<? $img = CFile::ResizeImageGet($arResult['DETAIL_PICTURE']['ID'], Array("width" => 1000, "height" => 1000), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 
 $arColors = getColors();
 
@@ -17,6 +15,21 @@ if (isAuth($USER)){
 	if( empty($ids) || !count($ids) ){
 		$ids = 0;
 	}
+}
+
+if ($ids != 0){
+	foreach ($ids as $key => $value) {
+		$favClass = "";
+		$favAction = "ADD";
+		if ($value == $arResult['ID']) {
+			$favClass = "active";
+			$favAction = "REMOVE";
+			break;
+		} 
+	}
+} else{
+	$favClass = "";
+	$favAction = "ADD";
 }
 
 $GLOBALS["arProductReviews"] = array("PROPERTY_PRODUCT_ID" => $arResult["ID"]);
@@ -43,27 +56,44 @@ $reviewTabBlockClass = 'hide';
 if ($_GET['review'] == 'Y'){
 	$tabClass = '';
 	$reviewTabClass = 'active';
-
 	$tabBlockClass = 'hide';
 	$reviewTabBlockClass = '';
 }
 
-
 if ($arResult["OFFERS"]){
-
 	foreach ($arResult["OFFERS"] as $key => $offer){
 		$zoomClass = 'hide';
 		if ($offer["DETAIL_PICTURE"]){
 			$zoomClass = '';
 			break;
 		}
+		if ($key == 0){
+			$price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]);
+			$discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]);
+			$priceType = $offer["ITEM_MEASURE"]["ID"];
+		}
+		if($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"]){
+			$class = "has-discount";
+		}
 	}
-	
 } else {
-
 	if (!$arResult["DETAIL_PICTURE"]) {
 		$zoomClass = 'hide';
+		$imgAttr = 'onclick="return false;"';
 	}
+	if( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arResult["PRICES"]["PRICE"]["VALUE"] ){
+		$class = "has-discount";
+	}
+	$price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' );
+	$discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' );
+}
+
+if ($price != $discountPrice){
+	$discount = true;
+}
+
+if (count($arResult["OFFERS"]) < 5){
+	$sliderClass = "no-slider";
 }
 
 ?>
@@ -75,65 +105,24 @@ if ($arResult["OFFERS"]){
 		<div class="b-product-photo">
 			<div class="main-photo">
 				<div class="icon-zoom <?=$zoomClass?>"></div>
-				
 				<div class="b-product-main after-load">
 					<? if ($arResult["OFFERS"]): ?>
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-							<? if ($offer["DETAIL_PICTURE"]):?>
-								<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-									<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>');"></div>
-								</a>
-							<?else:?>
-								<a href="#" onclick="return false;">
-									<img src="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>">
-								</a>
-							<?endif;?>
-
-							<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
-								<? $class = "has-discount"; ?>
-							<? endif; ?>
-
-							<? if ($key == 0): ?>
-								<? $price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]); ?>
-								<? $discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
-								<? $priceType = $offer["ITEM_MEASURE"]["ID"]; ?>
-							<? endif; ?>
+							<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+								<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>');"></div>
+							</a>
 						<? endforeach; ?>
 					<? else: ?>
-						<? if ($arResult["DETAIL_PICTURE"]): ?>
-								<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-									<div class="catalog-element-img" style="background-image: url('<?=$renderImage["src"]?>');"></div>
-								</a>
-						<? else: ?>
-							<img src="<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>">
-						<? endif; ?>
-						<? if( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arResult["PRICES"]["PRICE"]["VALUE"] ): ?>
-							<? $class = "has-discount"; ?>
-						<? endif; ?>
-						<? $price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' ); ?>
-						<? $discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' ); ?>
+						<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1" <?=$imgAttr?>>
+							<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>');"></div>
+						</a>
 					<? endif; ?>
 				</div>
-
-				<? if ($price != $discountPrice): ?>
-					<? $discount = true; ?>
-				<? endif; ?>
 			</div>
-
-			<? if (count($arResult["OFFERS"]) < 5): ?>
-				<? $sliderClass = "no-slider"; ?>
-			<? endif; ?>
-
 			<? if ($arResult["OFFERS"]): ?>
 				<div class="b-product-photo-slider <?=$sliderClass?>">
 					<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-						<?
-						if ($key == 0){
-							$class = 'active';
-						}else{
-							$class = '';
-						}
-						?>
+						<? $class = ($key == 0) ? 'active' : ''; ?>
 						<img data-color-id="<?=$offer['ID']?>" src="<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>" class="<?=$class?>">
 					<? endforeach; ?>
 				</div>
@@ -145,35 +134,17 @@ if ($arResult["OFFERS"]){
 				<ul class="b-product-actions clearfix">
 					<li>
 						<? if (isAuth($USER)): ?>
-							<? if ($ids != 0): ?>
-								<? foreach ($ids as $key => $value) {
-									$favClass = "";
-									$favAction = "ADD";
-									if ($value == $arResult['ID']) {
-										$favClass = "active";
-										$favAction = "REMOVE";
-										break;
-									} 
-								} ?>
-							<? else: ?>
-								<?
-									$favClass = "";
-									$favAction = "ADD";
-								?>
-							<? endif; ?>
 							<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-action="<?=$favAction?>">
 								<span class="icon icon-star"></span>
 								В избранное
 							</a>
 						<? endif; ?>
-						<!-- <a href="#"><span class="icon icon-star"></span><span class="icon icon-star-green"></span>В избранное</a> -->
 					</li>
 					<li class="b-share-link">
 						<a href="#">
 							<span class="icon icon-share"></span>
 							<span class="icon icon-share-green"></span>Поделиться
 						</a>
-						<? $shareLink = 'http://motochki.redder.pro'.$arResult["DETAIL_PAGE_URL"]; ?>
 						<script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
 						<script src="https://yastatic.net/share2/share.js"></script>
 						<div class="ya-share2" data-url="<?=$shareLink?>"  data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>

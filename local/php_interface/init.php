@@ -752,7 +752,7 @@ function getElementImages($arResult){
 		}
 		array_push($arImg['DETAIL_PHOTO'], $arPhoto);
 	}
-	
+
 	return $arImg;
 }
 function resizePhotos($photo){

@@ -273,6 +273,9 @@ body {
 	.b-order-item img{
 		margin-right: 12px;
 	}
+	.catalog-element-img{
+		height: 351px;
+	}
 	.b-order-item-left {
 	    width: calc(100% - 152px);
 	}
