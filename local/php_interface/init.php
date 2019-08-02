@@ -627,14 +627,15 @@ function getOrderList(){
 		$productID = CCatalogSku::GetProductInfo($arBasketItem["id"]);//получить id товара по id торгового предложения
 		if(is_array($productID)){
 			$arBasketItem["productID"] = $productID["ID"];
-			$db_res = CCatalogProduct::GetList(
+			$db_res = CIBlockElement::GetList(
 		        array(),
 		        array("ID" => $productID["ID"]),
 		        false,
 		        array("nTopCount" => 10)
 		    );
 			if ($ar_res = $db_res->Fetch()){
-			    $arBasketItem["productName"] = $ar_res["ELEMENT_NAME"];
+				$arBasketItem["productImage"] = $ar_res["DETAIL_PICTURE"];
+			    $arBasketItem["productName"] = $ar_res["NAME"];
 			}
 		}else{
 			$arBasketItem["productID"] = $arBasketItem["id"];
@@ -648,8 +649,12 @@ function getOrderList(){
 		}
 		if($objElement->getDetailPicture()){
 			$img = CFile::ResizeImageGet($objElement->getDetailPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
-		}else{
+		}else if($objElement->getPreviewPicture()){
 			$img = CFile::ResizeImageGet($objElement->getPreviewPicture(), array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
+		}else if($arBasketItem["productImage"]){
+			$img = CFile::ResizeImageGet($arBasketItem["productImage"], array('width'=>73*2, 'height'=>73*2), BX_RESIZE_IMAGE_PROPORTIONAL, true, false, false, 70);
+		}else{
+			$img["src"] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 		}
 		$arBasketItem["image"] = $img["src"];
 		$arBasketItem["name"] = $basketItem->getField('NAME');
@@ -763,7 +768,7 @@ function getElementImages($arResult){
 	return $arImg;
 }
 function resizePhotos($photo){
-	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 900, "height" => 900), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 2048, "height" => 2048), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 	$tmpSmall = CFile::ResizeImageGet($photo, Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 	$arPhoto['BIG'] = $tmpBig['src'];
 	$arPhoto['SMALL'] = $tmpSmall['src'];

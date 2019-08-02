@@ -196,8 +196,8 @@ h1.b-title{
 	font-family: DINPro-Medium;
 	font-size: 42px;
 	line-height: 50px;
-	padding-top: 40px;
-	margin-bottom: 34px;
+	padding-top: 24px;
+	margin-bottom: 28px;
 	color: #564531;
 	letter-spacing: 0;
 	text-align: center;
@@ -582,7 +582,7 @@ h3.b-title{
 		}
 		.b-header-catalog{
 			position: absolute;
-			z-index: 2;
+			z-index: 10000;
 			opacity: 0;
 			visibility: hidden;
 			background: #fff;
@@ -590,10 +590,20 @@ h3.b-title{
 			border-radius: 3px;
 			width: 213px;
 			box-shadow: 3px 5px 20px 5px rgba(230,230,230,0.50);
+			-webkit-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+			   -moz-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+			    -ms-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+			   	 -o-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+					transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
 		}
 		.b-header-catalog-block:hover > .b-header-catalog{
 			opacity: 1;
 			visibility: visible;
+			-webkit-transition: opacity 150ms ease-out, margin-top 150ms ease-out, visibility 150ms ease-out;
+			   -moz-transition: opacity 150ms ease-out, margin-top 150ms ease-out, visibility 150ms ease-out;
+			    -ms-transition: opacity 150ms ease-out, margin-top 150ms ease-out, visibility 150ms ease-out;
+			   	 -o-transition: opacity 150ms ease-out, margin-top 150ms ease-out, visibility 150ms ease-out;
+					transition: opacity 150ms ease-out, margin-top 150ms ease-out, visibility 150ms ease-out;
 			margin-top: 20px;
 		}
 		.b-header-catalog-block > .b-header-catalog:before{
@@ -611,21 +621,33 @@ h3.b-title{
 				padding: 10px 20px;
 				display: block;
 			}
-			.b-header-catalog-block > .b-header-catalog > li{
+			.b-header-catalog-block > .b-header-catalog li{
 				position: relative;
 			}
 			.b-header-catalog-block > .b-header-catalog > li:hover{
 				background: #D4EABF;
 			}
-			.b-header-catalog li:hover > .b-header-catalog{
-				opacity: 1;
-				visibility: visible;
+			.b-header-catalog li > .b-header-catalog{
 				left: 100%;
 				top: -1px;
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
+				-webkit-transition: opacity 300ms ease-out, visibility 300ms ease-out;
+				   -moz-transition: opacity 300ms ease-out, visibility 300ms ease-out;
+				    -ms-transition: opacity 300ms ease-out, visibility 300ms ease-out;
+				   	 -o-transition: opacity 300ms ease-out, visibility 300ms ease-out;
+						transition: opacity 300ms ease-out, visibility 300ms ease-out;
 			}
-			.b-header-catalog > li:hover > .b-header-catalog ~ a:before{
+			.b-header-catalog li:hover > .b-header-catalog{
+				opacity: 1;
+				visibility: visible;
+				-webkit-transition: opacity 150ms ease-out, visibility 150ms ease-out;
+				   -moz-transition: opacity 150ms ease-out, visibility 150ms ease-out;
+				    -ms-transition: opacity 150ms ease-out, visibility 150ms ease-out;
+				   	 -o-transition: opacity 150ms ease-out, visibility 150ms ease-out;
+						transition: opacity 150ms ease-out, visibility 150ms ease-out;
+			}
+			.b-header-catalog > li > .b-header-catalog ~ a:before{
 				content: '';
 				position: absolute;
 			    right: -4px;
@@ -639,7 +661,7 @@ h3.b-title{
 				-o-transform: translateY(-50%) rotate(45deg);
 				transform: translateY(-50%) rotate(45deg);
 			}
-			.b-header-catalog li:hover > .b-header-catalog a{
+			.b-header-catalog li > .b-header-catalog a{
 				font-family: 'DINPro-Regular';
 				font-size: 16px;
 				line-height: 22px;
@@ -873,9 +895,9 @@ h3.b-title{
 		display: block;
 	}
 		.b-main-slide h2{
-			font-family: DINPro-Light;
+			font-family: DINPro-Bold;
 			font-size: 52px;
-			color: #564531;
+			color: #5f9828;
 			letter-spacing: 0;
 			max-width: 783px;
 			text-align: center;
@@ -978,7 +1000,7 @@ h3.b-title{
 			display: inline-block;
 			width: calc(100% / 4);
 			text-align: center;
-			padding: 10px;
+			padding: 10px 12px;
 			position: relative;
 			padding-bottom: 13px;
 			/*min-height: 100%;*/
@@ -1000,16 +1022,17 @@ h3.b-title{
 				max-width: 100%;
 				max-height: 100%;
 				width: 100%;
-				height: 267px;
-				background-size: cover;
+				height: 245px;
+				background-size: contain;
 				background-position: center;
+				background-repeat: no-repeat;
 			}
 			.b-card-top-hover{
 				font-family: DINPro-Regular;
 				font-size: 14px;
 				color: #FFFFFF;
 				letter-spacing: 0;
-				line-height: 17px;
+				line-height: 18px;
 				border: 1px solid #FFF;
 				position: absolute;
 				left: 50%;
@@ -1020,7 +1043,7 @@ h3.b-title{
 				transform: translate(-50%, -50%);
 				min-width: 162px;
 				opacity: 0;
-				padding: 10px 18px 10px 20px;
+				padding: 10px 18px 12px 20px;
 				-webkit-transition: background-color .1s, color .1s;
 				-o-transition: background-color .1s, color .1s;
 				transition: background-color .1s, color .1s;
@@ -1062,6 +1085,7 @@ h3.b-title{
 				position: absolute;
 				width: calc(100% + 1px);
 				height: 100%;
+				border-radius: 4px;
 				content: " ";
 				border: 1px #E6E6E6 solid;
 				left: 50%;
@@ -1222,10 +1246,10 @@ h3.b-title{
 					margin: 0 10px;
 				}
 					.slick-slider .b-item-card .b-card-hover-frame{
-    					width: calc(100% + 22px);
-					}
+    					/* width: calc(100% + 22px); */
+    	}
 					.slick-slider .b-item-card:hover .b-card-hover-frame{
-						width: calc(100% + 42px);
+						width: calc(100% + 18px);
 					}
 					.slick-slider .b-item-card:not(.slick-active) .b-card-hover-frame{
 
@@ -2194,16 +2218,18 @@ h3.b-title{
 		}
 			.b-nav-pages li{
 				display: inline-block;
-				margin-right: 2px;
+				margin: 0px 4px;
 			}
 			.b-nav-pages li:last-child{;
 				margin-right: 0;
 			}
 				.b-nav-pages li a{
 					display: block;
-					padding: 6px 12px;
+					padding: 8px 0px;
 					border: 1px solid #E6E6E6;
 					border-radius: 3px;
+					width: 40px;
+					height: 40px;
 				}
 				.b-nav-pages li a.active{
 					border: 1px solid #77BE32;
@@ -2213,7 +2239,9 @@ h3.b-title{
 				.b-nav-pages li:hover a{
 					border: 1px solid #77BE32;
 				}
-
+	.modern-page-dots{
+		padding: 0px 10px;
+	}
 	.b-cabinet-profile a:hover,
 	.b-order-item-name a:hover,
 	.b-nav a:hover{
@@ -2295,10 +2323,10 @@ h3.b-title{
 					}
 					.catalog-element-img{
 						width: 100%;
-						height: 431px;
-					    background-size: contain;
-					    background-position: 50% 50%;
-    					background-repeat: no-repeat;
+						height: 461px;
+						background-size: contain;
+						background-position: 50% 50%;
+						background-repeat: no-repeat;
 					}
 					.main-photo .b-product-main:not(.loaded) a:not(:first-child){
 						display: none;
@@ -2490,9 +2518,9 @@ h3.b-title{
 				}
 					.b-product-colors{
 						margin-bottom: 24px;
-					    display: flex;
-    					justify-content: space-between;
-    					align-items: center;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
 					}
 					.b-catalog-list .b-product-colors{
 						display: inline-block;
@@ -2509,23 +2537,33 @@ h3.b-title{
 							line-height: 22px;
 						}
 						.b-catalog-list .b-product-colors > span{
-							font-family: 'DINPro-Light';
+							/*font-family: 'DINPro-Light';*/
+						}
+						.chosen-container .chosen-results {
+						    margin: 0 0px 4px 0;
+						    padding: 0 0 0 0px;
+						}
+						.chosen-container .chosen-results li {
+						    font-size: 16px;
+						    /*font-family: DINPro-Light;*/
+						    padding: 10px 12px;
 						}
 						.b-product-colors .chosen-container{
-							vertical-align: top;
+							vertical-align: middle;
 							/*margin-left: 22px;*/
+							margin-left: 10px;
 						}
 						.b-product-colors .chosen-container-single .chosen-single{
 							background: transparent;
-							padding: 5px 16px 7px 16px;
-							height: 34px;
+							padding: 9px 16px 11px 16px;
+							height: auto;
 							font-size: 16px;
-    						line-height: 20px;
-    						box-shadow: none;
-    						border: 1px solid #E6E6E6;
+							line-height: 20px;
+							box-shadow: none;
+							border: 1px solid #E6E6E6;
 						}
 						.b-catalog-list .b-product-colors .chosen-container-single .chosen-single{
-							font-family: 'DINPro-Light';
+							/* font-family: 'DINPro-Light'; */
 						}
 						.b-product-colors .chosen-container-single .chosen-single div:before{
 							position: absolute;
@@ -3156,7 +3194,8 @@ h3.b-title{
 	.b-filter{
 		vertical-align: top;
 		display: inline-block;
-		width: 269px;
+		width: 256px;
+		margin-top: -8px;
 	}
 		.b-filter-item{
 			border-bottom: 1px solid #EEE;
@@ -3245,7 +3284,7 @@ h3.b-title{
 					display: block;
 				}
 				.b-filter-checkbox-list li{
-					margin-bottom: 10px;
+					margin-bottom: 7px;
 				}
 				.load .b-filter-checkbox-list li{
 
@@ -3310,10 +3349,11 @@ h3.b-title{
 				}*/
 				.range-inputs{
 					margin-bottom: 14px;
+					font-size: 0px;
 				}
 				.range-inputs input[type=text]{
 					display: inline-block;
-					width: 116px;
+					width: 112px;
 					padding: 12px 0 15px 0;
 					font-size: 16px;
 					line-height: 20px;
@@ -3323,7 +3363,7 @@ h3.b-title{
 					.range-inputs .icon-minus{
 						display: inline-block;
 						vertical-align: top;
-						padding: 24px 5px 0 5px;
+						padding: 24px 9px 0 10px;
 					}
 					.range-inputs .icon-minus:before{
 						width: 13px;
@@ -3383,8 +3423,8 @@ h3.b-title{
 
 .b-catalog-list{
 	display: inline-block;
-    width: calc(100% - 284px);
-    margin-left: 10px;
+	width: calc(100% - 284px);
+	margin-left: 24px;
 }
 .b-catalog-list.after-load:after{
     background-size: 70px;
@@ -3399,9 +3439,14 @@ h3.b-title{
 		width: calc(100%/4);
 	}
 	.b-catalog-list .b-item-card{
-		width: calc(100%/3);
+		width: calc((100% - 2*24px)/3);
 		float: left;
 		vertical-align: top;
+		margin-right: 24px;
+		margin-bottom: 24px;
+	}
+	.b-catalog-list .b-item-card:nth-child(3n){
+		margin-right: 0px;
 	}
 	.b-catalog-list:not(.loaded) .b-item-card{
 		z-index: 0;
@@ -4582,7 +4627,7 @@ textarea:-moz-placeholder {
 }
 	.b-checkbox .b-checked{
 		display: inline-block;
-		vertical-align: top;
+		vertical-align: middle;
 		width: 20px;
 		height: 20px;
 		border-radius: 2px;
@@ -4606,9 +4651,10 @@ textarea:-moz-placeholder {
 
 	.b-checkbox p{
 		display: inline-block;
-		vertical-align: top;
+		vertical-align: middle;
 		width: calc(100% - 40px);
-		line-height: 16px;
+		line-height: 20px;
+		margin-bottom: 2px;
 	}
 
 /*=====radio=====*/
@@ -4825,7 +4871,7 @@ textarea:-moz-placeholder {
 	text-align: left;
 }
 .b-blog-list-text .blog-title {
-	margin-bottom: 14px;
+	margin-bottom: 8px;
 	width: 100%;
 	font-family: 'DINPro-Medium';
 	color: #000000;
@@ -4856,6 +4902,7 @@ textarea:-moz-placeholder {
 	font-size: 16px;
 	color: #000000;
 	line-height: 1.5;
+	margin-bottom: 10px;
 }
 .b-blog-list-text .blog-more-a {
 	display: inline-block;

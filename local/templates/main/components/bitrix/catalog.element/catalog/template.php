@@ -43,7 +43,7 @@ $arFilter = Array("IBLOCK_ID" => 3, "IBLOCK_SECTION_ID" => 8, "ACTIVE"=>"Y", 'PR
 $reviewsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPageSize"=>50), array());
 
 $id = $arResult['OFFERS'] ? $arResult['OFFERS'][0]['ID'] : $arResult['ID'];
-$quantity = $arResult['OFFERS'] ? $arResult['OFFERS'][0]["PRODUCT"]["QUANTITY"] : $arResult["PRODUCT"]["QUANTITY"];
+$quantity = intval($arResult['OFFERS'] ? $arResult['OFFERS'][0]["PRODUCT"]["QUANTITY"] : $arResult["PRODUCT"]["QUANTITY"]);
 $article = $arResult["OFFERS"] ? $arResult["OFFERS"][0]['CODE'] : $arResult["PROPERTIES"]["ARTICLE"]["VALUE"];
 
 $arImg = getElementImages($arResult);
@@ -94,7 +94,12 @@ if ($arResult["OFFERS"]){
 		}
 	}
 	if (!isset($name)) {
-		if ($arResult["ORIGINAL_PARAMETERS"]["SECTION_CODE"] == 'pryazha') {
+		$nav = CIBlockSection::GetNavChain(false, $arResult["SECTION"]["ID"]);
+		$sections = array();
+		while($arSectionPath = $nav->GetNext()){
+			array_push($sections, $arSectionPath);
+		}
+		if ($sections[0]["CODE"] == "pryazha") {
 			$name = 'Цвет';
 		} else {
 			$name = 'Опция';
@@ -353,7 +358,15 @@ if (count($arResult["OFFERS"]) < 5){
 			</div>
 			<div class="tabs-content spec-block b-text hide">
 				<div class="spec-block-left">
-					<? if ($arResult["PROPERTIES"]["COUNTRY"]["VALUE"]): ?>
+					<? foreach ($arResult["PROPERTIES"] as $key => $arProp) {
+						if( empty($arProp["VALUE"]) || (is_array($arProp["VALUE"]) && count($arProp["VALUE"]) == 0) || in_array($arProp["CODE"], array("ARTICLE")) ){
+							continue;
+						}
+						?>
+						<p><span><?=$arProp["NAME"]?>:</span> <? if( is_array($arProp["VALUE"]) ): ?><?=mb_strtolower(implode(", ", $arProp["VALUE"]), "UTF-8")?><? else: ?><?=$arProp["VALUE"]?><? endif; ?></p>
+						<?
+					} ?>
+					<? /* ?><? if ($arResult["PROPERTIES"]["COUNTRY"]["VALUE"]): ?>
 						<p><span>Страна:</span> <?=$arResult["PROPERTIES"]["COUNTRY"]["VALUE"]?></p>
 					<? endif; ?>
 					<? if ($arResult["PROPERTIES"]["FACTORY"]["VALUE"]): ?>
@@ -397,6 +410,7 @@ if (count($arResult["OFFERS"]) < 5){
 					<? if ($arResult['PROPERTIES']['CARE']['VALUE']): ?>
 						<p><span>Уход:</span> <?=$arResult['PROPERTIES']['CARE']['VALUE']?></p>
 					<? endif; ?>
+					<? */ ?>
 				</div>
 				<? if ($arResult["TAGS"]): ?>
 					<div class="spec-block-right">
