@@ -1,5 +1,16 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
+// var_dump($arResult["OFFERS"]);
+
+foreach ($arResult["OFFERS"] as $key => $offer) {
+	$quantity = intval($offer["PRODUCT"]["QUANTITY"]);
+	if( $quantity <= 0 ){
+		unset($arResult["OFFERS"][$key]);
+	}
+}
+
+$arResult["OFFERS"] = array_values($arResult["OFFERS"]);
+
 /**
  * @var CBitrixComponentTemplate $this
  * @var CatalogElementComponent $component

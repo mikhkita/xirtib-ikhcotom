@@ -4871,7 +4871,7 @@ textarea:-moz-placeholder {
 	text-align: left;
 }
 .b-blog-list-text .blog-title {
-	margin-bottom: 14px;
+	margin-bottom: 8px;
 	width: 100%;
 	font-family: 'DINPro-Medium';
 	color: #000000;
@@ -4902,6 +4902,7 @@ textarea:-moz-placeholder {
 	font-size: 16px;
 	color: #000000;
 	line-height: 1.5;
+	margin-bottom: 10px;
 }
 .b-blog-list-text .blog-more-a {
 	display: inline-block;
