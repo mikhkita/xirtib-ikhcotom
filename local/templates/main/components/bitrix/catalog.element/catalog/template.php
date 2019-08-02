@@ -70,11 +70,10 @@ if ($_GET['review'] == 'Y'){
 }
 
 if ($arResult["OFFERS"]){
+	$zoomClass = 'hide';
 	foreach ($arResult["OFFERS"] as $key => $offer){
-		$zoomClass = 'hide';
 		if ($offer["DETAIL_PICTURE"]){
 			$zoomClass = '';
-			break;
 		}
 		if ($key == 0){
 			$price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]);
