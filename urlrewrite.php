@@ -48,6 +48,14 @@ $arUrlRewrite=array (
     'PATH' => '/catalog/index.php',
     'SORT' => 100,
   ),
+  9 => 
+  array (
+    'CONDITION' => '#^/product/(.+)/(\\\\?(.*))?#',
+    'RULE' => 'ELEMENT_CODE=$1',
+    'ID' => '',
+    'PATH' => '/catalog/detail.php',
+    'SORT' => 100,
+  ),
   7 => 
   array (
     'CONDITION' => '#^/blog/(.+)/(\\\\?(.*))?#',

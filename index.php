@@ -354,7 +354,6 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 					"FILTER_VIEW_MODE" => "horizontal",
 					"HIDE_NOT_AVAILABLE" => "Y",
 					"IBLOCK_ID" => "1",
-					"CUSTOM_SECTION_CODE" => 'pryazha',
 					"IBLOCK_TYPE" => "content",
 					"INSTANT_RELOAD" => "Y",
 					"PAGER_PARAMS_NAME" => "arrPager",

@@ -67,7 +67,8 @@ $APPLICATION->SetTitle("Каталог");?>
 	} ?>
 
 	<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
-
+	
+	<div class="catalog-mobile-filter">Фильтр</div>
 	<div class="b-catalog clearfix" id="b-catalog">
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.smart.filter",
@@ -125,7 +126,6 @@ $APPLICATION->SetTitle("Каталог");?>
 				<? if ($GLOBALS['partial']): ?>
 					<? $APPLICATION->RestartBuffer(); ?>
 				<? endif; ?>
-
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",
 					"main",
@@ -153,7 +153,7 @@ $APPLICATION->SetTitle("Каталог");?>
 						"DISABLE_INIT_JS_IN_COMPONENT" => "N",
 						"DISPLAY_BOTTOM_PAGER" => "Y",
 						"DISPLAY_TOP_PAGER" => "N",
-						"ELEMENT_SORT_FIELD" => $_REQUEST['SORT'],
+						"ELEMENT_SORT_FIELD" => $_REQUEST['SORT_FIELD'],
 						"ELEMENT_SORT_FIELD2" => "id",
 						"ELEMENT_SORT_ORDER" => $_REQUEST['SORT_TYPE'],
 						"ELEMENT_SORT_ORDER2" => "DESC",

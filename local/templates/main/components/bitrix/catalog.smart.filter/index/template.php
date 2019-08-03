@@ -19,11 +19,8 @@ foreach($arResult["ITEMS"] as $arItem){
 	if ($arItem['ID'] == '4') {
 		$arColors[] = $arItem;
 	}
-	if ($arItem["ID"] == '8') {
-		$arStructure[] = $arItem; 
-	}
-	if ($arItem["ID"] == '11') {
-		$arLength[] = $arItem; 
+	if ($arItem["ID"] == '25') {
+		$arStructure = $arItem['VALUES'];
 	}
 }
 
@@ -48,18 +45,18 @@ foreach($arResult["ITEMS"] as $arItem){
 			<h3>По составу</h3>
 			<div class="filter-list">
 				<? $i = 0; ?>
-				<? foreach ($arStructure[0]['VALUES'] as $xmlID => $structure): ?>
-					<? if ($i > 6): ?>
+				<? foreach ($arStructure as $xmlID => $structure): ?>
+					<? if ($i == 6): ?>
 						<div class="b-more-tabs">
 					<? endif; ?>
 						<input class="wool-input" name="<?=$structure["CONTROL_ID"]?>" type="checkbox" id="<?=$structure["CONTROL_ID"]?>" value="<?=$structure["HTML_VALUE"]?>">
 						<label class="b-btn b-tab-wool" for="<?=$structure["CONTROL_ID"]?>"><?=$structure["VALUE"]?></label>
-					<?if ($i > 6 && $i == count($arStructure[0]['VALUES'])): ?>
+					<?if ($i == (count($arStructure) - 1)): ?>
 						</div>
 					<?endif; ?>
 					<? $i ++; ?>
 				<? endforeach; ?>
-				<? if ($i > 6): ?>
+				<? if ($i >= 6): ?>
 					<div class="b-show-more">смотреть больше</div>
 				<? endif; ?>
 			</div>
@@ -79,8 +76,8 @@ foreach($arResult["ITEMS"] as $arItem){
 				<label class="b-btn b-tab-wool" for="lenght-5">500-800</label>
 				<input class="lenght-input" name="lenght" type="radio" id="lenght-6" data-min="800" data-max="1200">
 				<label class="b-btn b-tab-wool" for="lenght-6">800-1200</label>
-				<input type="hidden" name="arrFilter_11_MIN">
-				<input type="hidden" name="arrFilter_11_MAX">
+				<input type="hidden" name="arrFilter_28_MIN">
+				<input type="hidden" name="arrFilter_28_MAX">
 			</div>
 		</div>
 	</div>

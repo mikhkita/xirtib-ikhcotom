@@ -444,8 +444,8 @@ $(document).ready(function(){
         var min = $('.lenght-input:checked').attr('data-min'),
             max = $('.lenght-input:checked').attr('data-max');
 
-        $('input[name=arrFilter_11_MIN]').val(min);
-        $('input[name=arrFilter_11_MAX]').val(max);
+        $('input[name=arrFilter_28_MIN]').val(min);
+        $('input[name=arrFilter_28_MAX]').val(max);
     })
 
     $(".rating").hover(function() {
