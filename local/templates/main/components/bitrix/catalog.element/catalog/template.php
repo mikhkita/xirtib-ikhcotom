@@ -62,6 +62,12 @@ $tabBlockClass = '';
 $reviewTabClass = '';
 $reviewTabBlockClass = 'hide';
 
+$measures = array(
+	1 => "за 1 метр",
+	3 => "за 1 грамм",
+	5 => "за 1 шт.",
+);
+
 if ($_GET['review'] == 'Y'){
 	$tabClass = '';
 	$reviewTabClass = 'active';
@@ -78,7 +84,7 @@ if ($arResult["OFFERS"]){
 		if ($key == 0){
 			$price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]);
 			$discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]);
-			$priceType = $offer["ITEM_MEASURE"]["ID"];
+			$priceType = $measures[$offer["ITEM_MEASURE"]["ID"]];
 		}
 		if($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"]){
 			$class = "has-discount";
@@ -113,6 +119,7 @@ if ($arResult["OFFERS"]){
 	if( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arResult["PRICES"]["PRICE"]["VALUE"] ){
 		$class = "has-discount";
 	}
+	$priceType = $measures[$arResult["ITEM_MEASURE"]["ID"]];
 	$price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' );
 	$discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' );
 }
@@ -261,43 +268,18 @@ if (count($arResult["OFFERS"]) < 5){
 						<? endif; ?>
 					</div>
 				</div>
-				<? if ($discount): ?>
-					<div class="b-product-params-right has-discount">
+				
+					<div class="b-product-params-right<? if ($discount): ?> has-discount<? endif; ?>">
 						<div class="b-product-price-base">
-							<span id="price"><?=$price?></span>
+							<span id="price"><? if ($discount): ?><?=$price?><? endif; ?></span>
 							<span class="icon-ruble"></span>
 						</div>
-						<? if ($priceType == 3): ?>
-							<div class="b-product-price-total gram">
-								<span id="discount-price"><?=$discountPrice?></span>
-								<span class="icon-ruble-bold"></span>
-								<small>за 1 грамм</small>
-							</div>
-						<? else: ?>
-							<div class="b-product-price-total">
-								<span id="discount-price"><?=$discountPrice?></span>
-								<span class="icon-ruble-bold"></span>
-							</div>
-						<? endif; ?>
-				<? else: ?>
-					<div class="b-product-params-right">
-						<div class="b-product-price-base">
-							<span id="price"></span>
-							<span class="icon-ruble"></span>
-						</div>
-						<? if ($priceType == 3): ?>
-							<div class="b-product-price-total gram">
-								<span id="discount-price"><?=$discountPrice?></span>
-								<span class="icon-ruble-bold"></span>
-								<small>за 1 грамм</small>
-							</div>
-						<? else: ?>
-						<div class="b-product-price-total">
-							<span id="discount-price"><?=$price?></span>
+						<div class="b-product-price-total gram">
+							<span id="discount-price"><?=$discountPrice?></span>
 							<span class="icon-ruble-bold"></span>
+							<small><?=$priceType?></small>
 						</div>
-						<? endif; ?>
-				<? endif; ?>
+				
 					<?if($quantity <= 0){
 						$inputVal = 0;
 						$btnClass = "unavailable";

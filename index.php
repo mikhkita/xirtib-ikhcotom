@@ -100,22 +100,23 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 			<h2 class="b-title">Скидки</h2>
 			<?
 
-			$arDiscounts = getDiscountProducts();
-			$discountProducts = array();
+			// $arDiscounts = getDiscountProducts();
+			// $discountProducts = array();
 
-			foreach ($arDiscounts['PRODUCTS'] as $discount) {
-				$mxResult = CCatalogSku::GetProductInfo($discount);
-				if (is_array($mxResult)){
-					array_push($discountProducts, $mxResult['ID']);
-				}
-			}
+			// foreach ($arDiscounts['PRODUCTS'] as $discount) {
+			// 	$mxResult = CCatalogSku::GetProductInfo($discount);
+			// 	if (is_array($mxResult)){
+			// 		array_push($discountProducts, $mxResult['ID']);
+			// 	}
+			// }
 
-			$discountProducts = array_unique($discountProducts);
+			// $discountProducts = array_unique($discountProducts);
 
 
-			$GLOBALS["arrFilter2"][] = Array(
-				"LOGIC"=>"OR",
-				Array("ID" =>$discountProducts),
+			$GLOBALS["arrFilter2"] = Array(
+				// "LOGIC"=>"OR",
+				// Array("ID" =>$discountProducts),
+				"!PROPERTY_DISCOUNT" => false
 			);
 			
 			$APPLICATION->IncludeComponent(
