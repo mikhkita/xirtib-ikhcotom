@@ -436,19 +436,20 @@ body {
 }
 .b-main-tabs {
 	display: block;
+	margin-bottom: 0;
 }
 .b-wool-tabs, .b-lenght-tabs {
 	display: block;
 	width: 100%;
 }
 .filter-list {
-	display: block;
+	/*display: block;*/
 	text-align: left;
 	padding-bottom: 17px;
 	margin-bottom: 20px;
 }
 .b-tab-wool {
-	width: calc(100%/4 - 16px);
+	/*width: calc(100%/4 - 16px);*/
 }
 .b-show-more {
 	bottom: 0;

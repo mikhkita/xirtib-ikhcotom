@@ -32,7 +32,6 @@ if(count($arResult["ITEMS"])): ?>
 				<? $minVal = 100000; ?>
 				<? $maxVal = 0; ?>
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
-
 					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
 						<? $class = "has-discount"; ?>
 					<? endif; ?>
@@ -70,20 +69,6 @@ if(count($arResult["ITEMS"])): ?>
 					$images = getElementImages($arItem);
 					$renderImage['src'] = $images["DETAIL_PHOTO"][0]["SMALL"];
 					?>
-					<? /* ?><? if ($arItem['OFFERS']): ?>
-						<? if ($arItem['OFFERS'][0]["DETAIL_PICTURE"]): ?>
-							<? $renderImage = CFile::ResizeImageGet($arItem['OFFERS'][0]["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters ); ?>
-						<? else: ?>
-							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
-						<? endif; ?>
-					<? else: ?>
-						<? if ($arItem["DETAIL_PICTURE"]): ?>
-							<? $renderImage = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters ); ?>
-						<? else: ?>
-							<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
-						<? endif; ?>
-					<? endif; ?>
-					<? */ ?>
 					<div class="b-card-top-img" style="background-image: url('<?=$renderImage['src']?>');"></div>
 
 					<? if( $label = getItemLabel($arItem) ): ?>

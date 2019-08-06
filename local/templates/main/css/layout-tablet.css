@@ -189,8 +189,8 @@ body {
 @media screen and (max-width: 1024px){
 
 	.b-card-top img{
-		width: auto;
-		height: auto;
+		/*width: auto;*/
+		/*height: auto;*/
 	}
 	
 	.b-product-params-left {
