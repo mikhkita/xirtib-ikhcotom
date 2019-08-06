@@ -104,8 +104,28 @@ $APPLICATION->SetTitle("Каталог");?>
 				"XML_EXPORT" => "N"
 			)
 		);?>
-
 		<div class="b-catalog-list after-load">
+			<?$APPLICATION->IncludeComponent("redder:catalog.section.list", "subcategories", Array(
+				"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
+					"CACHE_GROUPS" => "Y",	// Учитывать права доступа
+					"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+					"CACHE_TYPE" => "N",	// Тип кеширования
+					"COUNT_ELEMENTS" => "Y",	// Показывать количество элементов в разделе
+					"IBLOCK_ID" => "1",	// Инфоблок
+					"IBLOCK_TYPE" => "content",	// Тип инфоблока
+					"SECTION_CODE" => $_REQUEST["SECTION_CODE"],	// Код раздела
+					"SECTION_FIELDS" => array(	// Поля разделов
+						0 => "NAME",
+					),
+					"SECTION_URL" => "",	// URL, ведущий на страницу с содержимым раздела
+					"SECTION_USER_FIELDS" => array(	// Свойства разделов
+					),
+					"SHOW_PARENT_NAME" => "Y",	// Показывать название раздела
+					"TOP_DEPTH" => "1",	// Максимальная отображаемая глубина разделов
+					"VIEW_MODE" => "LINE",	// Вид списка подразделов
+				),
+				false
+			);?>
 			<div class="clearfix">
 				<div class="b-product-colors">
 					<span>Сортировать:</span>
@@ -123,9 +143,16 @@ $APPLICATION->SetTitle("Каталог");?>
 				</div>
 			</div>
 			<div class="b-catalog-list-cont">
+
 				<? if ($GLOBALS['partial']): ?>
 					<? $APPLICATION->RestartBuffer(); ?>
 				<? endif; ?>
+
+				<? if ($_REQUEST["SECTION_CODE"] == "aktsii-i-skidki"): ?>
+					<? $_REQUEST["SECTION_CODE"] = ''; ?>
+					<? $GLOBALS['arrFilter'] = array("!PROPERTY_DISCOUNT"=>false); ?>
+				<? endif; ?>
+
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",
 					"main",

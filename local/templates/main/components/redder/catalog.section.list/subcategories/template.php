@@ -15,10 +15,11 @@ $this->setFrameMode(true);
 <?if( count($arResult["SECTIONS"]) ): ?>
 	<div class="b-category-tiles">
 		<?foreach($arResult["SECTIONS"] as $key => $arItem):?>
-			<? $isSectionActive = isSectionActive($arItem["ID"]); ?>
-			<a href="<?=detailPageUrl($arItem["SECTION_PAGE_URL"])?>" class="<? if( $isSectionActive ): ?>active <? endif; ?>b-tile-item">
-				<p><?=$arItem["NAME"]?></p>
-			</a>
+			<? if ($arItem["DEPTH_LEVEL"] <= 2): ?>
+				<a href="<?=$arItem["SECTION_PAGE_URL"]?>" class="b-tile-item">
+					<p><?=$arItem["NAME"]?></p>
+				</a>
+			<? endif; ?>
 		<?endforeach;?>
 	</div>
 <? endif; ?>

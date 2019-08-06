@@ -15,8 +15,8 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Услуги", 
-		"services/", 
+		"Акции и скидки", 
+		"catalog/aktsii-i-skidki/", 
 		Array(), 
 		Array(), 
 		"" 

@@ -1,4 +1,4 @@
-var progress = new KitProgress("#5F9827", 2);
+var progress = new KitProgress("#5F9827", 4);
 
 $(document).ready(function(){	
 
@@ -1091,7 +1091,6 @@ $(document).ready(function(){
     });
 
     // cardImgHeight();
-
 });
 
 window.onload = function(){
@@ -1113,52 +1112,74 @@ function loadBlock(i){
     }
 }
 
+function isIE() {
+    var rv = -1;
+    if (navigator.appName == 'Microsoft Internet Explorer')
+    {
+        var ua = navigator.userAgent;
+        var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+        if (re.exec(ua) != null)
+            rv = parseFloat( RegExp.$1 );
+    }
+    else if (navigator.appName == 'Netscape')
+    {
+        var ua = navigator.userAgent;
+        var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+        if (re.exec(ua) != null)
+            rv = parseFloat( RegExp.$1 );
+    }
+
+    var isIE = false;
+
+    if (rv !== -1) {
+        var isIE = true;
+        $('html').addClass('ie');
+    }
+
+    return isIE;
+}
+
 function cardHeight(){
-    $(document).find(".b-item-card").each(function(){
-
-        if ($(".b-catalog-list .b-item-card").length == 1) {
-            return false;
-        }
-
-        var cardsInString = 3;
-
-        if ($(this).parents('.b-catalog-list').hasClass('b-catalog-list-full')) {
-            cardsInString = 4;
-        }
-
-        var $index = $(this).index() + 1,
-            $height = $(this).height(),
-            $count = $(this).parents('.b-catalog-list').find('.b-item-card').length;
-
-        if ($index == 1) {
-            $maxHeight = 0;
-        }
-
-        if ($height > $maxHeight) {
-            $maxHeight = $height;
-        }
-
-        if ($index % cardsInString == 0) {
-            for (var i = 0; i < cardsInString; i++) {
-                $('.b-catalog-list .b-item-card:nth-child('+($index - i)+')').height(Math.round($maxHeight));   
+    if (isIE()) {
+        $(document).find(".b-item-card").each(function(){
+            if ($(".b-catalog-list .b-item-card").length == 1) {
+                return false;
             }
-            $maxHeight = 0;
-        } else {
-            if (($count - $index) == 0) {
-                while($index % cardsInString != 0){
-                    $('.b-catalog-list .b-item-card:nth-child('+$index+')').height(Math.round($maxHeight));
-                    $index = $index - 1;
+
+            var cardsInString = 4;
+
+            var $index = $(this).index() + 1,
+                $height = $(this).height(),
+                $count = $(this).parents('.b-catalog-list').find('.b-item-card').length;
+
+            if ($index == 1) {
+                $maxHeight = 0;
+            }
+
+            if ($height > $maxHeight) {
+                $maxHeight = $height;
+            }
+
+            if ($index % cardsInString == 0) {
+                for (var i = 0; i < cardsInString; i++) {
+                    $('.b-catalog-list .b-item-card:nth-child('+($index - i)+')').height(Math.round($maxHeight));   
+                }
+                $maxHeight = 0;
+            } else {
+                if (($count - $index) == 0) {
+                    while($index % cardsInString != 0){
+                        $('.b-catalog-list .b-item-card:nth-child('+$index+')').height(Math.round($maxHeight));
+                        $index = $index - 1;
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 }
 
 function cardImgHeight(){
     $('.b-item-card').each(function(){
-
         var $this = $(this).find('.b-card-top img');
-
         $this.height($this.width());
     });
 }

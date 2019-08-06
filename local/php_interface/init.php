@@ -774,6 +774,15 @@ function resizePhotos($photo){
 	$arPhoto['SMALL'] = $tmpSmall['src'];
 	return $arPhoto;
 }
+function isSectionActive($sectionID){
+	foreach ($GLOBALS["SECTIONS"] as $key => $arSection) {
+		if( $arSection["ID"] == $sectionID ){
+			return true;
+		}
+	}
+
+	return false;
+}
 
 
 
