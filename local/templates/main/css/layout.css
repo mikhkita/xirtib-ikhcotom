@@ -704,7 +704,7 @@ h3.b-title{
 			color: #77BE32;
 		}
 		.b-main-menu .b-block > .b-header-catalog > li > .inner-menu{
-			top: calc(100% - 1px);
+			top: 100%;
 			left: -1px;
 			width: calc(100% + 2px);
 		}
