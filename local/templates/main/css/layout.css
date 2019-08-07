@@ -59,6 +59,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+b, strong{
+	font-family: "DINPro-Medium";
+}
 
 .icon-im:before {
   content: "\e908";
@@ -582,15 +585,15 @@ h3.b-title{
 			opacity: 0;
 			visibility: hidden;
 			background: #fff;
-			border: 1px solid #E6E6E6;
+			/* border: 1px solid #E6E6E6; */
 			border-radius: 3px;
 			width: 213px;
 			box-shadow: 3px 5px 20px 5px rgba(230,230,230,0.50);
 			-webkit-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
-			   -moz-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
-			    -ms-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
-			   	 -o-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
-					transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+			-moz-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+			-ms-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+			-o-transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
+			transition: opacity 300ms 300ms ease-out, margin-top 300ms 300ms ease-out, visibility 300ms 300ms ease-out;
 		}
 		.b-header-catalog-block .b-header-catalog{
 			z-index: 100;
@@ -707,7 +710,9 @@ h3.b-title{
 			border: unset;
 		}
 		.b-main-menu .b-block > .b-header-catalog li > .b-header-catalog a{
-			color: #77BE32;
+			color: #564430;
+			text-align: left;
+			padding: 15px 30px 19px 30px;
 		}
 		.b-main-menu .b-block > .b-header-catalog > li > .inner-menu{
 			top: 100%;
@@ -2414,7 +2419,8 @@ h3.b-title{
 					}
 					.b-catalog-list .b-product-colors{
 						display: inline-block;
-						/*float: right;*/
+						float: right;
+						margin-top: 7px;
 					}
 					.b-product-colors select{
 						display: none;
@@ -3079,8 +3085,8 @@ h3.b-title{
 			}
 				.b-filter-item-name h3{
 					font-family: 'DINPro-Medium';
-					font-size: 24px;
-					line-height: 30px;
+					font-size: 20px;
+					line-height: 26px;
 					padding-right: 35px;
 				}
 				.filter-toggle{
@@ -5356,7 +5362,7 @@ textarea:-moz-placeholder {
 	.b-fav:hover .b-fav-round{
 		border-color: #77BE32;
 	}
-	.b-menu-item a:hover{
+	.b-menu-item:hover>a{
 		background-color: #D4EABF;
 		color: #564531;
 	}
