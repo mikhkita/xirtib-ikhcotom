@@ -75,6 +75,17 @@ if ($_GET['review'] == 'Y'){
 	$reviewTabBlockClass = '';
 }
 
+$nav = CIBlockSection::GetNavChain(false, $arResult["SECTION"]["ID"]);
+$sections = array();
+while($arSectionPath = $nav->GetNext()){
+	array_push($sections, $arSectionPath);
+}
+if ($sections[0]["CODE"] == "pryazha") {
+	$isPryazha = true;
+} else {
+	$isPryazha = false;
+}
+
 if ($arResult["OFFERS"]){
 	$zoomClass = 'hide';
 	foreach ($arResult["OFFERS"] as $key => $offer){
@@ -100,12 +111,7 @@ if ($arResult["OFFERS"]){
 		}
 	}
 	if (!isset($name)) {
-		$nav = CIBlockSection::GetNavChain(false, $arResult["SECTION"]["ID"]);
-		$sections = array();
-		while($arSectionPath = $nav->GetNext()){
-			array_push($sections, $arSectionPath);
-		}
-		if ($sections[0]["CODE"] == "pryazha") {
+		if ($isPryazha) {
 			$name = 'Цвет';
 		} else {
 			$name = 'Опция';
@@ -319,6 +325,10 @@ if (count($arResult["OFFERS"]) < 5){
 					</ul>
 				</div>
 			</div>
+			<? if( $isPryazha ): ?>
+				<br>
+				<p><b>Уважаемые покупатели, обращаем ваше внимание на возможное отличие цвета пряжи, в зависимости от настроек Вашего монитора</b></p>
+			<? endif; ?>
 		</div>
 	</div>
 	<? if ($_REQUEST['element_view'] == "Y"): ?>

@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Акции и скидки", 
-		"catalog/aktsii-i-skidki/", 
+		"discounts/", 
 		Array(), 
 		Array(), 
 		"" 
@@ -34,13 +34,13 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	), 
+	),
 	Array(
 		"Контакты", 
 		"contacts/", 
 		Array(), 
 		Array(), 
 		"" 
-	),
+	)
 );
 ?>
