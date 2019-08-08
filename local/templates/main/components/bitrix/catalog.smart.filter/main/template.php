@@ -23,10 +23,16 @@ if (isset($templateData['TEMPLATE_THEME']))
 // $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 // $this->addExternalCss("/bitrix/css/main/font-awesome.css");
 
+$filterClass = '';
+
+if(count($arResult["ITEMS"]) <= 2){
+	$filterClass = 'no-filter';
+}
+
 ?>
 
 
-<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="b-filter">
+<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="b-filter <?=$filterClass?>">
 	<? $isSortField = false; ?>
 	<? $isSortType = false; ?>
 
@@ -49,8 +55,7 @@ if (isset($templateData['TEMPLATE_THEME']))
 		<input type="hidden" name="SORT_TYPE" value="ASC"/>
 	<? endif ?>
 		<?//prices
-		foreach($arResult["ITEMS"] as $key=>$arItem)
-		{
+		foreach($arResult["ITEMS"] as $key=>$arItem){
 			$key = $arItem["ENCODED_ID"];
 			if(isset($arItem["PRICE"])):
 				if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
@@ -132,8 +137,9 @@ if (isset($templateData['TEMPLATE_THEME']))
 			//not prices
 			foreach($arResult["ITEMS"] as $key=>$arItem)
 			{
-				if(empty($arItem["VALUES"])|| isset($arItem["PRICE"]))
+				if(empty($arItem["VALUES"])|| isset($arItem["PRICE"])){
 					continue;
+				}
 
 				if ($arItem["DISPLAY_TYPE"] == "A"&& ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0))
 					continue;

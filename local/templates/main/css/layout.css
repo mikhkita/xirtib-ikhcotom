@@ -618,7 +618,7 @@ h3.b-title{
 			}
 			.b-header-catalog li > .b-header-catalog{
 				left: 100%;
-				top: -1px;
+				top: 0;
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
 				-webkit-transition: opacity 300ms ease-out, visibility 300ms ease-out;
@@ -716,8 +716,8 @@ h3.b-title{
 		}
 		.b-main-menu .b-block > .b-header-catalog > li > .inner-menu{
 			top: 100%;
-			left: -1px;
-			width: calc(100% + 2px);
+			left: 0;
+			width: 100%;
 		}
 		.b-header-catalog .inner-menu{
 			top: -1px;
@@ -1501,6 +1501,7 @@ h3.b-title{
 		padding-bottom: 24px;
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		justify-content: space-between;
 	}
 		.b-footer-top-text{

@@ -36,6 +36,8 @@ $GLOBALS["arProductReviews"] = array("PROPERTY_PRODUCT_ID" => $arResult["ID"]);
 $GLOBALS['arModelsFilter'] = array('PROPERTY_MATERIALS' => $arResult['ID']);
 $GLOBALS['arSliderFilter'] = array('TAGS' => $arResult['TAGS']);
 
+vardump($arResult['TAGS']);
+
 $arFilter = Array("IBLOCK_ID" => 6, "ACTIVE"=>"Y", 'PROPERTY_MATERIALS' => $arResult['ID']);
 $modelsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPageSize"=>50), array());
 

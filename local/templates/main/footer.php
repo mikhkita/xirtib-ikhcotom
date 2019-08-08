@@ -12,15 +12,10 @@
 					<p>Если вы сомневаетесь в выборе того или иного товара, мы можем провести его полный обзор с помощью видео-связи в приложении WhatsApp. Просто оставьте свой номер телефона и мы перезвоним вам для записи.</p>
 				</div>
 				<div class="b-footer-top-input">
-					<form action="/ajax/?action=WHATSAPP" method="POST" class="b-footer-inputs clearfix">
-						<input type="text" name="name" placeholder="Ваше имя" required>
-						<input type="text" name="phone" placeholder="Ваш телефон" required>
-						<input type="text" name="MAIL">
-						<a href="#" class="b-btn ajax">Записаться</a>
+					<div class="b-footer-inputs clearfix">
+						<a href="https://wa.me/79039538088?text=Здравствуйте!%20Хочу%20подробнее%20узнать%20о%20товаре%20с%20помощью%20видеосвязи." class="b-btn" target="_blank">Записаться</a>
 						<div class="politics">Отправляя форму, я даю согласие на обработку моих персональных данных в соответствии с <a href="/docs/politics/" class="underlined">политикой конфиденциальности</a></div>
-						<a href="#b-popup-success" class="b-thanks-link fancy" style="display:none;"></a>
-						<a href="#b-popup-error" class="b-error-link fancy" style="display:none;"></a>
-					</form>
+					</div>
 				</div>
 			</div>
 			<div class="b-footer-bottom clearfix">
