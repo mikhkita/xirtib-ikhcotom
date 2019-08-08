@@ -31,6 +31,8 @@ function KitProgress(c,h){
         this.elem.css({"background-color" : this.color});
     }
     this.start = function(seconds){
+        clearInterval(this.timer);
+
         this.now = 0;
         this.max = 100;
         this.elem.fadeIn(200);

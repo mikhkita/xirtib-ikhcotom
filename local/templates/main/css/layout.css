@@ -3086,7 +3086,7 @@ h3.b-title{
 			}
 				.b-filter-item-name h3{
 					font-family: 'DINPro-Medium';
-					font-size: 20px;
+					font-size: 18px;
 					line-height: 26px;
 					padding-right: 35px;
 				}
@@ -3335,15 +3335,15 @@ h3.b-title{
 				display: inline-block;
 				vertical-align: top;
 				/*text-align: center;*/
-				padding: 10px 20px;
+				padding: 10px 20px 14px;
 				border-radius: 3px;
-				border: 1px solid #78C032;
-			    width: calc((100% - 3*16px)/4);
-			    margin-right: 12px;
-			    margin-bottom: 16px;
-			    -webkit-transition: background-color .1s, color .1s;
-			    -o-transition: background-color .1s, color .1s;
-			    transition: background-color .1s, color .1s;
+				border: 1px solid #E6E6E6;
+				width: calc((100% - 3*16px)/4);
+				margin-right: 12px;
+				margin-bottom: 16px;
+				-webkit-transition: background-color .1s, color .1s;
+				-o-transition: background-color .1s, color .1s;
+				transition: background-color .1s, color .1s;
 			}
 			.b-tile-item:nth-child(4n){
 				margin-right: 0;

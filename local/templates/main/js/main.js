@@ -1,4 +1,5 @@
-var progress = new KitProgress("#5F9827", 4);
+var progress = new KitProgress("#5F9827", 4),
+    filterAjax = null;
 
 $(document).ready(function(){	
 
@@ -553,13 +554,17 @@ $(document).ready(function(){
         var url = window.location.href,
             block = $('.b-catalog-list');
 
+        if( filterAjax !== null ){
+            filterAjax.abort();
+        }
+
         progress.start(1.5);
         if (block.hasClass('loaded')) {
             block.removeClass('loaded');
         }
         // $('.b-filter').addClass('load');
 
-        $.ajax({
+        filterAjax = $.ajax({
             type: "GET",
             url: url,
             data: { partial : true },
