@@ -694,7 +694,10 @@ switch ($action) {
 				"cost" => $price
 			));
 		}else{
+			// var_dump($calcResult->getErrors());
+			// die();
 			returnError("Не удалось рассчитать стоимость доставки. Наш оператор свяжется с вами после оформления заказа и поможет рассчитать стоимость доставки.");
+			// returnError(print_r($calcResult->getErrors(), true));
 		}
 		break;
 	default:
