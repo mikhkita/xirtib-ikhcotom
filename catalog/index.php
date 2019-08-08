@@ -19,7 +19,8 @@ $APPLICATION->SetTitle("Каталог");?>
 		$tagName = mb_strtoupper(mb_substr($_REQUEST['TAGS'], 0, 1)).mb_substr($_REQUEST['TAGS'], 1);
 		$APPLICATION->SetTitle($tagName);
 
-		$GLOBALS['arrFilter'] = array("?TAGS" => $_REQUEST['TAGS']);
+		$GLOBALS['arrFilter'] = array("TAGS" => $_REQUEST['TAGS']);
+		$_REQUEST["SECTION_CODE"] = '';
 	}
 
 	$code = isset($_REQUEST['SECTION_CODE_CUSTOM']) ? $_REQUEST['SECTION_CODE_CUSTOM'] : $_REQUEST['SECTION_CODE'];
@@ -105,27 +106,29 @@ $APPLICATION->SetTitle("Каталог");?>
 			)
 		);?>
 		<div class="b-catalog-list after-load">
-			<?$APPLICATION->IncludeComponent("redder:catalog.section.list", "subcategories", Array(
-				"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
-					"CACHE_GROUPS" => "Y",	// Учитывать права доступа
-					"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-					"CACHE_TYPE" => "N",	// Тип кеширования
-					"COUNT_ELEMENTS" => "Y",	// Показывать количество элементов в разделе
-					"IBLOCK_ID" => "1",	// Инфоблок
-					"IBLOCK_TYPE" => "content",	// Тип инфоблока
-					"SECTION_CODE" => $_REQUEST["SECTION_CODE"],	// Код раздела
-					"SECTION_FIELDS" => array(	// Поля разделов
-						0 => "NAME",
+			<? if (!$_REQUEST['TAGS']):?>
+				<?$APPLICATION->IncludeComponent("redder:catalog.section.list", "subcategories", Array(
+					"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
+						"CACHE_GROUPS" => "Y",	// Учитывать права доступа
+						"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+						"CACHE_TYPE" => "N",	// Тип кеширования
+						"COUNT_ELEMENTS" => "Y",	// Показывать количество элементов в разделе
+						"IBLOCK_ID" => "1",	// Инфоблок
+						"IBLOCK_TYPE" => "content",	// Тип инфоблока
+						"SECTION_CODE" => $_REQUEST["SECTION_CODE"],	// Код раздела
+						"SECTION_FIELDS" => array(	// Поля разделов
+							0 => "NAME",
+						),
+						"SECTION_URL" => "",	// URL, ведущий на страницу с содержимым раздела
+						"SECTION_USER_FIELDS" => array(	// Свойства разделов
+						),
+						"SHOW_PARENT_NAME" => "Y",	// Показывать название раздела
+						"TOP_DEPTH" => "1",	// Максимальная отображаемая глубина разделов
+						"VIEW_MODE" => "LINE",	// Вид списка подразделов
 					),
-					"SECTION_URL" => "",	// URL, ведущий на страницу с содержимым раздела
-					"SECTION_USER_FIELDS" => array(	// Свойства разделов
-					),
-					"SHOW_PARENT_NAME" => "Y",	// Показывать название раздела
-					"TOP_DEPTH" => "1",	// Максимальная отображаемая глубина разделов
-					"VIEW_MODE" => "LINE",	// Вид списка подразделов
-				),
-				false
-			);?>
+					false
+				);?>
+			<? endif; ?>
 			<div class="clearfix">
 				<div class="b-product-colors">
 					<span>Сортировать:</span>
@@ -202,7 +205,7 @@ $APPLICATION->SetTitle("Каталог");?>
 						"META_KEYWORDS" => "-",
 						"OFFERS_CART_PROPERTIES" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",),
 						"OFFERS_FIELD_CODE" => array(0=>"",1=>"",),
-						"OFFERS_LIMIT" => "5",
+						"OFFERS_LIMIT" => "",
 						"OFFERS_PROPERTY_CODE" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",2=>"SIZES_SHOES",3=>"",),
 						"OFFERS_SORT_FIELD" => $_REQUEST['SORT'],
 						"OFFERS_SORT_FIELD2" => "id",

@@ -60,7 +60,7 @@ $APPLICATION->SetTitle("Каталог");
 		"META_KEYWORDS" => "-",
 		"OFFERS_FIELD_CODE" => array("NAME", "CODE"),
 		"OFFERS_PROPERTY_CODE" => array("PROPERTY_COLOR"),
-		"OFFERS_LIMIT" => "0",
+		"OFFERS_LIMIT" => "",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
 		"PRICE_CODE" => array("PRICE"),
 		"PRICE_VAT_INCLUDE" => "Y",

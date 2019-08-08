@@ -1499,22 +1499,19 @@ h3.b-title{
 		border-bottom: 1px solid #D8D8D8;
 		padding-top: 32px;
 		padding-bottom: 24px;
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: space-between;
+		text-align: center;
 	}
 		.b-footer-top-text{
-			display: inline-block;
-			width: calc(100% / 2 - 12px);
+			display: block;
+			max-width: 920px;
+			margin: 0 auto;
 		}
 			.b-footer-top-text h3{
 				font-family: DINPro-Medium;
 				font-size: 32px;
 				color: #564531;
 				letter-spacing: 0;
-				margin-bottom: 16px;
-				margin-top: -5px;
+				margin-bottom: 24px;
 			}
 			.b-footer-top-text p{
 				font-size: 18px;
@@ -1524,13 +1521,15 @@ h3.b-title{
 			display: inline-block;
 			width: calc(100% / 2 - 12px);
 			position: relative;
+			text-align: center;
+			margin-top: 32px;
 		}
 			.b-footer-inputs{
 				width: 100%;
 				display: flex;
-				flex-wrap: wrap;
-				margin-top: 9px;
-				justify-content: space-between;
+			    flex-wrap: wrap;
+			    margin-top: 9px;
+			    justify-content: space-between;
 			}
 				.b-footer-inputs input{
 					width: calc(100% / 2 - 12px);
@@ -1538,6 +1537,7 @@ h3.b-title{
 				}
 				.b-footer-inputs .b-btn{
 					padding: 14px 24px;
+					width: auto;
 				}
 				.b-footer-inputs a{
 					width: calc(100% / 2 - 12px);

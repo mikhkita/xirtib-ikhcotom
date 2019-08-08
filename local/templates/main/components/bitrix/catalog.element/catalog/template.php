@@ -34,9 +34,11 @@ if ($ids != 0){
 
 $GLOBALS["arProductReviews"] = array("PROPERTY_PRODUCT_ID" => $arResult["ID"]);
 $GLOBALS['arModelsFilter'] = array('PROPERTY_MATERIALS' => $arResult['ID']);
-$GLOBALS['arSliderFilter'] = array('TAGS' => $arResult['TAGS']);
-
-vardump($arResult['TAGS']);
+$GLOBALS['arSliderFilter'] = array(
+	'LOGIC' => 'AND',
+	'TAGS' => trim($arResult['TAGS']),
+	'!ID' => $arResult['ID'],
+);
 
 $arFilter = Array("IBLOCK_ID" => 6, "ACTIVE"=>"Y", 'PROPERTY_MATERIALS' => $arResult['ID']);
 $modelsCount = CIBlockElement::GetList(Array(), $arFilter, array(), Array("nPageSize"=>50), array());
@@ -580,6 +582,7 @@ if (count($arResult["OFFERS"]) < 5){
 		</div>
 	</div>
 	<h3 class="b-title">Похожие товары</h3>
+	<? $_REQUEST["SECTION_CODE"] = ''; ?>
 	<?$APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
 		"slider",

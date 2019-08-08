@@ -16,7 +16,12 @@ $this->setFrameMode(true);?>
 		<div class="b-cabinet-order clearfix">
 			<div class="b-order-list">
 				<? foreach ($arResult["ITEMS"] as $arItem): ?>
-					<? $class = "";?>
+					<? 
+					$images = getElementImages($arItem);
+					$renderImage['src'] = $images["DETAIL_PHOTO"][0]["SMALL"];
+					$class = "";
+					?>
+
 					<? if ($arItem["OFFERS"]): ?>
 						<? foreach ($arItem["OFFERS"] as $offer): ?>
 							<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
@@ -36,20 +41,6 @@ $this->setFrameMode(true);?>
 						<? $price = convertPrice($arItem["PRICES"]["PRICE"]["VALUE"]); ?>
 						<? $discountPrice = convertPrice($arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
 
-				<? endif; ?>
-				
-				<? if ($arItem['OFFERS']): ?>
-					<? if ($arItem['OFFERS'][0]["DETAIL_PICTURE"]): ?>
-						<? $renderImage = CFile::ResizeImageGet($arItem['OFFERS'][0]["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
-					<? else: ?>
-						<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
-					<? endif; ?>
-				<? else: ?>
-					<? if ($arItem["DETAIL_PICTURE"]): ?>
-						<? $renderImage = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], Array("width" => 267, "height" => 267), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
-					<? else: ?>
-						<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/hank.svg'; ?>
-					<? endif; ?>
 				<? endif; ?>
 
 				<div class="b-order-item clearfix">
