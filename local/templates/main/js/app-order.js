@@ -317,6 +317,10 @@
                 var self = this,
                     index = self.orders.map(function(v) {return v.id}).indexOf(id);
                 self.orders[index].visible = false;//скрыть элемент
+                if(self.orders.length === 1){//Если удаляется последний товар
+                  self.show = false;
+                  self.showCatalogRef = true;
+                }
                 var selfBase = self.orders[index].basePriceForOne,
                     selfTotal = self.orders[index].totalPriceForOne;
                 self.orders[index].basePriceForOne = 0;//обнулить стоимость (чтобы сразу обновить общую стоимость)
