@@ -353,7 +353,7 @@ if (count($arResult["OFFERS"]) < 5){
 			<div class="tabs-content spec-block b-text hide">
 				<div class="spec-block-left">
 					<? foreach ($arResult["PROPERTIES"] as $key => $arProp) {
-						if( empty($arProp["VALUE"]) || (is_array($arProp["VALUE"]) && count($arProp["VALUE"]) == 0) || in_array($arProp["CODE"], array("ARTICLE")) ){
+						if( empty($arProp["VALUE"]) || (is_array($arProp["VALUE"]) && count($arProp["VALUE"]) == 0) || in_array($arProp["CODE"], array("ARTICLE", "DISCOUNT")) ){
 							continue;
 						}
 						?>
