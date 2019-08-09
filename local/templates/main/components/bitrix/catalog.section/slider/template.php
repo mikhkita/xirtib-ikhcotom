@@ -33,21 +33,19 @@ if (isAuth($USER)){
 				<? $minVal = 100000; ?>
 				<? $maxVal = 0; ?>
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
+
 					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
 						<? $class = "has-discount"; ?>
 					<? endif; ?>
 
-					<? if( $offer["PRICES"]["PRICE"]["VALUE"] < $minVal): ?>
-						<? $minVal = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
-						<? if ($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]): ?>
-							<? $minVal = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
-						<? endif; ?>
+					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] < $minVal): ?>
+						<? $minVal = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
 					<? endif; ?>
 
-					<? if( $offer["PRICES"]["PRICE"]["VALUE"] > $maxVal): ?>
-						<? $maxVal = $offer["PRICES"]["PRICE"]["VALUE"]; ?>
+					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] > $maxVal): ?>
+						<? $maxVal = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]; ?>
 					<? endif; ?>
-
+					
 					<? $price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]); ?>
 					<? $discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
 					
