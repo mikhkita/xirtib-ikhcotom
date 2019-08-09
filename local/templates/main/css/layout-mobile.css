@@ -406,6 +406,9 @@ body {
 	width: 100%;
 	margin: 0 auto;
 }
+	.b-catalog-list .b-product-colors{
+		float: unset;
+	}
 
 .b-main-slide {
 	min-height: 250px;
