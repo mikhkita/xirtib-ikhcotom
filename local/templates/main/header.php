@@ -46,7 +46,7 @@ if ($arFav > 0){
 	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/slick.css" type="text/css">
 	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/chosen.min.css" type="text/css">
 	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/jquery-ui.min.css" type="text/css">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/layout.css" type="text/css">
+	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/layout.css?<?=$GLOBALS["version"]?>" type="text/css">
 
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png" />
@@ -69,8 +69,8 @@ if ($arFav > 0){
 	<meta name="msapplication-wide310x150logo" content="/favicon/mstile-310x150.png" />
 	<meta name="msapplication-square310x310logo" content="/favicon/mstile-310x310.png" />
 
-	<link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 1188px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-tablet.css">
-	<link rel="stylesheet" media="screen and (min-width: 240px) and (max-width: 767px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-mobile.css">
+	<link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 1188px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-tablet.css?<?=$GLOBALS["version"]?>">
+	<link rel="stylesheet" media="screen and (min-width: 240px) and (max-width: 767px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-mobile.css?<?=$GLOBALS["version"]?>">
 
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-3.2.1.min.js"></script>
 	<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">

@@ -538,10 +538,16 @@ $(document).ready(function(){
         });
     });
 
+    var filterInterval = null;
     $('.b-filter').on('change', function(){
 
         window.history.replaceState(null , null, ($(this)).serialize()+"&set_filter=1");
-        ajaxFilter();
+
+        if( filterInterval !== null ){
+            clearTimeout(filterInterval);
+        }
+
+        filterInterval = setTimeout(ajaxFilter, 1500);
 
     });
 
@@ -550,7 +556,6 @@ $(document).ready(function(){
     });
 
     function ajaxFilter(){
-
         var url = window.location.href,
             block = $('.b-catalog-list');
 

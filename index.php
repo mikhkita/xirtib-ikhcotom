@@ -113,11 +113,17 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 			// $discountProducts = array_unique($discountProducts);
 
 
-			$GLOBALS["arrFilter2"] = Array(
-				// "LOGIC"=>"OR",
-				// Array("ID" =>$discountProducts),
-				"!PROPERTY_DISCOUNT" => false
-			);
+
+			$GLOBALS['arrFilter2'][] = array(
+				"LOGIC" => "OR", 
+				array("!PROPERTY_DISCOUNT"=>false), 
+				array(
+					'ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', array(
+					    'IBLOCK_ID' => 2,
+					    "!PROPERTY_DISCOUNT" => false
+					)),
+				),
+			); 
 			
 			$APPLICATION->IncludeComponent(
 				"bitrix:catalog.section",
@@ -168,7 +174,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 					"META_KEYWORDS" => "-",
 					"OFFERS_CART_PROPERTIES" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",),
 					"OFFERS_FIELD_CODE" => array(0=>"",1=>"",),
-					"OFFERS_LIMIT" => "5",
+					"OFFERS_LIMIT" => "50",
 					"OFFERS_PROPERTY_CODE" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",2=>"SIZES_SHOES",3=>"",),
 					"OFFERS_SORT_FIELD" => $_REQUEST['SORT'],
 					"OFFERS_SORT_FIELD2" => "id",
@@ -183,7 +189,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 					"PAGER_SHOW_ALWAYS" => "N",
 					"PAGER_TEMPLATE" => "main",
 					"PAGER_TITLE" => "Товары",
-					"PAGE_ELEMENT_COUNT" => 12,
+					"PAGE_ELEMENT_COUNT" => 16,
 					"PARTIAL_PRODUCT_PROPERTIES" => "N",
 					"PRICE_CODE" => array(0=>"PRICE",),
 					"PRICE_VAT_INCLUDE" => "N",

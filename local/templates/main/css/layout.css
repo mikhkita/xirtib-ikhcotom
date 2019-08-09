@@ -3330,6 +3330,9 @@ h3.b-title{
 	}
 		.b-category-tiles{
 			text-align: left;
+		    display: flex;
+		    align-items: stretch;
+		    flex-wrap: wrap;
 		}
 			.b-tile-item{
 				display: inline-block;
@@ -3344,6 +3347,8 @@ h3.b-title{
 				-webkit-transition: background-color .1s, color .1s;
 				-o-transition: background-color .1s, color .1s;
 				transition: background-color .1s, color .1s;
+				    align-items: center;
+    			display: inline-flex;
 			}
 			.b-tile-item:nth-child(4n){
 				margin-right: 0;

@@ -319,7 +319,7 @@
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/plupload.full.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/mask.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/KitProgress.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/KitSend.js"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/KitSend.js?<?=$GLOBALS["version"]?>"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/slick.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/autosize.min.js"></script>
@@ -334,15 +334,15 @@
 	<!-- <script type="text/javascript" src="js/vue-resource.min.js"></script> -->
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.mask.min.js"></script>
 	<script type="text/javascript" src="https://api-maps.yandex.ru/2.1.41/?load=package.full&amp;apikey=dcf82496-06b7-476e-b6f8-0078e5d46b67&amp;lang=ru-RU"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/address.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/AddressDeliveryClass.js"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/address.js?<?=$GLOBALS["version"]?>"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/AddressDeliveryClass.js?<?=$GLOBALS["version"]?>"></script>
 	<?$dataOrder = getOrderList();?>
 	<script type="text/javascript">
 		var dataOrder = <?=$dataOrder?>;
 	</script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/app-order.js"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/app-order.js?<?=$GLOBALS["version"]?>"></script>
 	<? endif; ?>
 	<!-- \\\\\\\\ -->
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.js"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.js?<?=$GLOBALS["version"]?>"></script>
 </body>
 </html>

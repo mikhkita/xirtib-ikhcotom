@@ -3,26 +3,6 @@ $APPLICATION->SetTitle("Каталог");?>
 
 <? if($_REQUEST["SECTION_CODE"] || $_REQUEST['TAGS'] || $_REQUEST['SECTION_CODE_CUSTOM']):
 
-	if ($_REQUEST['TAGS'] && CModule::IncludeModule('search')) {
-		// $rsTags = CSearchTags::GetList(array(),array("MODULE_ID" => "iblock"), array("CNT" => "DESC"));
-		// $arTag = Array();
-		// while($arTag = $rsTags->Fetch()){
-			
-		// 	if( $_REQUEST['TAGS'] == Cutil::translit($arTag['NAME'],"ru") ){
-		// 		$tagName = mb_strtoupper(mb_substr($arTag['NAME'], 0, 1)).mb_substr($arTag['NAME'], 1);
-		// 		$APPLICATION->SetTitle($tagName);
-		// 		$GLOBALS['arrFilter'] = array("?TAGS" => $arTag['NAME']);
-		// 		break;
-		// 	}
-		// }
-		$_REQUEST['TAGS'] = trim($_REQUEST['TAGS']);
-		$tagName = mb_strtoupper(mb_substr($_REQUEST['TAGS'], 0, 1)).mb_substr($_REQUEST['TAGS'], 1);
-		$APPLICATION->SetTitle($tagName);
-
-		$GLOBALS['arrFilter'] = array("TAGS" => $_REQUEST['TAGS']);
-		$_REQUEST["SECTION_CODE"] = '';
-	}
-
 	$code = isset($_REQUEST['SECTION_CODE_CUSTOM']) ? $_REQUEST['SECTION_CODE_CUSTOM'] : $_REQUEST['SECTION_CODE'];
 	
 	$arSelect = Array("ID", "IBLOCK_ID", "NAME", "DATE_ACTIVE_FROM","PROPERTY_*", 'PREVIEW_TEXT');
@@ -71,7 +51,8 @@ $APPLICATION->SetTitle("Каталог");?>
 	
 	<div class="catalog-mobile-filter">Фильтр</div>
 	<div class="b-catalog clearfix" id="b-catalog">
-		<?$APPLICATION->IncludeComponent(
+		<?
+		$APPLICATION->IncludeComponent(
 			"bitrix:catalog.smart.filter",
 			"main",
 			Array(
@@ -104,7 +85,32 @@ $APPLICATION->SetTitle("Каталог");?>
 				"TEMPLATE_THEME" => "site",
 				"XML_EXPORT" => "N"
 			)
-		);?>
+		);
+
+
+		if ($_REQUEST['TAGS'] && CModule::IncludeModule('search')) {
+			// $rsTags = CSearchTags::GetList(array(),array("MODULE_ID" => "iblock"), array("CNT" => "DESC"));
+			// $arTag = Array();
+			// while($arTag = $rsTags->Fetch()){
+				
+			// 	if( $_REQUEST['TAGS'] == Cutil::translit($arTag['NAME'],"ru") ){
+			// 		$tagName = mb_strtoupper(mb_substr($arTag['NAME'], 0, 1)).mb_substr($arTag['NAME'], 1);
+			// 		$APPLICATION->SetTitle($tagName);
+			// 		$GLOBALS['arrFilter'] = array("?TAGS" => $arTag['NAME']);
+			// 		break;
+			// 	}
+			// }
+			$_REQUEST['TAGS'] = trim($_REQUEST['TAGS']);
+			$tagName = mb_strtoupper(mb_substr($_REQUEST['TAGS'], 0, 1)).mb_substr($_REQUEST['TAGS'], 1);
+			$APPLICATION->SetTitle($tagName);
+
+			$GLOBALS['arrFilter'] = array("TAGS" => $_REQUEST['TAGS']);
+			$_REQUEST["SECTION_CODE"] = '';
+		}
+
+
+
+		?>
 		<div class="b-catalog-list after-load">
 			<? if (!$_REQUEST['TAGS']):?>
 				<?$APPLICATION->IncludeComponent("redder:catalog.section.list", "subcategories", Array(
@@ -153,7 +159,20 @@ $APPLICATION->SetTitle("Каталог");?>
 
 				<? if ($_REQUEST["SECTION_CODE"] == "aktsii-i-skidki"): ?>
 					<? $_REQUEST["SECTION_CODE"] = ''; ?>
-					<? $GLOBALS['arrFilter'] = array("!PROPERTY_DISCOUNT"=>false); ?>
+					<? 
+					$APPLICATION->SetTitle($arFields["NAME"]);
+
+					$GLOBALS['arrFilter'][] = array(
+							"LOGIC" => "OR", 
+							array("!PROPERTY_DISCOUNT"=>false), 
+							array(
+								'ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', array(
+								    'IBLOCK_ID' => 2,
+								    "!PROPERTY_DISCOUNT" => false
+								)),
+							),
+						); 
+					?>
 				<? endif; ?>
 
 				<?$APPLICATION->IncludeComponent(
