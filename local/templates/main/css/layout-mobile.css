@@ -409,6 +409,12 @@ body {
 	.b-catalog-list .b-product-colors{
 		float: unset;
 	}
+	.b-category-tiles .b-tile-item{
+		width: calc(100%/2 - 6px);
+	}
+	.b-category-tiles .b-tile-item:nth-child(2n){
+		margin-right: 0;
+	}
 
 .b-main-slide {
 	min-height: 250px;
@@ -424,7 +430,24 @@ body {
 }
 .b-advantage-img-wrapper {
 	height: auto;
+	float: unset;
+	width: 80px;
+	vertical-align: middle;
 }
+.b-advantage-header{
+	display: inline-block;
+	width: calc(100% - 84px);
+	vertical-align: middle;
+}	
+	.b-advantage h3{
+		margin-bottom: 0;
+	}
+	.b-advantage-description{
+		margin-top: 16px;
+	}
+	.b-advantage h3 br{
+		display: none;
+	}
 .b-advantage {
 	display: block;
 	width: 100%;
@@ -540,6 +563,12 @@ body {
 	margin-top: 15px;
 	order: 1;
 }
+	.b-search-input{
+		margin-left: 0;
+	}
+	.b-control{
+		margin-right: 0;
+	}
 .b-profile {
 	margin-right: 15px;
 }
@@ -548,11 +577,11 @@ body {
 	top: 0;
 }
 .b-main-menu {
-	padding: 5px 0;
+	padding: 11px 0;
 }
 .mobile-btn {
 	display: inline-block;
-	margin-top: 8px;
+	margin-top: 4px;
 }
 .b-bottom {
 	padding-top: 16px;
@@ -596,6 +625,16 @@ body {
 
 .delivery-methods-list {
 	padding: 0 40px;
+}
+
+.b-catalog-list .b-item-card {
+	width: calc(50% - 8px);
+}
+.b-catalog-list .b-item-card:nth-child(3n){
+	margin-right: 16px;
+}
+.b-catalog-list .b-item-card:nth-child(2n){
+	margin-right: 0px;
 }
 
 @media screen and (max-width: 665px){
@@ -800,16 +839,6 @@ body {
 	}
 	.b-btn-logout{
 		padding: 10px 70px 13px 70px;
-	}
-
-	.b-catalog-list .b-item-card {
-		width: calc(50% - 12px);
-	}
-	.b-catalog-list .b-item-card:nth-child(3n){
-		margin-right: 24px;
-	}
-	.b-catalog-list .b-item-card:nth-child(2n){
-		margin-right: 0px;
 	}
 	#b-popup-map h3{
 		padding: 0 30px;
@@ -1146,6 +1175,10 @@ body {
 	.b-catalog-list .b-item-card {
 		height: auto !important;
 		width: 100%;
+		margin-right: 0;
+	}
+	.b-catalog-list .b-item-card:nth-child(3n){
+		margin-right: 0;
 	}
 	.b-main-slide h2 {
 		font-size: 24px;
@@ -1219,6 +1252,13 @@ body {
 	}
 	.b-card-top-img{
 		height: 250px;
+	}
+	.b-category-tiles .b-tile-item{
+		width: 100%;
+		margin-right: 0;
+	}
+	.b-product-colors .chosen-container{
+		max-width: calc(100% - 125px);
 	}
 }
 

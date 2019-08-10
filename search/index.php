@@ -60,7 +60,7 @@ if($_REQUEST["q"]){
 		false
 	);?>
 </div>
-
+<div class="no-filter"></div>
 <div class="b-catalog-list b-catalog-list-full after-load clearfix" id="b-catalog">
 	<div class="b-catalog-list-cont">
 		<?

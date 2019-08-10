@@ -70,8 +70,10 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 				<div class="b-advantage-img-wrapper">
 					<img src="<?=SITE_TEMPLATE_PATH?>/i/24-hours.svg">
 				</div>
+				<div class="b-advantage-header">
+					<h3>Обработка заказа - <br>1&nbsp;день</h3>
+				</div>
 				<div class="b-advantage-description">
-					<h3>Обработка заказа - <br>1 день</h3>
 					<p>Отправим со склада на следующий&nbsp;день после оформления&nbsp;заказа.</p>
 				</div>
 			</div>
@@ -79,8 +81,10 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 				<div class="b-advantage-img-wrapper">
 					<img src="<?=SITE_TEMPLATE_PATH?>/i/knitting.svg">
 				</div>
-				<div class="b-advantage-description">
+				<div class="b-advantage-header">
 					<h3>Легко определить <br>расход пряжи</h3>
+				</div>
+				<div class="b-advantage-description">
 					<p>Мы вяжем образцы, чтобы вы&nbsp;смогли&nbsp;определиться с расходом&nbsp;пряжи на изделие.</p>
 				</div>
 			</div>
@@ -88,8 +92,10 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 				<div class="b-advantage-img-wrapper">
 					<img src="<?=SITE_TEMPLATE_PATH?>/i/percent.svg">
 				</div>
-				<div class="b-advantage-description">
+				<div class="b-advantage-header">
 					<h3>Скидки постоянным <br>покупателям</h3>
+				</div>
+				<div class="b-advantage-description">
 					<p>Регистрируйтесь на сайте и получайте скидки при покупках от … руб.</p>
 				</div>
 			</div>
