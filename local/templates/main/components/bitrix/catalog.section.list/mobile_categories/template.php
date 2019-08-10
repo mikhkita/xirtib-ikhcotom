@@ -17,14 +17,15 @@ $this->setFrameMode(true);
 	<ul class="mobile-menu-catalog-list">
 		<?foreach($arResult["SECTIONS"] as $key => $arItem):?>
 			<? $items = GetIBlockSectionList(1, $arItem['ID'], Array("sort"=>"asc"), 2, array()); ?>
+			<? $innerSections = $items->GetNext(); ?>
 			<li class="b-accordeon">
 				<div class="b-accrodeon-head">
 					<a href="<?=$arItem["SECTION_PAGE_URL"]?>"><?=$arItem["NAME"]?></a>
-					<? if ($items->GetNext()): ?>
+					<? if ($innerSections): ?>
 						<a href="#" class="b-accordeon-plus"></a>
 					<? endif; ?>
 				</div>
-				<? if ($items->GetNext()): ?>
+				<? if ($innerSections): ?>
 					<div class="b-accordeon-body">
 						<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
 								"ADD_SECTIONS_CHAIN" => "N",

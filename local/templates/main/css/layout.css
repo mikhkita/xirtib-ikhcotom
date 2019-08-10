@@ -4087,11 +4087,17 @@ h3.b-title{
 			.b-accordeon-plus{
 				width: 15px;
 				height: 15px;
-				margin-left: 10px;
-				position: relative;
+				right: 0;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				-o-transform: translateY(-50%);
+				transform: translateY(-50%);
+				position: absolute;
 				-webkit-transition: transform .1s;
 				-o-transition: transform .1s;
 				transition: transform .1s;
+				transform-origin: 10px 0;
 			}
 			.b-accordeon-plus:before{
 				content: '';
@@ -4117,11 +4123,14 @@ h3.b-title{
 				transform: translateX(-50%);
 				background-color: #598E25;
 			}
+			.b-accrodeon-head{
+				position: relative;
+			}
 			.opened > .b-accrodeon-head .b-accordeon-plus{
-				-webkit-transform: rotate(45deg);
-				-ms-transform: rotate(45deg);
-				-o-transform: rotate(45deg);
-				transform: rotate(45deg);
+				-webkit-transform: rotate(45deg) translateY(-50%);
+				-ms-transform: rotate(45deg) translateY(-50%);
+				-o-transform: rotate(45deg) translateY(-50%);
+				transform: rotate(45deg) translateY(-50%);
 			}
 			.b-accordeon-body{
 				display: none;
