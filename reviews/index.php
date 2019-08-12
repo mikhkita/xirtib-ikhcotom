@@ -2,8 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Отзывы");?>
 
-<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
-
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"reviews", 

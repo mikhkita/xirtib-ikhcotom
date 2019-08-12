@@ -12,8 +12,6 @@ if (isAuth()):
 	$fullName = trim($arUser['NAME']);
 ?>
 
-
-<h2 class="b-title"><?$APPLICATION->ShowTitle();?></h2>
 <div class="b-cabinet">
 	<div class="b-cabinet-profile">
 		<div class="b-profile-photo">

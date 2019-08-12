@@ -538,6 +538,7 @@ h3.b-title{
 		div.title-search-result{
 			border: unset;
 			min-width: unset;
+			border-radius: 5px;
 		}
 		.bx_item_block.all_result .all_result_title{
 			font-size: 16px;

@@ -1,10 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Блог");
-?>
-<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
-
-<? 
+	$APPLICATION->SetTitle("Блог");
+	
 	$arFilter = Array('IBLOCK_ID'=>4);
 	$dbList = CIBlockSection::GetList(Array(), $arFilter, true);
 	while($arRes = $dbList->GetNext()){

@@ -2,7 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Оформление заказа");
 ?>
-	<h1 class="b-title"><?$APPLICATION->ShowTitle()?></h1>
 	<div class="b-order-parent clearfix">
 		<div id="app-order">
 			<v-order></v-order>

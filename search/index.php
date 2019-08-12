@@ -1,10 +1,11 @@
 <?
 define("SEARCH", "Y");
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Поиск по запросу '".trim($_REQUEST["q"])."'");
+
+$APPLICATION->SetTitle("Поиск");
 
 global $f;
-if($_REQUEST["q"]){
+if(!empty(trim($_REQUEST["q"]))){
 	global $f;
 	$f = array(
 		array(
@@ -14,14 +15,9 @@ if($_REQUEST["q"]){
 			array("PREVIEW_TEXT" => "%".$_REQUEST["q"]."%")
 		),
 	);
+	$APPLICATION->SetTitle("Поиск по запросу '".trim($_REQUEST["q"])."'");
 }
 ?>
-<? if (empty($_REQUEST["q"])): ?>
-	<? $title = 'Поиск'; ?>
-<? else: ?>
-	<? $title = $APPLICATION->GetTitle(); ?>
-<? endif; ?>
-<h1 class="b-title"><?=$title?></h1>
 
 <div class="b-search-form b-search-inner-form">
 	<?$APPLICATION->IncludeComponent("bitrix:search.title", "header", Array(
@@ -96,7 +92,7 @@ if($_REQUEST["q"]){
 				"ELEMENT_SORT_ORDER" => $_REQUEST["ORDER_TYPE"],
 				"ELEMENT_SORT_ORDER2" => "DESC",
 				"FILTER_NAME" => "f",
-				"HIDE_NOT_AVAILABLE" => "N",
+				"HIDE_NOT_AVAILABLE" => "Y",
 				"IBLOCK_ID" => "1",
 				"IBLOCK_TYPE" => "catalog",
 				"IBLOCK_TYPE_ID" => "catalog",
@@ -113,7 +109,7 @@ if($_REQUEST["q"]){
 				"META_KEYWORDS" => "-",
 				"OFFERS_CART_PROPERTIES" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",),
 				"OFFERS_FIELD_CODE" => array(0=>"",1=>"",),
-				"OFFERS_LIMIT" => "5",
+				"OFFERS_LIMIT" => "",
 				"OFFERS_PROPERTY_CODE" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",2=>"SIZES_SHOES",3=>"",),
 				"OFFERS_SORT_FIELD" => "sort",
 				"OFFERS_SORT_FIELD2" => "id",
