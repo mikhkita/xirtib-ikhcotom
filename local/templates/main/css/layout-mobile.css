@@ -352,6 +352,9 @@ body {
 .b-contacts-list {
 	max-width: none;
 }
+.b-control{
+	margin-top: -5px;
+}
 .b-contacts-list li {
 	display: inline-block;
 	vertical-align: top;
@@ -548,7 +551,7 @@ body {
 	top: 0;
 }
 .b-main-menu {
-	padding: 5px 0;
+	padding: 12px 0;
 }
 .mobile-btn {
 	display: inline-block;
@@ -556,7 +559,7 @@ body {
 }
 .b-bottom {
 	padding-top: 16px;
-	padding-bottom: 16px;
+	padding-bottom: 24px;
 }
 .mobile-menu {
 	display: block;
@@ -598,13 +601,23 @@ body {
 	padding: 0 40px;
 }
 
+.b-breadcrumbs{
+	padding-top: 24px;
+}
+.b-detail{
+	margin-top: 18px;
+}
 @media screen and (max-width: 665px){
 
-	h2.b-title {
+	h2.b-title, h1.b-title {
 	    font-size: 30px;
 	    line-height: 40px;
 	    padding-top: 26px;
 	    margin-bottom: 24px;
+	}
+	.b-content-inner h1.b-title, 
+	.b-content-inner h2.b-title{
+		padding-top: 12px;
 	}
 	.b-block{
 		width: calc(100% - 32px);
