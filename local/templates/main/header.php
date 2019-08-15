@@ -4,7 +4,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 $curPage = $APPLICATION->GetCurPage();
 $urlArr = $GLOBALS["urlArr"] = explode("/", $curPage);
 $page = $GLOBALS["page"] = ( $urlArr[2] == null || $urlArr[2] == "" )?$urlArr[1]:$urlArr[2];
-$GLOBALS["version"] = 45;
+$GLOBALS["version"] = 55;
 $is404 = defined('ERROR_404') && ERROR_404=='Y' && !defined('ADMIN_SECTION');
 $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[1]];
 
@@ -32,9 +32,6 @@ if ($arFav > 0){
 	<title><?$APPLICATION->ShowTitle()?></title>
 	
 	<?$APPLICATION->ShowHead();?>
-
-	<meta name="keywords" content=''>
-	<meta name="description" content=''>
 
 	<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 	<meta name="format-detection" content="telephone=no">
