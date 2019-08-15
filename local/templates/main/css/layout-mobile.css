@@ -645,6 +645,10 @@ body {
 .b-catalog-list .b-item-card:nth-child(2n){
 	margin-right: 0px;
 }
+.b-btn-order-submit{
+	margin-top: 40px;
+    width: 100%;
+}
 
 @media screen and (max-width: 665px){
 
