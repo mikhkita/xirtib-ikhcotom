@@ -11,7 +11,12 @@ body {
     min-width: 520px;
     left: auto; 
 }
-
+.b-control{
+	margin-right: 0;
+}
+.b-search-input{
+	margin-left: 0;
+}
 .b-product-params-left {
     margin-right: 24px;
 }
@@ -413,11 +418,11 @@ body {
 		top: 0;
 	}
 	.b-main-menu {
-		padding: 5px 0;
+		padding: 11px 0;
 	}
 	.mobile-btn {
 		display: inline-block;
-		margin-top: 8px;
+		margin-top: 4px;
 	}
 	.b-bottom {
 		padding-top: 16px;
@@ -456,6 +461,16 @@ body {
 		width: 100%;
 		margin: 0 auto;
 	}
+		.b-catalog-list .b-item-card{
+			width: calc((100% - 2*16px)/3);
+		}
+		.b-catalog-list .b-item-card:nth-child(4n){
+			margin-right: 16px;
+		}
+		.b-catalog-list .b-item-card:nth-child(3n){
+			margin-right: 0;
+		}
+		
 
 	.delivery-methods-list {
 		padding: 0 40px;

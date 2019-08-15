@@ -47,7 +47,7 @@ $APPLICATION->SetTitle("Каталог");?>
 		$_REQUEST['SORT_TYPE'] = "ASC";
 	} ?>
 
-	<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
+	<!-- <h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1> -->
 	
 	<div class="catalog-mobile-filter">Фильтр</div>
 	<div class="b-catalog clearfix" id="b-catalog">
@@ -239,7 +239,7 @@ $APPLICATION->SetTitle("Каталог");?>
 						"PAGER_SHOW_ALWAYS" => "N",
 						"PAGER_TEMPLATE" => "main",
 						"PAGER_TITLE" => "Товары",
-						"PAGE_ELEMENT_COUNT" => 12,
+						"PAGE_ELEMENT_COUNT" => 16,
 						"PARTIAL_PRODUCT_PROPERTIES" => "N",
 						"PRICE_CODE" => array(0=>"PRICE",),
 						"PRICE_VAT_INCLUDE" => "N",
@@ -299,7 +299,7 @@ $APPLICATION->SetTitle("Каталог");?>
 	<? endif; ?>
 	<? else: ?>
 		<div class="b-catalog-section">
-			<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
+			<!-- <h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1> -->
 			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "main", Array(
 					"ADD_SECTIONS_CHAIN" => "N",
 					"CACHE_GROUPS" => "Y",

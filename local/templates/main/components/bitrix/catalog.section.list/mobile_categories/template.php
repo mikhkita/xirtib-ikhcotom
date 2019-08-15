@@ -16,23 +16,34 @@ $this->setFrameMode(true);
 <?if( count($arResult["SECTIONS"]) ): ?>
 	<ul class="mobile-menu-catalog-list">
 		<?foreach($arResult["SECTIONS"] as $key => $arItem):?>
-			<li>
-				<a href="<?=$arItem["SECTION_PAGE_URL"]?>"><?=$arItem["NAME"]?></a>
-				<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
-						"ADD_SECTIONS_CHAIN" => "N",
-						"CACHE_GROUPS" => "Y",
-						"CACHE_TIME" => "36000000",
-						"CACHE_TYPE" => "N",
-						"COUNT_ELEMENTS" => "Y",
-						"IBLOCK_ID" => "1",
-						"SECTION_ID" => $arItem["ID"],
-						"IBLOCK_TYPE" => "content",
-						"SHOW_PARENT_NAME" => "Y",
-						"TOP_DEPTH" => "1",
-						"VIEW_MODE" => "LINE",
-					),
-					false
-				);?>
+			<? $items = GetIBlockSectionList(1, $arItem['ID'], Array("sort"=>"asc"), 2, array()); ?>
+			<? $innerSections = $items->GetNext(); ?>
+			<li class="b-accordeon">
+				<div class="b-accrodeon-head">
+					<a href="<?=$arItem["SECTION_PAGE_URL"]?>"><?=$arItem["NAME"]?></a>
+					<? if ($innerSections): ?>
+						<a href="#" class="b-accordeon-plus"></a>
+					<? endif; ?>
+				</div>
+				<? if ($innerSections): ?>
+					<div class="b-accordeon-body">
+						<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
+								"ADD_SECTIONS_CHAIN" => "N",
+								"CACHE_GROUPS" => "Y",
+								"CACHE_TIME" => "36000000",
+								"CACHE_TYPE" => "N",
+								"COUNT_ELEMENTS" => "Y",
+								"IBLOCK_ID" => "1",
+								"SECTION_ID" => $arItem["ID"],
+								"IBLOCK_TYPE" => "content",
+								"SHOW_PARENT_NAME" => "Y",
+								"TOP_DEPTH" => "1",
+								"VIEW_MODE" => "LINE",
+							),
+							false
+						);?>
+					</div>
+				<? endif; ?>
 			</li>
 		<?endforeach;?>
 	</ul>

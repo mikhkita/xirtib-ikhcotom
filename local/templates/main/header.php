@@ -77,64 +77,140 @@ if ($arFav > 0){
 </head>
 <body>
 	<?$APPLICATION->ShowPanel();?>
-	<div class="b-left-menu">
-		<div class="mobile-menu-bg"></div>
-		<div class="mobile-menu">
-			<div class="mobile-menu-wrap">
-				<div class="mobile-menu-close-btn">Закрыть</div>
-				<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
-						"ADD_SECTIONS_CHAIN" => "N",
-						"CACHE_GROUPS" => "Y",
-						"CACHE_TIME" => "36000000",
-						"CACHE_TYPE" => "N",
-						"COUNT_ELEMENTS" => "Y",
-						"IBLOCK_ID" => "1",
-						"IBLOCK_TYPE" => "content",
-						"SHOW_PARENT_NAME" => "Y",
-						"TOP_DEPTH" => "1",
-						"VIEW_MODE" => "LINE",
-					),
-					false
-				);?>
-				<?$APPLICATION->IncludeComponent("bitrix:menu", "mobile_menu", array(
-					"ROOT_MENU_TYPE" => "main",
-					"MAX_LEVEL" => "1",
-					"MENU_CACHE_TYPE" => "A",
-					"CACHE_SELECTED_ITEMS" => "N",
-					"MENU_CACHE_TIME" => "36000000",
-					"MENU_CACHE_USE_GROUPS" => "Y",
-					"MENU_CACHE_GET_VARS" => array(),
+	<div id="mobile-menu" class="mobile-menu b-left-menu hide">
+		<h2 class="b-bottom-border">Меню</h2>
+		<div class="mobile-menu-wrap">
+			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
+					"ADD_SECTIONS_CHAIN" => "N",
+					"CACHE_GROUPS" => "Y",
+					"CACHE_TIME" => "36000000",
+					"CACHE_TYPE" => "N",
+					"COUNT_ELEMENTS" => "Y",
+					"IBLOCK_ID" => "1",
+					"IBLOCK_TYPE" => "content",
+					"SHOW_PARENT_NAME" => "Y",
+					"TOP_DEPTH" => "1",
+					"VIEW_MODE" => "LINE",
 				),
-					false
-				);?>
-			</div>
+				false
+			);?>
+			<?$APPLICATION->IncludeComponent("bitrix:menu", "mobile_menu", array(
+				"ROOT_MENU_TYPE" => "main",
+				"MAX_LEVEL" => "1",
+				"MENU_CACHE_TYPE" => "A",
+				"CACHE_SELECTED_ITEMS" => "N",
+				"MENU_CACHE_TIME" => "36000000",
+				"MENU_CACHE_USE_GROUPS" => "Y",
+				"MENU_CACHE_GET_VARS" => array(),
+			),
+				false
+			);?>
 		</div>
 	</div>
-	<div class="b-page">
-	<div class="b b-header">
-		<div class="b-top">
-			<div class="b-block">
-				<p class="b-city">Интернет-магазин пряжи</p>
-					<?$APPLICATION->IncludeComponent("bitrix:menu", "top_menu", array(
-						"ROOT_MENU_TYPE" => "main",
-						"MAX_LEVEL" => "1",
-						"MENU_CACHE_TYPE" => "A",
-						"CACHE_SELECTED_ITEMS" => "N",
-						"MENU_CACHE_TIME" => "36000000",
-						"MENU_CACHE_USE_GROUPS" => "Y",
-						"MENU_CACHE_GET_VARS" => array(),
-					),
-						false
-					);?>
-				<a href="tel:+79039538088" class="b-phone">+7 (903) 953-80-88</a>
+	<div id="panel-page">
+		<div class="b-page">
+		<div class="b b-header">
+			<div class="b-top">
+				<div class="b-block">
+					<p class="b-city">Интернет-магазин пряжи</p>
+						<?$APPLICATION->IncludeComponent("bitrix:menu", "top_menu", array(
+							"ROOT_MENU_TYPE" => "main",
+							"MAX_LEVEL" => "1",
+							"MENU_CACHE_TYPE" => "A",
+							"CACHE_SELECTED_ITEMS" => "N",
+							"MENU_CACHE_TIME" => "36000000",
+							"MENU_CACHE_USE_GROUPS" => "Y",
+							"MENU_CACHE_GET_VARS" => array(),
+						),
+							false
+						);?>
+					<a href="tel:+79039538088" class="b-phone">+7 (903) 953-80-88</a>
+				</div>
 			</div>
-		</div>
-		<div class="b-block">
-			<div class="b-bottom">
-				<a href="/" class="b-logo"></a>
-				<div class="b-header-catalog-block">
-					<a href="#" class="b-header-catalogue icon-list">Каталог</a>
-					<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_catalog", Array(
+			<div class="b-block">
+				<div class="b-bottom">
+					<a href="/" class="b-logo"></a>
+					<div class="b-header-catalog-block">
+						<a href="#" class="b-header-catalogue icon-list">Каталог</a>
+						<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_catalog", Array(
+								"ADD_SECTIONS_CHAIN" => "N",
+								"CACHE_GROUPS" => "Y",
+								"CACHE_TIME" => "36000000",
+								"CACHE_TYPE" => "N",
+								"COUNT_ELEMENTS" => "Y",
+								"IBLOCK_ID" => "1",
+								"IBLOCK_TYPE" => "content",
+								"SHOW_PARENT_NAME" => "Y",
+								"TOP_DEPTH" => "1",
+								"VIEW_MODE" => "LINE",
+							),
+							false
+						);?>
+					</div>
+					<div class="b-search-form">
+						<?$APPLICATION->IncludeComponent("bitrix:search.title", "header", Array(
+							"CATEGORY_0" => array(	// Ограничение области поиска
+									0 => "iblock_content",
+								),
+								"CATEGORY_0_TITLE" => "",	// Название категории
+								"CATEGORY_0_forum" => array(
+									0 => "all",
+								),
+								"CATEGORY_0_iblock_content" => array(	// Искать в информационных блоках типа "iblock_content"
+									0 => "1",
+								),
+								"CATEGORY_0_main" => array(
+									0 => "",
+								),
+								"CHECK_DATES" => "N",	// Искать только в активных по дате документах
+								"CONTAINER_ID" => "title-search",	// ID контейнера, по ширине которого будут выводиться результаты
+								"CONVERT_CURRENCY" => "N",	// Показывать цены в одной валюте
+								"INPUT_ID" => "title-search-input",	// ID строки ввода поискового запроса
+								"NUM_CATEGORIES" => "1",	// Количество категорий поиска
+								"ORDER" => "rank",	// Сортировка результатов
+								"PAGE" => "#SITE_DIR#search/",	// Страница выдачи результатов поиска (доступен макрос #SITE_DIR#)
+								"PREVIEW_HEIGHT" => "75",	// Высота картинки
+								"PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода
+								"PREVIEW_WIDTH" => "75",	// Ширина картинки
+								"PRICE_CODE" => "",	// Тип цены
+								"PRICE_VAT_INCLUDE" => "Y",	// Включать НДС в цену
+								"SHOW_INPUT" => "Y",	// Показывать форму ввода поискового запроса
+								"SHOW_OTHERS" => "N",	// Показывать категорию "прочее"
+								"SHOW_PREVIEW" => "Y",	// Показать картинку
+								"TEMPLATE_THEME" => "site",
+								"TOP_COUNT" => "8",	// Количество результатов в каждой категории
+								"USE_LANGUAGE_GUESS" => "Y",	// Включить автоопределение раскладки клавиатуры
+							),
+							false
+						);?>
+					</div>
+					<div class="b-control">
+						<? if (isAuth()): ?>
+							<a href="/personal/" class="b-profile icon-login"></a>	
+						<? else: ?>
+							<a href="#popup-sign" class="b-profile icon-login fancy"></a>
+						<? endif; ?>
+						<a href="/personal/?tab=favourite" class="b-fav icon-star">
+							<div class="b-fav-round <?=$favClass?>">
+								<span class="b-fav-number"><?=$favCount?></span>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="b-main-menu">
+				<div class="b-block clearfix">
+					<div class="mobile-btn">
+						<div class="mobile-btn-burger icon-list">
+							<!-- div class="mobile-btn-burger">
+								<div class="burger-el"></div>
+								<div class="burger-el"></div>
+								<div class="burger-el"></div>
+							</div> -->
+						</div>
+						<span>Меню</span>
+					</div>
+					<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_categories", Array(
 							"ADD_SECTIONS_CHAIN" => "N",
 							"CACHE_GROUPS" => "Y",
 							"CACHE_TIME" => "36000000",
@@ -148,106 +224,29 @@ if ($arFav > 0){
 						),
 						false
 					);?>
-				</div>
-				<div class="b-search-form">
-					<?$APPLICATION->IncludeComponent("bitrix:search.title", "header", Array(
-						"CATEGORY_0" => array(	// Ограничение области поиска
-								0 => "iblock_content",
-							),
-							"CATEGORY_0_TITLE" => "",	// Название категории
-							"CATEGORY_0_forum" => array(
-								0 => "all",
-							),
-							"CATEGORY_0_iblock_content" => array(	// Искать в информационных блоках типа "iblock_content"
-								0 => "1",
-							),
-							"CATEGORY_0_main" => array(
-								0 => "",
-							),
-							"CHECK_DATES" => "N",	// Искать только в активных по дате документах
-							"CONTAINER_ID" => "title-search",	// ID контейнера, по ширине которого будут выводиться результаты
-							"CONVERT_CURRENCY" => "N",	// Показывать цены в одной валюте
-							"INPUT_ID" => "title-search-input",	// ID строки ввода поискового запроса
-							"NUM_CATEGORIES" => "1",	// Количество категорий поиска
-							"ORDER" => "rank",	// Сортировка результатов
-							"PAGE" => "#SITE_DIR#search/",	// Страница выдачи результатов поиска (доступен макрос #SITE_DIR#)
-							"PREVIEW_HEIGHT" => "75",	// Высота картинки
-							"PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода
-							"PREVIEW_WIDTH" => "75",	// Ширина картинки
-							"PRICE_CODE" => "",	// Тип цены
-							"PRICE_VAT_INCLUDE" => "Y",	// Включать НДС в цену
-							"SHOW_INPUT" => "Y",	// Показывать форму ввода поискового запроса
-							"SHOW_OTHERS" => "N",	// Показывать категорию "прочее"
-							"SHOW_PREVIEW" => "Y",	// Показать картинку
-							"TEMPLATE_THEME" => "site",
-							"TOP_COUNT" => "8",	// Количество результатов в каждой категории
-							"USE_LANGUAGE_GUESS" => "Y",	// Включить автоопределение раскладки клавиатуры
-						),
-						false
-					);?>
-				</div>
-				<div class="b-control">
-					<? if (isAuth()): ?>
-						<a href="/personal/" class="b-profile icon-login"></a>	
-					<? else: ?>
-						<a href="#popup-sign" class="b-profile icon-login fancy"></a>
+					
+					<? $basketInfo = getBasketCount(); ?>
+					<? if ($basketInfo['sum'] >= 1000): ?>
+						<? $basketInfo['sum'] = number_format( $basketInfo['sum'], 0, ',', ' ' ); ?>
 					<? endif; ?>
-					<a href="/personal/?tab=favourite" class="b-fav icon-star">
-						<div class="b-fav-round <?=$favClass?>">
-							<span class="b-fav-number"><?=$favCount?></span>
-						</div>
+
+					<a href='/cart/order/' class="b-price-button">
+						<span class="b-cart-price icon-ruble"><?=$basketInfo['sum']?></span>
+						<span class="b-cart-number-container">
+							<span class="b-cart-number"><?=$basketInfo['count']?></span>
+						</span>
 					</a>
 				</div>
 			</div>
 		</div>
-		<div class="b-main-menu">
-			<div class="b-block clearfix">
-				<div class="mobile-btn">
-					<div class="mobile-btn-burger">
-						<div class="mobile-btn-burger">
-							<div class="burger-el"></div>
-							<div class="burger-el"></div>
-							<div class="burger-el"></div>
-						</div>
-					</div>
-					<span>Меню</span>
-				</div>
-				<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_categories", Array(
-						"ADD_SECTIONS_CHAIN" => "N",
-						"CACHE_GROUPS" => "Y",
-						"CACHE_TIME" => "36000000",
-						"CACHE_TYPE" => "N",
-						"COUNT_ELEMENTS" => "Y",
-						"IBLOCK_ID" => "1",
-						"IBLOCK_TYPE" => "content",
-						"SHOW_PARENT_NAME" => "Y",
-						"TOP_DEPTH" => "1",
-						"VIEW_MODE" => "LINE",
-					),
-					false
-				);?>
-				
-				<? $basketInfo = getBasketCount(); ?>
-				<? if ($basketInfo['sum'] >= 1000): ?>
-					<? $basketInfo['sum'] = number_format( $basketInfo['sum'], 0, ',', ' ' ); ?>
-				<? endif; ?>
-
-				<a href='/cart/order/' class="b-price-button">
-					<span class="b-cart-price icon-ruble"><?=$basketInfo['sum']?></span>
-					<span class="b-cart-number-container">
-						<span class="b-cart-number"><?=$basketInfo['count']?></span>
-					</span>
-				</a>
-			</div>
-		</div>
-	</div>
-	<? if (!$isMain): ?>
-	<div class="b-content-inner">
-		<div class="b-block">
-			<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "main", Array(
-				"COMPONENT_TEMPLATE" => ".defaults",
-				"START_FROM" => "0",
-				"PATH" => "",
-				"SITE_ID" => "s1",
-			),false );?>	
-	<? endif; ?>
+		<? if (!$isMain): ?>
+		<div class="b-content-inner">
+			<div class="b-block">
+				<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "main", Array(
+					"COMPONENT_TEMPLATE" => ".defaults",
+					"START_FROM" => "0",
+					"PATH" => "",
+					"SITE_ID" => "s1",
+				),false );?>	
+				<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
+		<? endif; ?>

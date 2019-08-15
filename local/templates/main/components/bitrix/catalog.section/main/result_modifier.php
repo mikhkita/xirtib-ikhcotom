@@ -1,5 +1,5 @@
 <?
-
+/*
 foreach ($arResult['ITEMS'] as $k => $arItem) {
 
 	if ($arResult['ITEMS'][$k]["OFFERS"]) {
@@ -25,5 +25,5 @@ foreach ($arResult['ITEMS'] as $k => $arItem) {
 }
 
 $arResult['ITEMS'] = array_values($arResult['ITEMS']);
-
+*/
 ?>

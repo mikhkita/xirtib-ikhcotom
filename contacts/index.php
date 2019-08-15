@@ -2,8 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
 ?>
-
-	<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
 		<div class="b-contacts clearfix">
 			<div class="b-contacts-left">
 				<ul class="b-contacts-list">

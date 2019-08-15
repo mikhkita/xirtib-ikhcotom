@@ -93,6 +93,8 @@
 			</div>
 		</div>
 	</div>
+	<div class="b-menu-overlay" id="b-menu-overlay"></div>
+</div>
 </div>
 	<div style="display:none;">
 		<a href="#b-popup-error" class="b-error-link fancy" style="display:none;"></a>
@@ -324,6 +326,7 @@
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/autosize.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/slideout.min.js"></script>
 	<!-- Плагины для страницы оформления заказа -->
 	<? if($urlArr[1] == "cart" && $urlArr[2] == "order"): ?>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vue.js"></script>
