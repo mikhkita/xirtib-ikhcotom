@@ -357,6 +357,9 @@ body {
 .b-contacts-list {
 	max-width: none;
 }
+.b-control{
+	margin-top: -5px;
+}
 .b-contacts-list li {
 	display: inline-block;
 	vertical-align: top;
@@ -604,7 +607,7 @@ body {
 	top: 0;
 }
 .b-main-menu {
-	padding: 11px 0;
+	padding: 12px 0;
 }
 .mobile-btn {
 	display: inline-block;
@@ -612,7 +615,7 @@ body {
 }
 .b-bottom {
 	padding-top: 16px;
-	padding-bottom: 16px;
+	padding-bottom: 24px;
 }
 /*.mobile-menu {
 	display: block;
@@ -654,6 +657,12 @@ body {
 	padding: 0 40px;
 }
 
+.b-breadcrumbs{
+	padding-top: 24px;
+}
+.b-detail{
+	margin-top: 18px;
+}
 .b-catalog-list .b-item-card {
 	width: calc(50% - 8px);
 }
@@ -662,6 +671,23 @@ body {
 }
 .b-catalog-list .b-item-card:nth-child(2n){
 	margin-right: 0px;
+}
+.b-btn-order-submit,
+.b-btn-blocked{
+	margin-top: 40px;
+    width: 100%;
+}
+
+.b-btn-blocked-preloader{
+	margin-top: 10px;
+	margin-left: 0;
+}
+
+.order-submit-desktop{
+	display: none;
+}
+.order-submit-mobile{
+	display: block;
 }
 
 @media screen and (max-width: 665px){
@@ -672,6 +698,10 @@ body {
 	    line-height: 40px;
 	    padding-top: 26px;
 	    margin-bottom: 24px;
+	}
+	.b-content-inner h1.b-title, 
+	.b-content-inner h2.b-title{
+		padding-top: 12px;
 	}
 	.b-block{
 		width: calc(100% - 32px);
@@ -948,7 +978,6 @@ body {
 	}
 	.b-btn-blocked-preloader {
 	    display: block;
-	    margin-left: 0;
 	}
 }
 
