@@ -25,8 +25,8 @@
 						<p>Напишите нам:</p>
 						<div class="b-footer-messenger">
 							<a href="https://vk.com/mkv70" target="_blank" class="icon-vk"></a>
-							<a href="https://vk.com/mkv70" target="_blank" class="icon-whatsapp"></a>
-							<a href="https://vk.com/mkv70" target="_blank" class="icon-viber"></a>
+							<a href="https://wa.me/79039538088" target="_blank" class="icon-whatsapp"></a>
+							<a href="viber://chat?number=+380508812637" target="_blank" class="icon-viber"></a>
 						</div>
 					</div>
 					<a href="#popup-callback" class="b-btn fancy">Обратная связь</a>
@@ -76,7 +76,7 @@
 						<div class="b-footer-social">
 							<a href="https://vk.com/mkv70" class="icon-vk" target="_blank"></a>
 							<a href="https://www.instagram.com/motochkiklubochki/" class="icon-im" target="_blank"></a>
-							<a href="#" class="icon-yt" target="_blank"></a>
+							<!-- <a href="#" class="icon-yt" target="_blank"></a> -->
 						</div>
 					</div>
 					<div class="b-all-politics">
