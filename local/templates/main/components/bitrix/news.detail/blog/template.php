@@ -215,6 +215,7 @@ $this->setFrameMode(true);
 					<textarea rows="2" name="comment" required placeholder="<?=$placeholder?>"></textarea>
 				</div>
 				<input type="text" name="MAIL">
+				<a href="#b-popup-commnet-success" class="b-thanks-link fancy" style="display:none;"></a>
 				<? if (isAuth()): ?>
 					<a href="#" class="b-btn ajax">Оставить комментарий</a>
 				<? else: ?>

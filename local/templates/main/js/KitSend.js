@@ -267,6 +267,10 @@ $(document).ready(function(){
 				                    document.location.reload(true);
 				                    $.fancybox.close();
 				                break;
+				                case "redirect":
+				                    document.location.href = json.redirect;
+				                    $.fancybox.close();
+				                break;
 				            }
 				        }else{
 				        	$form.find(".b-popup-error").html(json.error);

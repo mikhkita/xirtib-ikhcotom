@@ -3113,6 +3113,24 @@ h3.b-title{
 		width: 215px;
 		margin-top: -8px;
 	}
+	.b-filter.filter-mobile{
+		padding: 40px 0;
+	}
+	.b-filter.filter-mobile h2{
+		padding: 0 20px 20px;
+	    border-bottom: 1px solid #EEE;
+	}
+	.b-filter .b-btn-container{
+		margin-top: 20px;
+	}
+	.b-filter .b-btn-container .b-btn{
+		background-color: #78C032;
+		border: unset;
+		color: #fff;
+	}
+	.filter-mobile .range-inputs input[type=text]{
+	    width: 115px;
+	}
 		.b-filter-item{
 			border-bottom: 1px solid #EEE;
 		}
@@ -3715,6 +3733,7 @@ h3.b-title{
 				}
 				.coupon-item p{
 					display: inline-block;
+					margin-right: 10px;
 				}
 					.coupon-item p b{
 						font-family: 'DINPro-Medium';
@@ -3722,7 +3741,6 @@ h3.b-title{
 				.coupon-item a{
 					color: #9E9891;
 					border-bottom: 1px dashed #9E9891;
-					margin-left: 10px;
 				}
 				
 	.b-order-form{
@@ -4417,7 +4435,7 @@ input::-webkit-input-placeholder {
 input:-moz-placeholder {
 	color: #777;
 }
-input[type=text], input[type=tel], input[type=submit], input[type=number], input[type=search], textarea{
+input[type=text], input[type=tel], input[type=submit], input[type=number], input[type=search], input[type=password], textarea{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -4520,8 +4538,8 @@ textarea:-moz-placeholder {
 }
 .b-checkbox label{
 	font-family: 'DINPro-Regular';
-	font-size: 18px;
-	line-height: 22px;
+	/*font-size: 18px;*/
+	/*line-height: 22px;*/
 	cursor: pointer;
 }
 
@@ -4557,8 +4575,8 @@ textarea:-moz-placeholder {
 		display: inline-block;
 		vertical-align: middle;
 		width: calc(100% - 40px);
-		line-height: 20px;
-		margin-bottom: 2px;
+		/*line-height: 20px;*/
+		/*margin-bottom: 2px;*/
 	}
 
 /*=====radio=====*/
@@ -4676,7 +4694,7 @@ textarea:-moz-placeholder {
 	font-family: 'DINPro-Regular';
 	font-size: 18px;
 	color: #000000;
-	max-height: 129px;
+	max-height: 131px;
 	overflow: hidden;
 	margin-bottom: 8px;
 }

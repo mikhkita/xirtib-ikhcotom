@@ -59,7 +59,12 @@ body {
 .b-product-actions-wrap {
     border-bottom: 0;
 }
-
+.after-load:not(.loaded){
+	height: 300px;
+}
+	.after-load:not(.loaded) .b-catalog-list-cont{
+		display: none;
+	}
 .b-detail-review-text p {
     max-width: none;
     width: 100%;
@@ -381,22 +386,12 @@ body {
 	display: block;
 }
 .b-filter {
-	display: block;
-	width: 100%;
-	height: 100vh;
-	box-sizing: border-box;
-	overflow-y: auto;
-	overflow-x: hidden;
-	position: fixed;
-	top: 0;
-	left: -200%;
-	z-index: 1000;
-	padding: 40px 20px;
-	background-color: #ffffff;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	-ms-transition: all 0.3s;
-	transition: all 0.3s;
+	display: none;
+	width: 300px;
+}
+.b-filter-item {
+	padding: 0 15px;
+	padding-left: 20px;
 }
 .b-filter.active {
 	left: 0;
@@ -409,6 +404,38 @@ body {
 	.b-catalog-list .b-product-colors{
 		float: unset;
 	}
+		.b-product-colors select{
+		    vertical-align: middle;
+		    margin-left: 10px;
+		    padding: 9px 35px 11px 10px;
+		    font-size: 16px;
+		    line-height: 20px;
+		    box-shadow: none;
+		    border: 1px solid #E6E6E6;
+			display: inline-block;
+		    background: #fff;
+		    -webkit-appearance: none;
+		    appearance: none;
+	        max-width: calc(100% - 125px);
+            font-family: 'DINPro-Regular';
+		}
+		.b-product-colors{
+			position: relative;
+		}
+		.b-product-colors:before {
+			font-family: 'icomoon';
+			position: absolute;
+		    top: 50%;
+		    -webkit-transform: translateY(-50%);
+		    -ms-transform: translateY(-50%);
+		    -o-transform: translateY(-50%);
+		    transform: translateY(-50%);
+		    right: 16px;
+		    display: inline-block;
+		    content: "\e910";
+		    font-size: 9px;
+		    color: #564531;
+		}
 	.b-category-tiles .b-tile-item{
 		width: calc(100%/2 - 6px);
 	}
@@ -587,9 +614,9 @@ body {
 	padding-top: 16px;
 	padding-bottom: 16px;
 }
-.mobile-menu {
+/*.mobile-menu {
 	display: block;
-}
+}*/
 
 .b-footer-top-text {
 	display: block;
@@ -639,7 +666,8 @@ body {
 
 @media screen and (max-width: 665px){
 
-	h2.b-title {
+	h1.b-title,
+	h2.b-title{
 	    font-size: 30px;
 	    line-height: 40px;
 	    padding-top: 26px;
@@ -853,6 +881,9 @@ body {
 			float: none;
 			display: inline-block;
 			width: calc(50% - 11px);
+		}
+		.b-inputs-right .b-input:nth-child(2n){
+			margin-right: 0;
 		}
 		.b-inputs-right .b-input.b-postal-code{
 			margin-right: 0;

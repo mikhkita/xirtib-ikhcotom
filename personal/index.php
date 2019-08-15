@@ -150,11 +150,12 @@ if( isset($_REQUEST["action"]) ){
 			}
 
 			if( $user->Update($userID, $arFields) ){
-				echo "1";
-				// echo json_encode(array(
-				// 	"success" => 1,
-				// 	"message" => "Данные успешно сохранены"
-				// ));
+				// echo "1";
+				echo json_encode(array(
+					"result" => "success",
+					"action" => "redirect",
+					"redirect" => "/personal/"
+				));
 			}else{
 				echo "0";
 				// echo json_encode(array(

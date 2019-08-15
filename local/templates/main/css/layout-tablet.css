@@ -436,22 +436,11 @@ body {
 	display: block;
 }
 	.b-filter {
-		display: block;
-		width: 100%;
-		height: 100vh;
-		box-sizing: border-box;
-		overflow-y: auto;
-		overflow-x: hidden;
-		position: fixed;
-		top: 0;
-		left: -200%;
-		z-index: 1000;
-		padding: 40px 20px;
-		background-color: #ffffff;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		-ms-transition: all 0.3s;
-		transition: all 0.3s;
+		display: none;
+		width: 300px;
+	}
+	.b-filter-item{
+		padding: 0px 15px;
 	}
 	.b-filter.active {
 		left: 0;

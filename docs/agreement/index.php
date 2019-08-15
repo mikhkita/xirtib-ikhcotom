@@ -2,7 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Пользовательское соглашение");?>
 
-<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
 <div class="b-text b-politics-text">
 	<p>Настоящий документ «Пользовательское соглашение» (далее – Соглашение) представляет собой предложение ИП Шпичко Елена Николаевна, размещенное на сайте www.motochki-klubochki.ru (далее – «Сайт»), заключить договор на изложенных ниже условиях Соглашения.</p>
 

@@ -2,7 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Правила предоставления услуг");?>
 
-<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
 <div class="b-text b-politics-text">
 	<p>Совершить покупку в нашем магазине очень просто. Заказы принимаются круглосуточно на нашем сайте <a href="/">motochki-klubochki.ru</a></p>
 	<p>Совершая заказ в нашем магазине вы принимаете <a href="/docs/agreement/">Пользовательское соглашение.</a></p>

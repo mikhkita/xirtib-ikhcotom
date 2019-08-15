@@ -32,7 +32,7 @@ if(count($arResult["ITEMS"]) <= 2){
 ?>
 
 
-<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="b-filter <?=$filterClass?>">
+<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="b-filter <?=$filterClass?>" id="b-filter-panel">
 	<? $isSortField = false; ?>
 	<? $isSortType = false; ?>
 

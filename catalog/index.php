@@ -46,8 +46,6 @@ $APPLICATION->SetTitle("Каталог");?>
 	if (!$_REQUEST['SORT_TYPE']) {
 		$_REQUEST['SORT_TYPE'] = "ASC";
 	} ?>
-
-	<!-- <h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1> -->
 	
 	<div class="catalog-mobile-filter">Фильтр</div>
 	<div class="b-catalog clearfix" id="b-catalog">
@@ -299,7 +297,6 @@ $APPLICATION->SetTitle("Каталог");?>
 	<? endif; ?>
 	<? else: ?>
 		<div class="b-catalog-section">
-			<!-- <h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1> -->
 			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "main", Array(
 					"ADD_SECTIONS_CHAIN" => "N",
 					"CACHE_GROUPS" => "Y",

@@ -2,7 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Договор-оферта");?>
 
-<h1 class="b-title b-title-left"><?$APPLICATION->ShowTitle()?></h1>
 <div class="b-text b-politics-text">
 	<p>ИП Шпичко Елена Николаевна в лице интернет-магазина моточки-клубочки.рф (далее ПРОДАВЕЦ) публикует настоящий договор, являющийся публичным договором-офертой в адрес физических лиц (далее ПОКУПАТЕЛЬ) о нижеследующем:</p>
 

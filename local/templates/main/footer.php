@@ -146,6 +146,14 @@
 			</div>
 		</div>
 
+		<div class="b-thanks b-popup" id="b-popup-commnet-success">
+			<h3>Спасибо!</h3>
+			<p>Ваш комментарий будет опубликован после модерации.</p>
+			<div class="b-btn-container">
+				<input type="submit" class="b-btn" onclick="$.fancybox.close(); return false;" value="Закрыть">
+			</div>
+		</div>
+
 		<div class="b-thanks b-popup" id="b-popup-success-reg">
 			<h3>Спасибо!</h3>
 			<p>Письмо для подтверждения регистрации отправлено на ваш e-mail.</p>
@@ -326,6 +334,7 @@
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/chosen.jquery.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/autosize.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.ui.touch-punch.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/slideout.min.js"></script>
 	<!-- Плагины для страницы оформления заказа -->
 	<? if($urlArr[1] == "cart" && $urlArr[2] == "order"): ?>
