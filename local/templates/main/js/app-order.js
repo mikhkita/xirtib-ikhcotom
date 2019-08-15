@@ -19,7 +19,7 @@
         }
 
         if(myWidth < 768){
-            $(".b-side-right").trigger("sticky_kit:detach");
+            $(".b-order-totals").trigger("sticky_kit:detach");
         }else{
             $(".b-order-totals").stick_in_parent({offset_top: 24});
         }

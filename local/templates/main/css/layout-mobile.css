@@ -653,6 +653,7 @@ body {
 
 .b-btn-blocked-preloader{
 	margin-top: 10px;
+	margin-left: 0;
 }
 
 .order-submit-desktop{
@@ -946,7 +947,6 @@ body {
 	}
 	.b-btn-blocked-preloader {
 	    display: block;
-	    margin-left: 0;
 	}
 }
 
