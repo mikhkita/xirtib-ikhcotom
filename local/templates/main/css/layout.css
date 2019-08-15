@@ -3812,6 +3812,15 @@ h3.b-title{
 	    background-color: #77BE32;
 	    border: none;
 	}
+	.b-btn-order-submit:hover{
+		color: #FFF;
+	}
+	.order-submit-desktop{
+
+	}
+	.order-submit-mobile{
+		display: none;
+	}
 
 /*======Попапы=======*/
 .b-popup{
@@ -5295,13 +5304,21 @@ textarea:-moz-placeholder {
 		vertical-align: top;
 		pointer-events: none;
 		opacity: 0.25;
+		min-width: 270px;
+	    position: relative;
+	    font-family: 'DINPro-Regular';
+	    line-height: 24px;
+	    padding: 16px 17px 21px 17px;
+	    color: #FFF;
+	    background-color: #77BE32;
+	    border: none;
 	}
 	.b-btn-blocked-preloader{
 		display: inline-block;
 		margin-left: 20px;
 	}
 		.b-btn-blocked-preloader img{
-			margin-top: 10px;
+			margin-top: 6px;
 			display: inline-block;
 			vertical-align: top;
 			width: 50px;
@@ -5309,7 +5326,7 @@ textarea:-moz-placeholder {
 		}
 		.b-btn-blocked-preloader span{
 			margin-left: 10px;
-			margin-top: 12px;
+			margin-top: 8px;
 			display: inline-block;
 			vertical-align: top;
 			width: 250px

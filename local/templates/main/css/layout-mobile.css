@@ -645,9 +645,21 @@ body {
 .b-catalog-list .b-item-card:nth-child(2n){
 	margin-right: 0px;
 }
-.b-btn-order-submit{
+.b-btn-order-submit,
+.b-btn-blocked{
 	margin-top: 40px;
     width: 100%;
+}
+
+.b-btn-blocked-preloader{
+	margin-top: 10px;
+}
+
+.order-submit-desktop{
+	display: none;
+}
+.order-submit-mobile{
+	display: block;
 }
 
 @media screen and (max-width: 665px){

@@ -246,13 +246,15 @@
                             </div>\
                         </div>\
                     </form>\
-                    <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit && !form.nowSubmit">Оформить заказ</a>\
-                    <div class="b-btn-blocked-cont" v-else>\
-                        <span class="b-btn b-btn-blocked">Оформить заказ</span>\
-                        <div class="b-btn-blocked-preloader">\
-                            <img src="/local/templates/main/i/preloader.svg">\
-                            <span v-if="!form.nowSubmit">Идет расчет стоимости доставки, пожалуйста, подождите</span>\
-                            <span v-else>Выполняется оформление заказа, пожалуйста, подождите</span>\
+                    <div class="order-submit-desktop">\
+                        <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit && !form.nowSubmit">Оформить заказ</a>\
+                        <div class="b-btn-blocked-cont" v-else>\
+                            <span class="b-btn b-btn-blocked">Оформить заказ</span>\
+                            <div class="b-btn-blocked-preloader">\
+                                <img src="/local/templates/main/i/preloader.svg">\
+                                <span v-if="!form.nowSubmit">Идет расчет стоимости доставки, пожалуйста, подождите</span>\
+                                <span v-else>Выполняется оформление заказа, пожалуйста, подождите</span>\
+                            </div>\
                         </div>\
                     </div>\
                 </div>\
@@ -266,6 +268,17 @@
                     :_total="total"\
                     :_couponList="couponList"\
                 ></v-totals>\
+                <div class="order-submit-mobile">\
+                    <a href="#" class="b-btn b-btn-order-submit" @click.prevent="validationForm" v-if="!form.blockedSubmit && !form.nowSubmit">Оформить заказ</a>\
+                    <div class="b-btn-blocked-cont" v-else>\
+                        <span class="b-btn b-btn-blocked">Оформить заказ</span>\
+                        <div class="b-btn-blocked-preloader">\
+                            <img src="/local/templates/main/i/preloader.svg">\
+                            <span v-if="!form.nowSubmit">Идет расчет стоимости доставки, пожалуйста, подождите</span>\
+                            <span v-else>Выполняется оформление заказа, пожалуйста, подождите</span>\
+                        </div>\
+                    </div>\
+                </div>\
             </div>\
             \
             <div v-if="showCatalogRef">\
