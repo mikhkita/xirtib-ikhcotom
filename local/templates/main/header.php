@@ -208,17 +208,21 @@ if ($arFav > 0){
 						<span>Меню</span>
 					</div>
 					<div class="b-top-menu-cont">
+						<? $GLOBALS['sectionsFilter'] = array(
+							'!ID' => '116'
+						);?>
 						<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_categories", Array(
+								"FILTER_NAME" => "sectionsFilter",
 								"ADD_SECTIONS_CHAIN" => "N",
 								"CACHE_GROUPS" => "Y",
 								"CACHE_TIME" => "36000000",
 								"CACHE_TYPE" => "N",
-								"COUNT_ELEMENTS" => "Y",
+								"COUNT_ELEMENTS" => "N",
 								"IBLOCK_ID" => "1",
 								"IBLOCK_TYPE" => "content",
-								"SHOW_PARENT_NAME" => "Y",
-								"TOP_DEPTH" => "1",
-								"VIEW_MODE" => "LINE",
+								"SHOW_PARENT_NAME" => "N",
+								"TOP_DEPTH" => "10",
+								"VIEW_MODE" => "LIST",
 							),
 							false
 						);?>

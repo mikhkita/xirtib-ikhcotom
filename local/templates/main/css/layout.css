@@ -5427,7 +5427,8 @@ textarea:-moz-placeholder {
 	.b-header-catalog-block > .b-header-catalog > li:hover{
 		background: #D4EABF;
 	}
-	.b-header-catalog li:hover > .b-header-catalog{
+	.b-header-catalog li:hover > .b-header-catalog,
+	.b-header-catalog li:hover > div > .b-header-catalog{
 		opacity: 1;
 		visibility: visible;
 		-webkit-transition: opacity 150ms ease-out, visibility 150ms ease-out;
@@ -5436,7 +5437,8 @@ textarea:-moz-placeholder {
 		-o-transition: opacity 150ms ease-out, visibility 150ms ease-out;
 		transition: opacity 150ms ease-out, visibility 150ms ease-out;
 	}
-	.b-header-catalog li:hover > .b-header-catalog a:before{
+	.b-header-catalog li:hover > .b-header-catalog a:before,
+	.b-header-catalog li:hover > div > .b-header-catalog a:before{
 		opacity: 0;
 	}
 	.b-fav:hover .b-fav-round{
