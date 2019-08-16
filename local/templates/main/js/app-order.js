@@ -52,7 +52,7 @@
                     deliveryList: [],
                     paymentActive: "",
                     paymentList: [],
-                    address: "",
+                    rdrdlvr: "",
                     comment: "",
                     blockedSubmit: false,
                     nowSubmit: false
@@ -230,10 +230,10 @@
                                 <div v-if="form.deliveryActive != \'5\' && form.deliveryActive != \'15\'">\
                                     <div class="b-textarea">\
                                         <p>Адрес доставки</p>\
-                                        <textarea rows="1" name="address" placeholder="Введите адрес" v-model="form.address"\
+                                        <textarea rows="1" name="rdrdlvr" autocomplete="off" placeholder="Введите адрес" v-model="form.rdrdlvr"\
                                             v-validate="\'required\'"\
-                                            :class="{ error: errors.first(\'address\')}"\
-                                            @click="openMap"\
+                                            :class="{ error: errors.first(\'rdrdlvr\')}"\
+                                            @focus="openMap"\
                                         ></textarea>\
                                     </div>\
                                 </div>\
@@ -409,11 +409,15 @@
                 if(this.formValid){
                     this.form.nowSubmit = true;
                     document.getElementById('b-order-form').submit();
+                }else{
+                    setTimeout(function(){
+                        $("#app-order").find("input.error,select.error,textarea.error").eq(0).focus();
+                    }, 10);
                 }
             },
             openMap: function (event) {
                 $(".b-popup-map-link").click();
-                console.log(this.form.address);
+                console.log(this.form.rdrdlvr);
                 // console.log(event.target);
                 // event.target.blur();
             },
@@ -854,7 +858,7 @@
             if($('#app-order input[name="phone"]').length && !this.pluginsInit){
                 $('#app-order input[name="phone"]').mask('+7 (000) 000-00-00');
                 if( typeof autosize == "function" ){
-                    autosize(document.querySelectorAll('#app-order textarea[name="address"], #app-order textarea[name="comment"]'));
+                    autosize(document.querySelectorAll('#app-order textarea[name="rdrdlvr"], #app-order textarea[name="comment"]'));
                 }
                 window.onresize = windowResize;
                 windowResize();

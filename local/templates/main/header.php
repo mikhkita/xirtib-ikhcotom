@@ -207,21 +207,23 @@ if ($arFav > 0){
 						</div>
 						<span>Меню</span>
 					</div>
-					<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_categories", Array(
-							"ADD_SECTIONS_CHAIN" => "N",
-							"CACHE_GROUPS" => "Y",
-							"CACHE_TIME" => "36000000",
-							"CACHE_TYPE" => "N",
-							"COUNT_ELEMENTS" => "Y",
-							"IBLOCK_ID" => "1",
-							"IBLOCK_TYPE" => "content",
-							"SHOW_PARENT_NAME" => "Y",
-							"TOP_DEPTH" => "1",
-							"VIEW_MODE" => "LINE",
-						),
-						false
-					);?>
-					
+					<div class="b-top-menu-cont">
+						<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_categories", Array(
+								"ADD_SECTIONS_CHAIN" => "N",
+								"CACHE_GROUPS" => "Y",
+								"CACHE_TIME" => "36000000",
+								"CACHE_TYPE" => "N",
+								"COUNT_ELEMENTS" => "Y",
+								"IBLOCK_ID" => "1",
+								"IBLOCK_TYPE" => "content",
+								"SHOW_PARENT_NAME" => "Y",
+								"TOP_DEPTH" => "1",
+								"VIEW_MODE" => "LINE",
+							),
+							false
+						);?>
+					</div>
+
 					<? $basketInfo = getBasketCount(); ?>
 					<? if ($basketInfo['sum'] >= 1000): ?>
 						<? $basketInfo['sum'] = number_format( $basketInfo['sum'], 0, ',', ' ' ); ?>

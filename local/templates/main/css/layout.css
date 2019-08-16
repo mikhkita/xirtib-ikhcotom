@@ -742,22 +742,26 @@ h3.b-title{
 	.b-main-menu{
 		background-color: #77BE32;
 	}
-		.b-main-menu .b-block > .b-header-catalog{
+		.b-top-menu-cont{
+			width: calc(100% - 230px);
+			display: inline-block;
+		}
+		.b-main-menu .b-top-menu > .b-header-catalog{
 			opacity: 1;
 			visibility: visible;
 			position: relative;
 			background: transparent;
 			box-shadow: unset;
 			display: inline-block;
-			width: calc(100% - 230px);
+			width: 100%;
 			border: unset;
 		}
-		.b-main-menu .b-block > .b-header-catalog li > .b-header-catalog a{
+		.b-main-menu .b-top-menu > .b-header-catalog li > .b-header-catalog a{
 			color: #564430;
 			text-align: left;
 			padding: 15px 30px 19px 30px;
 		}
-		.b-main-menu .b-block > .b-header-catalog > li > .inner-menu{
+		.b-main-menu .b-top-menu > .b-header-catalog > li > .inner-menu{
 			top: 100%;
 			left: 0;
 			width: 100%;
@@ -766,7 +770,7 @@ h3.b-title{
 			top: -1px;
 			border-radius: 0;
 		}
-		.b-main-menu .b-block > .b-header-catalog li .b-menu-item{
+		.b-main-menu .b-top-menu > .b-header-catalog li .b-menu-item{
 			width: 100%;
 			display: block;
 		}
@@ -3107,11 +3111,14 @@ h3.b-title{
 		right: 0;
 		z-index: 1100;
 	}
-	.b-filter{
+	.b-filter-cont{
 		vertical-align: top;
 		display: inline-block;
 		width: 215px;
 		margin-top: -8px;
+	}
+	.b-filter{
+		
 	}
 	.b-filter.filter-mobile{
 		padding: 40px 0;
