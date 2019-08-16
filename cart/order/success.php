@@ -21,7 +21,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 	$name = $_REQUEST["name"];
 	$phone = $_REQUEST["phone"];
 	$email = $_REQUEST["email"];
-	$address = $_REQUEST["addr"];
+	$address = $_REQUEST["rdrdlvr"];
 	$comment = $_REQUEST["comment"];
 	$paymentId = $_REQUEST["payment"];
 	$deliveryId = $_REQUEST["delivery"];

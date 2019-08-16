@@ -762,7 +762,7 @@ $(document).ready(function(){
         }
         postalCode = $('#postal-code').val() + ", ";
         var resString = postalCode + $('.js-order-adress-map-input').val() + room;
-        var $address = $("#app-order textarea[name='addr']").val(resString);
+        var $address = $("#app-order textarea[name='rdrdlvr']").val(resString);
         var e = new Event("input");
         $address[0].dispatchEvent(e);
         $.fancybox.close();
