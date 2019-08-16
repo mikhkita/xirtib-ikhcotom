@@ -398,7 +398,7 @@ body {
 	.b-footer .b-city {
 		max-width: none;
 	}
-	.b-top-menu, .b-header-catalogue, .b-menu-items {
+	.b-top-menu-cont, .b-top-menu, .b-header-catalogue, .b-menu-items {
 		display: none;
 	}
 	.b-main-menu .b-block > .b-header-catalog{
