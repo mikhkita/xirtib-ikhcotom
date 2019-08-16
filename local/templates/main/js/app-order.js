@@ -230,10 +230,10 @@
                                 <div v-if="form.deliveryActive != \'5\' && form.deliveryActive != \'15\'">\
                                     <div class="b-textarea">\
                                         <p>Адрес доставки</p>\
-                                        <textarea rows="1" name="address" placeholder="Введите адрес" v-model="form.address"\
+                                        <textarea rows="1" name="addr" autocomplete="off" placeholder="Введите адрес" v-model="form.address"\
                                             v-validate="\'required\'"\
                                             :class="{ error: errors.first(\'address\')}"\
-                                            @click="openMap"\
+                                            @focus="openMap"\
                                         ></textarea>\
                                     </div>\
                                 </div>\
@@ -854,7 +854,7 @@
             if($('#app-order input[name="phone"]').length && !this.pluginsInit){
                 $('#app-order input[name="phone"]').mask('+7 (000) 000-00-00');
                 if( typeof autosize == "function" ){
-                    autosize(document.querySelectorAll('#app-order textarea[name="address"], #app-order textarea[name="comment"]'));
+                    autosize(document.querySelectorAll('#app-order textarea[name="addr"], #app-order textarea[name="comment"]'));
                 }
                 window.onresize = windowResize;
                 windowResize();

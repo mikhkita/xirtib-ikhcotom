@@ -132,6 +132,7 @@ $(document).ready(function(){
 				padding : 0,
 				content : $popup,
 				touch: false,
+				backFocus: false,
 				helpers: {
 		         	overlay: {
 		            	locked: true 
