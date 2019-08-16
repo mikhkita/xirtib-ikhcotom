@@ -3111,11 +3111,14 @@ h3.b-title{
 		right: 0;
 		z-index: 1100;
 	}
-	.b-filter{
+	.b-filter-cont{
 		vertical-align: top;
 		display: inline-block;
 		width: 215px;
 		margin-top: -8px;
+	}
+	.b-filter{
+		
 	}
 	.b-filter.filter-mobile{
 		padding: 40px 0;

@@ -49,8 +49,8 @@ $APPLICATION->SetTitle("Каталог");?>
 	
 	<div class="catalog-mobile-filter">Фильтр</div>
 	<div class="b-catalog clearfix" id="b-catalog">
-		<?
-		$APPLICATION->IncludeComponent(
+		<div class="b-filter-cont">
+		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.smart.filter",
 			"main",
 			Array(
@@ -83,8 +83,10 @@ $APPLICATION->SetTitle("Каталог");?>
 				"TEMPLATE_THEME" => "site",
 				"XML_EXPORT" => "N"
 			)
-		);
+		);?>
+		</div>
 
+		<?
 
 		if ($_REQUEST['TAGS'] && CModule::IncludeModule('search')) {
 			// $rsTags = CSearchTags::GetList(array(),array("MODULE_ID" => "iblock"), array("CNT" => "DESC"));
@@ -106,9 +108,8 @@ $APPLICATION->SetTitle("Каталог");?>
 			$_REQUEST["SECTION_CODE"] = '';
 		}
 
-
-
 		?>
+
 		<div class="b-catalog-list after-load">
 			<? if (!$_REQUEST['TAGS']):?>
 				<?$APPLICATION->IncludeComponent("redder:catalog.section.list", "subcategories", Array(
