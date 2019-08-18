@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 ?>
 
-	<div class="b b-main-slider">
+	<div class="b b-main-slider-cont">
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"main_slider",
@@ -71,10 +71,10 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 					<img src="<?=SITE_TEMPLATE_PATH?>/i/24-hours.svg">
 				</div>
 				<div class="b-advantage-header">
-					<h3>Обработка заказа - <br>1&nbsp;день</h3>
+					<h3><?includeArea("b-advantage-title-1")?></h3>
 				</div>
 				<div class="b-advantage-description">
-					<p>Отправим со склада на следующий&nbsp;день после оплаты&nbsp;заказа.</p>
+					<p><?includeArea("b-advantage-description-1")?></p>
 				</div>
 			</div>
 			<div class="b-advantage clearfix">
@@ -82,10 +82,10 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 					<img src="<?=SITE_TEMPLATE_PATH?>/i/knitting.svg">
 				</div>
 				<div class="b-advantage-header">
-					<h3>Легко определить <br>расход пряжи</h3>
+					<h3><?includeArea("b-advantage-title-2")?></h3>
 				</div>
 				<div class="b-advantage-description">
-					<p>Мы вяжем образцы, чтобы вы&nbsp;смогли&nbsp;определиться с расходом&nbsp;пряжи на изделие.</p>
+					<p><?includeArea("b-advantage-description-2")?></p>
 				</div>
 			</div>
 			<div class="b-advantage clearfix">
@@ -93,33 +93,18 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 					<img src="<?=SITE_TEMPLATE_PATH?>/i/percent.svg">
 				</div>
 				<div class="b-advantage-header">
-					<h3>Скидки постоянным <br>покупателям</h3>
+					<h3><?includeArea("b-advantage-title-3")?></h3>
 				</div>
 				<div class="b-advantage-description">
-					<p>Регистрируйтесь на сайте и первыми узнавайте о наших акциях и скидках</p>
+					<p><?includeArea("b-advantage-description-3")?></p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="b b-stock">
 		<div class="b-block">
-			<h2 class="b-title">Скидки</h2>
+			<h2 class="b-title"><?includeArea("b-main-title-1")?></h2>
 			<?
-
-			// $arDiscounts = getDiscountProducts();
-			// $discountProducts = array();
-
-			// foreach ($arDiscounts['PRODUCTS'] as $discount) {
-			// 	$mxResult = CCatalogSku::GetProductInfo($discount);
-			// 	if (is_array($mxResult)){
-			// 		array_push($discountProducts, $mxResult['ID']);
-			// 	}
-			// }
-
-			// $discountProducts = array_unique($discountProducts);
-
-
-
 			$GLOBALS['arrFilter2'][] = array(
 				"LOGIC" => "OR", 
 				array("!PROPERTY_DISCOUNT"=>false), 
@@ -240,7 +225,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 	</div>
 	<div class="b b-stock">
 		<div class="b-block">
-			<h2 class="b-title">Новинки</h2>
+			<h2 class="b-title"><?includeArea("b-main-title-2")?></h2>
 			<?
 			$APPLICATION->IncludeComponent(
 				"bitrix:catalog.section",
@@ -352,44 +337,49 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 	</div>
 	<div class="b b-choose-type">
 		<div class="b-block">
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:catalog.smart.filter",
-				"index",
-				Array(
-					"CACHE_GROUPS" => "Y",
-					"CACHE_TIME" => "36000000",
-					"CACHE_TYPE" => "A",
-					"COMPONENT_TEMPLATE" => "main",
-					"CONVERT_CURRENCY" => "Y",
-					"CURRENCY_ID" => "RUB",
-					"DISPLAY_ELEMENT_COUNT" => "Y",
-					"FILTER_NAME" => "arrFilter",
-					"FILTER_VIEW_MODE" => "horizontal",
-					"HIDE_NOT_AVAILABLE" => "Y",
-					"IBLOCK_ID" => "1",
-					"IBLOCK_TYPE" => "content",
-					"INSTANT_RELOAD" => "Y",
-					"PAGER_PARAMS_NAME" => "arrPager",
-					"POPUP_POSITION" => "left",
-					"PREFILTER_NAME" => "smartPreFilter",
-					"PRICE_CODE" => array(0=>"PRICE",),
-					"SAVE_IN_SESSION" => "N",
-					"SECTION_CODE" => "",
-					"SECTION_CODE_PATH" => "",
-					"SECTION_DESCRIPTION" => "-",
-					"SECTION_ID" => "1",
-					"SECTION_TITLE" => "-",
-					"SEF_MODE" => "N",
-					"SEF_RULE" => "/catalog/#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
-					"SMART_FILTER_PATH" => $_REQUEST["SMART_FILTER_PATH"],
-					"TEMPLATE_THEME" => "site",
-					"XML_EXPORT" => "N"
-				)
-			);?>
+			<form name="_form" action="/catalog/pryazha/" method="get" class="b-main-filter">
+				<h2 class="b-title"><?includeArea("b-main-title-3")?></h2>
+				<?$APPLICATION->IncludeComponent(
+					"bitrix:catalog.smart.filter",
+					"index",
+					Array(
+						"CACHE_GROUPS" => "Y",
+						"CACHE_TIME" => "36000000",
+						"CACHE_TYPE" => "A",
+						"COMPONENT_TEMPLATE" => "main",
+						"CONVERT_CURRENCY" => "Y",
+						"CURRENCY_ID" => "RUB",
+						"DISPLAY_ELEMENT_COUNT" => "Y",
+						"FILTER_NAME" => "arrFilter",
+						"FILTER_VIEW_MODE" => "horizontal",
+						"HIDE_NOT_AVAILABLE" => "Y",
+						"IBLOCK_ID" => "1",
+						"IBLOCK_TYPE" => "content",
+						"INSTANT_RELOAD" => "Y",
+						"PAGER_PARAMS_NAME" => "arrPager",
+						"POPUP_POSITION" => "left",
+						"PREFILTER_NAME" => "smartPreFilter",
+						"PRICE_CODE" => array(0=>"PRICE",),
+						"SAVE_IN_SESSION" => "N",
+						"SECTION_CODE" => "",
+						"SECTION_CODE_PATH" => "",
+						"SECTION_DESCRIPTION" => "-",
+						"SECTION_ID" => "1",
+						"SECTION_TITLE" => "-",
+						"SEF_MODE" => "N",
+						"SEF_RULE" => "/catalog/#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
+						"SMART_FILTER_PATH" => $_REQUEST["SMART_FILTER_PATH"],
+						"TEMPLATE_THEME" => "site",
+						"XML_EXPORT" => "N"
+					)
+				);?>
+			</form>
 		</div>
 	</div>
 	<div class="b b-im-watch">
-		<h2 class="b-title">Следите за нами в Instagram</h2>
+		<div class="b-block">
+			<h2 class="b-title"><?includeArea("b-main-title-4")?></h2>
+		</div>
 		<div class="b-im-block">
 			<a href="https://www.instagram.com/motochkiklubochki/" target="_blank"><img src="<?=SITE_TEMPLATE_PATH?>/i/im-post-1.jpg"></a>
 			<a href="https://www.instagram.com/motochkiklubochki/" target="_blank"><img src="<?=SITE_TEMPLATE_PATH?>/i/im-post-2.jpg"></a>
@@ -406,7 +396,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 	</div>
 	<div class="b b-main-articles-block">
 		<div class="b-block">
-			<h2 class="b-title">Читайте наши статьи</h2>
+			<h2 class="b-title"><?includeArea("b-main-title-5")?></h2>
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:news.list",
 				"index-blog",

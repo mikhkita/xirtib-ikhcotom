@@ -8,8 +8,8 @@
 		<div class="b-block clearfix">
 			<div class="b-footer-top">
 				<div class="b-footer-top-text">
-					<h3>Видео-магазин в WhatsApp</h3>
-					<p>Если вы сомневаетесь в выборе того или иного товара, мы можем провести его полный обзор с помощью видео-связи в приложении WhatsApp. Просто оставьте свой номер телефона и мы перезвоним вам для записи.</p>
+					<h3><?includeArea("b-footer-text-1")?></h3>
+					<p><?includeArea("b-footer-text-2")?></p>
 				</div>
 				<div class="b-footer-top-input">
 					<a href="https://wa.me/79039538088?text=Здравствуйте!%20Хочу%20подробнее%20узнать%20о%20товаре%20с%20помощью%20видеосвязи." class="b-btn" target="_blank">Записаться на обзор пряжи</a>
@@ -17,16 +17,16 @@
 			</div>
 			<div class="b-footer-bottom clearfix">
 				<div class="b-footer-bottom-left">
-					<p class="b-city">Интернет-магазин пряжи</p>
+					<p class="b-city"><?includeArea("b-footer-text-3")?></p>
 					<a href="#" class="b-footer-logo"></a>
-					<a href="tel:+79039538088" class="b-phone">+7 (903) 953-8088</a>
+					<?includeArea("b-footer-text-4")?>
 					<a href="#popup-callback" class="b-phone-call fancy underlined">Обратный звонок</a>
 					<div class="b-write-us">
-						<p>Напишите нам:</p>
+						<p><?includeArea("b-footer-text-5")?></p>
 						<div class="b-footer-messenger">
-							<a href="https://vk.com/mkv70" target="_blank" class="icon-vk"></a>
-							<a href="https://wa.me/79039538088" target="_blank" class="icon-whatsapp"></a>
-							<a href="viber://chat?number=+380508812637" target="_blank" class="icon-viber"></a>
+							<?includeArea("b-footer-link-1")?>
+							<?includeArea("b-footer-link-2")?>
+							<?includeArea("b-footer-link-3")?>
 						</div>
 					</div>
 					<a href="#popup-callback" class="b-btn fancy">Обратная связь</a>
@@ -60,22 +60,22 @@
 				</div>
 				<div class="b-footer-bottom-right">
 					<div class="b-subscribe">
-						<h3 class="b-subscribe-us">Будьте в курсе новинок, подпишитесь на рассылку!</h3>
+						<h3 class="b-subscribe-us"><?includeArea("b-footer-text-6")?></h3>
 						<form action="ajax/?action=SUBSCRIBE" method="POST" class="b-footer-inputs clearfix">
 							<input type="text" name="name" placeholder="Имя" required>
 							<input type="text" name="email" placeholder="E-mail" required>
 							<input type="text" name="MAIL">
 							<a href="#" class="b-btn ajax">Подписаться</a>
-							<div class="politics">Отправляя форму, я даю согласие на обработку моих персональных данных в соответствии с <a href="/docs/politics/">политикой конфиденциальности</a></div>
+							<div class="politics"><?includeArea("b-footer-text-7")?></div>
 							<a href="#b-popup-subscribe-success" class="b-thanks-link fancy" style="display:none;"></a>
 							<a href="#b-popup-error" class="b-error-link fancy" style="display:none;"></a>
 						</form>
 					</div>
 					<div class="b-social">
-						<p>Присоединяйтесь к нам в соцсетях:</p>
+						<p><?includeArea("b-footer-text-8")?></p>
 						<div class="b-footer-social">
-							<a href="https://vk.com/mkv70" class="icon-vk" target="_blank"></a>
-							<a href="https://www.instagram.com/motochkiklubochki/" class="icon-im" target="_blank"></a>
+							<?includeArea("b-footer-link-4")?>
+							<?includeArea("b-footer-link-5")?>
 							<!-- <a href="#" class="icon-yt" target="_blank"></a> -->
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 					</div>
 				</div>
 				<div class="b-copyright">
-					<p>© Моточки-Клубочки. Все права защищены</p>
+					<div><?includeArea("b-footer-text-9")?></div>
 					<a href="http://redder.pro" target="_blank" class="b-redder">Разработка сайта: REDDER</a>
 				</div>
 			</div>

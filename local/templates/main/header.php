@@ -109,7 +109,7 @@ if ($arFav > 0){
 		<div class="b b-header">
 			<div class="b-top">
 				<div class="b-block">
-					<p class="b-city">Интернет-магазин пряжи</p>
+					<p class="b-city"><?includeArea("b-header-text-1")?></p>
 						<?$APPLICATION->IncludeComponent("bitrix:menu", "top_menu", array(
 							"ROOT_MENU_TYPE" => "main",
 							"MAX_LEVEL" => "1",
@@ -121,7 +121,7 @@ if ($arFav > 0){
 						),
 							false
 						);?>
-					<a href="tel:+79039538088" class="b-phone">+7 (903) 953-80-88</a>
+					<?includeArea("b-header-text-2")?>
 				</div>
 			</div>
 			<div class="b-block">

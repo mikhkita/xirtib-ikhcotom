@@ -1657,6 +1657,9 @@ h3.b-title{
 				.b-footer-messenger{
 					margin-top: 11px;
 				}
+					.b-footer-messenger div{
+						display: inline-block;
+					}
 					.b-footer-messenger .icon-vk{
 						font-size: 17px;
 						position: relative;
@@ -1734,6 +1737,9 @@ h3.b-title{
 			}
 				.b-social p{
 					margin-bottom: 18px;
+				}
+				.b-footer-social div{
+					display: inline-block;
 				}
 				.b-footer-social .icon-vk{
 					font-size: 18px;
