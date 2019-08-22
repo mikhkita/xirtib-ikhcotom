@@ -185,10 +185,12 @@ if ($_GET['tab'] == 'favourite') {
 			</div>
 		<? else: ?>
 			<div class="b-cabinet-orders tabs-content history-block">
+				<? $_REQUEST['show_all'] = "Y"; ?>
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:sale.personal.order.list",
 					"main",
 					Array(
+						"DEFAULT_SORT" => 'ID',
 				        "STATUS_COLOR_N" => "green",
 				        "STATUS_COLOR_P" => "yellow",
 				        "STATUS_COLOR_F" => "gray",
@@ -206,8 +208,8 @@ if ($_GET['tab'] == 'favourite') {
 				        "CACHE_TYPE" => "A",
 				        "CACHE_TIME" => "3600",
 				        "CACHE_GROUPS" => "Y",
-				        "HISTORIC_STATUSES" => "F",
-				        "ACTIVE_DATE_FORMAT" => "d.m.Y"
+				        "HISTORIC_STATUSES" => array(),
+				        "ACTIVE_DATE_FORMAT" => "d.m.Y",
 				    )
 				);?>
 			</div>
