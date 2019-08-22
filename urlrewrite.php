@@ -1,5 +1,13 @@
 <?php
 $arUrlRewrite=array (
+  9 => 
+  array (
+    'CONDITION' => '#^/product-category/(.+)/(\\\\?(.*))?#',
+    'RULE' => 'SECTION_CODE=$1&$2',
+    'ID' => '',
+    'PATH' => '/product-category/index.php',
+    'SORT' => 100,
+  ),
   4 => 
   array (
     'CONDITION' => '#^/catalog/(.+)/(.+)/(\\\\?(.*))?#',
@@ -48,12 +56,12 @@ $arUrlRewrite=array (
     'PATH' => '/catalog/index.php',
     'SORT' => 100,
   ),
-  9 => 
+  10 => 
   array (
     'CONDITION' => '#^/product/(.+)/(\\\\?(.*))?#',
-    'RULE' => 'ELEMENT_CODE=$1',
+    'RULE' => 'ELEMENT_CODE=$1&$2',
     'ID' => '',
-    'PATH' => '/catalog/detail.php',
+    'PATH' => '/product/index.php',
     'SORT' => 100,
   ),
   7 => 
