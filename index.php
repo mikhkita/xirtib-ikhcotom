@@ -2,7 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 ?>
-
 	<div class="b b-main-slider-cont">
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:news.list",

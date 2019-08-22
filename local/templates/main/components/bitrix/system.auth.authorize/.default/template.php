@@ -19,6 +19,7 @@ ShowMessage($arResult['ERROR_MESSAGE']);
 					<input type="hidden" name="AUTH_FORM" value="Y">
 	                <input type="hidden" name="TYPE" value="AUTH">
 	                <input type="hidden" name="Login" value="Войти">
+	                <input type="submit" style="display: none;">
 
 					<input type="text" name="USER_LOGIN" placeholder="Электронная почта" required="">
 					<input type="password" name="USER_PASSWORD" placeholder="Пароль" required="">
@@ -39,6 +40,7 @@ ShowMessage($arResult['ERROR_MESSAGE']);
 					<input type="text" name="email" placeholder="Электронная почта" required="">
 					<input type="password" name="password" placeholder="Пароль" required="">
 					<input type="text" name="MAIL">
+					<input type="submit" style="display: none;">
 					<div class="b-btn-container">
 						<a href="#" class="b-btn b-btn-sign-up ajax">Зарегистрироваться</a>
 					</div>
