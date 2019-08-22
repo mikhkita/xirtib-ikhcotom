@@ -109,7 +109,7 @@ if ($arResult["OFFERS"]){
 	$arr = $arResult["OFFERS"][0]["PROPERTIES"];
 	unset($arr["CML2_LINK"]);
 	foreach ($arr as $key => $value) {
-		if (!empty($value['VALUE'])) {
+		if (!empty($value['VALUE']) && intval($value['ID']) != 42) { // Не скидка
 			$name = $value['NAME'];
 			break;
 		}
