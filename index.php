@@ -235,7 +235,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 				'ACTIVE_COMPONENT' => 'Y'
 			)
 			);?>
-			<a href="/catalog/" class="b-btn">Смотреть все</a>
+			<a href="/catalog/aktsii-i-skidki/" class="b-btn">Смотреть все</a>
 		</div>
 	</div>
 	<div class="b b-stock">
@@ -347,7 +347,7 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 			)
 			);
 			?>
-			<a href="/catalog/" class="b-btn">Смотреть все</a>
+			<a href="/catalog/novoe-postuplenie/" class="b-btn">Смотреть все</a>
 		</div>
 	</div>
 	<div class="b b-choose-type">
