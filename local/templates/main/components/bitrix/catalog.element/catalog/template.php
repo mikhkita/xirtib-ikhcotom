@@ -614,7 +614,7 @@ if (count($arResult["OFFERS"]) < 5){
 			"ELEMENT_SORT_ORDER" => $_REQUEST['SORT_TYPE'],
 			"ELEMENT_SORT_ORDER2" => "DESC",
 			"FILTER_NAME" => "arSliderFilter",
-			"HIDE_NOT_AVAILABLE" => "N",
+			"HIDE_NOT_AVAILABLE" => "Y",
 			"IBLOCK_ID" => "1",
 			"IBLOCK_TYPE" => "catalog",
 			"IBLOCK_TYPE_ID" => "catalog",
