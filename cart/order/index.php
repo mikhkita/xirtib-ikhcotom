@@ -6,6 +6,9 @@ $APPLICATION->SetTitle("Оформление заказа");
 		<div id="app-order">
 			<v-order></v-order>
 		</div>
+		<div id="b-order-preloader" class="b-order-preloader">
+          	<img src="/local/templates/main/i/preloader.svg">
+		</div>
 	</div>
 
 	<div style="display: none;" class="b-cdek-map-cont">

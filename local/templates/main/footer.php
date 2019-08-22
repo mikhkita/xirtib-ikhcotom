@@ -338,7 +338,7 @@
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/slideout.min.js"></script>
 	<!-- Плагины для страницы оформления заказа -->
 	<? if($urlArr[1] == "cart" && $urlArr[2] == "order"): ?>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vue.js"></script>
+	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vue.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vee-validate.min.js"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.sticky-kit.min.js"></script>
 	<!-- <script type="text/javascript" src="js/cleave.min.js"></script> -->
