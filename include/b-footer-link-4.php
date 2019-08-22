@@ -1,0 +1,1 @@
+<a href="https://vk.com/mkv70" class="icon-vk" target="_blank"></a>

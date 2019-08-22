@@ -5,37 +5,27 @@ $APPLICATION->SetTitle("О магазине");
 	</div>
 	<div class="b b-about-face">
 		<div class="b-block">
-			<div class="about-face-title">Интернет-магазин пряжи</div>
+			<div class="about-face-title"><?includeArea("b-about-text-1")?></div>
 			<img src="<?=SITE_TEMPLATE_PATH?>/i/about-face-img.svg" class="about-face-img">
-			<div class="about-face-subtitle">Создан рукодельницами для рукодельниц</div>
+			<div class="about-face-subtitle"><?includeArea("b-about-text-2")?></div>
 		</div>
 	</div>
 	<div class="b b-about-info">
 		<div class="b-block">
 			<div class="about-info-text">
-				<h3>Здравствуйте, дорогие друзья!</h3>
-				<p>Приветствуем вас в интернет-магазине «Моточки Клубочки». Магазине, который был открыт рукодельницами для рукодельниц.</p>
-				<p>Мы очень любим вязать и обязательно проверяем каждый вид пряжи, который продаем. В нашем магазине продается пряжа для вязания от лучших производителей: итальянская, немецкая, перуанская, турецкая. А также аксессуары для вязания и другие товары для hand-made творчества отличного качества.</p>
-				<p>Мы всегда рады новым единомышленникам – присоединяйтесь к нам в <a href="https://www.instagram.com/motochkiklubochki/" target="_blank">Инстаграм</a> и вступайте в нашу группу <a href="https://vk.com/mkv70">ВКонтакте</a>.</p>
-				<p>Всегда рады вашему участию – оставляйте отзывы и пожелания о товаре и нашей работе, на <a href="/reviews">странице в комментариях</a> или по адресу mkv70@yandex.ru</p>
+				<?includeArea("b-about-text-3")?>
 			</div>
 			<div class="about-info-wrap">
-				<div class="about-info-wrap-title">Юридическая информация</div>
+				<div class="about-info-wrap-title"><?includeArea("b-about-text-4")?></div>
 				<div class="about-info-wrap-text">
-					<p><b>ИП Шпичко Елена Николаевна</b></p>
-					<p><b>Номер счета:</b> 40802810264000006683</p>
-					<p>ПАО Сбербанк Томское отделение №8616</p>
-					<p><b>Кор.счет:</b> 30101810800000000606</p>
-					<p><b>ИНН:</b> 701900718370</p>
-					<p><b>БИК:</b> 046902606</p>
-					<p><b>Адрес:</b> г. Томск, пер. Дербышевского, 26Б, 3 этаж, офис 304</p>
+					<?includeArea("b-about-text-5")?>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="b b-about-articles-block">
 		<div class="b-block">
-			<h2 class="about-articles-block-title">Свежее в блоге</h2>
+			<h2 class="about-articles-block-title"><?includeArea("b-about-text-6")?></h2>
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:news.list",
 				"index-blog",
@@ -116,7 +106,7 @@ $APPLICATION->SetTitle("О магазине");
 				</script>
 			</div>
 			<div class="about-qwestions-form">
-				<h2 class="about-qwestions-title">Есть вопросы? Задайте!</h2>
+				<h2 class="about-qwestions-title"><?includeArea("b-about-text-7")?></h2>
 				<form action="/ajax/?action=ASK" method="POST">
 					<div class="b-inputs-2 clearfix">
 						<div class="b-input">
@@ -131,7 +121,7 @@ $APPLICATION->SetTitle("О магазине");
 					</div>
 					<input type="text" name="MAIL">
 					<a href="#" class="b-btn ajax">Отправить сообщение</a>
-					<div class="politics">Отправляя форму, я даю согласие на обработку моих персональных данных в соответствии с <a href="#" class="underlined">политикой конфиденциальности</a></div>
+					<div class="politics"><?includeArea("b-about-text-8")?></div>
 					<a href="#b-popup-success" class="b-thanks-link fancy" style="display:none;"></a>
 					<a href="#b-popup-error" class="b-error-link fancy" style="display:none;"></a>
 				</form>
@@ -140,7 +130,7 @@ $APPLICATION->SetTitle("О магазине");
 	</div>
 	<div class="b b-im-watch">
 		<div class="b-block">
-			<h2 class="b-title">Следите за нами в Instagram</h2>
+			<h2 class="b-title"><?includeArea("b-about-text-9")?></h2>
 		</div>
 		<div class="b-im-block about-im-block">
 			<a href="https://www.instagram.com/motochkiklubochki" target="_blank"><img src="<?=SITE_TEMPLATE_PATH?>/i/im-post-1.jpg"></a>

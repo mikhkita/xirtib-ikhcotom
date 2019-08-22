@@ -26,8 +26,7 @@ foreach($arResult["ITEMS"] as $arItem){
 
 ?>
 
-<form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="/catalog/pryazha/" method="get" class="b-main-filter">
-	<h2 class="b-title">Подберите пряжу по параметрам</h2>
+<div class="b-main-filter">
 	<h3>По цвету</h3>
 	<div class="b-product-texture">
 		<div class="main-texture-list">
@@ -82,4 +81,4 @@ foreach($arResult["ITEMS"] as $arItem){
 		</div>
 	</div>
 	<input class="b-btn b-filter-submit" type="submit" id="set_filter" name="set_filter" value="Подобрать"/>
-</form>
+</div>

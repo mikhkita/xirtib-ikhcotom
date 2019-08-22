@@ -1657,6 +1657,9 @@ h3.b-title{
 				.b-footer-messenger{
 					margin-top: 11px;
 				}
+					.b-footer-messenger div{
+						display: inline-block;
+					}
 					.b-footer-messenger .icon-vk{
 						font-size: 17px;
 						position: relative;
@@ -1734,6 +1737,9 @@ h3.b-title{
 			}
 				.b-social p{
 					margin-bottom: 18px;
+				}
+				.b-footer-social div{
+					display: inline-block;
 				}
 				.b-footer-social .icon-vk{
 					font-size: 18px;
@@ -5427,7 +5433,8 @@ textarea:-moz-placeholder {
 	.b-header-catalog-block > .b-header-catalog > li:hover{
 		background: #D4EABF;
 	}
-	.b-header-catalog li:hover > .b-header-catalog{
+	.b-header-catalog li:hover > .b-header-catalog,
+	.b-header-catalog li:hover > div > .b-header-catalog{
 		opacity: 1;
 		visibility: visible;
 		-webkit-transition: opacity 150ms ease-out, visibility 150ms ease-out;
@@ -5436,7 +5443,8 @@ textarea:-moz-placeholder {
 		-o-transition: opacity 150ms ease-out, visibility 150ms ease-out;
 		transition: opacity 150ms ease-out, visibility 150ms ease-out;
 	}
-	.b-header-catalog li:hover > .b-header-catalog a:before{
+	.b-header-catalog li:hover > .b-header-catalog a:before,
+	.b-header-catalog li:hover > div > .b-header-catalog a:before{
 		opacity: 0;
 	}
 	.b-fav:hover .b-fav-round{

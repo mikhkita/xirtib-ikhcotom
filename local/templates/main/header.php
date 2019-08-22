@@ -109,7 +109,7 @@ if ($arFav > 0){
 		<div class="b b-header">
 			<div class="b-top">
 				<div class="b-block">
-					<p class="b-city">Интернет-магазин пряжи</p>
+					<p class="b-city"><?includeArea("b-header-text-1")?></p>
 						<?$APPLICATION->IncludeComponent("bitrix:menu", "top_menu", array(
 							"ROOT_MENU_TYPE" => "main",
 							"MAX_LEVEL" => "1",
@@ -121,7 +121,7 @@ if ($arFav > 0){
 						),
 							false
 						);?>
-					<a href="tel:+79039538088" class="b-phone">+7 (903) 953-80-88</a>
+					<?includeArea("b-header-text-2")?>
 				</div>
 			</div>
 			<div class="b-block">
@@ -208,17 +208,21 @@ if ($arFav > 0){
 						<span>Меню</span>
 					</div>
 					<div class="b-top-menu-cont">
+						<? $GLOBALS['sectionsFilter'] = array(
+							'!ID' => '116'
+						);?>
 						<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "header_categories", Array(
+								"FILTER_NAME" => "sectionsFilter",
 								"ADD_SECTIONS_CHAIN" => "N",
 								"CACHE_GROUPS" => "Y",
 								"CACHE_TIME" => "36000000",
 								"CACHE_TYPE" => "N",
-								"COUNT_ELEMENTS" => "Y",
+								"COUNT_ELEMENTS" => "N",
 								"IBLOCK_ID" => "1",
 								"IBLOCK_TYPE" => "content",
-								"SHOW_PARENT_NAME" => "Y",
-								"TOP_DEPTH" => "1",
-								"VIEW_MODE" => "LINE",
+								"SHOW_PARENT_NAME" => "N",
+								"TOP_DEPTH" => "10",
+								"VIEW_MODE" => "LIST",
 							),
 							false
 						);?>

@@ -1,0 +1,1 @@
+<a href="viber://chat?number=+380508812637" target="_blank" class="icon-viber"></a>
