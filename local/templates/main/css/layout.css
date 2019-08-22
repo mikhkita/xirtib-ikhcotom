@@ -449,7 +449,7 @@ h3.b-title{
 			
 		}
 		.b-top-menu{
-			min-width: 582px;
+			min-width: 630px;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
@@ -743,7 +743,7 @@ h3.b-title{
 		background-color: #77BE32;
 	}
 		.b-top-menu-cont{
-			width: calc(100% - 230px);
+			width: calc(100% - 200px);
 			display: inline-block;
 		}
 		.b-main-menu .b-top-menu > .b-header-catalog{

@@ -44,7 +44,7 @@ if( $order->isPaid() ){
 		<p style="max-width: 600px;">Наш менеджер свяжется с Вами в ближайшее время по телефону, который Вы указали  при оформлении заказа, для уточнения деталей.</p>
 		<ul>
 			<li><b>Способ доставки:</b> <?=$delivery["NAME"]?></li>
-			<li><b>Способ оплаты:</b> <?=$payment["NAME"]?></li>
+			<li><b>Способ оплаты:</b> <?=$payment["NAME"]?><?=(($payment["ID"] == 1)?" (счет на оплату придет на Ваш e-mail)":"")?></li>
 			<? /* ?><li><b>Стоимость доставки:</b> <?=rtrim(rtrim(number_format($order->getDeliveryPrice(), 1, '.', ' '),"0"),".")?> руб.</li><? */ ?>
 			<li><b>Сумма к оплате:</b> <?=rtrim(rtrim(number_format($order->getPrice(), 1, '.', ' '),"0"),".")?> руб.</li>
 		</ul>
