@@ -1213,7 +1213,7 @@ $(document).ready(function(){
         $(this).wrap("<div class='b-table-wrap'></div>");
     });
 
-    if ($('.b-filter').hasClass('no-filter')) {
+    if ($('.b-filter-cont').height() == 0 || $('.b-filter').hasClass('no-filter')) {
         $('.b-filter-cont').addClass('no-filter');
     }
 
