@@ -251,5 +251,7 @@ if ($arFav > 0){
 					"PATH" => "",
 					"SITE_ID" => "s1",
 				),false );?>	
-				<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
+				<? if (!$isDetail): ?>
+					<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
+				<? endif; ?>
 		<? endif; ?>
