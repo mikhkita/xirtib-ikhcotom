@@ -23,7 +23,7 @@ if(count($arResult["ITEMS"])): ?>
 					$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 558, "height" => 313), BX_RESIZE_IMAGE_EXACT, false, $arFilters );
 					?>
 				<? else: ?>
-					<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/popup-logo.svg'?>
+					<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/blog-img.svg'?>
 				<? endif; ?>
 				<div class="b-blog-list-image">
 					<img src="<?=$renderImage['src']?>">

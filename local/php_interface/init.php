@@ -1,5 +1,4 @@
 <?
-
 // Для импорта ----------------------------------------------------------------------
 function getFileArray($url){
 	return CFile::MakeFileArray($url);
