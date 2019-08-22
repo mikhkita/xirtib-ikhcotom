@@ -213,6 +213,7 @@ $this->setFrameMode(true);
 			<form class="clearfix" action="/ajax/?action=ADDCOMMENT&ARTICLE_ID=<?=$arResult["ID"]?>" method="POST">
 				<div class="b-textarea">
 					<textarea rows="2" name="comment" required placeholder="<?=$placeholder?>"></textarea>
+					<input type="hidden" name="article" value="<?=$arResult['NAME']?>">
 				</div>
 				<input type="text" name="MAIL">
 				<a href="#b-popup-commnet-success" class="b-thanks-link fancy" style="display:none;"></a>

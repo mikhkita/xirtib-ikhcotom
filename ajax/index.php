@@ -234,7 +234,7 @@ switch ($action) {
 			);
 
 			if ($id = $el->Add($arLoadProductArray)) {
-				$link = 'http://motochki.redder.pro/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=3&type=content&ID='.$id.'&lang=ru&find_section_section='.$sectionID.'&WF=Y';
+				$link = 'http://old.motochki-klubochki.ru/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=3&type=content&ID='.$id.'&lang=ru&find_section_section='.$sectionID.'&WF=Y';
 				if(CEvent::Send("NEW_REVIEW", "s1", array('NAME' => $name, 'PHONE' => $phone, 'LINK' => $link))){
 					echo "1";
 				} else {
@@ -284,7 +284,14 @@ switch ($action) {
 			);
 			
 			if ($id = $el->Add($arLoadProductArray)) {
-				echo "1";
+				$link = 'http://old.motochki-klubochki.ru/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=5&type=content&ID='.$id.'&lang=ru&find_section_section=0&WF=Y';
+				if(CEvent::Send("NEW_COMMENT", "s1", array('NAME' => $USER->GetFullName(), 'ARTICLE' => $_POST['article'], 'LINK' => $link))){
+					echo "1";
+				} else {
+					echo "0";
+				}
+			} else {
+				echo "0";
 			}
 		}else{
 			echo "0";
@@ -339,7 +346,7 @@ switch ($action) {
 			$name = $_POST['name'];
 			$email = $_POST['email'];
 
-			if(CEvent::Send("WHATSAPP", "s1", array('NAME' => $name, 'EMAIL' => $email,))){
+			if(CEvent::Send("NEW_SUBSCRIBE", "s1", array('NAME' => $name, 'EMAIL' => $email,))){
 				echo "1";
 			} else {
 				echo "0";
