@@ -12,6 +12,8 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);?>
 
+<? if(count($arResult["ITEMS"])): ?>
+
 <? 
 
 if (isAuth($USER)){
@@ -23,7 +25,9 @@ if (isAuth($USER)){
 }
 
 ?>
-<? if(count($arResult["ITEMS"])): ?>
+	<?if ($arParams['CUSTOM_HEADER']): ?>
+		<h3 class="b-title"><?=$arParams['CUSTOM_HEADER']?></h3>
+	<? endif ?>
 	<div class="b-item-cards">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
 			<? $class = "";?>
@@ -140,6 +144,7 @@ if (isAuth($USER)){
 	<? if ($arParams["DISPLAY_BOTTOM_PAGER"]): ?>
 		<?=$arResult["NAV_STRING"];?>
 	<?endif;?>
+<?/*?>
 <? else: ?>
 	<div class="b-not-result b-text">
 		<br>
@@ -149,4 +154,5 @@ if (isAuth($USER)){
 		<h3>По Вашему запросу товаров не найдено.</h3>
 		<? endif; ?>
 	</div>
+<?*/?>
 <? endif; ?>

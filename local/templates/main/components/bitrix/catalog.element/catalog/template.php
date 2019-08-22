@@ -581,7 +581,6 @@ if (count($arResult["OFFERS"]) < 5){
 			</div>
 		</div>
 	</div>
-	<h3 class="b-title">Похожие товары</h3>
 	<? $_REQUEST["SECTION_CODE"] = ''; ?>
 	<?$APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
@@ -681,6 +680,7 @@ if (count($arResult["OFFERS"]) < 5){
 			"USE_MAIN_ELEMENT_SECTION" => "N",
 			"USE_PRICE_COUNT" => "N",
 			"USE_PRODUCT_QUANTITY" => "N",
+			"CUSTOM_HEADER" => 'Похожие товары'
 		),
 	false,
 	Array(
