@@ -15,12 +15,39 @@ ymaps.ready(['AddressDelivery']).then(function init() {
         autoReverseGeocode: true
     })
     .then(function (result) {
+        // alert();
+
+        // console.log(1);
         var response = result.geoObjects.get(0).properties.get('metaDataProperty');
+        // console.log(2);
         if(response){
+            // console.log(3);
             defaultOptions.city = response.GeocoderMetaData.text;
-            defaultOptions.coords = response.GeocoderMetaData.InternalToponymInfo.Point.coordinates;
+
+            var addr = response.GeocoderMetaData.Address.Components;
+
+            for( var i in addr ){
+                if( addr[i].kind == "locality" && typeof IPOLSDEK_pvz != "undefined" ){
+                    // alert(addr[i].name);
+                    IPOLSDEK_pvz.chooseCity(addr[i].name);
+                }
+            }
+            // console.log(4);
+            // console.log(response);
+            // defaultOptions.coords = response.GeocoderMetaData.InternalToponymInfo.Point.coordinates;
+            // console.log(5);
         }
+        // console.log(6);
+
         mapInit();
+
+        // var interval = setInterval(function(){
+        //     if( typeof IPOLSDEK_pvz == "object" ){
+        //         IPOLSDEK_pvz.chooseCity( response.GeocoderMetaData.text );
+
+        //         clearInterval(interval);
+        //     }
+        // }, 500);
     });
 
     function mapInit () {
