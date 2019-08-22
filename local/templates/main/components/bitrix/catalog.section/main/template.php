@@ -144,7 +144,7 @@ if(count($arResult["ITEMS"])): ?>
 		<? if( $arParams["CUSTOM_MESSAGE"] ): ?>
 			<h3><?=$arParams["CUSTOM_MESSAGE"]?></h3>
 		<? else: ?>
-		<h3>По Вашему запросу товаров не найдено.</h3>
+		<h3>В данном разделе пока нет товаров. В ближайшее время мы разместим весь ассортимент.</h3>
 		<? endif; ?>
 	</div>
 <? endif; ?>
