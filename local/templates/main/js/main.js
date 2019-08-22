@@ -794,8 +794,7 @@ $(document).ready(function(){
         
         clearTimeout(cartTimeout);
         progress.start(1.5);
-        $cap.removeClass('hide');
-        $cap.addClass('after-load');
+        $cap.removeClass('hide').addClass('after-load');
         $this.addClass('hide');
 
         url = href+"&element_id="+id+"&quantity="+quantity;
@@ -812,6 +811,7 @@ $(document).ready(function(){
                         }else{
                             updateBasket(json.count, json.sum);
                         }
+                        $cap.removeClass('error');
                         $cap.find('.b-cap-text').text('Товар успешно добавлен');
                     }
                 }else{
