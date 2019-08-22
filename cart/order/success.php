@@ -26,6 +26,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 	$paymentId = $_REQUEST["payment"];
 	$deliveryId = $_REQUEST["delivery"];
 	$deliveryPrice = $_REQUEST["delivery-cost"];
+	$cdek = $_REQUEST["CDEK"];
 
 	$siteId = Context::getCurrent()->getSite();
 	$currencyCode = CurrencyManager::getBaseCurrency();
@@ -65,6 +66,14 @@ $APPLICATION->SetTitle("Оформление заказа");
 			$shipmentItem->setQuantity($item->getQuantity());
 		}
 
+		function getPropertyByCode($propertyCollection, $code)  {
+		    foreach ($propertyCollection as $property)
+		    {
+		        if($property->getField('CODE') == $code)
+		            return $property;
+		    }
+		}
+
 		// Способ оплаты
 		$paymentCollection = $order->getPaymentCollection();
 		$paymentItem = $paymentCollection->createItem();
@@ -86,6 +95,8 @@ $APPLICATION->SetTitle("Оформление заказа");
 		$emailProp->setValue($email);
 		$addrProp = $propertyCollection->getAddress();
 		$addrProp->setValue($address);
+		$cdekProp = getPropertyByCode($propertyCollection, "CDEK");
+		$cdekProp->setValue($cdek);
 
 		// Сохраняем
 		$order->doFinalAction(true);
@@ -124,7 +135,15 @@ $APPLICATION->SetTitle("Оформление заказа");
 						$tmpOrder->setFieldNoDemand('USER_ID', $id);
 						$tmpOrder->save();
 					}
+				}else{
+					$tmpOrder = \Bitrix\Sale\Order::load($orderId);
+					$tmpOrder->setFieldNoDemand('USER_ID', $arUser["ID"]);
+					$tmpOrder->save();
 				}
+			}else{
+				$tmpOrder = \Bitrix\Sale\Order::load($orderId);
+				$tmpOrder->setFieldNoDemand('USER_ID', $USER->GetID());
+				$tmpOrder->save();
 			}
 		}
 

@@ -218,11 +218,15 @@ $(document).ready(function(){
 
 		$(".b-postamat-error").remove();
 
-		if( $form.hasClass("b-data-order-form") && $(".b-pickpoint").is(":visible") && !$(".pickpointaddr").length ){
-			$(".b-add-postamat").after("<p class='red b-postamat-error'>Вам нужно выбрать постамат, в котором вы хотите получить вашу посылку.</p>");
-		}
+		// if( $form.hasClass("b-data-order-form") && $(".b-pickpoint").is(":visible") && !$(".pickpointaddr").length ){
+		// 	$(".b-add-postamat").after("<p class='red b-postamat-error'>Вам нужно выбрать постамат, в котором вы хотите получить вашу посылку.</p>");
+		// }
+		// alert($form.is("#b-order-form"));
+		// alert($("input[name='delivery']:cheched").val());
+		// alert($(".cdekaddr").length);
 
-		if( $form.hasClass("b-data-order-form") && $("#delivery").val() == "120" && $("#cdek_type").val() == "1" && !$(".cdekaddr").length ){
+
+		if( $form.is("#b-order-form") && $("input[name='delivery']:cheched").val() == "15" && !$(".cdekaddr").length ){
 			$(".b-cdek-punkt").after("<p class='red b-postamat-error'>Вам нужно выбрать пункт самовывоза, в котором вы хотите получить вашу посылку.</p>");
 		}
 

@@ -210,7 +210,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 					$('#SDEK_citySel').css('display','');
 				},
 
-				// ������
+				// ðåæèìû
 				switchMode: function(mode,doLoad){
 					$('.SDEK_mC_block').removeClass('active');
 					if(typeof(mode) != 'undefined' && mode)
@@ -318,6 +318,10 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 				Y_selectPVZ: function(wat){
 					IPOLSDEK_pvz.cityPVZ[wat].placeMark.balloon.open();
 					IPOLSDEK_pvz.Y_map.setCenter([IPOLSDEK_pvz.cityPVZ[wat].cY,IPOLSDEK_pvz.cityPVZ[wat].cX]);
+
+					$(".cdekaddr, .b-postamat-error").remove();
+					console.log(IPOLSDEK_pvz);
+					$("#b-cdek-punk-addr").html(IPOLSDEK_pvz.cityPVZ[wat].Address).after( '<input type="hidden" class="cdekaddr" name="CDEK" value="Внутренний код ПВЗ: ' + wat + '; Название ПВЗ: ' + IPOLSDEK_pvz.cityPVZ[wat].Name + '; Адрес ПВЗ: ' + IPOLSDEK_pvz.cityPVZ[wat].Address + '; Город ПВЗ: ' + IPOLSDEK_pvz.city + '" />' );
 				},
 
 				Y_readyToBlink: false,
@@ -401,6 +405,9 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 						$('#SDEK_pDate').html(IPOLSDEK_pvz.prices.pickup[1]);
 					}else
 						$('.IPOLSDEK_subPunct_detail_PVZ').each(function(){$(this).html(IPOLSDEK_pvz.prices.pickup[0]+" &nbsp;"+IPOLSDEK_pvz.prices.pickup[1]);});
+
+					$(".cdekaddr, .b-postamat-error").remove();
+					$("#b-cdek-punk-addr").html("не выбран");
 				},
 
 				resetPrices: function(){
