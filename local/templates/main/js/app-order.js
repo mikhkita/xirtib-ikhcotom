@@ -70,6 +70,7 @@
                 this.orders = dataOrder.items;
                 this.show = true;
                 this.showPreloader = false;
+                $("#b-order-preloader").hide();
             }
             if(dataOrder.coupons){
                 this.couponList = dataOrder.coupons;
@@ -167,6 +168,7 @@
                                     name="phone" \
                                     placeholder="+7 (999) 999 0000"\
                                     v-model="form.phone"\
+                                    @focus="checkPhone"\
                                     v-validate="{ required: true, regex: /^\\+\\d \\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}$/ }"\
                                     :class="{ error: errors.first(\'phone\')}"\
                                 >\
@@ -283,10 +285,6 @@
             \
             <div v-if="showCatalogRef">\
               <span>Ваша корзина пуста. </span><a class="dashed" href="/catalog/">Перейти в каталог</a>\
-            </div>\
-            \
-            <div v-if="showPreloader" class="b-order-preloader">\
-              <img src="/local/templates/main/i/preloader.svg">\
             </div>\
         </div>\
         ',
@@ -471,6 +469,11 @@
             removeWarning: function (id) {
                 index = this.orders.map(function(v) {return v.id}).indexOf(id);
                 this.orders[index].limitWarning = false;
+            },
+            checkPhone: function (id) {
+                if(this.form.phone == ""){
+                    this.form.phone = "+7 (";
+                }
             }
         },
         computed: {
