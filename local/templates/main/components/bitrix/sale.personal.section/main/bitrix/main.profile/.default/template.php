@@ -21,7 +21,7 @@ if ($_GET['tab'] == 'favourite') {
 					<a href="edit" class="empty-photo-icon"></a>
 				</div>
 			<? else: ?>
-				<? $photo = CFile::ResizeImageGet($arUser['PERSONAL_PHOTO'], Array("width" => 534, "height" => 534), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters ); ?>
+				<? $photo = CFile::ResizeImageGet($arUser['PERSONAL_PHOTO'], Array("width" => 534, "height" => 534), BX_RESIZE_IMAGE_EXACT, false, $arFilters ); ?>
 				<div class="current-photo" style="background-image: url(<?=$photo['src']?>);"></div>
 			<? endif; ?>
 		</div>

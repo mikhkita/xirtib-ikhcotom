@@ -985,6 +985,12 @@ body {
 	.b-tab-wool {
 		width: calc(100%/3 - 12px);
 	}
+	#SDEK_info {
+	    display: none;
+	}
+	#SDEK_map .ymaps-2-1-74-controls__control {
+	    left: 16px !important;
+	}
 }
 
 @media screen and (max-width: 550px){
