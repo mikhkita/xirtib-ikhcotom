@@ -1,6 +1,7 @@
 (function() {
 
-    var myWidth;
+    var myWidth,
+        phoneMask;
 
     function isNumeric(n) {
       return !isNaN(parseFloat(n)) && isFinite(n);
@@ -166,9 +167,8 @@
                                 <input \
                                     type="text" \
                                     name="phone" \
-                                    placeholder="+7 (999) 999 0000"\
-                                    v-model="form.phone"\
-                                    @focus="checkPhone"\
+                                    placeholder="+7 (999) 999-00-00"\
+                                    v-model="formPhone"\
                                     v-validate="{ required: true, regex: /^\\+\\d \\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}$/ }"\
                                     :class="{ error: errors.first(\'phone\')}"\
                                 >\
@@ -408,9 +408,15 @@
                     this.form.nowSubmit = true;
                     document.getElementById('b-order-form').submit();
                 }else{
-                    // setTimeout(function(){
-                        $("#app-order").find("input.error,select.error,textarea.error").eq(0).focus();
-                    // }, 100);
+                    setTimeout(function(){
+                        if(myWidth < 768){
+                            $("body, html").animate({
+                                scrollTop : $("#app-order").find("input.error,select.error,textarea.error").eq(0).offset().top - 30
+                            }, 600);
+                        }else{
+                            $("#app-order").find("input.error,select.error,textarea.error").eq(0).focus();
+                        }
+                    }, 10);
                 }
             },
             openMap: function (event) {
@@ -470,11 +476,6 @@
                 index = this.orders.map(function(v) {return v.id}).indexOf(id);
                 this.orders[index].limitWarning = false;
             },
-            checkPhone: function (id) {
-                if(this.form.phone == ""){
-                    this.form.phone = "+7 (";
-                }
-            }
         },
         computed: {
             rawBase: function () {
@@ -519,6 +520,18 @@
                 //     }
                 // }
                 // return valid;
+            },
+            formPhone: {
+                get: function () {
+                    return this.form.phone;
+                },
+                set: function (value) {
+                    //console.log("до "+this.form.phone);
+                    if(value.length < 19){
+                        this.form.phone = value;
+                    }
+                    //console.log("после "+this.form.phone);
+                }
             },
         },
         components: {
@@ -859,7 +872,39 @@
         updated: function () {
           this.$nextTick(function () {
             if($('#app-order input[name="phone"]').length && !this.pluginsInit){
-                $('#app-order input[name="phone"]').mask('+7 (000) 000-00-00');
+                var self = this;
+                //$('#app-order input[name="phone"]').mask('+7 (000) 000-00-00');
+                var $phone = $('#app-order input[name="phone"]');
+                if (typeof IMask == 'function') {
+                    phoneMask = new IMask($phone[0], {
+                        mask: '+{7} (000) 000-00-00',
+                        prepare: function(value, masked){
+                            //console.log("prepare");
+                            if( value == 8 && masked._value.length == 0 ){
+                                return "+7 (";
+                            }
+
+                            if( value == 8 && masked._value == "+7 (" ){
+                                return "";
+                            }
+
+                            tmp = value.match(/[\d\+]*/g);
+                            if( tmp && tmp.length ){
+                                value = tmp.join("");
+                            }else{
+                                value = "";
+                            }
+                            return value;
+                        }
+                    });
+                    function acceptMask(){
+                        self.formPhone = phoneMask.value;
+                        //console.log(phoneMask);
+                    }
+                    phoneMask.on("accept", acceptMask);
+                }else {
+                    $(this).mask("+7 (999) 999-99-99");
+                }
                 if( typeof autosize == "function" ){
                     autosize(document.querySelectorAll('#app-order textarea[name="rdrdlvr"], #app-order textarea[name="comment"]'));
                 }

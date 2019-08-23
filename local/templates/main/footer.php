@@ -346,7 +346,7 @@
 	<!-- <script type="text/javascript" src="js/cleave.min.js"></script> -->
 	<!-- <script type="text/javascript" src="js/axios.min.js"></script> -->
 	<!-- <script type="text/javascript" src="js/vue-resource.min.js"></script> -->
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.mask.min.js"></script>
+	<!-- <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.mask.min.js"></script> -->
 	<script type="text/javascript" src="https://api-maps.yandex.ru/2.1.41/?load=package.full&amp;apikey=dcf82496-06b7-476e-b6f8-0078e5d46b67&amp;lang=ru-RU"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/address.js?<?=$GLOBALS["version"]?>"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/AddressDeliveryClass.js?<?=$GLOBALS["version"]?>"></script>
