@@ -99,6 +99,8 @@ if ($arResult["OFFERS"]){
 		if ($key == 0){
 			$price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]);
 			$discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]);
+			$price = $offer["PRICES"]["PRICE"]["VALUE"];
+			$discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"];
 			$priceType = $measures[$offer["ITEM_MEASURE"]["ID"]];
 		}
 		if($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"]){
@@ -130,8 +132,10 @@ if ($arResult["OFFERS"]){
 		$class = "has-discount";
 	}
 	$priceType = $measures[$arResult["ITEM_MEASURE"]["ID"]];
-	$price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' );
-	$discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' );
+	// $price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' );
+	// $discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' );
+	$price = convertPrice($arResult["PRICES"]["PRICE"]["VALUE"]);
+	$discountPrice = convertPrice($arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"]);
 }
 
 if ($price != $discountPrice){
