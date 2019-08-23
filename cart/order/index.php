@@ -13,6 +13,10 @@ $APPLICATION->SetTitle("Оформление заказа");
 
 	<div style="display: none;" class="b-cdek-map-cont">
 		<div class="b-cdek-map">
+			<div class="b-cdek-punkt">
+				Пункт самовывоза: <span id="b-cdek-punk-addr">не выбран</span>
+			</div>
+			<div class="b-postamat-error">Выберите пункт самовывоза</div>
 		<?$APPLICATION->IncludeComponent(
 		    "ipol:ipol.sdekPickup",
 		    "cdek",

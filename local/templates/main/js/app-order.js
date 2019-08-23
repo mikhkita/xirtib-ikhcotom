@@ -408,9 +408,9 @@
                     this.form.nowSubmit = true;
                     document.getElementById('b-order-form').submit();
                 }else{
-                    setTimeout(function(){
+                    // setTimeout(function(){
                         $("#app-order").find("input.error,select.error,textarea.error").eq(0).focus();
-                    }, 10);
+                    // }, 100);
                 }
             },
             openMap: function (event) {

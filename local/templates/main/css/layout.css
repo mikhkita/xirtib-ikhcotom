@@ -62,6 +62,9 @@
 b, strong{
 	font-family: "DINPro-Medium";
 }
+.red{
+	color: #a00;
+}
 
 .icon-im:before {
   content: "\e908";
