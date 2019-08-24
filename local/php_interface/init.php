@@ -9,6 +9,8 @@ class MyEventHandlers
 		if($event==="SALE_NEW_ORDER"){
 
 			$order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);
+			$descr = $order->getField("USER_DESCRIPTION");
+
 			$deliveryID = $order->getField("DELIVERY_ID");
 			$arDelivery = Bitrix\Sale\Delivery\Services\Manager::getById($deliveryID);
 
@@ -16,7 +18,7 @@ class MyEventHandlers
 			$arBasketSelect = array();
 			$dbBasketItems = CSaleBasket::GetList(array("NAME" => "ASC","ID" => "ASC"), $arBasketFilter, false, false, $arBasketSelect);
 
-			$arBasketItems = '<style>td{padding:2px 8px}td a{text-decoration:underline}</style>';
+			$arBasketItems = '<style>td{padding:2px 8px}td a{text-decoration:underline}td:first-child{padding-left:0}</style>';
 			$arBasketItems.= '<table>'.
 								"<tr>".
 								 	"<td>Наименование товара</td>".
@@ -58,7 +60,7 @@ class MyEventHandlers
 
 			$arFields['ITEMS_INFO'] = $arBasketItems;
 			$arFields['DELIVERY_NAME'] = $arDelivery['NAME'];
-			
+
 		}
     } 
 }
