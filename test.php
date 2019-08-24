@@ -4,6 +4,10 @@ $APPLICATION->SetTitle("Моточки - клубочки");
 $arFields["ORDER_ID"] = 37;
 
 $order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);
+$descr = $order->getField('USER_DESCRIPTION');
+
+vardump($descr);
+
 $deliveryID = $order->getField("DELIVERY_ID");
 $arDelivery = Bitrix\Sale\Delivery\Services\Manager::getById($deliveryID);
 
@@ -25,10 +29,12 @@ $totalSum = 0;
 while ($item = $dbBasketItems->Fetch()){
 
 	$mxResult = CCatalogSku::GetProductInfo($item['PRODUCT_ID']);
-	$name = is_array($mxResult) ? $item['NAME']." (".$mxResult['NAME'].")" : $item['NAME'];
+	$el = CIBlockElement::GetByID($mxResult['ID']);
+	$arElement = $el->fetch();
+	$name = is_array($mxResult) ? $arElement['NAME']." (".$item['NAME'].")" : $item['NAME'];
 
-	$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? convertPrice($item['BASE_PRICE']) : convertPrice($item['DISCOUNT_PRICE']);
-	$sum = (intval($item['DISCOUNT_PRICE']) == 0) ? ($item['QUANTITY']*convertPrice($item['BASE_PRICE'])) : ($item['QUANTITY']*convertPrice($item['DISCOUNT_PRICE']));
+	$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? convertPrice($item['BASE_PRICE']) : (convertPrice($item['BASE_PRICE']) - convertPrice($item['DISCOUNT_PRICE']));
+	$sum = $item['QUANTITY'] * $discountPrice;
 	$totalSum += $sum;
 
     $arBasketItems.="<tr>".
