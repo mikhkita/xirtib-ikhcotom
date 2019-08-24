@@ -16,28 +16,34 @@ if(count($arResult["ITEMS"])): ?>
 	<ul class="b-blog-list">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
 			<li id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-				<? $arDate = explode('.', $arItem['CREATED_DATE']); ?>
-				<? $date = $arDate[2].'.'.$arDate[1].'.'.$arDate[0]; ?>
-				<? if( $arItem["PREVIEW_PICTURE"] ): ?>
-					<?
-					$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 558, "height" => 313), BX_RESIZE_IMAGE_EXACT, false, $arFilters );
-					?>
-				<? else: ?>
-					<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/blog-img.svg'?>
-				<? endif; ?>
-				<div class="b-blog-list-image">
-					<img src="<?=$renderImage['src']?>">
-				</div>
-				
-				<div class="b-blog-list-text">
-					<div class="blog-title"><?=$arItem["NAME"]?></div>
-					<div class="blog-info">
-						<div class="blog-date"><?=$date?></div>
-						<div class="blog-author">Автор: <?=$arItem['PROPERTIES']['AUTHOR']['VALUE']?></div>
+				<a href="<?=$arItem['DETAIL_PAGE_URL']?>" class="blog-item">
+					<? $arDate = explode('.', $arItem['CREATED_DATE']); ?>
+					<? $date = $arDate[2].'.'.$arDate[1].'.'.$arDate[0]; ?>
+					<? $text = substr($arItem["PREVIEW_TEXT"], 0, 220); ?>
+					<? $pos = strrpos($text, ' '); ?>
+					<? $text = substr($text, 0, $pos).'...<br>'; ?>
+
+					<? if( $arItem["PREVIEW_PICTURE"] ): ?>
+						<?
+						$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 558, "height" => 313), BX_RESIZE_IMAGE_EXACT, false, $arFilters );
+						?>
+					<? else: ?>
+						<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/blog-img.svg'?>
+					<? endif; ?>
+					<div class="b-blog-list-image">
+						<img src="<?=$renderImage['src']?>">
 					</div>
-					<p><?=$arItem["PREVIEW_TEXT"]?></p>
-					<a href="<?=$arItem['DETAIL_PAGE_URL']?>" class="blog-more-a"><span>Читать статью</span> →</a>
-				</div>
+					
+					<div class="b-blog-list-text">
+						<div class="blog-title"><?=$arItem["NAME"]?></div>
+						<div class="blog-info">
+							<div class="blog-date"><?=$date?></div>
+							<div class="blog-author">Автор: <?=$arItem['PROPERTIES']['AUTHOR']['VALUE']?></div>
+						</div>
+						<p><?=$text?></p>
+						<span class="blog-more-a">Читать статью →</span>
+					</div>
+				</a>
 			</li>
 		<?endforeach;?>
 	</ul>

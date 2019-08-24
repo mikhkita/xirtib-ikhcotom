@@ -4851,13 +4851,16 @@ textarea:-moz-placeholder {
 	font-size: 12px;
 	font-family: 'DINPro-Light';
 }
-.b-blog-list-text .blog-more-a span {
+.b-blog-list-text span.blog-more-a {
 	display: inline-block;
 	position: relative;
 	font-size: 16px;
 	padding-bottom: 2px;
 }
-.b-blog-list-text .blog-more-a span::after {
+.blog-item{
+	display: block;
+}
+.b-blog-list-text span.blog-more-a::after {
 	content: '';
 	display: block;
 	width: 100%;
@@ -4867,6 +4870,7 @@ textarea:-moz-placeholder {
 	bottom: 0;
 	background-color: rgba(86, 69, 49, 0.35);
 }
+
 
 /*======Блог.Подробнее.======*/
 .blog-more-article {
@@ -5400,6 +5404,9 @@ textarea:-moz-placeholder {
 
 /*------hover--------*/
 @media screen and (min-width: 1024px){
+	.blog-item:hover span.blog-more-a::after{
+		background-color: transparent;
+	}
 	.icon-login:hover:before{
 		color: #77BE32;
 	}
