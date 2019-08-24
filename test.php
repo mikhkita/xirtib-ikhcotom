@@ -24,14 +24,15 @@ $totalSum = 0;
 
 while ($item = $dbBasketItems->Fetch()){
 
-	vardump($item);
+	$mxResult = CCatalogSku::GetProductInfo($item['PRODUCT_ID']);
+	$name = is_array($mxResult) ? $item['NAME']." (".$mxResult['NAME'].")" : $item['NAME'];
 
 	$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? convertPrice($item['BASE_PRICE']) : convertPrice($item['DISCOUNT_PRICE']);
 	$sum = (intval($item['DISCOUNT_PRICE']) == 0) ? ($item['QUANTITY']*convertPrice($item['BASE_PRICE'])) : ($item['QUANTITY']*convertPrice($item['DISCOUNT_PRICE']));
 	$totalSum += $sum;
 
     $arBasketItems.="<tr>".
-		"<td><a href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."'>".$item['NAME']."</a></td>".
+		"<td><a href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."'>".$name."</a></td>".
 		"<td>".round($item['QUANTITY'])."</td>".
 		"<td>".convertPrice($item['BASE_PRICE'])."</td>".
 		"<td>".$discountPrice."</td>".
