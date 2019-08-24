@@ -234,7 +234,7 @@ switch ($action) {
 			);
 
 			if ($id = $el->Add($arLoadProductArray)) {
-				$link = 'http://old.motochki-klubochki.ru/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=3&type=content&ID='.$id.'&lang=ru&find_section_section='.$sectionID.'&WF=Y';
+				$link = 'http://motochki-klubochki.ru/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=3&type=content&ID='.$id.'&lang=ru&find_section_section='.$sectionID.'&WF=Y';
 				if(CEvent::Send("NEW_REVIEW", "s1", array('NAME' => $name, 'PHONE' => $phone, 'LINK' => $link))){
 					echo "1";
 				} else {
@@ -284,7 +284,7 @@ switch ($action) {
 			);
 			
 			if ($id = $el->Add($arLoadProductArray)) {
-				$link = 'http://old.motochki-klubochki.ru/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=5&type=content&ID='.$id.'&lang=ru&find_section_section=0&WF=Y';
+				$link = 'http://motochki-klubochki.ru/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=5&type=content&ID='.$id.'&lang=ru&find_section_section=0&WF=Y';
 				if(CEvent::Send("NEW_COMMENT", "s1", array('NAME' => $USER->GetFullName(), 'ARTICLE' => $_POST['article'], 'LINK' => $link))){
 					echo "1";
 				} else {
@@ -437,7 +437,7 @@ switch ($action) {
 				$password = $_POST['password'];
 				$user = new CUser;
 				$hash = md5($email.$hashKey);
-				$link = "http://motochki.redder.pro/ajax/?action=CONFIRM_USER&email=".$email."&hash=".$hash;
+				$link = "http://motochki-klubochki.ru/ajax/?action=CONFIRM_USER&email=".$email."&hash=".$hash;
 
 				$arFields = Array(
 				  "EMAIL"             => $email,
