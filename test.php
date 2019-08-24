@@ -8,7 +8,7 @@ $deliveryID = $order->getField("DELIVERY_ID");
 $arDelivery = Bitrix\Sale\Delivery\Services\Manager::getById($deliveryID);
 
 $arBasketFilter = array("LID" => 's1',"ORDER_ID" => $arFields["ORDER_ID"]);
-$arBasketSelect = array("PRODUCT_ID", "NAME", "PRICE", "BASE_PRICE", "QUANTITY", "DISCOUNT_PRICE", "DETAIL_PAGE_URL");
+$arBasketSelect = array();
 $dbBasketItems = CSaleBasket::GetList(array("NAME" => "ASC","ID" => "ASC"), $arBasketFilter, false, false, $arBasketSelect);
 
 $arBasketItems = '<style>td{padding:2px 8px}td a{text-decoration:underline}</style>';
@@ -23,6 +23,8 @@ $arBasketItems.= '<table>'.
 $totalSum = 0;
 
 while ($item = $dbBasketItems->Fetch()){
+
+	vardump($item);
 
 	$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? convertPrice($item['BASE_PRICE']) : convertPrice($item['DISCOUNT_PRICE']);
 	$sum = (intval($item['DISCOUNT_PRICE']) == 0) ? ($item['QUANTITY']*convertPrice($item['BASE_PRICE'])) : ($item['QUANTITY']*convertPrice($item['DISCOUNT_PRICE']));
