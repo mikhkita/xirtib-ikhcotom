@@ -1,7 +1,7 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 
-$arFields["ORDER_ID"] = 21;
+$arFields["ORDER_ID"] = 37;
 
 $order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);
 $deliveryID = $order->getField("DELIVERY_ID");
