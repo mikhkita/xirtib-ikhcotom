@@ -244,7 +244,7 @@
                             <input id="delivery-cost" type="hidden" name="delivery-cost" @change="changeCost">\
                             <div class="b-textarea">\
                                 <p>Комментарий к заказу</p>\
-                                <textarea rows="1" name="comment" placeholder="Введите комментарий" v-model="form.comment"></textarea>\
+                                <textarea rows="1" name="ORDER_DESCRIPTION" placeholder="Введите комментарий" v-model="form.comment"></textarea>\
                             </div>\
                         </div>\
                     </form>\
