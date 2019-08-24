@@ -24,14 +24,14 @@ $totalSum = 0;
 
 while ($item = $dbBasketItems->Fetch()){
 
-	$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? round($item['BASE_PRICE']) : round($item['DISCOUNT_PRICE']);
-	$sum = (intval($item['DISCOUNT_PRICE']) == 0) ? round($item['QUANTITY']*$item['BASE_PRICE']) : round($item['QUANTITY']*$item['DISCOUNT_PRICE']);
+	$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? convertPrice($item['BASE_PRICE']) : convertPrice($item['DISCOUNT_PRICE']);
+	$sum = (intval($item['DISCOUNT_PRICE']) == 0) ? ($item['QUANTITY']*convertPrice($item['BASE_PRICE'])) : ($item['QUANTITY']*convertPrice($item['DISCOUNT_PRICE']));
 	$totalSum += $sum;
 
     $arBasketItems.="<tr>".
 		"<td><a href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."'>".$item['NAME']."</a></td>".
 		"<td>".round($item['QUANTITY'])."</td>".
-		"<td>".round($item['BASE_PRICE'])."</td>".
+		"<td>".convertPrice($item['BASE_PRICE'])."</td>".
 		"<td>".$discountPrice."</td>".
 		"<td>".$sum."</td>".
 	"</tr>";
