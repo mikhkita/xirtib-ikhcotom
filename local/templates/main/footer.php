@@ -155,8 +155,8 @@
 		</div>
 
 		<div class="b-thanks b-popup" id="b-popup-success-reg">
-			<h3>Спасибо!</h3>
-			<p>Письмо для подтверждения регистрации отправлено на ваш e-mail.</p>
+			<h3>Подтвердите e-mail</h3>
+			<p>Ссылка для подтверждения регистрации отправлена на ваш e-mail.</p>
 			<div class="b-btn-container">
 				<input type="submit" class="b-btn" onclick="$.fancybox.close(); return false;" value="Закрыть">
 			</div>
