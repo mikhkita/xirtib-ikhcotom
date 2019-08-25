@@ -99,9 +99,17 @@ $(document).ready(function(){
         });
     }
 
-    var url = window.location.href.split('/');
-    if(url[url.length - 1].indexOf('#') == 0){
-        console.log(url[url.length - 1]);
+    $('.b-product-main').on('init', function(slick){
+        setTimeout(selectOffer, 1);
+    });
+
+    function selectOffer(){
+        var url = window.location.href.split('/');
+        if(url[url.length - 1].indexOf('#') == 0){
+            var id = url[url.length - 1].split('#');
+            $('.colors-select option[data-color-id='+id[1]+']').prop('selected', true);
+            $('.colors-select').change().trigger('chosen:updated');
+        }
     }
 
     $('.mobile-menu').removeClass("hide");
@@ -476,6 +484,9 @@ $(document).ready(function(){
         if(id > 10 && !$(".texture-list").hasClass("open")){
             $(".more-colors").click();
         }
+        $(".b-product-photo-slider.no-slider img.active").removeClass('active');
+        $(".b-product-photo-slider.no-slider img[data-color-id='"+id+"']").addClass('active');
+
         $(".b-product-photo-slider:not(.no-slider) img[data-color-id='"+id+"']").click();
         showPhotoColor(id);
 
@@ -846,11 +857,14 @@ $(document).ready(function(){
     }
 
     function updateBasket(count, sum){
+
+        console.log(sum);
+
         $(".b-cart-number").text( count.toLocaleString() );
         $(".b-cart-price").text( sum.toLocaleString() );
 
-        Cookies.set('count', count.toLocaleString());
-        Cookies.set('sum', sum.toLocaleString());
+        // Cookies.set('count', count.toLocaleString());
+        // Cookies.set('sum', sum.toLocaleString());
     }
 
     function bindFancy(){

@@ -1,12 +1,11 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 
-$arFields["ORDER_ID"] = 40;
+$arFields["ORDER_ID"] = 57;
 
 $order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);
 $propCollection = $order->getPropertyCollection();
 $temp = $propCollection->getArray();
-vardump($order);
 
 $descr = $order->getField('USER_DESCRIPTION');
 
@@ -40,7 +39,7 @@ while ($item = $dbBasketItems->Fetch()){
 	$totalSum += $sum;
 
     $arBasketItems.="<tr>".
-		"<td><a href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."'>".$name."</a></td>".
+		"<td><a href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a></td>".
 		"<td>".round($item['QUANTITY'])."</td>".
 		"<td>".convertPrice($item['BASE_PRICE'])."</td>".
 		"<td>".$discountPrice."</td>".

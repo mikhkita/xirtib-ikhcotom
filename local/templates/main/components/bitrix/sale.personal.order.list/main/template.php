@@ -124,11 +124,18 @@ else
 					endif;
 					?>
 
+					<?
+					$mxResult = CCatalogSku::GetProductInfo($item['PRODUCT_ID']);
+					$el = CIBlockElement::GetByID($mxResult['ID']);
+					$arElement = $el->fetch();
+					$name = is_array($mxResult) ? $arElement['NAME']." (".$item['NAME'].")" : $item['NAME'];
+					?>
+
 					<div class="b-order-item clearfix">
 						<div class="b-order-item-left">
 							<div class="b-order-item-image" style="background-image: url('<?=$img['src']?>');"></div>
 							<div class="b-order-item-name">
-								<a href="<?=$item["DETAIL_PAGE_URL"]?>"><?=$item['NAME']?></a>
+								<a href="<?=$item["DETAIL_PAGE_URL"]?>#<?=$item['PRODUCT_ID']?>"><?=$name?></a>
 								<div class="meters"><?=$item['QUANTITY']?> шт.</div>
 							</div>
 						</div>

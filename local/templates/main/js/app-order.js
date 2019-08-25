@@ -618,7 +618,7 @@
                                return this._productName;
                             },
                             url: function () {
-                               return this._url;
+                               return this._url + '#' + this._id ;
                             },
                             quantity: {
                                 get: function () {
