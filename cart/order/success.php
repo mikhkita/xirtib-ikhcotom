@@ -35,9 +35,6 @@ $APPLICATION->SetTitle("Оформление заказа");
 	$order = Order::create($siteId, $USER->isAuthorized() ? $USER->GetID() : null);
 	$order->setPersonTypeId(1);
 	$order->setField('CURRENCY', $currencyCode);
-	if ($comment) {
-	    $order->setField('USER_DESCRIPTION', $comment); // Устанавливаем поля комментария покупателя
-	}
 
 	$basket = \Bitrix\Sale\Basket::loadItemsForFUser(
 	   \Bitrix\Sale\Fuser::getId(),
@@ -49,6 +46,10 @@ $APPLICATION->SetTitle("Оформление заказа");
 			\Bitrix\Main\Context::getCurrent()->getSite(),
 			\Bitrix\Sale\Fuser::getId());
 		$order->setBasket($basket);
+
+		if ($comment) {
+		    $order->setField('USER_DESCRIPTION', $comment); // Устанавливаем поля комментария покупателя
+		}
 
 		// Способ доставки
 		$shipmentCollection = $order->getShipmentCollection();
@@ -100,52 +101,43 @@ $APPLICATION->SetTitle("Оформление заказа");
 
 		// Сохраняем
 		$order->doFinalAction(true);
-		$result = $order->save();
-		$orderId = $order->getId();
 
-		if ($orderId > 0) {
+		if (!isAuth()) {
+			$rsUser = CUser::GetByLogin($email);
+			$arUser = $rsUser->Fetch();
 
-			if (!isAuth()) {
-				
-				$rsUser = CUser::GetByLogin($email);
-				$arUser = $rsUser->Fetch();
+			if (!is_object($user)) $user = new CUser;
 
-				if (!is_object($user)) $user = new CUser;
+			if (!$arUser) {
+				$password = randomPassword();
 
-				if (!$arUser) {
-					$password = randomPassword();
+				$arFields = Array(
+					"EMAIL"             => $email,
+					"LOGIN"             => $email,
+					"LID"               => "ru",
+					"ACTIVE"            => "Y",
+					"PASSWORD"          => $password,
+					"CONFIRM_PASSWORD"  => $password,
+					"PERSONAL_PHONE"    => $phone,
+					"NAME"  			=> $name,
+				);
 
-					$arFields = Array(
-						"EMAIL"             => $email,
-						"LOGIN"             => $email,
-						"LID"               => "ru",
-						"ACTIVE"            => "Y",
-						"PASSWORD"          => $password,
-						"CONFIRM_PASSWORD"  => $password,
-						"PERSONAL_PHONE"    => $phone,
-						"NAME"  			=> $name,
-					);
+				if ($id = $user->Add($arFields)){
+					CEvent::Send("NEW_USER_FROM_ORDER", "s1", array('EMAIL' => $email, "PASS" => $password));
 
-					if ($id = $user->Add($arFields)){
-						CEvent::Send("NEW_USER_FROM_ORDER", "s1", array('EMAIL' => $email, "PASS" => $password));
-
-						$user->Authorize($id);
-						
-						$tmpOrder = \Bitrix\Sale\Order::load($orderId);
-						$tmpOrder->setFieldNoDemand('USER_ID', $id);
-						$tmpOrder->save();
-					}
-				}else{
-					$tmpOrder = \Bitrix\Sale\Order::load($orderId);
-					$tmpOrder->setFieldNoDemand('USER_ID', $arUser["ID"]);
-					$tmpOrder->save();
+					$user->Authorize($id);
+					
+					$order->setFieldNoDemand('USER_ID', $id);
 				}
 			}else{
-				$tmpOrder = \Bitrix\Sale\Order::load($orderId);
-				$tmpOrder->setFieldNoDemand('USER_ID', $USER->GetID());
-				$tmpOrder->save();
+				$order->setFieldNoDemand('USER_ID', $arUser["ID"]);
 			}
+		}else{
+			$order->setFieldNoDemand('USER_ID', $USER->GetID());
 		}
+
+		$result = $order->save();
+		$orderId = $order->getId();
 
 		$paymentCollection = $order->getPaymentCollection();
 		foreach ($paymentCollection as $payment) {

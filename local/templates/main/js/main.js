@@ -843,6 +843,9 @@ $(document).ready(function(){
     function updateBasket(count, sum){
         $(".b-cart-number").text( count.toLocaleString() );
         $(".b-cart-price").text( sum.toLocaleString() );
+
+        Cookies.set('count', count.toLocaleString());
+        Cookies.set('sum', sum.toLocaleString());
     }
 
     function bindFancy(){

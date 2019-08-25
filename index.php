@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Моточки - клубочки");
+$APPLICATION->SetPageProperty("description", "Интернет-магазин пряжи Моточки-Клубочки. Пряжа от лучших производителей мира в наличии и под заказ по выгодным ценам. Доставляем по всей России.");
+$APPLICATION->SetTitle("Интернет-магазин пряжи Моточки-Клубочки: купить пряжу выгодно с доставкой по России");
 ?>
 	<div class="b b-main-slider-cont">
 		<?$APPLICATION->IncludeComponent(
