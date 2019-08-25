@@ -671,12 +671,9 @@ $(document).ready(function(){
     });
 
     $(document).on('change', '.sort-select', function(){
-        if (isDesktop) {
-            $('.b-filter').change();
-        } else {
-            window.history.replaceState(null , null, ($('.filter-mobile')).serialize()+"&set_filter=1");
-            ajaxFilter();
-        }
+        var form = isDesktop ? $('.b-filter') : $('.filter-mobile');
+        window.history.replaceState(null , null, form.serialize()+"&set_filter=1");
+        ajaxFilter();
     });
 
     function ajaxFilter(){
