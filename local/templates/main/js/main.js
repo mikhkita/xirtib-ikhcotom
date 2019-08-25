@@ -99,6 +99,11 @@ $(document).ready(function(){
         });
     }
 
+    var url = window.location.href.split('/');
+    if(url[url.length - 1].indexOf('#') == 0){
+        console.log(url[url.length - 1]);
+    }
+
     $('.mobile-menu').removeClass("hide");
     $('.filter-mobile').removeClass("hide");
 

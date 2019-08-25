@@ -27,6 +27,7 @@ foreach($arResult["ITEMS"] as $arItem){
 ?>
 
 <div class="b-main-filter">
+	<? if (!empty($arColors[0]['VALUES'])): ?>
 	<h3>По цвету</h3>
 	<div class="b-product-texture">
 		<div class="main-texture-list">
@@ -39,6 +40,7 @@ foreach($arResult["ITEMS"] as $arItem){
 			<? endforeach; ?>
 		</div>
 	</div>
+	<?endif;?>
 	<div class="b-main-tabs">
 		<div class="b-wool-tabs">
 			<h3>По составу</h3>
