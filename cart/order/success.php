@@ -22,7 +22,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 	$phone = $_REQUEST["phone"];
 	$email = $_REQUEST["email"];
 	$address = $_REQUEST["rdrdlvr"];
-	$comment = $_REQUEST["comment"];
+	$comment = $_REQUEST["ORDER_DESCRIPTION"];
 	$paymentId = $_REQUEST["payment"];
 	$deliveryId = $_REQUEST["delivery"];
 	$deliveryPrice = $_REQUEST["delivery-cost"];
