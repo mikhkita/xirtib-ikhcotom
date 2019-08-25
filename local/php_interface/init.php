@@ -1,5 +1,14 @@
 <?
 
+
+AddEventHandler("main", "OnEndBufferContent", "replacePlaceholders");
+function replacePlaceholders(&$content){
+	// echo "string";
+	// die();
+	// $year = date("Y", strtotime("+2 month"));
+	// $content = str_replace("#YEAR#", $year, $content);
+}
+
 AddEventHandler("main", "OnBeforeEventAdd", Array("MyEventHandlers", "OnBeforeEventAddHandler"));
 
 class MyEventHandlers 

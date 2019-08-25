@@ -25,17 +25,17 @@
             highlight();
         },100);
 
-        $(".adm-info-message-wrap").each(function(){
-            if( !$(this).find("a:contains(SiteUpdate)").length ){
-                $(this).css("display", "block");
-            }
-        });
+        // $(".adm-info-message-wrap").each(function(){
+        //     if( !$(this).find("a:contains(SiteUpdate)").length ){
+        //         $(this).css("display", "block");
+        //     }
+        // });
     })
 </script>
 <style>
-    .adm-info-message-wrap{
+    /*.adm-info-message-wrap{
         display: none;
-    }
+    }*/
     .no-active td{
         background-color: #e7e9ea;
     }
