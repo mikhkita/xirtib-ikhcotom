@@ -19,7 +19,7 @@ $APPLICATION->SetTitle("Каталог");
 		"BROWSER_TITLE" => "-",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "N",
+		"CACHE_TYPE" => "A",
 		"CHECK_SECTION_ID_VARIABLE" => "N",
 		"CONVERT_CURRENCY" => "N",
 		"DETAIL_PICTURE_MODE" => "IMG",

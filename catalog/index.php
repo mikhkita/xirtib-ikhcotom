@@ -194,7 +194,7 @@ $APPLICATION->SetTitle("Каталог");?>
 						"CACHE_FILTER" => "N",
 						"CACHE_GROUPS" => "Y",
 						"CACHE_TIME" => "36000000",
-						"CACHE_TYPE" => "N",
+						"CACHE_TYPE" => "A",
 						"COMPONENT_TEMPLATE" => ".default",
 						"CONVERT_CURRENCY" => "N",
 						"DETAIL_URL" => "",
