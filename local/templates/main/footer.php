@@ -272,7 +272,7 @@
 						<input type="password" name="USER_PASSWORD" placeholder="Пароль" required>
 
 						<div class="clearfix">
-							<a href="#" class="popup-sign-pass-a underline right">Забыли пароль?</a>
+							<a href="/personal/?forgot_password=yes" class="popup-sign-pass-a underline right">Забыли пароль?</a>
 						</div>
 						<div class="b-btn-container">
 							<a href="#" class="b-btn b-btn-sign-in ajax">Войти</a>
