@@ -1,12 +1,14 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 
-$arFields["ORDER_ID"] = 37;
+$arFields["ORDER_ID"] = 40;
 
 $order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);
-$descr = $order->getField('USER_DESCRIPTION');
+$propCollection = $order->getPropertyCollection();
+$temp = $propCollection->getArray();
+vardump($order);
 
-vardump($descr);
+$descr = $order->getField('USER_DESCRIPTION');
 
 $deliveryID = $order->getField("DELIVERY_ID");
 $arDelivery = Bitrix\Sale\Delivery\Services\Manager::getById($deliveryID);

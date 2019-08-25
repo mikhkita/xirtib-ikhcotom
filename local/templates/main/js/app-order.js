@@ -54,7 +54,7 @@
                     paymentActive: "",
                     paymentList: [],
                     rdrdlvr: "",
-                    comment: "",
+                    ORDER_DESCRIPTION: "",
                     blockedSubmit: false,
                     nowSubmit: false
                 },
