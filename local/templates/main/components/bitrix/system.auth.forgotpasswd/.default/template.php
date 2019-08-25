@@ -20,7 +20,7 @@ ShowMessage($arParams["~AUTH_RESULT"]);
 					</div>
 
 					<div class="b-btn-container">
-						<input type="submit" name="send_account_info" value="Отправить" class="b-btn b-btn-submit"/>
+						<input type="submit" name="send_account_info" value="Отправить" class="b-btn b-btn-submit ajax"/>
 					</div>
 				</div>
 			</form>

@@ -62,10 +62,13 @@
 b, strong{
 	font-family: "DINPro-Medium";
 }
+.notetext{
+	display: block;
+	margin-bottom: 20px;
+}
 .red{
 	color: #a00;
 }
-
 .icon-im:before {
   content: "\e908";
 }
@@ -2010,10 +2013,10 @@ h3.b-title{
 						color: #CB6163;
 					}
 					.order-status.status-wait-send{
-						color: #32B2BE;
+						color: #77BE32;
 					}
 					.order-status.status-success{
-						color: #77BE32;
+						color: #9c9c9c;
 					}
 			.b-order-list{
 				

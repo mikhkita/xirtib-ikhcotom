@@ -195,22 +195,6 @@ if( isset($_REQUEST["confirm_registration"]) && $_REQUEST["confirm_registration"
 		LocalRedirect("/personal");
 	}
 	$APPLICATION->SetTitle("Смена пароля");
-
-	?>
-	    <form action="" id="pwd_form" class="profile cf" method="POST">
-            <input type="hidden" name="hash" value="<?=$_REQUEST["hash"]?>">
-            <input type="hidden" name="user_id" value="<?=$_REQUEST["user_id"]?>">
-            <div class="form profile-data">
-                <p class="input cf">
-                    <label for="profile-name" class="label">Введите новый пароль</label>
-                    <input name="new_pass" type="password" class="textInput" autocomplete="off">
-                </p>
-            </div>       
-            <p class="submit">
-                <button class="btn" id="pwd_btn" type="submit">Сохранить</button>
-            </p>
-	    </form>	
-	<?
 }
 
 ?><?$APPLICATION->IncludeComponent(
