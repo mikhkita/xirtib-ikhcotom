@@ -69,6 +69,9 @@ b, strong{
 .red{
 	color: #a00;
 }
+.green{
+	color: #5f9828;
+}
 .icon-im:before {
   content: "\e908";
 }
