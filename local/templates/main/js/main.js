@@ -185,6 +185,7 @@ $(document).ready(function(){
     $(document).on('click', '.b-filter-submit', function(){
         filterSlideout.close();
         $('.b-menu-overlay').hide();
+        $(this).parents('.filter-mobile').removeClass('show-btn');
         return false;
     });
 
@@ -206,6 +207,10 @@ $(document).ready(function(){
             $('.b-share-link').addClass('hover');
         }
         return false;
+    });
+
+    $(document).on('change', '.filter-mobile', function(){
+        $(this).addClass('show-btn');
     });
 
     $(window).scroll(function(){
