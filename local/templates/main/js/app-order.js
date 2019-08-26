@@ -232,7 +232,7 @@
                                 <div v-if="form.deliveryActive != \'5\' && form.deliveryActive != \'15\'">\
                                     <div class="b-textarea">\
                                         <p>Адрес доставки</p>\
-                                        <textarea rows="1" name="rdrdlvr" autocomplete="off" placeholder="Введите адрес" v-model="form.rdrdlvr"\
+                                        <textarea readonly rows="1" name="rdrdlvr" autocomplete="off" placeholder="Введите адрес" v-model="form.rdrdlvr"\
                                             v-validate="\'required\'"\
                                             :class="{ error: errors.first(\'rdrdlvr\')}"\
                                             @focus="openMap"\
