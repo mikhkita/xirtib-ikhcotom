@@ -28,6 +28,15 @@ class MyEventHandlers
 				}
 			}
 
+			$paymentCollection = $order->getPaymentCollection();
+
+			foreach ($paymentCollection as $payment) {
+			    $isPaid = $payment->isPaid() == true ? 'заказ оплачен' : 'заказ не оплачен';
+			    $psName = $payment->getPaymentSystemName();
+			}
+
+			$arFields['PAYMENT_INFO'] = $psName.', '.$isPaid;
+
 			$descr = $order->getField('USER_DESCRIPTION');
 			if (isset($descr)) {
 				$arFields['COMMENT'] = '<b>Комментарий к заказу:</b> '.$descr;

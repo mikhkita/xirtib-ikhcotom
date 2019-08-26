@@ -74,9 +74,7 @@ if(count($arResult["ITEMS"])): ?>
 					<div class="b-card-top-img" style="background-image: url('<?=$renderImage['src']?>');"></div>
 				
 					<? if( $label = getItemLabel($arItem) ): ?>
-						<? if (!empty($label)): ?>
-							<div class="b-discount"><?$label?></div>
-						<? endif; ?>
+						<div class="b-discount"><?=$label?></div>
 					<? endif;?>
 
 					<? if (isAuth($USER)): ?>

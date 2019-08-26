@@ -1,7 +1,7 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 
-$arFields["ORDER_ID"] = 21;
+$arFields["ORDER_ID"] = 22;
 
 $order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);
 
@@ -13,6 +13,16 @@ foreach ($temp["properties"] as $prop) {
 		$arFields['CLIENT_INFO'] .= "<b>".$prop['NAME'].":</b> ".$prop['VALUE'][0]."<br>";
 	}
 }
+
+$paymentCollection = $order->getPaymentCollection();
+
+foreach ($paymentCollection as $payment) {
+    $isPaid = $payment->isPaid() == true ? 'заказ оплачен' : 'заказ не оплачен';
+    $psName = $payment->getPaymentSystemName();
+}
+
+$arFields['PAYMENT_INFO'] = 'Способ оплаты: '.$psName.', '.$isPaid;
+
 
 $descr = $order->getField('USER_DESCRIPTION');
 
