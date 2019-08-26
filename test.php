@@ -1,13 +1,24 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 
-$arFields["ORDER_ID"] = 57;
+$arFields["ORDER_ID"] = 21;
 
 $order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);
+
 $propCollection = $order->getPropertyCollection();
 $temp = $propCollection->getArray();
+$arFields['CLIENT_INFO'] = '';
+foreach ($temp["properties"] as $prop) {
+	if (isset($prop['VALUE'][0])) {
+		$arFields['CLIENT_INFO'] .= "<b>".$prop['NAME'].":</b> ".$prop['VALUE'][0]."<br>";
+	}
+}
 
 $descr = $order->getField('USER_DESCRIPTION');
+
+if (isset($descr)) {
+	$arFields['USER_DESCRIPTION'] = '<b>Комментарий к заказу:</b> '.$descr."<br>";
+}
 
 $deliveryID = $order->getField("DELIVERY_ID");
 $arDelivery = Bitrix\Sale\Delivery\Services\Manager::getById($deliveryID);
@@ -16,7 +27,7 @@ $arBasketFilter = array("LID" => 's1',"ORDER_ID" => $arFields["ORDER_ID"]);
 $arBasketSelect = array();
 $dbBasketItems = CSaleBasket::GetList(array("NAME" => "ASC","ID" => "ASC"), $arBasketFilter, false, false, $arBasketSelect);
 
-$arBasketItems = '<style>td{padding:2px 8px}td a{text-decoration:underline}</style>';
+$arBasketItems = '<style>td{padding:2px 8px}td a{text-decoration:underline} td:first-child{padding-left:0px} td:last-child{padding-right:0px}</style>';
 $arBasketItems.= '<table>'.
 					"<tr>".
 					 	"<td>Наименование товара</td>".
@@ -37,9 +48,8 @@ while ($item = $dbBasketItems->Fetch()){
 	$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? convertPrice($item['BASE_PRICE']) : (convertPrice($item['BASE_PRICE']) - convertPrice($item['DISCOUNT_PRICE']));
 	$sum = $item['QUANTITY'] * $discountPrice;
 	$totalSum += $sum;
-
     $arBasketItems.="<tr>".
-		"<td><a href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a></td>".
+		"<td><a style='color: #77be32;' href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a></td>".
 		"<td>".round($item['QUANTITY'])."</td>".
 		"<td>".convertPrice($item['BASE_PRICE'])."</td>".
 		"<td>".$discountPrice."</td>".

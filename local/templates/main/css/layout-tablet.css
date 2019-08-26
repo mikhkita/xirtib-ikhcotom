@@ -6,7 +6,9 @@ body {
 .b-block{
 	width: calc(100% - 48px);
 }
-
+.ya-share2__list_direction_horizontal > .ya-share2__item{
+	display: inline-block!important;
+}
 .b-top-menu {
     min-width: 520px;
     left: auto; 
