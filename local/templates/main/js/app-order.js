@@ -343,7 +343,8 @@
                     success: function(response){
                       var data = JSON.parse(response);  
                       if(data.result === "success"){
-                          self.orders.splice(index, 1);
+                          var deleteIndex = self.orders.map(function(v) {return v.id}).indexOf(id);
+                          self.orders.splice(deleteIndex, 1);
                           if(self.orders.length === 0){//остались ли ещё товары
                               self.show = false;
                               self.showCatalogRef = true;
