@@ -7,6 +7,7 @@ $(document).ready(function(){
         isTablet = false,
         isMobile = false,
         isMobileSmall = false;
+        startOffsetY = window.pageYOffset;
     
     function resize(){
        if( typeof( window.innerWidth ) == 'number' ) {
@@ -103,12 +104,24 @@ $(document).ready(function(){
         setTimeout(selectOffer, 1);
     });
 
+    $('.edit-checkbox').on('change', function(){
+        if ($('.edit-pass-cont').hasClass('hide')) {
+            $('.edit-pass-cont').removeClass('hide');
+        } else {
+            $('.edit-pass-cont').addClass('hide');
+        }
+    });
+
+
+
     function selectOffer(){
         var url = window.location.href.split('/');
         if(url[url.length - 1].indexOf('#') == 0){
             var id = url[url.length - 1].split('#');
-            $('.colors-select option[data-color-id='+id[1]+']').prop('selected', true);
-            $('.colors-select').change().trigger('chosen:updated');
+            if (id[1] !== '') {
+                $('.colors-select option[data-color-id='+id[1]+']').prop('selected', true);
+                $('.colors-select').change().trigger('chosen:updated');
+            }
         }
     }
 
@@ -172,6 +185,7 @@ $(document).ready(function(){
     $(document).on('click', '.b-filter-submit', function(){
         filterSlideout.close();
         $('.b-menu-overlay').hide();
+        $(this).parents('.filter-mobile').removeClass('show-btn');
         return false;
     });
 
@@ -182,6 +196,31 @@ $(document).ready(function(){
         var html = $('.filter-mobile').html();
         $('.filter-mobile').html('<h2>Фильтр</h2>' + html + '<div class="b-btn-container"><a href="#" class="b-filter-submit b-btn">Применить</a></div>');
     }
+
+    $('.b-share-link a').on('click',function(){
+        
+        startOffsetY = window.pageYOffset;
+
+        if ($('.b-share-link').hasClass('hover')) {
+            $('.b-share-link').removeClass('hover');
+        } else {
+            $('.b-share-link').addClass('hover');
+        }
+        return false;
+    });
+
+    $(document).on('change', '.filter-mobile', function(){
+        $(this).addClass('show-btn');
+    });
+
+    $(window).scroll(function(){
+
+        currentOffsetY = window.pageYOffset;
+
+        if (Math.abs(currentOffsetY - startOffsetY) >= 50) {
+            $('.b-share-link').removeClass('hover');
+        }
+    });
 
 /******************************************/
 
@@ -857,8 +896,6 @@ $(document).ready(function(){
     }
 
     function updateBasket(count, sum){
-
-        console.log(sum);
 
         $(".b-cart-number").text( count.toLocaleString() );
         $(".b-cart-price").text( sum.toLocaleString() );

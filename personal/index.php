@@ -141,6 +141,11 @@ if( isset($_REQUEST["action"]) ){
 			$user = new CUser;
 			$arFields = $_REQUEST['user'];
 
+			if (empty($arFields['PASSWORD']) || $_REQUEST['change_pass'] !== 'on') {
+				unset($arFields['PASSWORD']);
+				unset($arFields['CONFIRM_PASSWORD']);
+			}
+
 			if ($arFields['PERSONAL_PHOTO']) {
 				$arFile = CFile::MakeFileArray($_SERVER['DOCUMENT_ROOT'].'/upload/tmp/'.$arFields['PERSONAL_PHOTO']);
 		        $arFile['del'] = "Y";           

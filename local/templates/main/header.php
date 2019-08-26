@@ -234,7 +234,7 @@ if ($arFav > 0){
 					<? $basketInfo = getBasketCount(); ?>
 
 					<a href='/cart/order/' class="b-price-button" id="b-price-button" <?/*?> style="display: none;"<?*/?>>
-						<span class="b-cart-price icon-ruble" id="b-cart-sum"><?=convertPrice($basketInfo['sum'])?></span>
+						<span class="b-cart-price icon-ruble" id="b-cart-sum"><?=$basketInfo['sum']?></span>
 						<span class="b-cart-number-container">
 							<span class="b-cart-number" id="b-cart-count"><?=$basketInfo['count']?></span>
 						</span>

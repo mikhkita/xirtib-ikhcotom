@@ -1106,6 +1106,7 @@ h3.b-title{
 				}
 			.b-item-card .b-card-fav{
 				color: #828282;
+				text-align: center;
 			}
 			.b-card-hover-frame{
 				position: absolute;
@@ -2013,7 +2014,7 @@ h3.b-title{
 						line-height: 30px;
 					}
 					.order-status.status-wait-pay{
-						color: #CB6163;
+						color: #628ACA;
 					}
 					.order-status.status-wait-send{
 						color: #77BE32;
@@ -2206,9 +2207,28 @@ h3.b-title{
 	.modern-page-dots{
 		padding: 0px 10px;
 	}
-
+/*
 .b-cabinet .b-btn-save{
 	padding: 17px 29px 20px 29px;
+}*/
+
+.b-cabinet .b-btn-save,
+.b-cabinet .b-btn-not-save {
+    padding: 12px 19px 14px 19px;
+    /*margin-top: 29px;*/
+    width: 100%;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 24px;
+}
+.b-cabinet .b-btn-save{
+	padding: 14px 19px 16px 19px;
+	border: unset;
+	color: #fff;
+	background-color: #77be32;
+	-webkit-transition: background-color .1s;
+	-o-transition: background-color .1s;
+	transition: background-color .1s;
 }
 
 /*=======Детальная======*/
@@ -2395,6 +2415,13 @@ h3.b-title{
 					        top: 30px;
 					        left: 0;
 					        box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15);
+						}
+						.b-share-link.hover a{
+							color: #77BE32;
+						}
+						.b-share-link.hover .ya-share2{
+							opacity: 1;
+							visibility: visible;
 						}
 						.b-share-link .ya-share2:before{
 							content: '';
@@ -3130,18 +3157,29 @@ h3.b-title{
 	}
 	.b-filter.filter-mobile{
 		padding: 40px 0;
+		padding-bottom: 100px;
 	}
 	.b-filter.filter-mobile h2{
 		padding: 0 20px 20px;
 	    border-bottom: 1px solid #EEE;
 	}
+	.b-filter.show-btn .b-btn-container{
+	    bottom: 20px;
+	}
 	.b-filter .b-btn-container{
-		margin-top: 20px;
+	    position: fixed;
+	    z-index: 100;
+	    bottom: -200px;
+	    -webkit-transition: bottom .2s ease-out;
+	    -o-transition: bottom .2s ease-out;
+	    transition: bottom .2s ease-out;
+	    width: 300px;
 	}
 	.b-filter .b-btn-container .b-btn{
 		background-color: #78C032;
 		border: unset;
 		color: #fff;
+	    box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.25);
 	}
 	.filter-mobile .range-inputs input[type=text]{
 	    width: 115px;
@@ -4049,6 +4087,9 @@ h3.b-title{
 .fancybox-container{
 	font-family: 'DINPro-Regular';
 }
+.fancybox-button--share{
+	display: none;
+}
 .fancybox-close-small {
     position: absolute;
     right: 15px;
@@ -4564,6 +4605,12 @@ textarea:-moz-placeholder {
 .b-checkbox{
 	position: relative;
 }
+.edit-checkbox{
+	/*margin-top: 32px;*/
+}
+	.edit-checkbox p{
+		margin-bottom: 4px;
+	}
 
 .b-checkbox input[type="checkbox"].error + span + label .b-checked,
 .b-checkbox input[type="checkbox"].error + label .b-checked{
@@ -5407,7 +5454,9 @@ textarea:-moz-placeholder {
 	    top: 12px;
 	    right: 12px;
 	}
-
+.pass-error p{
+	color: #F00;
+}
 /*------hover--------*/
 @media screen and (min-width: 1024px){
 	.blog-item:hover span.blog-more-a::after{
@@ -5687,6 +5736,9 @@ textarea:-moz-placeholder {
 		width: 12px;
 		border-radius: 10px;
 		background-color: #e4e4e4;
+	}
+	.b-cabinet .b-btn-save:hover{
+		background-color: #5f9828;
 	}
 }
 /*------hover--------*/

@@ -3,6 +3,9 @@
 body {
 	min-width: 320px;
 }
+.ya-share2__list_direction_horizontal > .ya-share2__item{
+	display: inline-block!important;
+}
 .b-table-wrap{
     max-width: calc(100% + 48px);
     overflow: auto;
@@ -19,6 +22,13 @@ body {
 
 .b-breadcrumbs li {
 	margin-bottom: 8px;
+}
+.b-breadcrumbs li a,
+.b-breadcrumbs li span{
+	font-size: 16px;
+}
+.b-breadcrumbs li:after{
+    margin: 11px 10px 0 8px;
 }
 .b-product-photo{
 	display: block;
@@ -92,6 +102,9 @@ body {
 }
 .b-card-top-img{
 	height: 200px;
+}
+.b-card-top-hover{
+	display: none;
 }
 .b-blog-filter {
 	margin-bottom: 15px;
@@ -1249,6 +1262,8 @@ body {
 		height: auto !important;
 		width: 100%;
 		margin-right: 0;
+		text-align: left;
+	    padding: 8px 6px;
 	}
 	.b-catalog-list .b-item-card:nth-child(3n){
 		margin-right: 0;
@@ -1324,7 +1339,23 @@ body {
 		margin-right: 0;
 	}
 	.b-card-top-img{
-		height: 250px;
+		height: 140px;
+	}
+	.b-card-top{
+		width: 140px;
+	}
+	.b-card-bottom{
+		display: inline-block;
+		vertical-align: top;
+	    width: calc(100% - 152px);
+    	margin-left: 8px;
+    	/*margin-bottom: 0;*/
+	}
+	.b-item-name{
+		margin-top: 0;
+	}
+	.b-price-container{
+	    left: 160px;
 	}
 	.b-category-tiles .b-tile-item{
 		width: 100%;
@@ -1379,5 +1410,18 @@ body {
 	}
 	.b-btn-blocked-preloader span{
 		width: 200px
+	}
+	.b-card-top{
+	    width: 120px;
+	}
+	.b-card-top-img{
+		height: 120px;
+	}
+	.b-card-bottom{
+        width: calc(100% - 132px);
+    	margin-left: 8px;
+	}
+	.b-price-container{
+		left: 138px;
 	}
 }

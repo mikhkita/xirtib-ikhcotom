@@ -214,6 +214,36 @@ $(document).ready(function(){
 
 		$(".b-postamat-error").remove();
 
+		if ($form.attr('id') == 'editForm') {
+
+			$form.find('.b-btn-save').parent().addClass('after-load');
+
+			if ($('#change_pass').prop('checked') == true){
+				$form.find('.pass-error').addClass('hide').html('');
+				var html = '';
+				var error = false;
+
+				if($form.find("#pass").val() !== $form.find("#confpass").val()){
+					error = true;
+					$form.find("#confpass").addClass('error');
+					html = '<p>Введённые пароли не&nbsp;совпадают</p>';
+				}
+
+				if($form.find("#pass").val().length < 6){
+					error = true;
+					$form.find("#pass").addClass('error');
+					html = '<p>Минимальная длина пароля - 6&nbsp;символов</p>' + html;
+				}
+
+				if (error) {
+					$form.find('.pass-error').removeClass('hide').html(html);
+					$form.find('.b-btn-save').parent().removeClass('after-load');
+				}
+			} else {
+				$form.find('.pass-error').addClass('hide');
+			}
+		}
+
 		// if( $form.hasClass("b-data-order-form") && $(".b-pickpoint").is(":visible") && !$(".pickpointaddr").length ){
 		// 	$(".b-add-postamat").after("<p class='red b-postamat-error'>Вам нужно выбрать постамат, в котором вы хотите получить вашу посылку.</p>");
 		// }
@@ -286,6 +316,9 @@ $(document).ready(function(){
 						if( msg == "1" ){
 							$link = $this.find(".b-thanks-link");
 						}else{
+							if ($form.attr('id') == 'editForm') {
+								$form.find('.b-btn-save').parent().removeClass('after-load');
+							}
 							$link = $this.find(".b-error-link");
 						}
 
