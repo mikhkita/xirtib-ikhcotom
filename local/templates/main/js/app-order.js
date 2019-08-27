@@ -89,7 +89,11 @@
             if(dataOrder.payments){
                 this.form.paymentList = dataOrder.payments;
                 this.form.paymentActive = this.form.paymentList[0].id;
+                for (i = 0; i < this.form.paymentList.length; i++) {
+                    this.form.paymentList[i].visible = true;
+                }
             }
+            console.log(this.form.paymentList);
             if(dataOrder.isAuth){
                 this.isAuth = dataOrder.isAuth;
                 if(dataOrder.user){
@@ -212,7 +216,7 @@
                           <div class="b-pay">\
                             <h4>Способ оплаты</h4>\
                             <ul class="b-radio">\
-                                <li v-for="payment in form.paymentList" :key="payment.id">\
+                                <li v-for="payment in form.paymentList" :key="payment.id" v-show="payment.visible">\
                                     <input\
                                         :id="getLabel(\'payment\', payment.id)"\
                                         type="radio"\
@@ -466,6 +470,20 @@
                     var e = new Event("change");
                     $('#delivery-cost')[0].dispatchEvent(e);
                 }
+                this.renderPayments();
+            },
+            //Отрисовать платежные системы для данной доставки
+            renderPayments: function () {
+                console.log(this.form.deliveryActive);
+                for (i = 0; i < this.form.paymentList.length; i++) {
+                    console.log(this.form.paymentList[i].deliveryIDs);
+                    if($.inArray(parseInt(this.form.deliveryActive), this.form.paymentList[i].deliveryIDs) > -1){
+                        this.form.paymentList[i].visible = true;
+                    }else{
+                        this.form.paymentList[i].visible = false;
+                    }
+                }
+                //перекрючить радиобаттон если активный скрылся
             },
             changeCost: function () {
                 //console.log("changeCost = " + $('#delivery-cost').val());

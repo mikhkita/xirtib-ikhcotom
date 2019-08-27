@@ -10,6 +10,8 @@ if($ob = $res->GetNextElement()){
 	$arFields = $ob->GetFields();
 }
 
-header('Location: '.$arFields["DETAIL_PAGE_URL"]);
+header("HTTP/1.1 301 Moved Permanently");
+header('Location: http://motochki-klubochki.ru'.$arFields["DETAIL_PAGE_URL"]);
+die();
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

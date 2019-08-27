@@ -717,9 +717,14 @@ function getOrderList(){
 	    )
 	));
 	while ($paySystem = $paySystemResult->fetch()){
+		$deliveryIDs = explode(",", $paySystem["CODE"]);
+		foreach ($deliveryIDs as $key => $value) {
+			$deliveryIDs[$key] = (int)$value;
+		}
 		$orders["payments"][] = array(
 			"id" => $paySystem["ID"],
-			"name"=> $paySystem["NAME"],
+			"name" => $paySystem["NAME"],
+			"deliveryIDs" => $deliveryIDs
 		);                   
 	}
 
