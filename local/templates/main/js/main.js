@@ -8,6 +8,17 @@ $(document).ready(function(){
         isMobile = false,
         isMobileSmall = false;
         startOffsetY = window.pageYOffset;
+
+    function supportedEvent(eventName) {
+        var e;
+        if(typeof(Event) === 'function') {
+            e = new Event(eventName);
+        }else{
+            e = document.createEvent('Event');
+            e.initEvent(eventName, true, true);
+        }
+        return e;
+    }
     
     function resize(){
        if( typeof( window.innerWidth ) == 'number' ) {
@@ -803,7 +814,7 @@ $(document).ready(function(){
         }
         if($('#postal-code').val()){
             $('#postal-code-vue').val($('#postal-code').val());
-            var e = new Event("change");
+            var e = supportedEvent("change");
             $('#postal-code-vue')[0].dispatchEvent(e);
             $('#postal-code').removeClass("error");
         }else{
@@ -819,7 +830,7 @@ $(document).ready(function(){
         postalCode = $('#postal-code').val() + ", ";
         var resString = postalCode + $('.js-order-adress-map-input').val() + room;
         var $address = $("#app-order textarea[name='rdrdlvr']").val(resString);
-        var e = new Event("input");
+        var e = supportedEvent("input");
         $address[0].dispatchEvent(e);
         $.fancybox.close();
         return false;
