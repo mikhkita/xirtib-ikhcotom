@@ -26,6 +26,17 @@
         }
     };
 
+    function supportedEvent(eventName) {
+        var e;
+        if(typeof(Event) === 'function') {
+            e = new Event(eventName);
+        }else{
+            e = document.createEvent('Event');
+            e.initEvent(eventName, true, true);
+        }
+        return e;
+    }
+
     // ===== Дерево компонентов =====
 
     // v-order
@@ -92,8 +103,8 @@
                 for (i = 0; i < this.form.paymentList.length; i++) {
                     this.form.paymentList[i].visible = true;
                 }
+                this.renderPayments();
             }
-            console.log(this.form.paymentList);
             if(dataOrder.isAuth){
                 this.isAuth = dataOrder.isAuth;
                 if(dataOrder.user){
@@ -453,7 +464,7 @@
                             var data = JSON.parse(response);
                             if(data.result === "success"){
                                 $('#delivery-cost').val(data.cost);
-                                var e = new Event("change");
+                                var e = supportedEvent("change");
                                 $('#delivery-cost')[0].dispatchEvent(e);
                             }else{
                                 alert(data.error);
@@ -467,23 +478,33 @@
                     });
                 }else{
                     $('#delivery-cost').val(this.form.deliveryList[index].cost);
-                    var e = new Event("change");
+                    var e = supportedEvent("change");
                     $('#delivery-cost')[0].dispatchEvent(e);
                 }
                 this.renderPayments();
             },
             //Отрисовать платежные системы для данной доставки
             renderPayments: function () {
-                console.log(this.form.deliveryActive);
+                //console.log(this.form.deliveryActive);
                 for (i = 0; i < this.form.paymentList.length; i++) {
-                    console.log(this.form.paymentList[i].deliveryIDs);
+                    //console.log(this.form.paymentList[i].deliveryIDs);
                     if($.inArray(parseInt(this.form.deliveryActive), this.form.paymentList[i].deliveryIDs) > -1){
                         this.form.paymentList[i].visible = true;
                     }else{
                         this.form.paymentList[i].visible = false;
                     }
                 }
-                //перекрючить радиобаттон если активный скрылся
+                //переключить радиобаттон если активный скрылся
+                var active = this.form.paymentActive,
+                    index = this.form.paymentList.map(function(v) {return v.id}).indexOf(active);
+                if(!this.form.paymentList[index].visible){
+                    for (i = 0; i < this.form.paymentList.length; i++) {
+                        if(this.form.paymentList[i].visible){
+                            this.form.paymentActive = this.form.paymentList[i].id;
+                            break;
+                        }
+                    }
+                }
             },
             changeCost: function () {
                 //console.log("changeCost = " + $('#delivery-cost').val());
@@ -901,10 +922,6 @@
                             //console.log("prepare");
                             if( value == 8 && masked._value.length == 0 ){
                                 return "+7 (";
-                            }
-
-                            if( value == 8 && masked._value == "+7 (" ){
-                                return "";
                             }
 
                             tmp = value.match(/[\d\+]*/g);
