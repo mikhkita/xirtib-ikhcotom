@@ -426,8 +426,10 @@
                 }else{
                     setTimeout(function(){
                         if(myWidth < 768){
+                            var $target = $("#app-order").find("input.error,select.error,textarea.error").eq(0);
+                            $target.focus();
                             $("body, html").animate({
-                                scrollTop : $("#app-order").find("input.error,select.error,textarea.error").eq(0).offset().top - 30
+                                scrollTop : $target.offset().top - 30
                             }, 600);
                         }else{
                             $("#app-order").find("input.error,select.error,textarea.error").eq(0).focus();
