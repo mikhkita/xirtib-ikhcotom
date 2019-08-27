@@ -3163,19 +3163,27 @@ h3.b-title{
 		padding: 0 20px 20px;
 	    border-bottom: 1px solid #EEE;
 	}
-	.b-filter.show-btn .b-btn-container{
-	    bottom: 20px;
+	.b-filter.show-btn + .b-btn-container{
+		-webkit-transform: translateY(-20px);
+		-ms-transform: translateY(-20px);
+		-o-transform: translateY(-20px);
+		transform: translateY(-20px);
 	}
-	.b-filter .b-btn-container{
+	.b-filter + .b-btn-container{
 	    position: fixed;
 	    z-index: 100;
-	    bottom: -200px;
-	    -webkit-transition: bottom .2s ease-out;
-	    -o-transition: bottom .2s ease-out;
-	    transition: bottom .2s ease-out;
+	    -webkit-transform: translateY(200px);
+	    -ms-transform: translateY(200px);
+	    -o-transform: translateY(200px);
+	    transform: translateY(200px);
+	    bottom: 0;
+	    -webkit-transition: transform .2s ease-out;
+	    -o-transition: transform .2s ease-out;
+	    transition: transform .2s ease-out;
 	    width: 300px;
+	    right: 0;
 	}
-	.b-filter .b-btn-container .b-btn{
+	.b-filter + .b-btn-container .b-btn{
 		background-color: #78C032;
 		border: unset;
 		color: #fff;

@@ -146,8 +146,10 @@ $(document).ready(function(){
 
     $('.b-menu-overlay').click(function() {
         menuSlideout.close();
-        if ($('#b-filter-panel').length)
+        if ($('#b-filter-panel').length){
+            $('.filter-mobile').removeClass('show-btn');
             filterSlideout.close();
+        }
         $('.b-menu-overlay').hide();
         return false;
     });
@@ -185,7 +187,7 @@ $(document).ready(function(){
     $(document).on('click', '.b-filter-submit', function(){
         filterSlideout.close();
         $('.b-menu-overlay').hide();
-        $(this).parents('.filter-mobile').removeClass('show-btn');
+        $('.filter-mobile').removeClass('show-btn');
         return false;
     });
 
@@ -194,7 +196,8 @@ $(document).ready(function(){
         $('#mobile-menu').after($this);
         $('#mobile-menu').siblings('.b-filter').addClass('filter-mobile');
         var html = $('.filter-mobile').html();
-        $('.filter-mobile').html('<h2>Фильтр</h2>' + html + '<div class="b-btn-container"><a href="#" class="b-filter-submit b-btn">Применить</a></div>');
+        $('.filter-mobile').html('<h2>Фильтр</h2>' + html);
+        $('.filter-mobile').after('<div class="b-btn-container"><a href="#" class="b-filter-submit b-btn">Применить</a></div>');
     }
 
     $('.b-share-link a').on('click',function(){
