@@ -206,6 +206,9 @@ h1.b-title{
 	color: #564531;
 	letter-spacing: 0;
 	text-align: center;
+	/* color: #696b66; */
+	font-family: "Lora","Arial",sans-serif;
+	font-weight: 600;
 }
 h2.b-title{
 	margin-bottom: 45px;
@@ -790,12 +793,14 @@ h3.b-title{
 				padding: 18px 0 22px 0;
 				color: #FFF;
 				display: block;
-				font-family: DINPro-Medium;
+				font-family: DINPro-Regular;
 				font-size: 18px;
 				letter-spacing: 0.4px;
 				-webkit-transition: background .1s, color .1s;
 				-o-transition: background .1s, color .1s;
 				transition: background .1s, color .1s;
+				/* font-family: "Lora","Arial",sans-serif; */
+				/* font-weight: 600; */
 			}
 				
 		.b-submenu-items{
@@ -1177,12 +1182,14 @@ h3.b-title{
 				.b-item-name{
 					font-family: DINPro-Regular;
 					font-size: 18px;
-					color: #3E3224;
+					color: #564531 !important;
 					display: block;
 					letter-spacing: 0;
 					margin-top: 12px;
 					z-index: 30;
-					line-height: 22px;
+					line-height: 26px;
+					font-family: "Lora","Arial",sans-serif;
+					font-weight: 600;
 				}
 				.b-price-container{
 					font-size: 24px;
@@ -1199,13 +1206,15 @@ h3.b-title{
 					.b-discount-price span{
 						font-family: 'DINPro-Regular';
 						padding-right: 20px;
+						font-family: "Lora","Arial",sans-serif;
+						font-weight: 600;
 					}
 					.b-price span:before,
 					.b-discount-price span:before{
 						position: absolute;
 						right: 0;
 						font-size: 17px;
-	    				top: 11px;
+						top: 7px;
 					}
 				.b-discount-price{
 					display: none;
@@ -1548,8 +1557,8 @@ h3.b-title{
 }
 	.b-footer-top{
 		border-bottom: 1px solid #D8D8D8;
-		padding-top: 32px;
-		padding-bottom: 44px;
+		padding-top: 36px;
+		padding-bottom: 48px;
 		text-align: center;
 	}
 		.b-footer-top-text{
@@ -1563,6 +1572,8 @@ h3.b-title{
 				color: #564531;
 				letter-spacing: 0;
 				margin-bottom: 24px;
+				font-family: "Lora","Arial",sans-serif;
+				font-weight: 600;
 			}
 			.b-footer-top-text p{
 				font-size: 18px;
@@ -2338,9 +2349,11 @@ h3.b-title{
 
 			.b-product-name{
 				font-family: 'DINPro-Medium';
-				font-size: 32px;
-				line-height: 40px;
-				margin-bottom: 20px;
+				font-size: 44px;
+				line-height: 50px;
+				margin-bottom: 24px;
+				font-family: "Lora","Arial",sans-serif;
+				font-weight: 600;
 			}
 			.b-product-actions-wrap{
 				padding-right: 50px;
@@ -2515,6 +2528,8 @@ h3.b-title{
 							/*padding-top: 4px;*/
 							font-size: 18px;
 							line-height: 22px;
+							font-family: "Lora","Arial",sans-serif;
+							font-weight: 600;
 						}
 						.b-catalog-list .b-product-colors > span{
 							/*font-family: 'DINPro-Light';*/
@@ -2586,11 +2601,11 @@ h3.b-title{
 							.b-product-texture img{
 								cursor: pointer;
 								float: left;
-								width: 49px;
-								height: 49px;
+								width: 60px;
+								height: 60px;
 								border: 2px solid transparent;
 								border-radius: 100px;
-								margin-right: 5px;
+								margin-right: 12px;
 								margin-bottom: 10px;
 							}
 							.b-product-texture img:nth-child(5n){
@@ -2657,6 +2672,8 @@ h3.b-title{
 						line-height: 50px;
 						color: #564531;
 						margin-bottom: 24px;
+						font-family: "Lora","Arial",sans-serif;
+						font-weight: 600;
 					}
 					.has-discount .b-product-price-total{
 						color: #CB6163;
@@ -2670,12 +2687,14 @@ h3.b-title{
 						font-size: 24px;
 						line-height: 30px;
 						color: #564531;
+						font-family: "Lora","Arial",sans-serif;
+						font-weight: 600;
 					}
 						.b-product-price-total .icon-ruble-bold:before {
 						    position: relative;
 						    top: -2px;
 						    font-size: 30px;
-						    margin-left: 14px;
+						    margin-left: 8px;
 						}
 					.b-product-quantity{
 						margin-bottom: 35px;
@@ -2749,16 +2768,16 @@ h3.b-title{
 						margin-bottom: 42px;
 						font-family: 'DINPro-Regular';
 						line-height: 24px;
-    					padding: 12px 17px 16px 55px;
-    					color: #FFF;
-    					background-color: #77BE32;
-    					border: none;
+						padding: 16px 32px 22px 63px;
+						color: #FFF;
+						background-color: #77BE32;
+						border: none;
 					}
 					
 					.b-btn .icon-cart{
 						position: absolute;
-						top: 12px;
-						left: 15px;
+						top: 16px;
+						left: 21px;
 					}
 					.b-btn .icon-cart:before{
 						font-size: 28px;
@@ -2806,12 +2825,14 @@ h3.b-title{
 				.b-detail-tabs .tabs .tab span{
 					display: inline-block;
 					padding: 9px 26px 11px 26px;
-					font-size: 18px;
+					font-size: 16px;
 					line-height: 22px;
 					border-radius: 3px 3px 0 0;
 					background-color: #EEE;
 					border: 1px solid #EEE;
 					border-bottom: 0;
+					font-family: "Lora","Arial",sans-serif;
+					font-weight: 600;
 				}
 				.b-detail-tabs .tabs .tab.active span{
 					position: relative;
@@ -3212,6 +3233,8 @@ h3.b-title{
 					font-size: 18px;
 					line-height: 26px;
 					padding-right: 35px;
+					font-family: "Lora","Arial",sans-serif;
+					font-weight: 600;
 				}
 				.filter-toggle{
 					position: absolute;
