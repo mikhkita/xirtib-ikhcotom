@@ -12,7 +12,7 @@
 					<p><?includeArea("b-footer-text-2")?></p>
 				</div>
 				<div class="b-footer-top-input">
-					<a href="https://wa.me/79039538088?text=Здравствуйте!%20Хочу%20подробнее%20узнать%20о%20товаре%20с%20помощью%20видеосвязи." class="b-btn" target="_blank">Записаться на обзор пряжи</a>
+					<a href="https://wa.me/79039538088?text=Здравствуйте!%20Хочу%20подробнее%20узнать%20о%20товаре%20с%20помощью%20видеосвязи." class="b-btn goal-click" target="_blank" data-goal="callback_whatsapp">Записаться на обзор пряжи</a>
 				</div>
 			</div>
 			<div class="b-footer-bottom clearfix">
@@ -61,7 +61,7 @@
 				<div class="b-footer-bottom-right">
 					<div class="b-subscribe">
 						<h3 class="b-subscribe-us"><?includeArea("b-footer-text-6")?></h3>
-						<form action="ajax/?action=SUBSCRIBE" method="POST" class="b-footer-inputs clearfix">
+						<form action="ajax/?action=SUBSCRIBE" method="POST" class="b-footer-inputs clearfix" data-goal="subscribe">
 							<input type="text" name="name" placeholder="Имя" required>
 							<input type="text" name="email" placeholder="E-mail" required>
 							<input type="text" name="MAIL">
@@ -106,7 +106,7 @@
 		<div class="b-popup" id="b-popup-1">
 			<h3>Оставьте заявку</h3>
 			<h4>и наши специалисты<br>свяжутся с Вами в ближайшее время</h4>
-			<form action="kitsend.php" data-goal="CALLBACK" method="POST" id="b-form-1">
+			<form action="kitsend.php" method="POST" id="b-form-1">
 				<div class="b-popup-form">
 					<label for="name">Введите Ваше имя</label>
 					<input type="text" id="name" name="name" required/>
@@ -301,7 +301,7 @@
 		<div class="b-popup b-review-popup" id="popup-callback">
 			<img src="<?=SITE_TEMPLATE_PATH?>/i/popup-logo.svg" class="popup-img">
 			<div class="popup-title"></div>
-			<form method="POST" action="/ajax/?action=CALLBACK">
+			<form method="POST" action="/ajax/?action=CALLBACK" data-goal="callback">
 				<div class="b-inputs-2 clearfix">
 					<div class="b-input">
 						<input type="text" name="name" placeholder="Ваше имя">
@@ -322,6 +322,22 @@
 		</div>
 
 	</div>
+	<? if($_SERVER["HTTP_HOST"] == "motochki-klubochki.ru" && !$USER->IsAuthorized() ): ?>
+		<!-- Yandex.Metrika counter -->
+			<script type="text/javascript" >
+			   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+			   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+			   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+			   ym(36653305, "init", {
+			        clickmap:true,
+			        trackLinks:true,
+			        accurateTrackBounce:true,
+			        webvisor:true
+			   });
+			</script>
+			<noscript><div><img src="https://mc.yandex.ru/watch/36653305" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+	<? endif; ?>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.fancybox.min.js"></script>
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false&key=AIzaSyD6Sy5r7sWQAelSn-4mu2JtVptFkEQ03YI"></script>
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.touch.min.js"></script>
@@ -358,21 +374,5 @@
 	<? endif; ?>
 	<!-- \\\\\\\\ -->
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.js?<?=$GLOBALS["version"]?>"></script>
-	<? if($_SERVER["HTTP_HOST"] == "motochki-klubochki.ru" && !$USER->IsAuthorized() ): ?>
-		<!-- Yandex.Metrika counter -->
-			<script type="text/javascript" >
-			   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-			   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-			   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-			   ym(36653305, "init", {
-			        clickmap:true,
-			        trackLinks:true,
-			        accurateTrackBounce:true,
-			        webvisor:true
-			   });
-			</script>
-			<noscript><div><img src="https://mc.yandex.ru/watch/36653305" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-		<!-- /Yandex.Metrika counter -->
-	<? endif; ?>
 </body>
 </html>

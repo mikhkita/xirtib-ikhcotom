@@ -25,10 +25,12 @@ body {
 }
 .b-breadcrumbs li a,
 .b-breadcrumbs li span{
-	font-size: 16px;
+	font-size: 14px;
 }
 .b-breadcrumbs li:after{
-    margin: 11px 10px 0 8px;
+    width: 4px;
+    height: 4px;
+    margin: 13px 10px 0 5px;
 }
 .b-product-photo{
 	display: block;
@@ -735,6 +737,9 @@ body {
 }
 .texture-list {
     max-height: auto;
+}
+.fancybox-slide > *{
+	margin: 0;
 }
 
 @media screen and (max-width: 665px){

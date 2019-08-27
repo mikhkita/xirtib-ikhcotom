@@ -44,7 +44,7 @@ $APPLICATION->SetTitle("О магазине");
 					"CHECK_DATES" => "Y",
 					"COMPONENT_TEMPLATE" => "blog",
 					"DETAIL_URL" => "",
-					"DISPLAY_BOTTOM_PAGER" => "Y",
+					"DISPLAY_BOTTOM_PAGER" => "N",
 					"DISPLAY_DATE" => "Y",
 					"DISPLAY_NAME" => "Y",
 					"DISPLAY_PICTURE" => "Y",

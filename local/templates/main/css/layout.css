@@ -1184,6 +1184,9 @@ h3.b-title{
 					z-index: 30;
 					line-height: 22px;
 				}
+				.b-item-subname{
+					
+				}
 				.b-price-container{
 					font-size: 24px;
 					color: #3E3224;
@@ -2749,7 +2752,7 @@ h3.b-title{
 						margin-bottom: 42px;
 						font-family: 'DINPro-Regular';
 						line-height: 24px;
-    					padding: 12px 17px 16px 55px;
+    					padding: 16px 22px 20px 60px;
     					color: #FFF;
     					background-color: #77BE32;
     					border: none;
@@ -2758,7 +2761,7 @@ h3.b-title{
 					.b-btn .icon-cart{
 						position: absolute;
 						top: 12px;
-						left: 15px;
+						left: 20px;
 					}
 					.b-btn .icon-cart:before{
 						font-size: 28px;
