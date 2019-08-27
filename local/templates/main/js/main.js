@@ -174,8 +174,7 @@ $(document).ready(function(){
         });
 
         filterSlideout.on('close', function() {
-            window.history.replaceState(null , null, ($('.filter-mobile')).serialize()+"&set_filter=1");
-            ajaxFilter();
+            ajaxFilter($('.filter-mobile'));
             setTimeout(function(){
                 $("body").unbind("touchmove");
                 $(".filter-mobile, #mobile-menu").hide();
@@ -718,23 +717,25 @@ $(document).ready(function(){
     var filterInterval = null;
     $('.b-filter').on('change', function(){
         if (isDesktop) {
-            window.history.replaceState(null , null, ($(this)).serialize()+"&set_filter=1");
 
             if( filterInterval !== null ){
                 clearTimeout(filterInterval);
             }
 
-            filterInterval = setTimeout(ajaxFilter, 1500);
+            filterInterval = setTimeout(ajaxFilter, 1500, $(this));
         }
     });
 
     $(document).on('change', '.sort-select', function(){
         var form = isDesktop ? $('.b-filter') : $('.filter-mobile');
-        window.history.replaceState(null , null, form.serialize()+"&set_filter=1");
-        ajaxFilter();
+        ajaxFilter(form);
     });
 
-    function ajaxFilter(){
+    function ajaxFilter(form){
+
+        $('#PAGEN').val('1');
+        window.history.replaceState(null , null, form.serialize()+"&set_filter=1");
+
         var url = window.location.href,
             block = $('.b-catalog-list');
 

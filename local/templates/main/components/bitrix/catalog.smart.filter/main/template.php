@@ -41,9 +41,15 @@ if(count($arResult["ITEMS"]) <= 2){
 	<? if ($arItem["CONTROL_NAME"] == 'SORT_FIELD'): ?>
 		<? $isSortField = true; ?>
 	<? endif;?>
+
 	<? if ($arItem["CONTROL_NAME"] == 'SORT_TYPE'): ?>
 		<? $isSortField = true; ?>
 	<? endif;?>
+
+	<? if (strpos($arItem["CONTROL_NAME"], "PAGEN") !== false): ?>
+		<? $arItem["CONTROL_ID"] = "PAGEN"; ?>
+	<? endif;?>
+
 	<input type="hidden" name="<?echo $arItem["CONTROL_NAME"]?>" id="<?echo $arItem["CONTROL_ID"]?>" value="<?echo $arItem["HTML_VALUE"]?>" />
 	
 	<?endforeach;?>
