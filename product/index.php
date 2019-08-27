@@ -9,8 +9,6 @@ $res = CIBlockElement::GetList(Array(), $arFilter, false, Array("nPageSize"=>50)
 if($ob = $res->GetNextElement()){
 	$arFields = $ob->GetFields();
 }
-// var_dump($arFields["DETAIL_PAGE_URL"]);
-// die();
 
 header("HTTP/1.1 301 Moved Permanently");
 header('Location: http://motochki-klubochki.ru'.$arFields["DETAIL_PAGE_URL"]);
