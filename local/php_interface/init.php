@@ -712,7 +712,10 @@ function getOrderList(){
 	}
 
 	$paySystemResult = \Bitrix\Sale\PaySystem\Manager::getList(array(
-	    'filter'  => array(
+		'order' => array(
+			'SORT' => 'ASC',
+		),
+	    'filter' => array(
 	        'ACTIVE' => 'Y',
 	    )
 	));
