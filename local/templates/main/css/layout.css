@@ -931,17 +931,30 @@ h3.b-title{
 		padding-top: 58px;
 		display: block;
 	}
-		.b-main-slide h2{
-			font-family: DINPro-Medium;
-			font-size: 52px;
-			color: #5f9828;
-			letter-spacing: 0;
-			padding: 0px 16px;
+		.b-main-slide-content{
+			width: 100%;
 			max-width: 832px;
-			text-align: center;
-			display: inline-block;
-			line-height: 64px;
+			padding: 0 24px 50px 24px;
+			margin: 0 auto;
 		}
+			.b-main-slide-content h1,
+			.b-main-slide-content h2{
+				font-family: DINPro-Medium;
+				font-size: 52px;
+				color: #5f9828;
+				letter-spacing: 0;
+				padding: 0px 16px;
+				text-align: center;
+				line-height: 64px;
+			}
+			.b-main-slide-content h3{
+				font-family: DINPro-Medium;
+				font-size: 32px;
+				line-height: 45px;
+				color: #5f9828;
+				text-align: center;
+				letter-spacing: 0;
+			}
 .b-main-advantages .b-block{
 	display: flex;
 	flex-wrap: wrap;
@@ -2757,10 +2770,14 @@ h3.b-title{
     					background-color: #77BE32;
     					border: none;
 					}
+					.b-product-params-right .b-btn.b-btn-to-cart-cap{
+						padding: 16px 22px 20px 40px;
+    					text-align: left;
+					}
 					
 					.b-btn .icon-cart{
 						position: absolute;
-						top: 12px;
+						top: 16px;
 						left: 20px;
 					}
 					.b-btn .icon-cart:before{
@@ -4163,6 +4180,26 @@ h3.b-title{
 	display: none;
 	padding: 33px;
 }
+	.mobile-menu-wrap{
+
+	}
+		.mobile-menu-login{
+			border-bottom: 1px solid #CFD3E0;
+	    	padding: 15px 0 20px 0;
+		}
+			.mobile-menu-user{
+				font-size: 18px;
+    			font-family: 'DINPro-Medium';
+    			margin-bottom: 10px;
+			}
+			.mobile-menu-login a{
+				display: inline-block;
+				margin-bottom: 10px;
+				border-bottom: 1px solid #564531;
+			}
+			.mobile-menu-login a:last-child{
+				margin-bottom: 0;
+			}
 	.b-bottom-border{
 		border-bottom: 1px solid #CFD3E0;
 		padding-bottom: 20px;

@@ -79,6 +79,17 @@ if ($arFav > 0){
 	<?$APPLICATION->ShowPanel();?>
 	<div id="mobile-menu" class="mobile-menu b-left-menu hide">
 		<h2 class="b-bottom-border">Меню</h2>
+		<div class="mobile-menu-login">
+			<?$arUser = getUserFields();?>
+			<? if ($arUser): ?>
+				<p class="mobile-menu-user"><?=$arUser["NAME"]?></p>
+				<a href="/personal/">Перейти в кабинет</a><br>
+				<a href="?logout=yes">Выйти</a>
+			<? else: ?>
+				<a href="/personal/">Войти</a><br>
+				<a href="/personal/">Регистрация</a>
+			<? endif; ?>
+		</div>
 		<div class="mobile-menu-wrap">
 			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
 					"ADD_SECTIONS_CHAIN" => "N",

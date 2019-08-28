@@ -880,6 +880,9 @@ $(document).ready(function(){
                         }
                         $cap.removeClass('error');
                         $cap.find('.b-cap-text').text('Товар успешно добавлен');
+                    }else{
+                        $cap.addClass('error');
+                        $cap.find('.b-cap-text').text((json.error) ? json.error : 'Ошибка!');
                     }
                 }else{
                     $cap.addClass('error');
@@ -888,6 +891,7 @@ $(document).ready(function(){
             },
             error: function(){
                 $cap.addClass('error');
+                $cap.find('.b-cap-text').text('Ошибка!');
             },
             complete : function(){
                 $this.siblings('.b-btn-to-cart-cap').addClass('loaded');

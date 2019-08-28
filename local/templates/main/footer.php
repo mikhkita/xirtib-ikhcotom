@@ -17,19 +17,23 @@
 			</div>
 			<div class="b-footer-bottom clearfix">
 				<div class="b-footer-bottom-left">
-					<p class="b-city"><?includeArea("b-footer-text-3")?></p>
-					<a href="#" class="b-footer-logo"></a>
-					<?includeArea("b-footer-text-4")?>
-					<a href="#popup-callback" class="b-phone-call fancy underlined">Обратный звонок</a>
-					<div class="b-write-us">
-						<p><?includeArea("b-footer-text-5")?></p>
-						<div class="b-footer-messenger">
-							<?includeArea("b-footer-link-1")?>
-							<?includeArea("b-footer-link-2")?>
-							<?includeArea("b-footer-link-3")?>
-						</div>
+					<div class="mobile-col-left">
+						<p class="b-city"><?includeArea("b-footer-text-3")?></p>
+						<a href="#" class="b-footer-logo"></a>
+						<?includeArea("b-footer-text-4")?>
+						<a href="#popup-callback" class="b-phone-call fancy underlined">Обратный звонок</a>
 					</div>
-					<a href="#popup-callback" class="b-btn fancy">Обратная связь</a>
+					<div class="mobile-col-right">
+						<div class="b-write-us">
+							<p><?includeArea("b-footer-text-5")?></p>
+							<div class="b-footer-messenger">
+								<?includeArea("b-footer-link-1")?>
+								<?includeArea("b-footer-link-2")?>
+								<?includeArea("b-footer-link-3")?>
+							</div>
+						</div>
+						<a href="#popup-callback" class="b-btn fancy">Обратная связь</a>
+					</div>
 				</div>
 				<div class="b-footer-bottom-middle">
 					<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "footer_categories", Array(

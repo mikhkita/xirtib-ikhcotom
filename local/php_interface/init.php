@@ -535,6 +535,17 @@ function isAuth(){
 	return $USER->IsAuthorized();
 }
 
+function getUserFields(){
+	global $USER;
+	$arUser = array();
+	if( $USER->IsAuthorized() ){
+		$idUser = $USER->GetID();
+		$rsUser = CUser::GetByID($idUser);
+		$arUser = $rsUser->Fetch();
+	}
+	return $arUser;
+}
+
 function getFavourites(){
 	global $USER;
 
