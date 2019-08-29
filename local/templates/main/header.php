@@ -4,7 +4,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 $curPage = $APPLICATION->GetCurPage();
 $urlArr = $GLOBALS["urlArr"] = explode("/", $curPage);
 $page = $GLOBALS["page"] = ( $urlArr[2] == null || $urlArr[2] == "" )?$urlArr[1]:$urlArr[2];
-$GLOBALS["version"] = 58;
+$GLOBALS["version"] = 59;
 $is404 = defined('ERROR_404') && ERROR_404=='Y' && !defined('ADMIN_SECTION');
 $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[1]];
 
@@ -79,6 +79,17 @@ if ($arFav > 0){
 	<?$APPLICATION->ShowPanel();?>
 	<div id="mobile-menu" class="mobile-menu b-left-menu hide">
 		<h2 class="b-bottom-border">Меню</h2>
+		<div class="mobile-menu-login">
+			<?$arUser = getUserFields();?>
+			<? if ($arUser): ?>
+				<p class="mobile-menu-user"><?=$arUser["NAME"]?></p>
+				<a href="/personal/">Перейти в кабинет</a><br>
+				<a href="?logout=yes">Выйти</a>
+			<? else: ?>
+				<a href="/personal/">Войти</a><br>
+				<a href="/personal/">Регистрация</a>
+			<? endif; ?>
+		</div>
 		<div class="mobile-menu-wrap">
 			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
 					"ADD_SECTIONS_CHAIN" => "N",

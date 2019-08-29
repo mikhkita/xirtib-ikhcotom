@@ -23,10 +23,6 @@ body {
 .b-breadcrumbs li {
 	margin-bottom: 8px;
 }
-.b-breadcrumbs li a,
-.b-breadcrumbs li span{
-	font-size: 14px;
-}
 .b-breadcrumbs li:after{
     width: 4px;
     height: 4px;
@@ -474,9 +470,15 @@ body {
 	min-height: 250px;
 	background-position: 50% 50%;
 }
-.b-main-slide h2 {
+.b-main-slide-content h1,
+.b-main-slide-content h2 {
 	font-size: 26px;
 	line-height: 34px;
+}
+
+.b-main-slide-content h3{
+	font-size: 20px;
+	line-height: 28px;
 }
 
 .b-main-advantages .b-block {
@@ -845,6 +847,7 @@ body {
 	}
 	.b-product-actions > li{
 		width: auto;
+		margin-right: 24px;
 	}
 	.b-product-actions > li li {
 	    float: none; 
@@ -1033,6 +1036,9 @@ body {
 	.b-btn-blocked-preloader {
 	    display: block;
 	}
+	.b-main-slide-content {
+	    padding: 0 16px 50px 16px;
+	}
 }
 
 @media screen and (max-width: 600px){
@@ -1127,10 +1133,10 @@ body {
 	}
 	.b-footer-bottom-left {
 		width: 100%;
-		text-align: center;
+		text-align: left;
 	}
 	.b-footer-logo {
-		margin: 6px auto 0;
+
 	}
 	.b-footer-bottom-middle {
 		margin-top: 30px;
@@ -1151,7 +1157,7 @@ body {
 		text-align: left;
 	}
 	.b-footer-bottom-right .politics {
-		margin-top: 5px;
+		margin-top: 8px;
 	}
 
 	.b-inputs-2 .b-input {
@@ -1186,6 +1192,46 @@ body {
 		width: 32px;
 		height: 32px;
 		padding: 3px 0px;
+	}
+
+	.mobile-col-left,
+	.mobile-col-right{
+		display: inline-block;
+   		vertical-align: top;
+    	width: calc(50% - 3px);
+	}
+	.mobile-col-left{
+		padding-right: 16px;
+	}
+		.mobile-col-right .b-write-us {
+		    margin-top: 0;
+		}
+	.b-footer-logo {
+	    width: 136px;
+	    height: 75px;
+	    background-size: 136px;
+	}
+	.b-footer-bottom-left .b-phone {
+	    font-size: 18px;
+	    margin-top: 14px;
+	}
+	.b-footer-bottom-left .b-btn {
+	    padding: 12px 16px 14px 16px;
+	}
+	.b-footer-top-menu,
+	.b-footer-bottom-menu{
+		display: inline-block;
+   		vertical-align: top;
+    	width: calc(50% - 3px);
+	}
+	.b-footer-top-menu{
+		padding-right: 16px;
+		margin-bottom: 0;
+	}
+
+	.b-footer-inputs .b-btn {
+	    width: 100%;
+	    max-width: 400px;
 	}
 }
 
@@ -1399,6 +1445,9 @@ body {
 }
 
 @media screen and (max-width: 374px){
+	.b-breadcrumbs li a, .b-breadcrumbs li span {
+	    font-size: 14px;
+	}
 	.b-product-actions li a {
 	    font-size: 16px;
 	    line-height: 20px;
@@ -1466,5 +1515,20 @@ body {
 	}
 	.b-discount{
 		font-size: 14px;
+	}
+
+	.b-footer-bottom-left {
+	    text-align: center;
+	}
+	.mobile-col-left, .mobile-col-right {
+	    display: block;
+	    width: 100%;
+	    padding-right: 0;
+	}
+	.b-footer-logo {
+	    margin: 6px auto 0;
+	}
+	.mobile-col-right .b-write-us {
+   		margin-top: 16px;
 	}
 }

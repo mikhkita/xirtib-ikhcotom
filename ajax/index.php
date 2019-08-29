@@ -19,7 +19,8 @@ switch ($action) {
 		    	Add2BasketByProductID($productId,$quantity);
 				if($ex = $APPLICATION->GetException()){
       				$strError = $ex->GetString();
-      				vardump($strError);
+      				//vardump($strError);
+      				returnError("Ошибка! ".$strError);
       			}
 		    }
 		}

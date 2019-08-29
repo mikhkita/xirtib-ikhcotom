@@ -17,7 +17,7 @@ if(count($arResult["ITEMS"])): ?>
 		<?foreach($arResult["ITEMS"] as $arItem):?>
 			<?$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 2048, "height" => 1048), BX_RESIZE_IMAGE_EXACT, false, $arFilters );?>
 			<div class="b-main-slide" id="<?=$this->GetEditAreaId($arItem['ID']);?>" style="background-image: url(<?=$renderImage['src']?>);">
-				<h2><?=$arItem["NAME"]?></h2>
+				<div class="b-main-slide-content"><?=$arItem["PREVIEW_TEXT"]?></div>
 			</div>
 		<?endforeach;?>
 	</div>
