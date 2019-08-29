@@ -876,7 +876,7 @@ function getItemLabel($arItem){
 	}
 }
 
-function getElementImages($arResult){
+function getElementImages($arResult, $isList = false){
 	
 	$arImg = array(
 		'DETAIL_PHOTO' => array(),
@@ -888,11 +888,11 @@ function getElementImages($arResult){
 		foreach ($arResult["OFFERS"] as $key => $offer) {
 			
 			if ($offer["DETAIL_PICTURE"]){
-				$arDetailPhoto = resizePhotos($offer["DETAIL_PICTURE"]);
+				$arDetailPhoto = resizePhotos($offer["DETAIL_PICTURE"], $isList);
 				$flag = true;
 			} else {
 				if ($offer["PREVIEW_PICTURE"]) {
-					$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"]);
+					$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
 					$flag = true;
 				} else {
 					$arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
@@ -900,7 +900,7 @@ function getElementImages($arResult){
 			}
 
 			if ($offer["PREVIEW_PICTURE"]) {
-				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"]);
+				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
 				$colorFlag = true;
 			} else {
 				$arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
@@ -911,7 +911,7 @@ function getElementImages($arResult){
 		}
 
 		if (!$flag && $arResult["DETAIL_PICTURE"]) {
-			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"]);
+			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"], $isList);
 			foreach ($arImg['DETAIL_PHOTO'] as $key => $value) {
 				$arImg['DETAIL_PHOTO'][$key] = $arPhoto;
 			}
@@ -931,9 +931,10 @@ function getElementImages($arResult){
 
 	return $arImg;
 }
-function resizePhotos($photo){
-	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 2048, "height" => 2048), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-	$tmpSmall = CFile::ResizeImageGet($photo, Array("width" => 461, "height" => 461), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+function resizePhotos($photo, $isList){
+	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 692, "height" => 692), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+	$smallSize = $isList ? Array("width" => 300, "height" => 300) : Array("width" => 461, "height" => 461);
+	$tmpSmall = CFile::ResizeImageGet($photo, $smallSize, BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
 	$arPhoto['BIG'] = $tmpBig['src'];
 	$arPhoto['SMALL'] = $tmpSmall['src'];
 	return $arPhoto;
