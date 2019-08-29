@@ -9,6 +9,17 @@ function replacePlaceholders(&$content){
 	// $content = str_replace("#YEAR#", $year, $content);
 }
 
+// #CLIENT_INFO#
+
+// #ITEMS_INFO#
+// Способ оплаты: #PAYMENT_INFO#
+// Вид доставки: #DELIVERY_NAME#
+// Стоимость доставки: #DELIVERY_PRICE# руб.
+
+// #COMMENT#
+
+// Ссылка для редактирования
+
 AddEventHandler("main", "OnBeforeEventAdd", Array("MyEventHandlers", "OnBeforeEventAddHandler"));
 
 class MyEventHandlers 
@@ -58,6 +69,7 @@ class MyEventHandlers
 								 	"<td>Цена&nbsp;со&nbsp;скидкой</td>".
 								 	"<td style='padding-right:0px;'>Сумма</td>".
 								 "</tr>";
+			$arBasketItemsTelegram = "Список товаров:<br>";
 			$totalSum = 0;
 
 			while ($item = $dbBasketItems->Fetch()){
@@ -78,6 +90,13 @@ class MyEventHandlers
 					"<td>".$discountPrice."</td>".
 					"<td style='padding-right:0px;'>".$sum."</td>".
 				"</tr>";
+				$arBasketItemsTelegram .= 
+					"Товар: <a style='color: #77be32;' href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a><br>".
+					"Количество: ".round($item['QUANTITY'])."<br>".
+					"Цена: ".convertPrice($item['BASE_PRICE'])."<br>".
+					"Цена&nbsp;со&nbsp;скидкой: ".$discountPrice."<br>".
+					"Сумма: ".$sum."<br>".
+					"______<br>";
 			}
 
 			$arBasketItems.= "<tr>".
@@ -91,6 +110,17 @@ class MyEventHandlers
 
 			$arFields['ITEMS_INFO'] = $arBasketItems;
 			$arFields['DELIVERY_NAME'] = $arDelivery['NAME'];
+
+			//Собираем сообщение в телеграм
+			$msgTelegram = "Новый заказ на сайте «Моточки Клубочки»<br>";
+			$msgTelegram .= $arFields['CLIENT_INFO'];
+			$msgTelegram .= $arBasketItemsTelegram;
+			$msgTelegram .= "Способ оплаты: ".$arFields['PAYMENT_INFO']."<br>";
+			$msgTelegram .= "Вид доставки: ".$arFields['DELIVERY_NAME']."<br>";
+			$msgTelegram .= "Стоимость доставки: ".$arFields['DELIVERY_PRICE']."<br>";
+			$msgTelegram .= $arFields['COMMENT'];
+
+			sendMessage($msgTelegram);
 
 		}
     } 
@@ -924,9 +954,24 @@ function includeArea($file){
 	        "PATH" => "/include/".$file.".php"
 	    )
 	);	
-} 
+}
 
+$chatID = "-229348589";
 
+function sendMessage($messaggio) {
+	global $chatID;
+    $token = "bot861797122:AAFU5Wfj2F1WdgfSuQSdVnDaaHr1USugXH0";
+    $url = "https://api.telegram.org/" . $token . "/sendMessage?chat_id=" . $chatID;
+    $url = $url . "&parse_mode=HTML&text=" . urlencode($messaggio);
+    $ch = curl_init();
+    $optArray = array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true
+    );
+    curl_setopt_array($ch, $optArray);
+    $result = curl_exec($ch);
+    curl_close($ch);
+}
 
 
 
