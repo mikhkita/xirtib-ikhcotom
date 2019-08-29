@@ -67,10 +67,8 @@ if(count($arResult["ITEMS"])): ?>
 			<div class="b-item-card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 				<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-hover-frame"></a>
 				<div class="b-card-top">
-					<? 
-					$images = getElementImages($arItem);
-					$renderImage['src'] = $images["DETAIL_PHOTO"][0]["SMALL"];
-					?>
+					<? $images = getElementImages($arItem, true);?>
+					<? $renderImage['src'] = $images["DETAIL_PHOTO"][0]["SMALL"]; ?>
 					<div class="b-card-top-img" style="background-image: url('<?=$renderImage['src']?>');"></div>
 				
 					<? if( $label = getItemLabel($arItem) ): ?>

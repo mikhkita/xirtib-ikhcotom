@@ -164,7 +164,7 @@ if (count($arResult["OFFERS"]) < 5){
 						<? endforeach; ?>
 					<? else: ?>
 						<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1" <?=$imgAttr?>>
-							<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>');"></div>
+							<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][0]["SMALL"]?>');"></div>
 						</a>
 					<? endif; ?>
 				</div>
