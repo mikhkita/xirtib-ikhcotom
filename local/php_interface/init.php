@@ -79,7 +79,7 @@ class MyEventHandlers
 				$arElement = $el->fetch();
 				$name = is_array($mxResult) ? $arElement['NAME']." (".$item['NAME'].")" : $item['NAME'];
 
-				$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? convertPrice($item['BASE_PRICE']) : (convertPrice($item['BASE_PRICE']) - convertPrice($item['DISCOUNT_PRICE']));
+				$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? $item['BASE_PRICE'] : $item['BASE_PRICE'] - $item['DISCOUNT_PRICE'];
 				$sum = $item['QUANTITY'] * $discountPrice;
 				$totalSum += $sum;
 
@@ -87,8 +87,8 @@ class MyEventHandlers
 					"<td style='padding-left:0px;'><a style='color: #77be32;' href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a></td>".
 					"<td>".round($item['QUANTITY'])."</td>".
 					"<td>".convertPrice($item['BASE_PRICE'])."</td>".
-					"<td>".$discountPrice."</td>".
-					"<td style='padding-right:0px;'>".$sum."</td>".
+					"<td>".convertPrice($discountPrice)."</td>".
+					"<td style='padding-right:0px;'>".convertPrice($sum)."</td>".
 				"</tr>";
 				$arBasketItemsTelegram .= 
 					"Товар: <a style='color: #77be32;' href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a><br>".
@@ -104,7 +104,7 @@ class MyEventHandlers
 							 	"<td></td>".
 							 	"<td></td>".
 							 	"<td style='text-align:right;'><b>Итого:</b></td>".
-							 	"<td style='padding-right:0px;'>".$totalSum."</td>".
+							 	"<td style='padding-right:0px;'>".convertPrice($totalSum)."</td>".
 							 "</tr>".
 						"</table>";
 
