@@ -5,7 +5,7 @@ global $APPLICATION;
 $this->setFrameMode(true);
 $APPLICATION->SetPageProperty('title', $arResult["NAME"]); ?>
 
-<? $img = CFile::ResizeImageGet($arResult['DETAIL_PICTURE']['ID'], Array("width" => 1000, "height" => 1000), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+<? 
 
 $arColors = getColors();
 
