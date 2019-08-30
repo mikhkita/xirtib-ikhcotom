@@ -743,6 +743,9 @@ body {
 .fancybox-slide > *{
 	margin: 0;
 }
+.b-btn-container .popup-sign > .popup-img{
+	display: none;
+}
 
 @media screen and (max-width: 665px){
 
