@@ -2021,6 +2021,12 @@ h3.b-title{
 						font-size: 24px;
 						line-height: 30px;
 					}
+					.track-number{
+						float: right;
+						font-family: 'DINPro-Light';
+						font-size: 20px;
+						line-height: 24px;
+					}
 					.order-status{
 						position: absolute;
 						top: 0;
@@ -2150,8 +2156,10 @@ h3.b-title{
 		}
 
 		.b-order-total{
-			width: 200px;
+			width: 370px;
+			text-align: right;
 			float: right;
+			max-width: 100%;
 		}
 			.total-border{
 				width: 100%;
@@ -2161,9 +2169,11 @@ h3.b-title{
 				position: relative;
 				margin-top: 24px;
 				/*padding-left: 10px;*/
+				padding-right: 140px;
 			}
 				.b-order-total-inner p{
 					display: inline-block;
+					vertical-align: middle;
 					font-family: 'DINPro-Medium';
 					font-size: 24px;
 					line-height: 30px;

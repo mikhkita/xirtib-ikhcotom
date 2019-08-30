@@ -361,11 +361,15 @@ body {
 	    margin-bottom: 40px;
 	}
 	.b-order-total-inner .total {
-	    right: 38px;
+	    right: 16px;
 	}
 	.b-order-total {
-	    width: 232px;
+	    /*width: 232px;*/
 	}
+		.b-order-total-inner p{
+			font-size: 18px;
+			line-height: 22px;
+		}
 
 .b-contacts-left {
 	float: none;
@@ -1388,7 +1392,6 @@ body {
 	.b-order-item-img {
 	    width: 72px;
 	}
-
 	.b-order-totals {
 	    width: 100%;
 	    padding: 18px 24px 28px 24px;
