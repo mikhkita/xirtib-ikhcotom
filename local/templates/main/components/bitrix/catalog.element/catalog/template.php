@@ -158,13 +158,13 @@ if (count($arResult["OFFERS"]) < 5){
 				<div class="b-product-main after-load">
 					<? if ($arResult["OFFERS"]): ?>
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
-							<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-								<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>');"></div>
+							<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["ORIGINAL"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
+								<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>');"></div>
 							</a>
 						<? endforeach; ?>
 					<? else: ?>
-						<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1" <?=$imgAttr?>>
-							<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][0]["SMALL"]?>');"></div>
+						<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][0]["ORIGINAL"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1" <?=$imgAttr?>>
+							<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][0]["BIG"]?>');"></div>
 						</a>
 					<? endif; ?>
 				</div>

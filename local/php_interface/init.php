@@ -895,7 +895,7 @@ function getElementImages($arResult, $isList = false){
 					$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
 					$flag = true;
 				} else {
-					$arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+					$arDetailPhoto['ORIGINAL'] = $arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 				}
 			}
 
@@ -903,7 +903,7 @@ function getElementImages($arResult, $isList = false){
 				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
 				$colorFlag = true;
 			} else {
-				$arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+				$arColorPhoto['ORIGINAL'] = $arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 			}	
 
 			array_push($arImg['DETAIL_PHOTO'], $arDetailPhoto);
@@ -924,21 +924,25 @@ function getElementImages($arResult, $isList = false){
 		if ($arResult["DETAIL_PICTURE"]){
 			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"]);
 		} else {
-			$arPhoto['BIG'] = $arPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+			$arPhoto['ORIGINAL'] = $arPhoto['BIG'] = $arPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 		}
 		array_push($arImg['DETAIL_PHOTO'], $arPhoto);
 	}
 
 	return $arImg;
 }
+
 function resizePhotos($photo, $isList){
 	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 692, "height" => 692), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
-	$smallSize = $isList ? Array("width" => 300, "height" => 300) : Array("width" => 461, "height" => 461);
+	$tmpOriginal = CFile::ResizeImageGet($photo, Array("width" => 2048, "height" => 2048), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+	$smallSize = $isList ? Array("width" => 270, "height" => 270) : Array("width" => 146, "height" => 146);
 	$tmpSmall = CFile::ResizeImageGet($photo, $smallSize, BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );
+	$arPhoto['ORIGINAL'] = $tmpOriginal['src'];
 	$arPhoto['BIG'] = $tmpBig['src'];
 	$arPhoto['SMALL'] = $tmpSmall['src'];
 	return $arPhoto;
 }
+
 function isSectionActive($sectionID){
 	foreach ($GLOBALS["SECTIONS"] as $key => $arSection) {
 		if( $arSection["ID"] == $sectionID ){
