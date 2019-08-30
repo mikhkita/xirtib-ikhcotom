@@ -370,6 +370,9 @@ body {
 			font-size: 18px;
 			line-height: 22px;
 		}
+	.track-number{
+		float: none;
+	}
 
 .b-contacts-left {
 	float: none;
