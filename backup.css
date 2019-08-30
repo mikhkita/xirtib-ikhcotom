@@ -1179,6 +1179,12 @@ h3.b-title{
 				position: relative;
 				margin-bottom: 46px;
 			}
+			.b-item-subname{
+				color: #909090;
+				margin-top: 6px;
+				font-size: 14px;
+				margin-bottom: -4px;
+			}
 				.b-item-name{
 					font-family: DINPro-Regular;
 					font-size: 18px;
