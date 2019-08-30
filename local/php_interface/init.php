@@ -935,7 +935,7 @@ function getElementImages($arResult, $isList = false){
 function resizePhotos($photo, $isList){
 	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 692, "height" => 692), BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
 	$tmpOriginal = CFile::ResizeImageGet($photo, Array("width" => 2048, "height" => 2048), BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
-	$smallSize = $isList ? Array("width" => 270, "height" => 270) : Array("width" => 146, "height" => 146);
+	$smallSize = $isList ? Array("width" => 362, "height" => 362) : Array("width" => 146, "height" => 146);
 	$tmpSmall = CFile::ResizeImageGet($photo, $smallSize, BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
 	$arPhoto['ORIGINAL'] = $tmpOriginal['src'];
 	$arPhoto['BIG'] = $tmpBig['src'];
