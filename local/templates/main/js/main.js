@@ -112,6 +112,7 @@ $(document).ready(function(){
     }
 
     $('.b-product-main').on('init', function(slick){
+        // console.log('init');
         setTimeout(selectOffer, 1);
     });
 
@@ -126,6 +127,7 @@ $(document).ready(function(){
 
 
     function selectOffer(){
+        // console.log('select');
         var url = window.location.href.split('/');
         if(url[url.length - 1].indexOf('#') == 0){
             var id = url[url.length - 1].split('#');
@@ -280,7 +282,7 @@ $(document).ready(function(){
 
         var asNavFor = '.b-product-photo-slider';
 
-        if ($('.b-product-photo-slider').hasClass('no-slider')) {
+        if ($('.b-product-photo-slider').hasClass('no-slider') || $('.b-product-photo-slider').length == 0) {
             asNavFor = '';
         }
 
