@@ -1239,7 +1239,7 @@ h3.b-title{
 				}
 				.b-price-container{
 					font-size: 24px;
-					color: #3E3224;
+					/*color: #3E3224;*/
 					letter-spacing: 0;
 					position: absolute;
 					bottom: 11px;
@@ -2419,7 +2419,7 @@ h3.b-title{
 				font-family: 'ProximaNova-Regular';
 				color: #777;
 				font-size: 20px;
-				line-height: 32px;
+				line-height: 26px;
 				display: block;
 				margin-top: 8px;
 			}
@@ -2594,6 +2594,7 @@ h3.b-title{
 							display: inline-block;
 							font-family: 'Lora-Bold';
 							/*padding-top: 4px;*/
+							margin-right: 10px;
 							font-size: 18px;
 							line-height: 22px;
 							position: relative;
@@ -2614,7 +2615,7 @@ h3.b-title{
 						.b-product-colors .chosen-container{
 							vertical-align: middle;
 							/*margin-left: 22px;*/
-							margin-left: 10px;
+							/*margin-left: 10px;*/
 						}
 						.b-product-colors .chosen-container-single .chosen-single{
 							background: transparent;
@@ -2717,7 +2718,8 @@ h3.b-title{
 						margin-bottom: 4px;
 						display: none;
 					}
-						.b-product-price-base .icon-ruble:before {
+						.b-product-price-base .icon-ruble:before,
+						.b-product-price-base .icon-ruble-bold:before {
 						    font-size: 13px;
 						    margin-left: 6px;
 						}
@@ -3840,7 +3842,8 @@ h3.b-title{
 				font-size: 32px;
 				line-height: 40px;
 			}
-			.price-final .price-total .icon-ruble:before{
+			.price-final .price-total .icon-ruble:before,
+			.price-final .price-total .icon-ruble-bold:before{
 			    font-size: 22px;
 			    margin-left: 9px;
 			    position: relative;
@@ -4182,7 +4185,7 @@ h3.b-title{
 .popup-review-text {
 	text-align: left;
 	font-family: 'ProximaNova-Regular';
-	color: #000000;
+	/*color: #000000;*/
 	font-size: 18px;
 	line-height: 1.6;
 	margin-bottom: 32px;

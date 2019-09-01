@@ -122,7 +122,7 @@ if (isAuth($USER)){
 					<a href="#element_view" data-href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="element-view b-card-top-hover fancy">Быстрый просмотр</a>
 				</div>
 				<div class="b-card-bottom">
-					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=(($arItem['PROPERTIES']['TITLE']['VALUE'])?($arItem['PROPERTIES']['SUBTITLE']['VALUE']):($arItem['NAME']))?></a>
+					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=(($arItem['PROPERTIES']['TITLE']['VALUE'])?($arItem['PROPERTIES']['TITLE']['VALUE']):($arItem['NAME']))?></a>
 					<h5 class="b-item-subname"><?=$arItem['PROPERTIES']['SUBTITLE']['VALUE']?></h5>
 				</div>
 				<? if ($minVal != $maxVal): ?>

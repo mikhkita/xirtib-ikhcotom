@@ -3,7 +3,7 @@
 global $APPLICATION;
 
 $this->setFrameMode(true);
-$APPLICATION->SetPageProperty('title', $arResult["NAME"].( ($arResult["PROPERTIES"]["SUBTITLE"]["VALUE"])?(" ".$arResult["PROPERTIES"]["SUBTITLE"]["VALUE"]):"" ));
+// $APPLICATION->SetPageProperty('title', $arResult["NAME"].( ($arResult["PROPERTIES"]["SUBTITLE"]["VALUE"])?(" ".$arResult["PROPERTIES"]["SUBTITLE"]["VALUE"]):"" ));
 ?>
 
 <? 
@@ -183,7 +183,7 @@ if (count($arResult["OFFERS"]) < 5){
 			<? endif; ?>
 		</div>
 		<div class="b-product-content">
-			<h1 class="b-product-name"><?=(($arResult['PROPERTIES']['TITLE']['VALUE'])?($arResult['PROPERTIES']['SUBTITLE']['VALUE']):($arResult['NAME']))?> <span><?=$arResult['PROPERTIES']['SUBTITLE']['VALUE']?></span></h1>
+			<h1 class="b-product-name"><?=(($arResult['PROPERTIES']['TITLE']['VALUE'])?($arResult['PROPERTIES']['TITLE']['VALUE']):($arResult['NAME']))?> <span><?=$arResult['PROPERTIES']['SUBTITLE']['VALUE']?></span></h1>
 			<div class="b-product-actions-wrap">
 				<ul class="b-product-actions clearfix">
 					<li>
