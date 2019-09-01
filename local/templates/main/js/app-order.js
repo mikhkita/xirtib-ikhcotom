@@ -422,7 +422,9 @@
             validationForm: function () {
                 if(this.formValid){
                     this.form.nowSubmit = true;
-                    ym(36653305, 'reachGoal', 'order');
+                    if( typeof ym != "undefined" ){
+                        ym(36653305, 'reachGoal', 'order');
+                    }
                     document.getElementById('b-order-form').submit();
                 }else{
                     setTimeout(function(){

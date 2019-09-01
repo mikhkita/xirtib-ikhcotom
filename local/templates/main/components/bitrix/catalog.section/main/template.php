@@ -115,7 +115,7 @@ if(count($arResult["ITEMS"])): ?>
 				</div>
 				<div class="b-card-bottom">
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=$arItem['NAME']?></a>
-					<h5 class="b-item-subname"> </h5>
+					<h5 class="b-item-subname"><?=$arItem['PROPERTIES']['SUBTITLE']['VALUE']?></h5>
 				</div>
 				<? if ($minVal != $maxVal): ?>
 					<? $minVal = convertPrice($minVal); ?>

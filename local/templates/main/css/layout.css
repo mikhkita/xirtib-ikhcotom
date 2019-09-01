@@ -1,6 +1,30 @@
 @charset "utf-8";
 
 @font-face {
+    font-family: 'Lora-Bold';
+    src: url('../fonts/Lora-Bold.eot');
+    src: url('../fonts/Lora-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Lora-Bold.woff') format('woff'),
+         url('../fonts/Lora-Bold.ttf') format('truetype'),
+         url('../fonts/Lora-Bold.svg#Lora-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Lora-Regular';
+    src: url('../fonts/Lora-Regular.eot');
+    src: url('../fonts/Lora-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Lora-Regular.woff') format('woff'),
+         url('../fonts/Lora-Regular.ttf') format('truetype'),
+         url('../fonts/Lora-Regular.svg#Lora-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
     font-family: 'DINPro-Regular';
     src: url('../fonts/DINPro-Regular.eot');
     src: url('../fonts/DINPro-Regular.eot?#iefix') format('embedded-opentype'),
@@ -198,7 +222,7 @@ input[name=MAIL]{
 }
 h2.b-title,
 h1.b-title{
-	font-family: DINPro-Medium;
+	font-family: 'Lora-Bold';
 	font-size: 42px;
 	line-height: 50px;
 	padding-top: 24px;
@@ -221,6 +245,7 @@ h3.b-title{
 	letter-spacing: 0;
 	margin-bottom: 24px;
 	text-align: center;
+	font-family: 'Lora-Bold';
 }
 
 .hide{
@@ -363,6 +388,7 @@ h3.b-title{
 		font-size: 24px;
 		line-height: 30px;
 		margin-bottom: 20px;
+		/* font-family: 'Lora-Bold'; */
 	}
 	.b-text h4{
 		font-family: 'DINPro-Medium';
@@ -441,6 +467,7 @@ h3.b-title{
 		background: rgba(86,69,49,0.02);
 		padding-top: 11px;
 		padding-bottom: 16px;
+		border-bottom: 1px solid #EEEEEE;
 	}
 		.b-top .b-block{
 			display: flex;
@@ -478,10 +505,10 @@ h3.b-title{
 	}
 	.b-search-form{
 		display: inline-block;
-	    width: calc(100% - 450px);
-        margin-top: 5px;
-	    vertical-align: middle;
-	    position: relative;
+		width: calc(100% - 500px);
+		margin-top: 5px;
+		vertical-align: middle;
+		position: relative;
 	}
 	.b-search-inner-form{
 		margin-bottom: 30px;
@@ -494,12 +521,13 @@ h3.b-title{
 			.b-search-input input[type=text]{
 				width: 100%;
 				border-radius: 30px;
-				border: 1px solid #ADA69C;
+				border: 1px solid #E4E4E4;
 				padding: 11px 23px 12px;
+				background: #FCFBFB;
 				font-family: 'DINPro-Regular';
 				font-size: 16px;
 				position: relative;
-			    -webkit-appearance: none;
+				-webkit-appearance: none;
 			}
 			.b-search-input input::-webkit-input-placeholder {
 				font-family: 'DINPro-Regular';
@@ -939,19 +967,24 @@ h3.b-title{
 		}
 			.b-main-slide-content h1,
 			.b-main-slide-content h2{
-				font-family: DINPro-Medium;
-				font-size: 52px;
+				font-family: 'Lora-Bold';
+				font-size: 48px;
 				color: #5f9828;
 				letter-spacing: 0;
 				padding: 0px 16px;
 				text-align: center;
-				line-height: 64px;
+				line-height: 62px;
+				margin-bottom: 16px;
+			}
+			.b-main-slide-content h2{
+				font-size: 40px;
+				line-height: 52px;
 			}
 			.b-main-slide-content h3{
-				font-family: DINPro-Medium;
+				font-family: DINPro-Regular;
 				font-size: 32px;
 				line-height: 45px;
-				color: #5f9828;
+				/*color: #5f9828;*/
 				text-align: center;
 				letter-spacing: 0;
 			}
@@ -968,17 +1001,18 @@ h3.b-title{
 	}
 		.b-advantage h3{
 			margin-bottom: 16px;
-			font-family: DINPro-Medium;
-			font-size: 24px;
+			font-family: 'Lora-Bold';
 			color: #564531;
 			letter-spacing: 0;
-			line-height: 29px;
+			line-height: 28px;
+			font-size: 22px;
 		}
 		.b-advantage p{
 			font-family: DINPro-Regular;
 			font-size: 18px;
 			letter-spacing: 0;
 			line-height: 22px;
+			color: #777;
 		}
 		.b-advantage-img-wrapper{
 			height: 100%;
@@ -1188,7 +1222,7 @@ h3.b-title{
 				margin-bottom: 46px;
 			}
 				.b-item-name{
-					font-family: DINPro-Regular;
+					font-family: 'Lora-Bold';
 					font-size: 18px;
 					color: #3E3224;
 					display: block;
@@ -1198,7 +1232,9 @@ h3.b-title{
 					line-height: 22px;
 				}
 				.b-item-subname{
-					
+					color: #777;
+					font-size: 16px;
+					margin-top: 6px;
 				}
 				.b-price-container{
 					font-size: 24px;
@@ -1378,7 +1414,7 @@ h3.b-title{
 }
 	.b-choose-type h3{
 		font-family: DINPro-Regular;
-		font-size: 32px;
+		font-size: 24px;
 		color: #564531;
 		letter-spacing: 0;
 		text-align: center;
@@ -1387,7 +1423,7 @@ h3.b-title{
 	}
 	.b-wool-tabs h3,
 	.b-lenght-tabs h3{
-		text-align: left;
+		text-align: center;
 	}
 	.b-choose-type .b-product-texture{
 
@@ -1531,11 +1567,11 @@ h3.b-title{
 			}
 				.b-main-article-header{
 					font-family: DINPro-Medium;
-					font-size: 18px;
+					font-size: 20px;
 					color: #564531;
 					letter-spacing: 0;
-					line-height: 22px;
-					margin-bottom: 6px;
+					line-height: 28px;
+					margin-bottom: 10px;
 				}
 				.b-main-article-description{
 					font-family: DINPro-Regular;
@@ -1543,6 +1579,7 @@ h3.b-title{
 					color: #564531;
 					letter-spacing: 0;
 					line-height: 22px;
+					color: #777;
 				}
 			.b-main-article a{
 				display: inline-block;
@@ -1579,10 +1616,12 @@ h3.b-title{
 				color: #564531;
 				letter-spacing: 0;
 				margin-bottom: 24px;
+				font-family: 'Lora-Bold';
 			}
 			.b-footer-top-text p{
 				font-size: 18px;
 				line-height: 26px;
+				color: #777;
 			}
 		.b-footer-top-input{
 			display: inline-block;
@@ -2353,10 +2392,18 @@ h3.b-title{
 		}
 
 			.b-product-name{
-				font-family: 'DINPro-Medium';
-				font-size: 32px;
-				line-height: 40px;
-				margin-bottom: 20px;
+				font-family: 'Lora-Bold';
+				font-size: 44px;
+				line-height: 54px;
+				margin-bottom: 24px;
+			}
+			.b-product-name span{
+				font-family: 'DINPro-Regular';
+				color: #969696;
+				font-size: 20px;
+				line-height: 32px;
+				display: block;
+				margin-top: 4px;
 			}
 			.b-product-actions-wrap{
 				padding-right: 50px;
@@ -2527,7 +2574,7 @@ h3.b-title{
 					}
 						.b-product-colors > span{
 							display: inline-block;
-							font-family: 'DINPro-Medium';
+							font-family: 'Lora-Bold';
 							/*padding-top: 4px;*/
 							font-size: 18px;
 							line-height: 22px;
@@ -2627,7 +2674,7 @@ h3.b-title{
 							margin-bottom: 12px;
 						}
 							.b-product-info p b{
-								font-family: 'DINPro-Medium';
+								font-family: 'Lora-Bold';
 							}
 						.all-specifications{
 							color: rgba(86,69,49,0.5);
@@ -2673,6 +2720,7 @@ h3.b-title{
 						line-height: 50px;
 						color: #564531;
 						margin-bottom: 24px;
+						font-family: 'Lora-Bold';
 					}
 					.has-discount .b-product-price-total{
 						color: #CB6163;
@@ -2686,12 +2734,13 @@ h3.b-title{
 						font-size: 24px;
 						line-height: 30px;
 						color: #564531;
+						font-family: 'Lora-Regular';
 					}
 						.b-product-price-total .icon-ruble-bold:before {
 						    position: relative;
 						    top: -2px;
 						    font-size: 30px;
-						    margin-left: 14px;
+						    margin-left: 6px;
 						}
 					.b-product-quantity{
 						margin-bottom: 35px;
@@ -2705,7 +2754,7 @@ h3.b-title{
 						.b-product-quantity span{
 							font-size: 18px;
 							line-height: 22px;
-							font-family: 'DINPro-Medium';
+							font-family: 'Lora-Bold';
 							display: inline-block;
 							vertical-align: middle;
 						}
@@ -2832,6 +2881,7 @@ h3.b-title{
 					background-color: #EEE;
 					border: 1px solid #EEE;
 					border-bottom: 0;
+					font-family: 'Lora-Bold';
 				}
 				.b-detail-tabs .tabs .tab.active span{
 					position: relative;
@@ -2866,7 +2916,7 @@ h3.b-title{
 
 			}
 				.spec-block p span {
-				    font-family: 'DINPro-Medium';
+				    font-family: 'Lora-Bold';
 				}
 				.spec-block-left{
 					display: inline-block;
@@ -3228,7 +3278,7 @@ h3.b-title{
 				margin-bottom: 16px;
 			}
 				.b-filter-item-name h3{
-					font-family: 'DINPro-Medium';
+					font-family: 'Lora-Bold';
 					font-size: 18px;
 					line-height: 26px;
 					padding-right: 35px;
