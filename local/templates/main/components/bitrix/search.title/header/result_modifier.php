@@ -130,10 +130,15 @@ foreach($arResult["SEARCH"] as $i=>$arItem)
 
 				if ($arParams["SHOW_PREVIEW"] == "Y")
 				{
+					$arElement['OFFERS'] = getOffers($arElement['ID']);
+					$arImg = getElementImages($arElement);
+
 					if ($arElement["PREVIEW_PICTURE"] > 0)
 						$arElement["PICTURE"] = CFile::ResizeImageGet($arElement["PREVIEW_PICTURE"], array("width"=>$PREVIEW_WIDTH, "height"=>$PREVIEW_HEIGHT), BX_RESIZE_IMAGE_PROPORTIONAL, true);
 					elseif ($arElement["DETAIL_PICTURE"] > 0)
 						$arElement["PICTURE"] = CFile::ResizeImageGet($arElement["DETAIL_PICTURE"], array("width"=>$PREVIEW_WIDTH, "height"=>$PREVIEW_HEIGHT), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+
+					$arElement["PICTURE"]['src'] = $arImg['DETAIL_PHOTO'][0]['SMALL'];
 				}
 			}
 			break;

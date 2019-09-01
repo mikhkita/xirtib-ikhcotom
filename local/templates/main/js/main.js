@@ -454,7 +454,7 @@ $(document).ready(function(){
     });
 
     $(document).on('beforeChange', '.b-product-photo-slider', function(event, slick, currentSlide, nextSlide){
-        var id = $(".b-product-photo-slider img[data-slick-index='"+nextSlide+"']").attr('data-color-id');
+        var id = $(".b-product-photo-slider .img[data-slick-index='"+nextSlide+"']").attr('data-color-id');
         
         $(".colors-select option[data-color-id='"+id+"']").prop('selected', true);
         $('.colors-select').change().trigger('chosen:updated');
@@ -477,10 +477,10 @@ $(document).ready(function(){
         disable_search_threshold: 10000
     });
 
-    $(document).on('click', '.b-product-photo-slider.no-slider img', function(){
+    $(document).on('click', '.b-product-photo-slider.no-slider .img', function(){
 
         var id = $(this).attr('data-color-id');
-        $('.texture-list img[data-color-id='+id+']').click();
+        $('.texture-list .img[data-color-id='+id+']').click();
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
         showPhotoColor(id);
@@ -533,23 +533,23 @@ $(document).ready(function(){
         $('.b-btn-to-cart').attr("data-id", id);
         $('input[name=count]').change();
 
-        $(".texture-list img.active").removeClass("active");
-        $(".texture-list img[data-color-id='"+id+"']").addClass("active");
+        $(".texture-list .img.active").removeClass("active");
+        $(".texture-list .img[data-color-id='"+id+"']").addClass("active");
         if(id > 10 && !$(".texture-list").hasClass("open")){
             $(".more-colors").click();
         }
-        $(".b-product-photo-slider.no-slider img.active").removeClass('active');
-        $(".b-product-photo-slider.no-slider img[data-color-id='"+id+"']").addClass('active');
+        $(".b-product-photo-slider.no-slider .img.active").removeClass('active');
+        $(".b-product-photo-slider.no-slider .img[data-color-id='"+id+"']").addClass('active');
 
-        $(".b-product-photo-slider:not(.no-slider) img[data-color-id='"+id+"']").click();
+        $(".b-product-photo-slider:not(.no-slider) .img[data-color-id='"+id+"']").click();
         showPhotoColor(id);
 
     });
 
-    $(document).on('click', '.texture-list img', function(){
+    $(document).on('click', '.texture-list .img', function(){
 
         var id = Number($(this).attr("data-color-id"));
-        $(".texture-list img.active").removeClass("active");
+        $(".texture-list .img.active").removeClass("active");
         $(this).addClass("active");
         $(".colors-select option[data-color-id='"+id+"']").prop('selected', true);
         $('.colors-select').change().trigger('chosen:updated');
@@ -735,7 +735,9 @@ $(document).ready(function(){
                 clearTimeout(filterInterval);
             }
 
-            filterInterval = setTimeout(ajaxFilter, 1500, $(this));
+            ajaxFilter($(this));
+            
+            // filterInterval = setTimeout(ajaxFilter, 1500, $(this));
         }
     });
 

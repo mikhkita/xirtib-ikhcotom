@@ -39,7 +39,11 @@ body {
 .main-photo{
 	max-width: 480px;
     margin: 0 auto;
+    margin-bottom: 15px;
     height: auto;
+}
+.b-product-main .img-cont{
+	height: 300px;
 }
 .main-photo .b-product-main a{
 	height: auto;

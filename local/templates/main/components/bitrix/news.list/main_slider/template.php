@@ -15,7 +15,7 @@ $this->setFrameMode(true);
 if(count($arResult["ITEMS"])): ?>
 	<div class="b-main-slider">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
-			<?$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 2048, "height" => 1048), BX_RESIZE_IMAGE_EXACT, false, $arFilters );?>
+			<?$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 2048, "height" => 1048), BX_RESIZE_IMAGE_EXACT, false, false, false, 50);?>
 			<div class="b-main-slide" id="<?=$this->GetEditAreaId($arItem['ID']);?>" style="background-image: url(<?=$renderImage['src']?>);">
 				<div class="b-main-slide-content"><?=$arItem["PREVIEW_TEXT"]?></div>
 			</div>

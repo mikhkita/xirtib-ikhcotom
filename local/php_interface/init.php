@@ -936,11 +936,17 @@ function resizePhotos($photo, $isList){
 	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 692, "height" => 692), BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
 	$tmpOriginal = CFile::ResizeImageGet($photo, Array("width" => 2048, "height" => 2048), BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
 	$smallSize = $isList ? Array("width" => 362, "height" => 362) : Array("width" => 146, "height" => 146);
-	$tmpSmall = CFile::ResizeImageGet($photo, $smallSize, BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
+	$resizeType = $isList ? BX_RESIZE_IMAGE_PROPORTIONAL : BX_RESIZE_IMAGE_EXACT;
+	$tmpSmall = CFile::ResizeImageGet($photo, $smallSize, $resizeType, false, false, false, 50);
 	$arPhoto['ORIGINAL'] = $tmpOriginal['src'];
 	$arPhoto['BIG'] = $tmpBig['src'];
 	$arPhoto['SMALL'] = $tmpSmall['src'];
 	return $arPhoto;
+}
+
+function getOffers($id){
+	$offers = CCatalogSKU::getOffersList($id, 1, array(), array("DETAIL_PICTURE", "PREVIEW_PICTURE"),array());
+	return $offers[$id];
 }
 
 function isSectionActive($sectionID){
