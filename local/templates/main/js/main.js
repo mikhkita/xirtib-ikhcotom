@@ -266,7 +266,7 @@ $(document).ready(function(){
     });
 
     $('.b-main-slider').slick({
-        dots: true,
+        dots: ($(".b-main-slide").length > 1),
         dotsClass: "my-dots",
         infinite: true,
         slidesToShow: 1,
@@ -343,36 +343,46 @@ $(document).ready(function(){
         });
     }
 
-    $('.b-item-cards').slick({
-        dots: false,
-        arrows: true,
-        prevArrow: '<div class="icon-arrow-left"></div>',
-        nextArrow: '<div class="icon-arrow-right"></div>',
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: false,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3
+    $('.b-item-cards').each(function(){
+        $(this).slick({
+            dots: false,
+            arrows: true,
+            prevArrow: '<div class="icon-arrow-left"></div>',
+            nextArrow: '<div class="icon-arrow-right"></div>',
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay: true,
+            autoplaySpeed: getRandomInt(3000, 5000),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 450,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
                 }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 450,
-                settings: {
-                    slidesToShow: 1
-                }
-            }
-        ]
+            ]
+        });
     });
+
+    function getRandomInt(min, max) {
+        return Math.round(Math.random() * (max - min)) + min;
+    }
 
     $('.b-im-block').slick({
         dots: false,

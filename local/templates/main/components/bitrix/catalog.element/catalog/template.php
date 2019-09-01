@@ -3,7 +3,8 @@
 global $APPLICATION;
 
 $this->setFrameMode(true);
-$APPLICATION->SetPageProperty('title', $arResult["NAME"]); ?>
+// $APPLICATION->SetPageProperty('title', $arResult["NAME"].( ($arResult["PROPERTIES"]["SUBTITLE"]["VALUE"])?(" ".$arResult["PROPERTIES"]["SUBTITLE"]["VALUE"]):"" ));
+?>
 
 <? 
 
@@ -160,7 +161,7 @@ if (count($arResult["OFFERS"]) < 5){
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 							<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["ORIGINAL"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
 								<div class="img-cont">
-									<img src="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" alt="<?=$arResult['NAME']?> <?=$offer['NAME']?>">
+									<img src="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" alt="<?=$arResult['NAME']?> <?=$offer['NAME']?>" title="<?=$arResult['NAME']?> <?=$offer['NAME']?>">
 								</div>
 								<!-- <div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>');"></div> -->
 							</a>
@@ -182,7 +183,7 @@ if (count($arResult["OFFERS"]) < 5){
 			<? endif; ?>
 		</div>
 		<div class="b-product-content">
-			<h1 class="b-product-name"><?=$arResult['NAME']?></h1>
+			<h1 class="b-product-name"><?=(($arResult['PROPERTIES']['TITLE']['VALUE'])?($arResult['PROPERTIES']['TITLE']['VALUE']):($arResult['NAME']))?> <span><?=$arResult['PROPERTIES']['SUBTITLE']['VALUE']?></span></h1>
 			<div class="b-product-actions-wrap">
 				<ul class="b-product-actions clearfix">
 					<li>
@@ -663,7 +664,7 @@ if (count($arResult["OFFERS"]) < 5){
 			"PRODUCT_PROPS_VARIABLE" => "prop",
 			"PRODUCT_QUANTITY_VARIABLE" => "",
 			"PRODUCT_SUBSCRIPTION" => "N",
-			"PROPERTY_CODE" => array(0=>"",1=>"",),
+			"PROPERTY_CODE" => array(0=>"SUBTITLE",1=>"TITLE",),
 			"SECTION_CODE" => $_REQUEST["SECTION_CODE"],
 			"SECTION_CODE_PATH" => "",
 			"SECTION_ID" => "",

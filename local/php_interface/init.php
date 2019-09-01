@@ -543,7 +543,7 @@ function getBasketCount(){
 	$res = $discounts->getApplyResult();
 
 	return array(
-		"count" => array_sum($basket->getQuantityList()),
+		"count" => count($basketItems),
 		//"sum" => number_format( $order->getPrice(), 0, ',', ' ' )
 		"sum" => convertPrice($order->getPrice())
 	);
@@ -922,7 +922,7 @@ function getElementImages($arResult, $isList = false){
 		}
 	} else {
 		if ($arResult["DETAIL_PICTURE"]){
-			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"]);
+			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"], $isList);
 		} else {
 			$arPhoto['ORIGINAL'] = $arPhoto['BIG'] = $arPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 		}

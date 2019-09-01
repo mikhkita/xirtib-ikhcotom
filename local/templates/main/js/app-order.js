@@ -422,7 +422,9 @@
             validationForm: function () {
                 if(this.formValid){
                     this.form.nowSubmit = true;
-                    ym(36653305, 'reachGoal', 'order');
+                    if( typeof ym != "undefined" ){
+                        ym(36653305, 'reachGoal', 'order');
+                    }
                     document.getElementById('b-order-form').submit();
                 }else{
                     setTimeout(function(){
@@ -721,8 +723,8 @@
                                     </div>\
                                 </div>\
                                 <div class="item-field b-order-item-price" :class="{ \'has-discount\': basePrice != totalPrice }">\
-                                    <div v-show="basePrice != totalPrice" class="price-base">{{ formatNumber(basePrice) }}<span class="icon-ruble"></span></div>\
-                                    <div class="price-total">{{ formatNumber(totalPrice) }}<span class="icon-ruble"></span></div>\
+                                    <div v-show="basePrice != totalPrice" class="price-base">{{ formatNumber(basePrice) }}<span class="icon-ruble-bold"></span></div>\
+                                    <div class="price-total">{{ formatNumber(totalPrice) }}<span class="icon-ruble-bold"></span></div>\
                                 </div>\
                                 <div class="item-field b-order-item-controls">\
                                     <div \
@@ -798,8 +800,8 @@
                     <div class="b-price-string b-price-raw clearfix">\
                       <span class="explanation">Стоимость заказа:</span>\
                       <div class="b-price-total" :class="{ \'has-discount\': _rawBase != _rawTotal }">\
-                        <div v-show="_rawBase != _rawTotal" class="price-base">{{ formatNumber(_rawBase) }}<span class="icon-ruble"></span></div>\
-                        <div class="price-total">{{ formatNumber(_rawTotal) }}<span class="icon-ruble"></span></div>\
+                        <div v-show="_rawBase != _rawTotal" class="price-base">{{ formatNumber(_rawBase) }}<span class="icon-ruble-bold"></span></div>\
+                        <div class="price-total">{{ formatNumber(_rawTotal) }}<span class="icon-ruble-bold"></span></div>\
                       </div>\
                     </div>\
                     <div class="b-order-coupon">\
@@ -831,15 +833,15 @@
                     </div>\
                     <div v-show="_discount > 0" class="b-price-string clearfix">\
                       <span class="explanation">Размер скидки:</span>\
-                      <div class="price-total">{{ formatNumber(_discount) }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_discount) }}<span class="icon-ruble-bold"></span></div>\
                     </div>\
                     <div class="b-price-string clearfix">\
                       <span class="explanation">Стоимость доставки:</span>\
-                      <div class="price-total">{{ formatNumber(_delivery) }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_delivery) }}<span class="icon-ruble-bold"></span></div>\
                     </div>\
                     <div class="b-price-string clearfix price-final">\
                       <span class="explanation">Итого:</span>\
-                      <div class="price-total">{{ formatNumber(_total) }}<span class="icon-ruble"></span></div>\
+                      <div class="price-total">{{ formatNumber(_total) }}<span class="icon-ruble-bold"></span></div>\
                     </div>\
                   </div>\
                 ',
