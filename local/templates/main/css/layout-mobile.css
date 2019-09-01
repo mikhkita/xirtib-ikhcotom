@@ -1209,7 +1209,7 @@ body {
 	.b-nav-pages li a{
 		width: 32px;
 		height: 32px;
-		padding: 3px 0px;
+		padding: 5px 0px;
 	}
 
 	.mobile-col-left,
@@ -1452,7 +1452,7 @@ body {
 		margin-top: 0;
 	}
 	.b-item-card:not(.slick-slide) .b-price-container{
-	    left: 160px;
+	    left: 164px;
 	}
 	.b-category-tiles .b-tile-item{
 		width: 100%;
