@@ -109,6 +109,11 @@ else
 					<div class="order-status <?=$statusClass?>"><?=$status?></div>
 				</div>
 			</div>
+			<? if ($order['ORDER']["TRACKING_NUMBER"]): ?>
+				<div class="b-order-header clearfix">
+					<div class="track-number">Трек-номер: <b><?=$order['ORDER']["TRACKING_NUMBER"]?></b></div>
+				</div>
+			<? endif; ?>
 			<div class="b-order-list">
 				<? foreach($order["BASKET_ITEMS"] as $item): ?>
 
@@ -141,17 +146,23 @@ else
 						</div>
 						<div class="b-order-item-right">
 							<div class="b-order-item-price <?=$class?>">
-								<div class="price-base"><?=number_format((float)$item['BASE_PRICE']*$item['QUANTITY'], 2, '.', '')?><span class="icon-ruble"></span></div>
-								<div class="price-total"><?=number_format((float)$item['PRICE']*$item['QUANTITY'], 2, '.', '')?><span class="icon-ruble"></span></div>
+								<div class="price-base"><?=convertPrice($item['BASE_PRICE']*$item['QUANTITY'])?><span class="icon-ruble"></span></div>
+								<div class="price-total"><?=convertPrice($item['PRICE']*$item['QUANTITY']);?><span class="icon-ruble"></span></div>
 							</div>
 						</div>
 					</div>
 				<? endforeach; ?>
 			</div>
 			<div class="b-order-total">
+				<? if (intval($order['ORDER']['PRICE_DELIVERY']) !== 0): ?>
+					<div class="b-order-total-inner">
+						<p>Стоимость доставки:</p>
+						<div class="total"><?=convertPrice($order['ORDER']['PRICE_DELIVERY']);?><span class="icon-ruble"></span></div>
+					</div>
+				<? endif ?>
 				<div class="b-order-total-inner">
 					<p>Итого:</p>
-					<div class="total"><?=number_format((float)$order['ORDER']["PRICE"], 2, '.', '')?><span class="icon-ruble"></span></div>
+					<div class="total"><?=convertPrice($order['ORDER']["PRICE"])?><span class="icon-ruble"></span></div>
 				</div>
 			</div>
 		</div>

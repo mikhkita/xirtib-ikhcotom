@@ -159,7 +159,10 @@ if (count($arResult["OFFERS"]) < 5){
 					<? if ($arResult["OFFERS"]): ?>
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 							<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["ORIGINAL"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
-								<div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>');"></div>
+								<div class="img-cont">
+									<img src="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" alt="<?=$arResult['NAME']?> <?=$offer['NAME']?>">
+								</div>
+								<!-- <div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>');"></div> -->
 							</a>
 						<? endforeach; ?>
 					<? else: ?>
@@ -173,7 +176,7 @@ if (count($arResult["OFFERS"]) < 5){
 				<div class="b-product-photo-slider <?=$sliderClass?>">
 					<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 						<? $class = ($key == 0) ? 'active' : ''; ?>
-						<img data-color-id="<?=$offer['ID']?>" src="<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>" class="<?=$class?>">
+						<div class="img <?=$class?>" style="background-image: url(<?=$arImg["DETAIL_PHOTO"][$key]["SMALL"]?>); " data-color-id="<?=$offer['ID']?>"></div>
 					<? endforeach; ?>
 				</div>
 			<? endif; ?>
@@ -245,7 +248,7 @@ if (count($arResult["OFFERS"]) < 5){
 							<div class="texture-list clearfix">
 								<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 									<? $class = ($key == 0) ? 'active' : ''; ?>
-									<img data-color-id="<?=$offer['ID']?>" src="<?=$arImg["COLOR_PHOTO"][$key]["SMALL"]?>" class="<?=$class?>">
+									<div class="img <?=$class?>" data-color-id="<?=$offer['ID']?>" style="background-image: url(<?=$arImg["COLOR_PHOTO"][$key]["SMALL"]?>);"></div>
 								<? endforeach; ?>
 							</div>
 							<? if (count($arResult["OFFERS"]) > 10): ?>
