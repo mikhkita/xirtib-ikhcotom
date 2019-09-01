@@ -224,7 +224,7 @@ $APPLICATION->SetTitle("Каталог");?>
 						"OFFERS_CART_PROPERTIES" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",),
 						"OFFERS_FIELD_CODE" => array(0=>"",1=>"",),
 						"OFFERS_LIMIT" => "",
-						"OFFERS_PROPERTY_CODE" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",2=>"SIZES_SHOES",3=>"SUBTITLE",),
+						"OFFERS_PROPERTY_CODE" => array(0=>"COLOR_REF",1=>"SIZES_CLOTHES",2=>"SIZES_SHOES",3=>"SUBTITLE",4=>"TITLE"),
 						"OFFERS_SORT_FIELD" => 'sort',
 						"OFFERS_SORT_FIELD2" => "id",
 						"OFFERS_SORT_ORDER" => 'asc',

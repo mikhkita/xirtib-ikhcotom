@@ -101,7 +101,7 @@ else
 		<div class="b-cabinet-order clearfix">
 			<div class="b-order-header clearfix">
 				<div class="order-header-left">
-					<h3>Заказ №<b><?=$order['ORDER']['ACCOUNT_NUMBER']?></h3>
+					<h3>Заказ №<?=$order['ORDER']['ACCOUNT_NUMBER']?></h3>
 					<div class="order-date"><?=$date?> г.</div>
 				</div>
 				<div class="order-header-right">
@@ -146,8 +146,8 @@ else
 						</div>
 						<div class="b-order-item-right">
 							<div class="b-order-item-price <?=$class?>">
-								<div class="price-base"><?=convertPrice($item['BASE_PRICE']*$item['QUANTITY'])?><span class="icon-ruble"></span></div>
-								<div class="price-total"><?=convertPrice($item['PRICE']*$item['QUANTITY']);?><span class="icon-ruble"></span></div>
+								<div class="price-base"><?=convertPrice($item['BASE_PRICE']*$item['QUANTITY'])?><span class="icon-ruble-bold"></span></div>
+								<div class="price-total"><?=convertPrice($item['PRICE']*$item['QUANTITY']);?><span class="icon-ruble-bold"></span></div>
 							</div>
 						</div>
 					</div>
@@ -157,12 +157,12 @@ else
 				<? if (intval($order['ORDER']['PRICE_DELIVERY']) !== 0): ?>
 					<div class="b-order-total-inner">
 						<p>Стоимость доставки:</p>
-						<div class="total"><?=convertPrice($order['ORDER']['PRICE_DELIVERY']);?><span class="icon-ruble"></span></div>
+						<div class="total"><?=convertPrice($order['ORDER']['PRICE_DELIVERY']);?><span class="icon-ruble-bold"></span></div>
 					</div>
 				<? endif ?>
 				<div class="b-order-total-inner">
 					<p>Итого:</p>
-					<div class="total"><?=convertPrice($order['ORDER']["PRICE"])?><span class="icon-ruble"></span></div>
+					<div class="total"><?=convertPrice($order['ORDER']["PRICE"])?><span class="icon-ruble-bold"></span></div>
 				</div>
 			</div>
 		</div>

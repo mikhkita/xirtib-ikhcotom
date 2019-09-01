@@ -2459,14 +2459,13 @@ if (!empty($orderList) && is_array($orderList))
 				$productID = CCatalogSku::GetProductInfo($arItem["PRODUCT_ID"]);//получить id товара по id торгового предложения
 				if(is_array($productID)){ // Если это торговое предложение
 					$res = \CIBlockElement::GetByID($productID["ID"]); // То ищем товар, к которому он привязан
-					$arItem["DETAIL_PAGE_URL"] .= ("#".$arItem["PRODUCT_ID"]);
 					if($ar_res = $res->GetNext()){
 						$arItem["NAME"] = $ar_res["NAME"].", <b>".$arItem["NAME"]."</b>";
 					}
 				}
 
 				if(strlen($arItem["DETAIL_PAGE_URL"]) > 0)
-					$fieldValue .= '<a href="'.htmlspecialcharsbx($url).'" class="'.$linkClass.'" target="_blank">';
+					$fieldValue .= '<a href="'.$url.'#'.$arItem["PRODUCT_ID"].'" class="'.$linkClass.'" target="_blank">';
 
 				// $fieldValue .= htmlspecialcharsbx($arItem["NAME"]);
 				$fieldValue .= $arItem["NAME"];

@@ -4,7 +4,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 $curPage = $APPLICATION->GetCurPage();
 $urlArr = $GLOBALS["urlArr"] = explode("/", $curPage);
 $page = $GLOBALS["page"] = ( $urlArr[2] == null || $urlArr[2] == "" )?$urlArr[1]:$urlArr[2];
-$GLOBALS["version"] = 62;
+$GLOBALS["version"] = 63;
 $is404 = defined('ERROR_404') && ERROR_404=='Y' && !defined('ADMIN_SECTION');
 $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[1]];
 
@@ -249,7 +249,7 @@ if ($arFav > 0){
 					<? $basketInfo = getBasketCount(); ?>
 
 					<a href='/cart/order/' class="b-price-button" id="b-price-button" <?/*?> style="display: none;"<?*/?>>
-						<span class="b-cart-price icon-ruble" id="b-cart-sum"><?=$basketInfo['sum']?></span>
+						<span class="b-cart-price icon-ruble-bold" id="b-cart-sum"><?=$basketInfo['sum']?></span>
 						<span class="b-cart-number-container">
 							<span class="b-cart-number" id="b-cart-count"><?=$basketInfo['count']?></span>
 						</span>

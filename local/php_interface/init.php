@@ -543,7 +543,7 @@ function getBasketCount(){
 	$res = $discounts->getApplyResult();
 
 	return array(
-		"count" => array_sum($basket->getQuantityList()),
+		"count" => count($basketItems),
 		//"sum" => number_format( $order->getPrice(), 0, ',', ' ' )
 		"sum" => convertPrice($order->getPrice())
 	);

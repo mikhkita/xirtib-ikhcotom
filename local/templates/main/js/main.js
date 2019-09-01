@@ -266,7 +266,7 @@ $(document).ready(function(){
     });
 
     $('.b-main-slider').slick({
-        dots: true,
+        dots: ($(".b-main-slide").length > 1),
         dotsClass: "my-dots",
         infinite: true,
         slidesToShow: 1,

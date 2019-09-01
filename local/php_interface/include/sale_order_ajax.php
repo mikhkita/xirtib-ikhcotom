@@ -2784,12 +2784,15 @@ class AjaxProcessor
 		);
 
 		foreach ($result["BASKET"]["ITEMS"] as $key => $item) {
-			if( $item['PRODUCT_ID'] != $item['OFFER_ID'] ){ // Если это торговое предложение
-				$res = \CIBlockElement::GetByID($item["PRODUCT_ID"]); // То ищем товар, к которому он привязан
+			$res = \CIBlockElement::GetByID($item["PRODUCT_ID"]); // То ищем товар, к которому он привязан
 
-				if($ar_res = $res->GetNext()){
-					$result["BASKET"]["ITEMS"][$key]["NAME"] = $ar_res["NAME"]." (".$item["NAME"].")"; // Добавляем к названию
-					$result["BASKET"]["ITEMS"][$key]["EDIT_PAGE_URL"] = $ar_res["DETAIL_PAGE_URL"]; // Добавляем к названию
+			if($ar_res = $res->GetNext()){
+				if( $item['PRODUCT_ID'] != $item['OFFER_ID'] ){ // Если это торговое предложение
+					$result["BASKET"]["ITEMS"][$key]["OFFER_NAME"] = $item["NAME"]; // Сохраняем название торгового предложения
+					$result["BASKET"]["ITEMS"][$key]["NAME"] = $ar_res["NAME"]; // Меняем на название товара
+					$result["BASKET"]["ITEMS"][$key]["EDIT_PAGE_URL"] = $ar_res["DETAIL_PAGE_URL"]."#".$item['OFFER_ID']; // Ссылка на торговое предложение
+				}else{
+					$result["BASKET"]["ITEMS"][$key]["EDIT_PAGE_URL"] = $ar_res["DETAIL_PAGE_URL"]; // Ссылка на товар
 				}
 			}
 		}
