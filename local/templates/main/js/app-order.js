@@ -707,7 +707,9 @@
                         <div class="b-order-item-cont" v-show="visible">\
                             <div class="b-order-item">\
                                 <a :href="url" class="item-field b-order-item-img">\
-                                    <img :src="image">\
+                                    <div class="b-order-item-img-inner">\
+                                        <img :src="image">\
+                                    </div>\
                                 </a>\
                                 <a :href="url" class="item-field b-order-item-name">\
                                     <p v-if="productName">\
