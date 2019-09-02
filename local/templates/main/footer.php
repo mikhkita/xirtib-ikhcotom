@@ -326,6 +326,9 @@
 		</div>
 
 	</div>
+	<?if($lighthouse){
+	    $APPLICATION->ShowCSS();         // Подключение файлов стилей CSS
+	}?>
 	<? if($_SERVER["HTTP_HOST"] == "motochki-klubochki.ru" && !$USER->IsAuthorized() ): ?>
 		<!-- Yandex.Metrika counter -->
 			<script type="text/javascript" >
@@ -342,43 +345,18 @@
 			<noscript><div><img src="https://mc.yandex.ru/watch/36653305" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 		<!-- /Yandex.Metrika counter -->
 	<? endif; ?>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.fancybox.min.js"></script>
-	<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false&key=AIzaSyD6Sy5r7sWQAelSn-4mu2JtVptFkEQ03YI"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.touch.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.maskedinput.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/KitAnimate.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/plupload.full.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/mask.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/KitProgress.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/KitSend.js?<?=$GLOBALS["version"]?>"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/slick.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/chosen.jquery.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/autosize.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.ui.touch-punch.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/slideout.min.js"></script>
-	<!-- Плагины для страницы оформления заказа -->
-	<? if($urlArr[1] == "cart" && $urlArr[2] == "order"): ?>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vue.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/vee-validate.min.js"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.sticky-kit.min.js"></script>
-	<!-- <script type="text/javascript" src="js/cleave.min.js"></script> -->
-	<!-- <script type="text/javascript" src="js/axios.min.js"></script> -->
-	<!-- <script type="text/javascript" src="js/vue-resource.min.js"></script> -->
-	<!-- <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery.mask.min.js"></script> -->
-	<script type="text/javascript" src="https://api-maps.yandex.ru/2.1.41/?load=package.full&amp;apikey=dcf82496-06b7-476e-b6f8-0078e5d46b67&amp;lang=ru-RU"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/address.js?<?=$GLOBALS["version"]?>"></script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/AddressDeliveryClass.js?<?=$GLOBALS["version"]?>"></script>
-	<?$dataOrder = getOrderList();?>
-	<script type="text/javascript">
-		var dataOrder = <?=$dataOrder?>;
-	</script>
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/app-order.js?<?=$GLOBALS["version"]?>"></script>
-	<? endif; ?>
-	<!-- \\\\\\\\ -->
-	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.js?<?=$GLOBALS["version"]?>"></script>
 
+	<? if($urlArr[1] == "contacts"): ?>
+		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false&key=AIzaSyD6Sy5r7sWQAelSn-4mu2JtVptFkEQ03YI"></script>
+	<? endif; ?>
+	<? if($urlArr[1] == "cart" && $urlArr[2] == "order"): ?>
+		<script type="text/javascript" src="https://api-maps.yandex.ru/2.1.41/?load=package.full&amp;apikey=dcf82496-06b7-476e-b6f8-0078e5d46b67&amp;lang=ru-RU"></script>
+		<?$dataOrder = getOrderList();?>
+		<script type="text/javascript">
+			var dataOrder = <?=$dataOrder?>;
+		</script>
+	<? endif; ?>
+	<?$APPLICATION->ShowHeadScripts();?>
 
 	<script>
 		(function(w,d,u){
