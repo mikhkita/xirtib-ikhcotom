@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@media (max-width: 767px) and (min-width: 240px){
+
 body {
 	min-width: 320px;
 }
@@ -1564,4 +1566,6 @@ body {
 	.mobile-col-right .b-write-us {
    		margin-top: 16px;
 	}
+}
+
 }
