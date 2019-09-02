@@ -1,39 +1,63 @@
 @charset "utf-8";
 
 @font-face {
-    font-family: 'DINPro-Regular';
-    src: url('../fonts/DINPro-Regular.eot');
-    src: url('../fonts/DINPro-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/DINPro-Regular.woff2') format('woff2'),
-        url('../fonts/DINPro-Regular.woff') format('woff'),
-        url('../fonts/DINPro-Regular.ttf') format('truetype'),
-        url('../fonts/DINPro-Regular.svg#DINPro') format('svg');
+    font-family: 'Lora-Bold';
+    src: url('../fonts/Lora-Bold.eot');
+    src: url('../fonts/Lora-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Lora-Bold.woff') format('woff'),
+         url('../fonts/Lora-Bold.ttf') format('truetype'),
+         url('../fonts/Lora-Bold.svg#Lora-Bold') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 @font-face {
-    font-family: 'DINPro-Medium';
-    src: url('../fonts/DINPro-Medium.eot');
-    src: url('../fonts/DINPro-Medium.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/DINPro-Medium.woff2') format('woff2'),
-        url('../fonts/DINPro-Medium.woff') format('woff'),
-        url('../fonts/DINPro-Medium.ttf') format('truetype'),
-        url('../fonts/DINPro-Medium.svg#DINPro-Medium') format('svg');
+    font-family: 'Lora-Regular';
+    src: url('../fonts/Lora-Regular.eot');
+    src: url('../fonts/Lora-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Lora-Regular.woff') format('woff'),
+         url('../fonts/Lora-Regular.ttf') format('truetype'),
+         url('../fonts/Lora-Regular.svg#Lora-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 @font-face {
-    font-family: 'DINPro-Light';
-    src: url('../fonts/DINPro-Light.eot');
-    src: url('../fonts/DINPro-Light.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/DINPro-Light.woff2') format('woff2'),
-        url('../fonts/DINPro-Light.woff') format('woff'),
-        url('../fonts/DINPro-Light.ttf') format('truetype'),
-        url('../fonts/DINPro-Light.svg#DINPro-Light') format('svg');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'ProximaNova-Regular';
+	src: url('../fonts/ProximaNova-Regular.eot');
+	src: url('../fonts/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ProximaNova-Regular.woff') format('woff'),
+		 url('../fonts/ProximaNova-Regular.woff2') format('woff2'),
+		 url('../fonts/ProximaNova-Regular.ttf')  format('truetype'),
+		 url('../fonts/ProximaNova-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ProximaNova-Semibold';
+	src: url('../fonts/ProximaNova-Semibold.eot');
+	src: url('../fonts/ProximaNova-Semibold.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ProximaNova-Semibold.woff') format('woff'),
+		 url('../fonts/ProximaNova-Semibold.woff2') format('woff2'),
+		 url('../fonts/ProximaNova-Semibold.ttf')  format('truetype'),
+		 url('../fonts/ProximaNova-Semibold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ProximaNova-Bold';
+	src: url('../fonts/ProximaNova-Bold.eot');
+	src: url('../fonts/ProximaNova-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ProximaNova-Bold.woff') format('woff'),
+		 url('../fonts/ProximaNova-Bold.woff2') format('woff2'),
+		 url('../fonts/ProximaNova-Bold.ttf')  format('truetype'),
+		 url('../fonts/ProximaNova-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
@@ -60,7 +84,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 b, strong{
-	font-family: "DINPro-Medium";
+	font-family: "ProximaNova-Semibold";
 }
 .notetext{
 	display: block;
@@ -169,7 +193,7 @@ body {
 }
 body {
 	min-width: 1140px;
-	font-family: DINPro-Regular;
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
 	color: #564531;
 	text-align: left;
@@ -198,11 +222,11 @@ input[name=MAIL]{
 }
 h2.b-title,
 h1.b-title{
-	font-family: DINPro-Medium;
+	font-family: 'Lora-Bold';
 	font-size: 42px;
 	line-height: 50px;
-	padding-top: 24px;
-	margin-bottom: 28px;
+	padding-top: 20px;
+	margin-bottom: 36px;
 	color: #564531;
 	letter-spacing: 0;
 	text-align: center;
@@ -214,13 +238,14 @@ h1.b-title{
 	text-align: left;
 }
 h3.b-title{
-	font-family: DINPro-Medium;
+	font-family: 'ProximaNova-Semibold';
 	font-size: 32px;
 	line-height: 45px;
 	color: #564531;
 	letter-spacing: 0;
 	margin-bottom: 24px;
 	text-align: center;
+	font-family: 'Lora-Bold';
 }
 
 .hide{
@@ -303,7 +328,7 @@ h3.b-title{
 	text-align: center;
 }
 .dashed{
-	border-bottom: 1px dashed #564531;
+	border-bottom: 1px dashed #dadada;
 }
 .slideout-menu {
   position: fixed;
@@ -359,13 +384,14 @@ h3.b-title{
 	max-width: 900px;
 }
 	.b-text h2, .b-text h3{
-		font-family: 'DINPro-Medium';
+		font-family: 'ProximaNova-Semibold';
 		font-size: 24px;
 		line-height: 30px;
 		margin-bottom: 20px;
+		/* font-family: 'Lora-Bold'; */
 	}
 	.b-text h4{
-		font-family: 'DINPro-Medium';
+		font-family: 'ProximaNova-Semibold';
 		font-size: 20px;
 		line-height: 28px;
 		margin-bottom: 20px;
@@ -377,13 +403,13 @@ h3.b-title{
 		margin: 16px 0;
 	}
 		.b-text li{
-			padding-left: 20px;
+			padding-left: 24px;
 			margin-bottom: 12px;
 			position: relative;
 		}
 		.b-text li:before{
 			content: '';
-			top: 11px;
+			top: 9px;
 			left: 0;
 			position: absolute;
 			width: 6px;
@@ -395,7 +421,7 @@ h3.b-title{
 		margin-bottom: 0;
 	}
 	.b-text b{
-		font-family: 'DINPro-Medium';
+		font-family: 'ProximaNova-Semibold';
 	}
 	.b-text a{
 		display: inline;
@@ -439,8 +465,9 @@ h3.b-title{
 }
 	.b-top{
 		background: rgba(86,69,49,0.02);
-		padding-top: 11px;
-		padding-bottom: 16px;
+		padding-top: 14px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid #EEEEEE;
 	}
 		.b-top .b-block{
 			display: flex;
@@ -478,10 +505,10 @@ h3.b-title{
 	}
 	.b-search-form{
 		display: inline-block;
-	    width: calc(100% - 450px);
-        margin-top: 5px;
-	    vertical-align: middle;
-	    position: relative;
+		width: calc(100% - 500px);
+		margin-top: 5px;
+		vertical-align: middle;
+		position: relative;
 	}
 	.b-search-inner-form{
 		margin-bottom: 30px;
@@ -494,20 +521,21 @@ h3.b-title{
 			.b-search-input input[type=text]{
 				width: 100%;
 				border-radius: 30px;
-				border: 1px solid #ADA69C;
-				padding: 11px 23px 12px;
-				font-family: 'DINPro-Regular';
+				border: 1px solid #E4E4E4;
+				padding: 12px 23px 12px;
+				background: #FCFBFB;
+				font-family: 'ProximaNova-Regular';
 				font-size: 16px;
 				position: relative;
-			    -webkit-appearance: none;
+				-webkit-appearance: none;
 			}
 			.b-search-input input::-webkit-input-placeholder {
-				font-family: 'DINPro-Regular';
-				color: #564531;
+				font-family: 'ProximaNova-Regular';
+				color: #999;
 			}
 			.b-search-input input:-moz-placeholder {
-				font-family: 'DINPro-Regular';
-				color: #564531;
+				font-family: 'ProximaNova-Regular';
+				color: #999;
 			}
 			.b-search-input:before{
 				right: 23px;
@@ -544,7 +572,7 @@ h3.b-title{
 		.bx_item_block.all_result .all_result_title{
 			font-size: 16px;
 			line-height: 22px;
-			font-family: 'DINPro-Regular';
+			font-family: 'ProximaNova-Regular';
 		}
 		.bx_searche{
 		    border: 1px solid #77be32;
@@ -611,7 +639,7 @@ h3.b-title{
 	}
 		.icon-list{
 			padding-left: 45px;
-			font-family: 'DINPro-Medium';
+			font-family: 'ProximaNova-Semibold';
 		}
 		.icon-list:before{
 			content: "\e916";
@@ -627,6 +655,7 @@ h3.b-title{
 		.b-header-catalog{
 			position: absolute;
 			z-index: 99;
+			font-size: 0px;
 			opacity: 0;
 			visibility: hidden;
 			background: #fff;
@@ -653,7 +682,7 @@ h3.b-title{
 		}
 			.b-header-catalog a{
 				font-size: 18px;
-				font-family: 'DINPro-Medium';
+				font-family: 'ProximaNova-Semibold';
 				line-height: 25px;
 				padding: 10px 20px;
 				display: block;
@@ -688,7 +717,7 @@ h3.b-title{
 				transform: translateY(-50%) rotate(45deg);
 			}
 			.b-header-catalog li > .b-header-catalog a{
-				font-family: 'DINPro-Regular';
+				font-family: 'ProximaNova-Regular';
 				font-size: 16px;
 				line-height: 22px;
 			}
@@ -729,7 +758,7 @@ h3.b-title{
 			}
 		.b-fav-number{
 			position: absolute;
-			font-family: DINPro-Regular;
+			font-family: 'ProximaNova-Regular';
 			font-size: 10px;
 			letter-spacing: 0;
 			right: 50%;
@@ -787,10 +816,10 @@ h3.b-title{
 				position: relative;
 			}
 			.b-menu-item a{
-				padding: 18px 0 22px 0;
+				padding: 20px 0 20px 0;
 				color: #FFF;
 				display: block;
-				font-family: DINPro-Medium;
+				font-family: 'ProximaNova-Semibold';
 				font-size: 18px;
 				letter-spacing: 0.4px;
 				-webkit-transition: background .1s, color .1s;
@@ -851,7 +880,7 @@ h3.b-title{
 					padding: 18px 20px 22px 20px;
 				}
 		.b-price-button{
-			padding: 4px 15px 7px 63px;
+			padding: 8px 15px 8px 63px;
 			background-color: #D4EABF;
 			border-radius: 3px;
 			display: inline-block;
@@ -874,16 +903,17 @@ h3.b-title{
 				font-size: 29px;
 			}
 				.b-cart-price{
-					font-family: 'DINPro-Regular';
+					font-family: 'Lora-Bold';
 					position: relative;
 					padding-right: 20px;
 					display: inline-block;
+					line-height: 22px;
 				}
 				.b-cart-price:before{
 					position: absolute;
 					right: 0;
-					top: calc(50% + 1px);
-					font-size: 16px;
+					top: calc(50% + 3px);
+					font-size: 17px;
 					-webkit-transform: translateY(-50%);
 					-ms-transform: translateY(-50%);
 					-o-transform: translateY(-50%);
@@ -891,7 +921,7 @@ h3.b-title{
 				}
 				.b-cart-number-container{
 					position: absolute;
-					font-family: DINPro-Regular;
+					font-family: 'ProximaNova-Semibold';
 					font-size: 10px;
 					letter-spacing: 0;
 					left: 34px;
@@ -905,14 +935,13 @@ h3.b-title{
 				.b-cart-number{
 					position: absolute;
 					left: 50%;
-					top: 49%;
+					top: 50%;
 					line-height: 10px;
 					-webkit-transform: translate(-50%, -50%);
 					-moz-transform: translate(-50%, -50%);
 					-ms-transform: translate(-50%, -50%);
 					-o-transform: translate(-50%, -50%);
 					transform: translate(-50%, -50%);
-					
 				}
 .b-main-slider{
 	position: relative;
@@ -939,19 +968,24 @@ h3.b-title{
 		}
 			.b-main-slide-content h1,
 			.b-main-slide-content h2{
-				font-family: DINPro-Medium;
-				font-size: 52px;
+				font-family: 'Lora-Bold';
+				font-size: 48px;
 				color: #5f9828;
 				letter-spacing: 0;
 				padding: 0px 16px;
 				text-align: center;
-				line-height: 64px;
+				line-height: 62px;
+				margin-bottom: 16px;
+			}
+			.b-main-slide-content h2{
+				font-size: 40px;
+				line-height: 52px;
 			}
 			.b-main-slide-content h3{
-				font-family: DINPro-Medium;
+				font-family: 'ProximaNova-Regular';
 				font-size: 32px;
 				line-height: 45px;
-				color: #5f9828;
+				/*color: #5f9828;*/
 				text-align: center;
 				letter-spacing: 0;
 			}
@@ -968,17 +1002,18 @@ h3.b-title{
 	}
 		.b-advantage h3{
 			margin-bottom: 16px;
-			font-family: DINPro-Medium;
-			font-size: 24px;
+			font-family: 'Lora-Bold';
 			color: #564531;
 			letter-spacing: 0;
-			line-height: 29px;
+			line-height: 28px;
+			font-size: 22px;
 		}
 		.b-advantage p{
-			font-family: DINPro-Regular;
+			font-family: 'ProximaNova-Regular';
 			font-size: 18px;
 			letter-spacing: 0;
 			line-height: 22px;
+			color: #777;
 		}
 		.b-advantage-img-wrapper{
 			height: 100%;
@@ -1079,7 +1114,7 @@ h3.b-title{
 				height: 245px;
 			}
 			.b-card-top-hover{
-				font-family: DINPro-Regular;
+				font-family: 'ProximaNova-Regular';
 				font-size: 14px;
 				color: #FFFFFF;
 				letter-spacing: 0;
@@ -1143,7 +1178,7 @@ h3.b-title{
 					position: absolute;
 					top: 0;
 					left: 0;
-					font-family: DINPro-Light;
+					font-family: 'ProximaNova-Regular';
 					font-size: 16px;
 					color: #564531;
 					letter-spacing: 0;
@@ -1170,7 +1205,7 @@ h3.b-title{
 					position: absolute;
 					bottom: 0px;
 					right: 0px;
-					font-family: DINPro-Light;
+					font-family: 'ProximaNova-Regular';
 					font-size: 14px;
 					color: #564531;
 					z-index: 100;
@@ -1188,9 +1223,9 @@ h3.b-title{
 				margin-bottom: 46px;
 			}
 				.b-item-name{
-					font-family: DINPro-Regular;
+					font-family: 'Lora-Bold';
 					font-size: 18px;
-					color: #3E3224;
+					/* color: #3E3224; */
 					display: block;
 					letter-spacing: 0;
 					margin-top: 12px;
@@ -1198,11 +1233,13 @@ h3.b-title{
 					line-height: 22px;
 				}
 				.b-item-subname{
-					
+					color: #777;
+					font-size: 16px;
+					margin-top: 6px;
 				}
 				.b-price-container{
 					font-size: 24px;
-					color: #3E3224;
+					/*color: #3E3224;*/
 					letter-spacing: 0;
 					position: absolute;
 					bottom: 11px;
@@ -1213,15 +1250,17 @@ h3.b-title{
 				}
 					.b-price span,
 					.b-discount-price span{
-						font-family: 'DINPro-Regular';
+						font-family: 'Lora-Bold';
 						padding-right: 20px;
+						line-height: 24px;
+						display: inline-block;
 					}
 					.b-price span:before,
 					.b-discount-price span:before{
 						position: absolute;
 						right: 0;
-						font-size: 17px;
-	    				top: 11px;
+						font-size: 16px;
+						top: 6px;
 					}
 				.b-discount-price{
 					display: none;
@@ -1294,11 +1333,11 @@ h3.b-title{
 			text-align: center;
 		}
 		.b-btn{
-			padding: 17px 40px 20px 40px;
+			padding: 18px 40px 18px 40px;
 			border: 2px rgba(86, 69, 49, 0.5) solid;
 			border-radius: 3px;
 			display: inline-block;
-			font-family: DINPro-Medium;
+			font-family: 'ProximaNova-Semibold';
 			font-size: 20px;
 			color: #564531;
 			letter-spacing: 0;
@@ -1347,18 +1386,8 @@ h3.b-title{
 		.b-btn-to-cart-cap.error .icon-checked{
 			display: none;
 		}
-			.b-stock .b-btn{
-				padding-left: 38px;
-				padding-right: 38px;
-				padding-top: 12px;
-				padding-bottom: 15px;
-			}
-			.b-filter-submit{
-			    padding-left: 38px;
-			    padding-right: 38px;
-			    padding-top: 12px;
-			    padding-bottom: 15px;
-			}
+			
+			
 			.b-show-more.hidden{
 				opacity: 0;
 			}
@@ -1377,8 +1406,8 @@ h3.b-title{
 	text-align: center;
 }
 	.b-choose-type h3{
-		font-family: DINPro-Regular;
-		font-size: 32px;
+		font-family: 'ProximaNova-Regular';
+		font-size: 24px;
 		color: #564531;
 		letter-spacing: 0;
 		text-align: center;
@@ -1387,7 +1416,7 @@ h3.b-title{
 	}
 	.b-wool-tabs h3,
 	.b-lenght-tabs h3{
-		text-align: left;
+		text-align: center;
 	}
 	.b-choose-type .b-product-texture{
 
@@ -1396,6 +1425,7 @@ h3.b-title{
 		width: 67px;
 		height: 67px;
 		margin-right: 0px;
+		border-radius: 100%;
 	}
 		.b-choose-type .b-product-texture img:last-child{
 			
@@ -1420,7 +1450,7 @@ h3.b-title{
 			position: relative;
 		}
 			.b-tab-wool{
-				font-family: DINPro-Regular;
+				font-family: 'ProximaNova-Regular';
 				font-size: 18px;
 				color: #564531;
 				letter-spacing: 0;
@@ -1429,7 +1459,7 @@ h3.b-title{
 				width: 32%;
 				display: inline-block;
 				margin-bottom: 13px;
-				padding: 6px 20px 12px 20px;
+				padding: 10px 20px 10px 20px;
 			}
 			.b-tab-wool.active{
 				color:#77BE32;
@@ -1477,7 +1507,7 @@ h3.b-title{
 		color: rgba(86, 69, 49, 0.5);
 		border-bottom: 1px dashed rgba(86, 69, 49, 0.5);
 		cursor: pointer;
-		font-family: DINPro-Regular;
+		font-family: 'ProximaNova-Regular';
 		font-size: 18px;
 		letter-spacing: 0;
 		text-align: center;
@@ -1530,25 +1560,26 @@ h3.b-title{
 				height: 100%;
 			}
 				.b-main-article-header{
-					font-family: DINPro-Medium;
-					font-size: 18px;
+					font-family: 'ProximaNova-Semibold';
+					font-size: 20px;
 					color: #564531;
 					letter-spacing: 0;
-					line-height: 22px;
-					margin-bottom: 6px;
+					line-height: 28px;
+					margin-bottom: 10px;
 				}
 				.b-main-article-description{
-					font-family: DINPro-Regular;
+					font-family: 'ProximaNova-Regular';
 					font-size: 16px;
 					color: #564531;
 					letter-spacing: 0;
 					line-height: 22px;
+					color: #777;
 				}
 			.b-main-article a{
 				display: inline-block;
 				vertical-align: bottom;
 				float: right;
-				font-family: DINPro-Light;
+				font-family: 'ProximaNova-Regular';
 				font-size: 16px;
 				color: rgba(86,69,49,0.50);
 				letter-spacing: 0;
@@ -1570,19 +1601,21 @@ h3.b-title{
 	}
 		.b-footer-top-text{
 			display: block;
-			max-width: 920px;
+			max-width: 930px;
 			margin: 0 auto;
 		}
 			.b-footer-top-text h3{
-				font-family: DINPro-Medium;
+				font-family: 'ProximaNova-Semibold';
 				font-size: 32px;
 				color: #564531;
 				letter-spacing: 0;
 				margin-bottom: 24px;
+				font-family: 'Lora-Bold';
 			}
 			.b-footer-top-text p{
 				font-size: 18px;
 				line-height: 26px;
+				color: #777;
 			}
 		.b-footer-top-input{
 			display: inline-block;
@@ -1610,7 +1643,7 @@ h3.b-title{
 					width: calc(100% / 2 - 12px);
 				}
 				.b-footer-inputs .politics{
-					font-family: DINPro-Regular;
+					font-family: 'ProximaNova-Regular';
 					font-size: 12px;
 					letter-spacing: 0;
 					width: calc(100% / 2);
@@ -1649,7 +1682,7 @@ h3.b-title{
 				margin-top: 6px;
 			}
 			.b-footer-bottom-left .b-phone{
-				font-family: DINPro-Medium;
+				font-family: 'ProximaNova-Semibold';
 				font-size: 20px;
 				letter-spacing: 0px;
 				line-height: 24px;
@@ -1662,7 +1695,7 @@ h3.b-title{
 				cursor: pointer;
 			}
 				.b-phone-call.underlined{
-					font-family: DINPro-Regular;
+					font-family: 'ProximaNova-Regular';
 					font-size: 16px;
 					color: #564531;
 				}
@@ -1695,7 +1728,8 @@ h3.b-title{
 						margin-left: 28px;
 						font-size: 27px;
 					}
-			.b-footer-bottom-left .b-btn{padding: 12px 31px;
+			.b-footer-bottom-left .b-btn{
+				padding: 16px 31px;
 				margin-top: 22px;
 				font-size: 18px;
 			}
@@ -1707,7 +1741,7 @@ h3.b-title{
 			}
 				.b-footer-top-menu li,
 				.b-footer-bottom-menu li{
-					font-family: DINPro-Regular;
+					font-family: 'ProximaNova-Regular';
 					font-size: 18px;
 					color: #564531;
 					letter-spacing: 0;
@@ -1728,7 +1762,7 @@ h3.b-title{
 				margin-bottom: 39px;
 			}
 				.b-subscribe .politics a{
-					font-family: DINPro-Light;
+					font-family: 'ProximaNova-Regular';
 					font-size: 12px;
 					color: rgba(86,69,49,0.50);
 					text-decoration: underline;
@@ -1746,6 +1780,7 @@ h3.b-title{
 					font-size: 18px;
 					padding: 10px 54px;
 					display: inline-block;
+					line-height: 30px;
 				}
 				.b-footer-bottom-right .politics{
 					margin-top: -5px;
@@ -1781,14 +1816,15 @@ h3.b-title{
 				justify-content: flex-start;
 			}
 				.b-all-politics a{
-				    font-family: DINPro-Light;
-					font-size: 14px;
-					display: inline-block;
-					width: auto;
-					position: relative;
-					flex-basis: 223px;
-					line-height: 21px;
-					color: rgba(86,69,49,0.50);
+				    font-family: 'ProximaNova-Regular';
+				    font-size: 14px;
+				    display: inline-block;
+				    width: auto;
+				    margin-bottom: 6px;
+				    position: relative;
+				    flex-basis: 223px;
+				    line-height: 21px;
+				    color: rgba(86,69,49,0.50);
 				}
 						.b-all-politics a:after{
 							width: 200px;
@@ -1801,7 +1837,7 @@ h3.b-title{
 			flex-wrap: wrap;
 			justify-content: space-between;
 			width: 100%;
-			padding-top: 43px;
+			padding-top: 36px;
 			padding-bottom: 30px;
 		}
 
@@ -1823,16 +1859,16 @@ h3.b-title{
 			display: inline-block;
 			vertical-align: top;
 			border-radius: 100px;
-		    background-color: #564531;
-		    margin: 11px 16px 0 12px;
-
+			background-color: #dadada;
+			margin: 11px 16px 0 12px;
 		}
 		.b-breadcrumbs li:last-child:after{
 			display: none;
 		}
 		.b-breadcrumbs li a{
 			font-size: 18px;
-			border-bottom: 1px solid #564531;
+			color: #777;
+			border-bottom: 1px solid #dadada;
 		}
 		.b-breadcrumbs li span{
 			font-size: 18px;
@@ -1923,7 +1959,7 @@ h3.b-title{
 		.b-profile-name{
 			font-size: 18px;
 			line-height: 22px;
-			font-family: 'DINPro-Medium';
+			font-family: 'ProximaNova-Semibold';
 			margin-top: 24px;
 		}
 		.b-profile-phone{
@@ -1972,13 +2008,13 @@ h3.b-title{
 				padding: 10px 26px 12px 26px;
 				font-size: 18px;
 				border: 1px rgb(119, 190, 50) solid;
-				font-family: 'DINPro-Light';
+				font-family: 'ProximaNova-Regular';
 				margin-right: 20px;
 			}
 			.b-cabinet-tabs .b-btn-tab.active{
 				background-color: #77BE32;
 				color: #FFF;
-				/*font-family: 'DINPro-Medium';*/
+				/*font-family: 'ProximaNova-Semibold';*/
 			}
 			.b-cabinet-tabs .b-btn-tab:last-child{
 				margin-right: 0;
@@ -2000,15 +2036,15 @@ h3.b-title{
 					.order-header-left h3{
 						display: inline-block;
 						margin-right: 20px;
-						font-family: 'DINPro-Medium';
+						font-family: 'ProximaNova-Semibold';
 						font-size: 24px;
 						line-height: 30px;
 					}
 					.order-date{
 						display: inline-block;
 						color: rgba(86, 69, 49, 0.5);
-						font-family: 'DINPro-Light';
-						font-size: 24px;
+						font-family: 'ProximaNova-Regular';
+						font-size: 20px;
 						line-height: 30px;
 					}
 				.order-header-right{
@@ -2017,16 +2053,22 @@ h3.b-title{
 					padding-right: 177px;
 				}
 					.order-header-right p{
-						font-family: 'DINPro-Light';
-						font-size: 24px;
+						font-family: 'ProximaNova-Regular';
+						font-size: 20px;
 						line-height: 30px;
+					}
+					.track-number{
+						float: right;
+						font-family: 'ProximaNova-Regular';
+						font-size: 20px;
+						line-height: 24px;
 					}
 					.order-status{
 						position: absolute;
 						top: 0;
 						right: 0;
-						font-family: 'DINPro-Regular';
-						font-size: 24px;
+						font-family: 'ProximaNova-Regular';
+						font-size: 20px;
 						line-height: 30px;
 					}
 					.order-status.status-wait-pay{
@@ -2129,7 +2171,7 @@ h3.b-title{
 								}
 							.price-total{
 								padding-top: 20px;
-								font-family: 'DINPro-Regular';
+								font-family: 'ProximaNova-Regular';
 								font-size: 24px;
 								line-height: 30px;
 							}
@@ -2139,12 +2181,12 @@ h3.b-title{
 							vertical-align: top;
 							padding-top: 27px;
 						}
-		.price-base .icon-ruble:before {
+		.price-base .icon-ruble-bold:before {
 			font-size: 12px;
 			margin-left: 4px;
 		}
-		.price-total .icon-ruble:before,
-		.total .icon-ruble:before{
+		.price-total .icon-ruble-bold:before,
+		.total .icon-ruble-bold:before{
 			font-size: 17px;
     		margin-left: 6px;
     		position: relative;
@@ -2158,8 +2200,10 @@ h3.b-title{
 		}
 
 		.b-order-total{
-			width: 200px;
+			width: 370px;
+			text-align: right;
 			float: right;
+			max-width: 100%;
 		}
 			.total-border{
 				width: 100%;
@@ -2169,20 +2213,21 @@ h3.b-title{
 				position: relative;
 				margin-top: 24px;
 				/*padding-left: 10px;*/
+				padding-right: 140px;
 			}
 				.b-order-total-inner p{
 					display: inline-block;
-					font-family: 'DINPro-Medium';
-					font-size: 24px;
+					vertical-align: middle;
+					font-family: 'ProximaNova-Semibold';
+					font-size: 20px;
 					line-height: 30px;
-
 				}
 				.b-order-total-inner .total{
 					position: absolute;
 				    top: 0;
 				    right: 0;
 				    display: inline-block;
-				    font-family: 'DINPro-Regular';
+				    font-family: 'ProximaNova-Regular';
 				    font-size: 24px;
 				    line-height: 30px;
 				}
@@ -2315,11 +2360,18 @@ h3.b-title{
 				.main-photo .b-product-main a{
 					width: 461px;
 				    height: 461px;
-				    display: block;
+				    display: table;
+				}
+				.b-product-main .img-cont {
+					display: table-cell;
+					vertical-align: middle;
 				}
 					.main-photo .b-product-main a img{
-						width: 100%;
-					    height: 100%;
+						width: auto;
+						height: auto;
+						max-width: 100%;
+					    max-height: 100%;
+					    margin: 0 auto;
 					}
 					.catalog-element-img{
 						width: 100%;
@@ -2336,35 +2388,48 @@ h3.b-title{
 				text-align: center;
 				font-size: 0px;
 			}
-				.b-product-photo-slider img{
+				.b-product-photo-slider .img{
 					cursor: pointer;
+					display: inline-block;
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center;
 					width: 73px;
 					height: 73px;
 					margin: 0 12px;
 					border-radius: 3px;
-					border: 2px solid transparent;
+					border: 2px solid #fff;
 				}
-				.b-product-photo-slider img.active:not(.slick-slide),
-				.b-product-photo-slider img.slick-current{
+				.b-product-photo-slider .img.active:not(.slick-slide),
+				.b-product-photo-slider .img.slick-current{
 					border-color: #77BE32;
 				}
-				.b-product-photo-slider img:first-child{
+				.b-product-photo-slider .img:first-child{
 					margin-left: 0px;
 				}
-				.b-product-photo-slider img:last-child{
+				.b-product-photo-slider .img:last-child{
 					margin-right: 0px;
 				}
 		.b-product-content{
 			display: inline-block;
 			vertical-align: top;
 			width: calc(100% - 490px);
+			line-height: 24px;
 		}
 
 			.b-product-name{
-				font-family: 'DINPro-Medium';
-				font-size: 32px;
-				line-height: 40px;
-				margin-bottom: 20px;
+				font-family: 'Lora-Bold';
+				font-size: 44px;
+				line-height: 54px;
+				margin-bottom: 24px;
+			}
+			.b-product-name span{
+				font-family: 'ProximaNova-Regular';
+				color: #777;
+				font-size: 20px;
+				line-height: 26px;
+				display: block;
+				margin-top: 8px;
 			}
 			.b-product-actions-wrap{
 				padding-right: 50px;
@@ -2535,13 +2600,16 @@ h3.b-title{
 					}
 						.b-product-colors > span{
 							display: inline-block;
-							font-family: 'DINPro-Medium';
+							font-family: 'Lora-Bold';
 							/*padding-top: 4px;*/
+							margin-right: 10px;
 							font-size: 18px;
 							line-height: 22px;
+							position: relative;
+							top: 1px;
 						}
 						.b-catalog-list .b-product-colors > span{
-							/*font-family: 'DINPro-Light';*/
+							/*font-family: 'ProximaNova-Regular';*/
 						}
 						.chosen-container .chosen-results {
 						    margin: 0 0px 4px 0;
@@ -2549,17 +2617,17 @@ h3.b-title{
 						}
 						.chosen-container .chosen-results li {
 						    font-size: 16px;
-						    /*font-family: DINPro-Light;*/
+						    /*font-family: 'ProximaNova-Regular';*/
 						    padding: 10px 12px;
 						}
 						.b-product-colors .chosen-container{
 							vertical-align: middle;
 							/*margin-left: 22px;*/
-							margin-left: 10px;
+							/*margin-left: 10px;*/
 						}
 						.b-product-colors .chosen-container-single .chosen-single{
 							background: transparent;
-							padding: 9px 16px 11px 16px;
+							padding: 10px 16px 10px 16px;
 							height: auto;
 							font-size: 16px;
 							line-height: 20px;
@@ -2567,7 +2635,7 @@ h3.b-title{
 							border: 1px solid #E6E6E6;
 						}
 						.b-catalog-list .b-product-colors .chosen-container-single .chosen-single{
-							/* font-family: 'DINPro-Light'; */
+							/* font-family: 'ProximaNova-Regular'; */
 						}
 						.b-product-colors .chosen-container-single .chosen-single div:before{
 							position: absolute;
@@ -2607,20 +2675,23 @@ h3.b-title{
 						.texture-list.open{
 							max-height: 1000px;
 						}
-							.b-product-texture img{
+							.b-product-texture .img{
 								cursor: pointer;
 								float: left;
 								width: 49px;
 								height: 49px;
-								border: 2px solid transparent;
+								border: 2px solid #FFF;
 								border-radius: 100px;
 								margin-right: 5px;
 								margin-bottom: 10px;
+								background-size: contain;
+								background-position: center;
+								background-repeat: no-repeat;
 							}
-							.b-product-texture img:nth-child(5n){
+							.b-product-texture .img:nth-child(5n){
 								margin-right: 0;
 							}
-							.b-product-texture img.active{
+							.b-product-texture .img.active{
 								border: 2px solid #77BE32;
 							}
 					.b-product-info{
@@ -2635,7 +2706,7 @@ h3.b-title{
 							margin-bottom: 12px;
 						}
 							.b-product-info p b{
-								font-family: 'DINPro-Medium';
+								font-family: 'Lora-Bold';
 							}
 						.all-specifications{
 							color: rgba(86,69,49,0.5);
@@ -2655,7 +2726,8 @@ h3.b-title{
 						margin-bottom: 4px;
 						display: none;
 					}
-						.b-product-price-base .icon-ruble:before {
+						.b-product-price-base .icon-ruble:before,
+						.b-product-price-base .icon-ruble-bold:before {
 						    font-size: 13px;
 						    margin-left: 6px;
 						}
@@ -2676,11 +2748,12 @@ h3.b-title{
 						background-color: #9E9891;
 					}
 					.b-product-price-total{
-						font-family: 'DINPro-Medium';
+						font-family: 'ProximaNova-Semibold';
 						font-size: 42px;
-						line-height: 50px;
+						line-height: 42px;
 						color: #564531;
 						margin-bottom: 24px;
+						font-family: 'Lora-Bold';
 					}
 					.has-discount .b-product-price-total{
 						color: #CB6163;
@@ -2690,19 +2763,20 @@ h3.b-title{
 					}
 					.b-product-price-total.gram small{
 						padding-left: 15px;
-						font-family: 'DINPro-Regular';
+						font-family: 'ProximaNova-Regular';
 						font-size: 24px;
 						line-height: 30px;
 						color: #564531;
+						font-family: 'Lora-Regular';
 					}
 						.b-product-price-total .icon-ruble-bold:before {
 						    position: relative;
 						    top: -2px;
 						    font-size: 30px;
-						    margin-left: 14px;
+						    margin-left: 6px;
 						}
 					.b-product-quantity{
-						margin-bottom: 35px;
+						margin-bottom: 30px;
 					}
 					.b-product-quantity.unavailable{
 						display: none;
@@ -2713,7 +2787,7 @@ h3.b-title{
 						.b-product-quantity span{
 							font-size: 18px;
 							line-height: 22px;
-							font-family: 'DINPro-Medium';
+							font-family: 'Lora-Bold';
 							display: inline-block;
 							vertical-align: middle;
 						}
@@ -2756,7 +2830,7 @@ h3.b-title{
 							}
 							.product-quantity input[type=text],
 							.product-quantity input[type=number]{
-								padding: 5px 0 6px 0;
+								padding: 6px 0 6px 0;
 								width: 60px;
 								text-align: center;
 								font-size: 16px;
@@ -2770,13 +2844,13 @@ h3.b-title{
 							}
 					.b-product-params-right .b-btn{
 						position: relative;
-						margin-bottom: 42px;
-						font-family: 'DINPro-Regular';
+						margin-bottom: 32px;
+						font-family: 'ProximaNova-Regular';
 						line-height: 24px;
-    					padding: 16px 22px 20px 60px;
-    					color: #FFF;
-    					background-color: #77BE32;
-    					border: none;
+						padding: 18px 22px 18px 60px;
+						color: #FFF;
+						background-color: #77BE32;
+						border: none;
 					}
 					.b-product-params-right .b-btn.b-btn-to-cart-cap{
 						padding: 16px 22px 20px 40px;
@@ -2815,7 +2889,7 @@ h3.b-title{
 							.b-product-advantages li a{
 								display: inline-block;
 								line-height: 18px;
-								border-bottom: 1px solid #564531;
+								border-bottom: 1px solid #999;
 							}
 
 		.b-detail-tabs{
@@ -2829,7 +2903,7 @@ h3.b-title{
 				float: left;
 				display: inline-block;
 				vertical-align: top;
-				font-family: 'DINPro-Medium';
+				font-family: 'ProximaNova-Semibold';
 			}
 				.b-detail-tabs .tabs .tab span{
 					display: inline-block;
@@ -2840,6 +2914,7 @@ h3.b-title{
 					background-color: #EEE;
 					border: 1px solid #EEE;
 					border-bottom: 0;
+					font-family: 'Lora-Bold';
 				}
 				.b-detail-tabs .tabs .tab.active span{
 					position: relative;
@@ -2874,7 +2949,7 @@ h3.b-title{
 
 			}
 				.spec-block p span {
-				    font-family: 'DINPro-Medium';
+				    font-family: 'Lora-Bold';
 				}
 				.spec-block-left{
 					display: inline-block;
@@ -2894,7 +2969,7 @@ h3.b-title{
 						}
 							.spec-block-right ul li a{
 								display: inline-block;
-								border-bottom: 1px solid #564531;
+								border-bottom: 1px solid #dadada;
 								line-height: 18px;
 							}
 			.b-detail-review{
@@ -2920,7 +2995,7 @@ h3.b-title{
 						padding-top: 9px;
 					}
 						.b-detail-review-name h3{
-							font-family: 'DINPro-Medium';
+							font-family: 'ProximaNova-Semibold';
 							font-size: 18px;
 							line-height: 22px;
 							margin-bottom: 8px;
@@ -2990,7 +3065,7 @@ h3.b-title{
 				margin: 0 auto;
 			}
 				.b-detail-feedback h3{
-					font-family: 'DINPro-Medium';
+					font-family: 'ProximaNova-Semibold';
 					font-size: 26px;
 					line-height: 32px;
 					margin-bottom: 15px;
@@ -3007,13 +3082,13 @@ h3.b-title{
 						display: inline-block;
 					    border-bottom: 1px solid #564531;
 					    line-height: 18px;
-					    font-family: DINPro-Light;
+					    font-family: 'ProximaNova-Regular';
 					}
 					
 					.b-detail-feedback .b-btn{
 						float: right;
 						padding: 10px 29px 13px 29px;
-						font-family: 'DINPro-Regular';
+						font-family: 'ProximaNova-Regular';
 						font-size: 20px;
 						line-height: 24px;
 					}
@@ -3053,7 +3128,7 @@ h3.b-title{
 						margin-bottom: 0;
 					}
 						.models-item p span{
-							font-family: 'DINPro-Medium';
+							font-family: 'ProximaNova-Semibold';
 						}
 
 /*=======Разделы========*/
@@ -3142,7 +3217,7 @@ h3.b-title{
 				padding-bottom: 9px;
 				position: relative;
 				z-index: 1;
-				font-family: 'DINPro-Medium';
+				font-family: 'ProximaNova-Semibold';
 				font-size: 24px;
 				line-height: 30px;
 			}
@@ -3159,7 +3234,7 @@ h3.b-title{
 }
 	.catalog-mobile-filter {
 		display: none;
-		font-family: 'DINPro-Regular';
+		font-family: 'ProximaNova-Regular';
 		color: rgba(86, 69, 49, 0.5);
 		font-size: 18px;
 		text-decoration: underline;
@@ -3228,7 +3303,7 @@ h3.b-title{
 		}
 			.b-filter-tab{
 				cursor: pointer;
-				padding-top: 15px;
+				padding-top: 16px;
 				padding-bottom: 5px;
 			}
 			.b-filter-item-name{
@@ -3236,7 +3311,7 @@ h3.b-title{
 				margin-bottom: 16px;
 			}
 				.b-filter-item-name h3{
-					font-family: 'DINPro-Medium';
+					font-family: 'Lora-Bold';
 					font-size: 18px;
 					line-height: 26px;
 					padding-right: 35px;
@@ -3268,10 +3343,10 @@ h3.b-title{
 						}
 					.filter-toggle .icon-plus{
 						position: absolute;
-						top: 8px;
+						top: 7px;
 						left: 8px;
 						width: 13px;
-	    				height: 13px;
+						height: 13px;
 					}
 						.filter-toggle .icon-plus:before{
 							font-size: 14px;
@@ -3379,7 +3454,7 @@ h3.b-title{
 					font-size: 16px;
 					line-height: 20px;
 					text-align: center;
-					font-family: 'DINPro-Regular';
+					font-family: 'ProximaNova-Regular';
 				}
 					.range-inputs .icon-minus{
 						display: inline-block;
@@ -3433,11 +3508,15 @@ h3.b-title{
 
 			.b-filter-toggle .show-more{
 				display: inline-block;
-    			margin-bottom: 14px;
-    			text-decoration: none;
+				margin-bottom: 20px;
+				text-decoration: none;
+				color: #777;
+			}
+			.b-filter-toggle .show-more:hover{
+				border-color: transparent;
 			}
 			.b-filter-toggle .show-more:focus{
-				color: #564531;
+				/* color: #564531; */
 			}
 
 /*=======Каталог=======*/
@@ -3447,7 +3526,7 @@ h3.b-title{
 }
 .b-catalog-list{
 	display: inline-block;
-	width: calc(100% - 235px);
+	width: calc(100% - 236px);
 	margin-left: 16px;
 }
 .no-filter + .b-catalog-list{
@@ -3489,7 +3568,7 @@ h3.b-title{
 				display: inline-block;
 				vertical-align: top;
 				/*text-align: center;*/
-				padding: 10px 20px 14px;
+				padding: 12px 20px 12px;
 				border-radius: 3px;
 				border: 1px solid #E6E6E6;
 				width: calc((100% - 3*16px)/4);
@@ -3498,8 +3577,8 @@ h3.b-title{
 				-webkit-transition: background-color .1s, color .1s;
 				-o-transition: background-color .1s, color .1s;
 				transition: background-color .1s, color .1s;
-				    align-items: center;
-    			display: inline-flex;
+				align-items: center;
+				display: inline-flex;
 			}
 			.b-tile-item:nth-child(4n){
 				margin-right: 0;
@@ -3613,7 +3692,7 @@ h3.b-title{
 	.b-order-left{
 		display: inline-block;
 		vertical-align: top;
-		width: calc(100% - 368px);
+		width: calc(100% - 369px);
 		padding-right: 22px;
 	}
 
@@ -3643,6 +3722,7 @@ h3.b-title{
 		padding-top: 0;
 		padding-bottom: 5px;
 		width: 269px;
+		line-height: 24px;
 	}
 	.b-order-item-quantity{
 		width: 124px;
@@ -3719,7 +3799,7 @@ h3.b-title{
 		}
 			.b-price-string .explanation{
 				float: left;
-				font-family: 'DINPro-Medium';
+				font-family: 'ProximaNova-Semibold';
 				font-size: 18px;
 				line-height: 30px;
 			}
@@ -3727,7 +3807,7 @@ h3.b-title{
 			.b-price-string .price-total{
 				padding-top: 0;
 				float: right;
-				font-family: 'DINPro-Medium';
+				font-family: 'ProximaNova-Semibold';
 	    		font-size: 24px;
 	    		line-height: 30px;
 			}
@@ -3766,11 +3846,12 @@ h3.b-title{
 				line-height: 40px;
 			}
 			.price-final .price-total{
-				font-family: DINPro-Medium;
+				font-family: 'ProximaNova-Semibold';
 				font-size: 32px;
 				line-height: 40px;
 			}
-			.price-final .price-total .icon-ruble:before{
+			.price-final .price-total .icon-ruble:before,
+			.price-final .price-total .icon-ruble-bold:before{
 			    font-size: 22px;
 			    margin-left: 9px;
 			    position: relative;
@@ -3779,37 +3860,40 @@ h3.b-title{
 		
 		.b-order-coupon{
 			margin-bottom: 16px;
+			font-size: 0px;
 		}
 			.b-order-coupon .b-input{
 				display: inline-block;
 				vertical-align: middle;
 				float: none;
 				width: 147px;
-				margin-right: 12px;
+				margin-right: 15px;
 				margin-bottom: 0;
 			}
 				.b-order-coupon .b-input p{
-					font-family: 'DINPro-Regular';
+					font-family: 'ProximaNova-Regular';
 					font-size: 16px;
 					line-height: 20px;
 				}
 				.b-order-coupon .b-input input{
 					font-size: 14px;
-		    		line-height: 18px;
-					padding: 11px 19px 12px 19px;
+					line-height: 18px;
+					padding: 12px 19px 12px 19px;
 				}
 				.b-order-coupon .b-btn{
 					vertical-align: top;
-				    border-radius: 5px;
-				    margin-top: 28px;
-				    padding: 9px 25px 10px 25px;
-				    font-family: 'DINPro-Light';
-				    font-size: 16px;
-				    line-height: 20px;
-				    color: rgb(86, 69, 49);
+					border-radius: 5px;
+					margin-top: 28px;
+					padding: 10px 25px 10px 25px;
+					font-family: 'ProximaNova-Regular';
+					font-size: 16px;
+					line-height: 20px;
+					color: rgb(86, 69, 49);
 				}
 			.coupon-list{
 				margin-top: 8px;
+				font-size: 16px;
+				line-height: 24px;
 			}
 				.coupon-item{
 					margin-bottom: 4px;
@@ -3825,7 +3909,7 @@ h3.b-title{
 					margin-right: 10px;
 				}
 					.coupon-item p b{
-						font-family: 'DINPro-Medium';
+						font-family: 'ProximaNova-Semibold';
 					}
 				.coupon-item a{
 					color: #9E9891;
@@ -3836,7 +3920,7 @@ h3.b-title{
 
 	}
 		.b-order-form h3{
-			font-family: 'DINPro-Medium';
+			font-family: 'Lora-Bold';
 			font-size: 24px;
 			line-height: 30px;
 			margin-bottom: 24px;
@@ -3848,7 +3932,7 @@ h3.b-title{
 				margin-bottom: 24px;
 			}
 				.b-choice h4{
-					font-family: 'DINPro-Medium';
+					font-family: 'ProximaNova-Semibold';
 					font-size: 18px;
 					line-height: 22px;
 					margin-bottom: 16px;
@@ -3869,9 +3953,7 @@ h3.b-title{
 						float: right;
 						width: calc(50% - 12px);
 					}
-						.b-delivery-tabs li{
-
-						}
+						.b-delivery-tabs li{line-height: 24px;}
 				.b-pay{
 					float: right;
 					width: calc(100%/3 - 16px);
@@ -3912,9 +3994,9 @@ h3.b-title{
 	.b-btn-order-submit{
 	    min-width: 270px;
 	    position: relative;
-	    font-family: 'DINPro-Regular';
+	    font-family: 'ProximaNova-Regular';
 	    line-height: 24px;
-	    padding: 16px 17px 21px 17px;
+	    padding: 20px 17px 20px 17px;
 	    color: #FFF;
 	    background-color: #77BE32;
 	    border: none;
@@ -3950,7 +4032,7 @@ h3.b-title{
 		color: #d00000;
 	}
 	.b-popup h3{
-		font-family: 'DINPro-Medium';
+		font-family: 'ProximaNova-Semibold';
 	    font-size: 28px;
 	    line-height: 36px;
 	    margin-bottom: 24px;
@@ -3987,14 +4069,14 @@ h3.b-title{
 	display: block;
 	width: 100%;
 	text-align: center;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	color: #564531;
 	font-size: 24px;
 	margin-bottom: 23px;
 }
 .b-popup .politics {
 	font-size: 12px;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	color: rgba(86, 69, 49, 0.5);
 	margin-top: 7px;
 	margin-bottom: 32px;
@@ -4016,13 +4098,13 @@ h3.b-title{
 	margin-right: 0;
 }
 .popup-sign-list li a {
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
 	color: rgba(86, 69, 49, 0.5);
 }
 .popup-sign-list li a.active {
 	color: #564531;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 }
 .popup-sign-form {
 	display: none;
@@ -4047,7 +4129,7 @@ h3.b-title{
 .popup-sign-checkbox label {
 	padding-left: 30px;
 	position: relative;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	color: #564531;
 	font-size: 16px;
 }
@@ -4076,7 +4158,7 @@ h3.b-title{
 	top: -3px;
 }
 .popup-sign-pass-a {
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	color: rgba(86, 69, 49, 0.5);
 	font-size: 16px;
 }
@@ -4104,14 +4186,14 @@ h3.b-title{
 .popup-review-name {
 	display: inline-block;
 	vertical-align: middle;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	color: #564531;
 	font-size: 24px;
 }
 .popup-review-text {
 	text-align: left;
-	font-family: 'DINPro-Regular';
-	color: #000000;
+	font-family: 'ProximaNova-Regular';
+	/*color: #000000;*/
 	font-size: 18px;
 	line-height: 1.6;
 	margin-bottom: 32px;
@@ -4121,7 +4203,7 @@ h3.b-title{
 	padding-right: 61px;
 }
 .fancybox-container{
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 }
 .fancybox-button--share{
 	display: none;
@@ -4182,7 +4264,7 @@ h3.b-title{
 	.mobile-btn span{
 		font-size: 24px;
 		line-height: 34px;
-		font-family: 'DINPro-Medium';
+		font-family: 'ProximaNova-Semibold';
 	}
 .mobile-menu{
 	display: none;
@@ -4197,7 +4279,7 @@ h3.b-title{
 		}
 			.mobile-menu-user{
 				font-size: 18px;
-    			font-family: 'DINPro-Medium';
+    			font-family: 'ProximaNova-Semibold';
     			margin-bottom: 10px;
 			}
 			.mobile-menu-login a{
@@ -4224,7 +4306,7 @@ h3.b-title{
 		}
 			.mobile-menu ul>li a{
 				font-size: 18px;
-				font-family: 'DINPro-Medium';
+				font-family: 'ProximaNova-Semibold';
 				display: inline-block;
 				vertical-align: middle;
 			}
@@ -4319,11 +4401,11 @@ h3.b-title{
 	#b-popup-map h3,
 	#b-popup-map h4{
 		color: #564531;
-		font-family: 'DINPro-Medium';
+		font-family: 'ProximaNova-Semibold';
 	}
 	#b-popup-map p{
 		color: #564531;
-		font-family: 'DINPro-Regular';
+		font-family: 'ProximaNova-Regular';
 	}
 		.b-map-padding{
 			padding: 0 32px;
@@ -4350,7 +4432,7 @@ h3.b-title{
 					.b-inputs-right .b-btn-address{
 						margin-top: 30px;
 						width: calc(40% - 12px);
-						padding: 9px 40px 12px 40px;
+						padding: 13px 40px 13px 40px;
 					}
 	
 
@@ -4375,7 +4457,7 @@ h3.b-title{
 
 .ui-menu .ui-menu-item .ui-menu-item-wrapper{
     color: #434343;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
 	line-height: 28px;
 	padding: 12px 24px;
@@ -4577,8 +4659,8 @@ input[type=number],
 input[type=phone], 
 input[type=search],
 input[type=password]{
-	font-family: DINPro-Light;
-	padding: 11px 24px 13px 24px;
+	font-family: 'ProximaNova-Regular';
+	padding: 13px 24px 13px 24px;
 	font-size: 18px;
 	color: #454545;
 	line-height: 24px;
@@ -4596,12 +4678,12 @@ input:-moz-placeholder {
 textarea::-webkit-input-placeholder {
 	color: rgba(86,69,49,0.50);
 	font-size: 16px;
-	font-family: DINPro-Light;
+	font-family: 'ProximaNova-Regular';
 }
 textarea:-moz-placeholder {
 	color: rgba(86,69,49,0.50);
 	font-size: 16px;
-	font-family: DINPro-Light;
+	font-family: 'ProximaNova-Regular';
 }
 [class^="icon-"]:before, 
 [class*=" icon-"]:before,
@@ -4627,7 +4709,7 @@ textarea:-moz-placeholder {
 	margin-bottom: 32px;
 }
 	.b-input p, .b-textarea p{
-		font-family: 'DINPro-Medium';
+		font-family: 'ProximaNova-Semibold';
 		font-size: 18px;
 		line-height: 22px;
 		margin-bottom: 8px;
@@ -4636,7 +4718,7 @@ textarea:-moz-placeholder {
 	.b-input input{
 		width: 100%;
 		border-radius: 5px;
-		padding: 13px 18px 15px 18px;
+		padding: 14px 18px 14px 18px;
 	}
 
 .b-textarea{
@@ -4647,7 +4729,7 @@ textarea:-moz-placeholder {
 		border-radius: 3px;
 		padding: 14px 24px 20px 24px;
 		font-size: 16px;
-		font-family: DINPro-Light;
+		font-family: 'ProximaNova-Regular';
 		border: 1px solid rgba(86,69,49,0.5);
 		resize: none;
 	}
@@ -4665,7 +4747,7 @@ textarea:-moz-placeholder {
 	/*margin-top: 32px;*/
 }
 	.edit-checkbox p{
-		margin-bottom: 4px;
+		margin-bottom: 0px;
 	}
 
 .b-checkbox input[type="checkbox"].error + span + label .b-checked,
@@ -4674,9 +4756,9 @@ textarea:-moz-placeholder {
 	/*box-shadow: 0px 0px 0px 2px #F00;*/
 }
 .b-checkbox label{
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	/*font-size: 18px;*/
-	/*line-height: 22px;*/
+	line-height: 24px;
 	cursor: pointer;
 }
 
@@ -4822,16 +4904,17 @@ textarea:-moz-placeholder {
 	margin: 0 auto 16px;
 }
 .b-reviews-list .review-name {
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 24px;
 	color: #564531;
 	margin-bottom: 12px;
 }
 .b-reviews-list .review-text {
-	font-family: 'DINPro-Regular';
-	font-size: 18px;
-	color: #000000;
-	max-height: 131px;
+	font-family: 'ProximaNova-Regular';
+	font-size: 16px;
+	line-height: 24px;
+	/* color: #000000; */
+	max-height: 123px;
 	overflow: hidden;
 	margin-bottom: 8px;
 }
@@ -4839,9 +4922,9 @@ textarea:-moz-placeholder {
 	display: inline-block;
 	position: relative;
 	color: #979797;
-	font-size: 18px;
-	font-family: 'DINPro-Regular';
-	padding-bottom: 2px;
+	font-size: 16px;
+	font-family: 'ProximaNova-Regular';
+	padding-bottom: 0px;
 }
 .review-more-a::after {
 	content: '';
@@ -4851,7 +4934,7 @@ textarea:-moz-placeholder {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	background-color: #979797;
+	background-color: #dadada;
 }
 .b-detail-review .review-more-a{
 	display: none;
@@ -4880,8 +4963,8 @@ textarea:-moz-placeholder {
 .b-blog-filter li a {
 	display: block;
 	box-sizing: border-box;
-	font-family: 'DINPro-Light';
-	padding: 10px 15px 12px;
+	font-family: 'ProximaNova-Regular';
+	padding: 12px 15px 12px;
 	border: 1px solid #564531;
 	border-radius: 3px;
 	color: #564531;
@@ -4906,7 +4989,7 @@ textarea:-moz-placeholder {
 .b-blog-list-image {
 	display: inline-block;
 	vertical-align: top;
-	width: calc(50% - 12px);
+	width: calc(50% - 13px);
 	margin-right: 20px;
 }
 .b-blog-list-image img {
@@ -4922,8 +5005,8 @@ textarea:-moz-placeholder {
 .b-blog-list-text .blog-title {
 	margin-bottom: 8px;
 	width: 100%;
-	font-family: 'DINPro-Medium';
-	color: #000000;
+	font-family: 'ProximaNova-Semibold';
+	/* color: #000000; */
 	font-size: 24px;
 }
 .b-blog-list-text .blog-info {
@@ -4932,7 +5015,7 @@ textarea:-moz-placeholder {
 .b-blog-list-text .blog-info .blog-date {
 	display: inline-block;
 	vertical-align: middle;
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	color: #564531;
 	font-size: 16px;
 	margin-right: 20px;
@@ -4940,16 +5023,16 @@ textarea:-moz-placeholder {
 .b-blog-list-text .blog-info .blog-author {
 	display: inline-block;
 	vertical-align: middle;
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	color: rgba(86, 69, 49, 0.5);
 	font-size: 16px;
 }
 .b-blog-list-text p {
 	display: block;
 	width: 100%;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
-	color: #000000;
+	color: #564531;
 	line-height: 1.5;
 	margin-bottom: 10px;
 }
@@ -4958,7 +5041,7 @@ textarea:-moz-placeholder {
 	position: relative;
 	color: rgba(86, 69, 49, 0.35);
 	font-size: 12px;
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 }
 .b-blog-list-text span.blog-more-a {
 	display: inline-block;
@@ -4988,22 +5071,28 @@ textarea:-moz-placeholder {
 	padding-bottom: 40px;
 }
 .blog-more-article .blog-more-date {
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
 	color: #564531;
 	margin-bottom: 19px;
 }
 .blog-more-article .blog-more-author {
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
 	color: #564531;
 	margin-bottom: 27px;
 }
+.blog-more-article .article-text{
+	font-family: 'ProximaNova-Regular';
+	font-size: 16px;
+	line-height: 24px;
+}
 .blog-more-article .article-text p {
 	display: block;
 	max-width: 848px;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
+	line-height: 24px;
 	margin-bottom: 24px;
 }
 .blog-more-article .article-text img {
@@ -5023,7 +5112,7 @@ textarea:-moz-placeholder {
 .blog-more-cards-title {
 	display: block;
 	text-align: left;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 32px;
 	color: #564531;
 	margin-bottom: 40px;
@@ -5034,7 +5123,7 @@ textarea:-moz-placeholder {
 .blog-more-comments-title {
 	display: block;
 	text-align: left;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 32px;
 	color: #564531;
 	margin-bottom: 31px;
@@ -5044,7 +5133,7 @@ textarea:-moz-placeholder {
 .b-order-empty{
     color: #564531;
     font-size: 16px;
-    font-family: 'DINPro-Regular';
+    font-family: 'ProximaNova-Regular';
 }
 .sale-order-link, 
 .sale-order-history-link{
@@ -5072,29 +5161,29 @@ textarea:-moz-placeholder {
 	margin-right: 27px;
 }
 .delivery-info-item-title {
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 24px;
-	color: #000000;
+	/* color: #000000; */
 	margin-bottom: 16px;
 }
 .delivery-info-item p {
 	display: block;
 	width: 100%;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	color: #564531;
 	font-size: 16px;
-	line-height: 1.5;
+	line-height: 24px;
 	margin-bottom: 18px;
 }
 .delivery-info-item p a {
 	color: #564531;
 }
 .delivery-info-item p b {
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-weight: normal;
 }
 .delivery-info-list-title {
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	color: #564531;
 	font-size: 16px;
 	line-height: 1.5;
@@ -5110,7 +5199,7 @@ textarea:-moz-placeholder {
 	position: relative;
 	padding-bottom: 2px;
 	border-bottom: 1px solid;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	color: #564531;
 	font-size: 16px;
 }
@@ -5121,9 +5210,10 @@ textarea:-moz-placeholder {
 }
 .delivery-info-text p {
 	display: block;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
 	color: #564531;
+	line-height: 24px;
 	margin-bottom: 10px;
 }
 
@@ -5133,7 +5223,7 @@ textarea:-moz-placeholder {
 .payment-title {
 	display: block;
 	width: 100%;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 32px;
 	color: #564531;
 }
@@ -5173,9 +5263,9 @@ textarea:-moz-placeholder {
 	transform: translate(-50%, 0);
 }
 .payment-list-text {
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 24px;
-	color: #000000;
+	/* color: #000000; */
 }
 .payment-info {
 	display: inline-block;
@@ -5187,9 +5277,9 @@ textarea:-moz-placeholder {
 	border-radius: 3px;
 }
 .payment-info-title {
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 24px;
-	color: #000000;
+	/* color: #000000; */
 	margin-bottom: 17px;
 }
 .payment-info-text {
@@ -5198,7 +5288,7 @@ textarea:-moz-placeholder {
 .payment-info-text p {
 	display: block;
 	width: 100%;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	color: #564531;
 	line-height: 1.5;
 	font-size: 16px;
@@ -5206,12 +5296,12 @@ textarea:-moz-placeholder {
 }
 .payment-info-text p b {
 	font-weight: normal;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 }
 
 .delivery-methods-title {
 	display: block;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 32px;
 	color: #564531;
 	margin-bottom: 31px;
@@ -5249,15 +5339,16 @@ textarea:-moz-placeholder {
 	transform: translate(-50%, -50%);
 }
 .delivery-method-title {
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 24px;
-	color: #000000;
+	/* color: #000000; */
 	margin-bottom: 7px;
 }
 .delivery-method-text {
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
-	color: #000000;
+	/* color: #000000; */
+	line-height: 24px;
 }
 
 /*======О нас======*/
@@ -5282,7 +5373,7 @@ textarea:-moz-placeholder {
 	text-align: center;
 }
 .about-face-title {
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	font-size: 52px;
 	color: #ffffff;
 	margin-bottom: 31px;
@@ -5293,7 +5384,7 @@ textarea:-moz-placeholder {
 	margin: 0 auto 32px;
 }
 .about-face-subtitle {
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	color: #ffffff;
 	font-size: 42px;
 }
@@ -5306,22 +5397,22 @@ textarea:-moz-placeholder {
 	display: inline-block;
 	vertical-align: middle;
 	box-sizing: border-box;
-	width: calc(50% + 84px);
+	width: calc(50% + 83px);
 	margin-right: 46px;
 }
 .about-info-text h3 {
 	display: block;
-	font-family: 'DINPro-Medium';
-	color: #000000;
+	font-family: 'ProximaNova-Semibold';
+	color: #564531;
 	font-size: 18px;
 	line-height: 24px;
 	margin-bottom: 10px;
 }
 .about-info-text p {
 	display: block;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	font-size: 16px;
-	color: #000000;
+	/* color: #000000; */
 	line-height: 24px;
 	margin-bottom: 10px;
 }
@@ -5330,8 +5421,8 @@ textarea:-moz-placeholder {
 }
 .about-info-text p a {
 	display: inline-block;
-	font-family: 'DINPro-Medium';
-	color: #000000;
+	font-family: 'ProximaNova-Semibold';
+	/* color: #000000; */
 	padding-bottom: 2px;
 	position: relative;
 }
@@ -5343,7 +5434,7 @@ textarea:-moz-placeholder {
 	position: absolute;
 	left: 0;
 	bottom: 3px;
-	background-color: #564531;
+	background-color: #dadada;
 }
 .about-info-wrap {
 	display: inline-block;
@@ -5355,9 +5446,9 @@ textarea:-moz-placeholder {
 	border-radius: 3px;
 }
 .about-info-wrap-title {
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 24px;
-	color: #000000;
+	color: #564531;
 	margin-bottom: 17px;
 }
 .about-info-wrap-text {
@@ -5366,7 +5457,7 @@ textarea:-moz-placeholder {
 .about-info-wrap-text p {
 	display: block;
 	width: 100%;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	color: #564531;
 	line-height: 1.5;
 	font-size: 16px;
@@ -5374,7 +5465,7 @@ textarea:-moz-placeholder {
 }
 .about-info-wrap-text p b {
 	font-weight: normal;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 }
 
 .b-about-articles-block {
@@ -5385,7 +5476,7 @@ textarea:-moz-placeholder {
 }
 .about-articles-block-title {
 	display: block;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 32px;
 	color: #564531;
 	margin-bottom: 33px;
@@ -5398,7 +5489,7 @@ textarea:-moz-placeholder {
 	display: inline-block;
 	vertical-align: top;
 	margin-right: 20px;
-	width: calc(50% - 12px);
+	width: calc(50% - 13px);
 }
 #vk_widget, #vk_groups {
     width: 100%!important;
@@ -5410,7 +5501,7 @@ textarea:-moz-placeholder {
 }
 .about-qwestions-title {
 	display: block;
-	font-family: 'DINPro-Medium';
+	font-family: 'ProximaNova-Semibold';
 	font-size: 32px;
 	color: #564531;
 	margin-bottom: 23px;
@@ -5420,7 +5511,7 @@ textarea:-moz-placeholder {
 }
 .about-qwestions-form .b-btn {
 	padding: 17px 10px 19px;
-	width: calc(50% - 12px);
+	width: calc(50% - 14px);
 	margin-right: 20px;
 }
 .about-qwestions-form .politics {
@@ -5428,7 +5519,7 @@ textarea:-moz-placeholder {
 	vertical-align: top;
 	width: calc(50% - 12px);
 	font-size: 12px;
-	font-family: 'DINPro-Regular';
+	font-family: 'ProximaNova-Regular';
 	color: rgba(86, 69, 49, 0.5);
 }
 
@@ -5446,7 +5537,7 @@ textarea:-moz-placeholder {
 		opacity: 0.25;
 		min-width: 270px;
 	    position: relative;
-	    font-family: 'DINPro-Regular';
+	    font-family: 'ProximaNova-Regular';
 	    line-height: 24px;
 	    padding: 16px 17px 21px 17px;
 	    color: #FFF;

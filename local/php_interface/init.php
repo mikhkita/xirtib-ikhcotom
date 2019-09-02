@@ -543,7 +543,7 @@ function getBasketCount(){
 	$res = $discounts->getApplyResult();
 
 	return array(
-		"count" => array_sum($basket->getQuantityList()),
+		"count" => count($basketItems),
 		//"sum" => number_format( $order->getPrice(), 0, ',', ' ' )
 		"sum" => convertPrice($order->getPrice())
 	);
@@ -900,7 +900,7 @@ function getElementImages($arResult, $isList = false){
 			}
 
 			if ($offer["PREVIEW_PICTURE"]) {
-				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
+				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"], false, true);
 				$colorFlag = true;
 			} else {
 				$arColorPhoto['ORIGINAL'] = $arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
@@ -922,7 +922,7 @@ function getElementImages($arResult, $isList = false){
 		}
 	} else {
 		if ($arResult["DETAIL_PICTURE"]){
-			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"]);
+			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"], $isList);
 		} else {
 			$arPhoto['ORIGINAL'] = $arPhoto['BIG'] = $arPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
 		}
@@ -932,15 +932,21 @@ function getElementImages($arResult, $isList = false){
 	return $arImg;
 }
 
-function resizePhotos($photo, $isList){
+function resizePhotos($photo, $isList = false, $isColor = false){
 	$tmpBig = CFile::ResizeImageGet($photo, Array("width" => 692, "height" => 692), BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
 	$tmpOriginal = CFile::ResizeImageGet($photo, Array("width" => 2048, "height" => 2048), BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
 	$smallSize = $isList ? Array("width" => 362, "height" => 362) : Array("width" => 146, "height" => 146);
-	$tmpSmall = CFile::ResizeImageGet($photo, $smallSize, BX_RESIZE_IMAGE_PROPORTIONAL, false, false, false, 50);
+	$resizeType = $isColor ? BX_RESIZE_IMAGE_EXACT : BX_RESIZE_IMAGE_PROPORTIONAL;
+	$tmpSmall = CFile::ResizeImageGet($photo, $smallSize, $resizeType, false, false, false, 50);
 	$arPhoto['ORIGINAL'] = $tmpOriginal['src'];
 	$arPhoto['BIG'] = $tmpBig['src'];
 	$arPhoto['SMALL'] = $tmpSmall['src'];
 	return $arPhoto;
+}
+
+function getOffers($id){
+	$offers = CCatalogSKU::getOffersList($id, 1, array(), array("DETAIL_PICTURE", "PREVIEW_PICTURE"),array());
+	return $offers[$id];
 }
 
 function isSectionActive($sectionID){

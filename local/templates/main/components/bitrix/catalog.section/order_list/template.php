@@ -55,8 +55,8 @@ $this->setFrameMode(true);?>
 					</div>
 					<div class="b-order-item-right">
 						<div class="b-order-item-price <?=$class?>">
-							<div class="price-base"><?=$price?><span class="icon-ruble"></span></div>
-							<div class="price-total"><?=$discountPrice?><span class="icon-ruble"></span></div>
+							<div class="price-base"><?=$price?><span class="icon-ruble-bold"></span></div>
+							<div class="price-total"><?=$discountPrice?><span class="icon-ruble-bold"></span></div>
 						</div>
 						<div class="b-order-item-icon">
 							<a href="/ajax/?action=FAVOURITE_REMOVE&ID=<?=$arItem['ID']?>" class="icon-close"></a>

@@ -378,5 +378,13 @@
 	<? endif; ?>
 	<!-- \\\\\\\\ -->
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.js?<?=$GLOBALS["version"]?>"></script>
+
+
+	<script>
+		(function(w,d,u){
+			var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
+			var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+		})(window,document,'https://cdn.bitrix24.ru/b11580950/crm/tag/call.tracker.js');
+	</script>
 </body>
 </html>

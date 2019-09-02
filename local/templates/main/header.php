@@ -4,7 +4,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 $curPage = $APPLICATION->GetCurPage();
 $urlArr = $GLOBALS["urlArr"] = explode("/", $curPage);
 $page = $GLOBALS["page"] = ( $urlArr[2] == null || $urlArr[2] == "" )?$urlArr[1]:$urlArr[2];
-$GLOBALS["version"] = 60;
+$GLOBALS["version"] = 72;
 $is404 = defined('ERROR_404') && ERROR_404=='Y' && !defined('ADMIN_SECTION');
 $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[1]];
 
@@ -159,41 +159,45 @@ if ($arFav > 0){
 						);?>
 					</div>
 					<div class="b-search-form">
-						<?$APPLICATION->IncludeComponent("bitrix:search.title", "header", Array(
-							"CATEGORY_0" => array(	// Ограничение области поиска
-									0 => "iblock_content",
-								),
-								"CATEGORY_0_TITLE" => "",	// Название категории
-								"CATEGORY_0_forum" => array(
-									0 => "all",
-								),
-								"CATEGORY_0_iblock_content" => array(	// Искать в информационных блоках типа "iblock_content"
-									0 => "1",
-								),
-								"CATEGORY_0_main" => array(
-									0 => "",
-								),
-								"CHECK_DATES" => "N",	// Искать только в активных по дате документах
-								"CONTAINER_ID" => "title-search",	// ID контейнера, по ширине которого будут выводиться результаты
-								"CONVERT_CURRENCY" => "N",	// Показывать цены в одной валюте
-								"INPUT_ID" => "title-search-input",	// ID строки ввода поискового запроса
-								"NUM_CATEGORIES" => "1",	// Количество категорий поиска
-								"ORDER" => "rank",	// Сортировка результатов
-								"PAGE" => "#SITE_DIR#search/",	// Страница выдачи результатов поиска (доступен макрос #SITE_DIR#)
-								"PREVIEW_HEIGHT" => "75",	// Высота картинки
-								"PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода
-								"PREVIEW_WIDTH" => "75",	// Ширина картинки
-								"PRICE_CODE" => "",	// Тип цены
-								"PRICE_VAT_INCLUDE" => "Y",	// Включать НДС в цену
-								"SHOW_INPUT" => "Y",	// Показывать форму ввода поискового запроса
-								"SHOW_OTHERS" => "N",	// Показывать категорию "прочее"
-								"SHOW_PREVIEW" => "Y",	// Показать картинку
-								"TEMPLATE_THEME" => "site",
-								"TOP_COUNT" => "8",	// Количество результатов в каждой категории
-								"USE_LANGUAGE_GUESS" => "Y",	// Включить автоопределение раскладки клавиатуры
-							),
-							false
-						);?>
+						<?$APPLICATION->IncludeComponent(
+	"bitrix:search.title", 
+	"header", 
+	array(
+		"CATEGORY_0" => array(
+			0 => "iblock_content",
+		),
+		"CATEGORY_0_TITLE" => "",
+		"CATEGORY_0_forum" => array(
+			0 => "all",
+		),
+		"CATEGORY_0_iblock_content" => array(
+			0 => "1",
+		),
+		"CATEGORY_0_main" => array(
+		),
+		"CHECK_DATES" => "N",
+		"CONTAINER_ID" => "title-search",
+		"CONVERT_CURRENCY" => "N",
+		"INPUT_ID" => "title-search-input",
+		"NUM_CATEGORIES" => "1",
+		"ORDER" => "rank",
+		"PAGE" => "#SITE_DIR#search/",
+		"PREVIEW_HEIGHT" => "75",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"PREVIEW_WIDTH" => "75",
+		"PRICE_CODE" => array(
+		),
+		"PRICE_VAT_INCLUDE" => "Y",
+		"SHOW_INPUT" => "Y",
+		"SHOW_OTHERS" => "N",
+		"SHOW_PREVIEW" => "Y",
+		"TEMPLATE_THEME" => "site",
+		"TOP_COUNT" => "8",
+		"USE_LANGUAGE_GUESS" => "Y",
+		"COMPONENT_TEMPLATE" => "header"
+	),
+	false
+);?>
 					</div>
 					<div class="b-control">
 						<? if (isAuth()): ?>
@@ -245,7 +249,7 @@ if ($arFav > 0){
 					<? $basketInfo = getBasketCount(); ?>
 
 					<a href='/cart/order/' class="b-price-button" id="b-price-button" <?/*?> style="display: none;"<?*/?>>
-						<span class="b-cart-price icon-ruble" id="b-cart-sum"><?=$basketInfo['sum']?></span>
+						<span class="b-cart-price icon-ruble-bold" id="b-cart-sum"><?=$basketInfo['sum']?></span>
 						<span class="b-cart-number-container">
 							<span class="b-cart-number" id="b-cart-count"><?=$basketInfo['count']?></span>
 						</span>

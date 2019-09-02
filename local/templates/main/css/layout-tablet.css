@@ -87,9 +87,12 @@ body {
 }
 .order-header-right p{
 	display: inline-block;
-	font-family: 'DINPro-Light';
+	font-family: 'ProximaNova-Regular';
 	font-size: 24px;
 	line-height: 30px;
+}
+.track-number{
+	float: none;
 }
 .order-status{
 	position: static;
@@ -299,7 +302,7 @@ body {
 	    right: 38px;
 	}
 	.b-order-total {
-	    width: 232px;
+	    /*width: 232px;*/
 	}
 
 	.b-input {

@@ -205,8 +205,9 @@ $(document).ready(function(){
 	// });
 
 	$(".goal-click").click(function(){
-		if( $(this).attr("data-goal") )
+		if( $(this).attr("data-goal") && typeof ym != "undefined" ){
 			ym(36653305, 'reachGoal', $(this).attr("data-goal"));
+		}
 	});
 
 	$(".ajax, .not-ajax").parents("form").submit(function(){
@@ -278,7 +279,7 @@ $(document).ready(function(){
 				customHandlers[$this.attr("data-beforeAjax")]($this);
 			}
 
-			if( $this.attr("data-goal") ){
+			if( $this.attr("data-goal") && typeof ym != "undefined" ){
 				ym(36653305, 'reachGoal', $(this).attr("data-goal"));
 			}
 
