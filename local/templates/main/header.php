@@ -4,7 +4,8 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 $curPage = $APPLICATION->GetCurPage();
 $urlArr = $GLOBALS["urlArr"] = explode("/", $curPage);
 $page = $GLOBALS["page"] = ( $urlArr[2] == null || $urlArr[2] == "" )?$urlArr[1]:$urlArr[2];
-$GLOBALS["version"] = 72;
+$lighthouse = $GLOBALS["lighthouse"] = strpos($_SERVER['HTTP_USER_AGENT'], "Lighthouse");
+$GLOBALS["version"] = 74;
 $is404 = defined('ERROR_404') && ERROR_404=='Y' && !defined('ADMIN_SECTION');
 $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[1]];
 
@@ -31,19 +32,37 @@ if ($arFav > 0){
 <head>
 	<title><?$APPLICATION->ShowTitle()?></title>
 	
-	<?$APPLICATION->ShowHead();?>
+	<?//$APPLICATION->ShowHead();?>
+	<?
+	$APPLICATION->ShowMeta("keywords");
+	$APPLICATION->ShowMeta("description");
+	?>
 
 	<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 	<meta name="format-detection" content="telephone=no">
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/reset.css" type="text/css">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/jquery.fancybox.css" type="text/css">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/KitAnimate.css" type="text/css">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/slick.css" type="text/css">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/chosen.min.css" type="text/css">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/jquery-ui.min.css" type="text/css">
-	<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/layout.css?<?=$GLOBALS["version"]?>" type="text/css">
+	<?
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/reset.css");
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/jquery.fancybox.css");
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/KitAnimate.css");
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/slick.css");
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/chosen.min.css");
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/jquery-ui.min.css");
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/reset.css");
+		if($GLOBALS["lighthouse"]){
+			$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/icomoon-preload.css");
+		}else{
+			$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/icomoon.css");
+		}
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/layout.css?".$GLOBALS["version"]);
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/layout-tablet.css?".$GLOBALS["version"]);
+		$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/layout-mobile.css?".$GLOBALS["version"]);
+
+		if(!$GLOBALS["lighthouse"]){
+	        $APPLICATION->ShowCSS();         // Подключение файлов стилей CSS
+	    }
+	?>
 
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png" />
@@ -66,14 +85,43 @@ if ($arFav > 0){
 	<meta name="msapplication-wide310x150logo" content="/favicon/mstile-310x150.png" />
 	<meta name="msapplication-square310x310logo" content="/favicon/mstile-310x310.png" />
 
-	<link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 1188px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-tablet.css?<?=$GLOBALS["version"]?>">
-	<link rel="stylesheet" media="screen and (min-width: 240px) and (max-width: 767px)" href="<?=SITE_TEMPLATE_PATH?>/css/layout-mobile.css?<?=$GLOBALS["version"]?>">
+	<?$APPLICATION->ShowHeadStrings();?>
 
 	<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-3.2.1.min.js"></script>
+	<?
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.fancybox.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.touch.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.maskedinput.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.validate.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/KitAnimate.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/plupload.full.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/mask.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/KitProgress.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/KitSend.js?".$GLOBALS["version"]);
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/slick.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/chosen.jquery.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/autosize.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery-ui.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.ui.touch-punch.min.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/slideout.min.js");
+		//Плагины для страницы оформления заказа
+		if($urlArr[1] == "cart" && $urlArr[2] == "order"){
+			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/vue.min.js");
+			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/vee-validate.min.js");
+			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.sticky-kit.min.js");
+			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/address.js?".$GLOBALS["version"]);
+			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/AddressDeliveryClass.js?".$GLOBALS["version"]);
+			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/app-order.js?".$GLOBALS["version"]);
+		}
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/main.js?".$GLOBALS["version"]);
+	?>
+
 	<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
-	<script>
-		!function(e){var n;if("function"==typeof define&&define.amd&&(define(e),n=!0),"object"==typeof exports&&(module.exports=e(),n=!0),!n){var t=window.Cookies,o=window.Cookies=e();o.noConflict=function(){return window.Cookies=t,o}}}(function(){function f(){for(var e=0,n={};e<arguments.length;e++){var t=arguments[e];for(var o in t)n[o]=t[o]}return n}function a(e){return e.replace(/(%[0-9A-Z]{2})+/g,decodeURIComponent)}return function e(u){function c(){}function t(e,n,t){if("undefined"!=typeof document){"number"==typeof(t=f({path:"/"},c.defaults,t)).expires&&(t.expires=new Date(1*new Date+864e5*t.expires)),t.expires=t.expires?t.expires.toUTCString():"";try{var o=JSON.stringify(n);/^[\{\[]/.test(o)&&(n=o)}catch(e){}n=u.write?u.write(n,e):encodeURIComponent(String(n)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),e=encodeURIComponent(String(e)).replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent).replace(/[\(\)]/g,escape);var r="";for(var i in t)t[i]&&(r+="; "+i,!0!==t[i]&&(r+="="+t[i].split(";")[0]));return document.cookie=e+"="+n+r}}function n(e,n){if("undefined"!=typeof document){for(var t={},o=document.cookie?document.cookie.split("; "):[],r=0;r<o.length;r++){var i=o[r].split("="),c=i.slice(1).join("=");n||'"'!==c.charAt(0)||(c=c.slice(1,-1));try{var f=a(i[0]);if(c=(u.read||u)(c,f)||a(c),n)try{c=JSON.parse(c)}catch(e){}if(t[f]=c,e===f)break}catch(e){}}return e?t[e]:t}}return c.set=t,c.get=function(e){return n(e,!1)},c.getJSON=function(e){return n(e,!0)},c.remove=function(e,n){t(e,"",f(n,{expires:-1}))},c.defaults={},c.withConverter=e,c}(function(){})});
-	</script>
+	<? if(!$GLOBALS["lighthouse"]): ?>
+		<script>
+			!function(e){var n;if("function"==typeof define&&define.amd&&(define(e),n=!0),"object"==typeof exports&&(module.exports=e(),n=!0),!n){var t=window.Cookies,o=window.Cookies=e();o.noConflict=function(){return window.Cookies=t,o}}}(function(){function f(){for(var e=0,n={};e<arguments.length;e++){var t=arguments[e];for(var o in t)n[o]=t[o]}return n}function a(e){return e.replace(/(%[0-9A-Z]{2})+/g,decodeURIComponent)}return function e(u){function c(){}function t(e,n,t){if("undefined"!=typeof document){"number"==typeof(t=f({path:"/"},c.defaults,t)).expires&&(t.expires=new Date(1*new Date+864e5*t.expires)),t.expires=t.expires?t.expires.toUTCString():"";try{var o=JSON.stringify(n);/^[\{\[]/.test(o)&&(n=o)}catch(e){}n=u.write?u.write(n,e):encodeURIComponent(String(n)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),e=encodeURIComponent(String(e)).replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent).replace(/[\(\)]/g,escape);var r="";for(var i in t)t[i]&&(r+="; "+i,!0!==t[i]&&(r+="="+t[i].split(";")[0]));return document.cookie=e+"="+n+r}}function n(e,n){if("undefined"!=typeof document){for(var t={},o=document.cookie?document.cookie.split("; "):[],r=0;r<o.length;r++){var i=o[r].split("="),c=i.slice(1).join("=");n||'"'!==c.charAt(0)||(c=c.slice(1,-1));try{var f=a(i[0]);if(c=(u.read||u)(c,f)||a(c),n)try{c=JSON.parse(c)}catch(e){}if(t[f]=c,e===f)break}catch(e){}}return e?t[e]:t}}return c.set=t,c.get=function(e){return n(e,!1)},c.getJSON=function(e){return n(e,!0)},c.remove=function(e,n){t(e,"",f(n,{expires:-1}))},c.defaults={},c.withConverter=e,c}(function(){})});
+		</script>
+	<? endif; ?>
 </head>
 <body>
 	<?$APPLICATION->ShowPanel();?>

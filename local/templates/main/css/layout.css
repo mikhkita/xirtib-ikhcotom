@@ -9,7 +9,7 @@
          url('../fonts/Lora-Bold.svg#Lora-Bold') format('svg');
     font-weight: normal;
     font-style: normal;
-
+	font-display: swap;
 }
 
 @font-face {
@@ -21,7 +21,7 @@
          url('../fonts/Lora-Regular.svg#Lora-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
-
+	font-display: swap;
 }
 
 @font-face {
@@ -34,6 +34,7 @@
 		 url('../fonts/ProximaNova-Regular.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -46,6 +47,7 @@
 		 url('../fonts/ProximaNova-Semibold.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -58,17 +60,7 @@
 		 url('../fonts/ProximaNova-Bold.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
-}
-
-@font-face {
-  font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?ael9xc');
-  src:  url('../fonts/icomoon.eot?ael9xc#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?ael9xc') format('truetype'),
-    url('../fonts/icomoon.woff?ael9xc') format('woff'),
-    url('../fonts/icomoon.svg?ael9xc#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
+	font-display: swap;
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -2089,12 +2081,20 @@ h3.b-title{
 					.b-order-item-left{
 						float: left;
 					}
-						.b-order-item img{
+						.b-order-item .b-order-item-img-inner{
 							display: inline-block;
+							text-align: center;
 							width: 73px;
 							height: 73px;
 							margin-right: 20px;
 						}
+							.b-order-item .b-order-item-img-inner img{
+								display: inline-block;
+								width: auto;
+								height: auto;
+								max-width: 100%;
+								max-height: 100%;
+							}
 						.b-order-item-image{
 							display: inline-block;
 							width: 73px;
