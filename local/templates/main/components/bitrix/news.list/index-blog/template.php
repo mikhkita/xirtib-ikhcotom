@@ -23,7 +23,7 @@ if(count($arResult["ITEMS"])): ?>
 				<? $text = substr($text, 0, $pos).'...'; ?>
 
 				<? if( $arItem["PREVIEW_PICTURE"] ): ?>
-					<?$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 261, "height" => 186), BX_RESIZE_IMAGE_EXACT, false, $arFilters );?>
+					<?$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 260, "height" => 185), BX_RESIZE_IMAGE_EXACT, false, false, false, 50 );?>
 				<? else: ?>
 					<? $renderImage['src'] = SITE_TEMPLATE_PATH.'/i/popup-logo.svg'?>
 				<? endif; ?>
