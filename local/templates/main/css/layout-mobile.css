@@ -450,8 +450,11 @@ body {
 		    background: #fff;
 		    -webkit-appearance: none;
 		    appearance: none;
-	        max-width: calc(100% - 125px);
+	        max-width: calc(100% - 131px);
             font-family: 'ProximaNova-Regular';
+		}
+		.b-catalog-list .b-product-colors .chosen-container{
+			max-width: calc(100% - 131px);
 		}
 		.b-product-colors{
 			margin-bottom: 0;
