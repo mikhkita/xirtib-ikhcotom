@@ -747,7 +747,7 @@ body {
 	margin-bottom: 24px;
 }
 .b-product-params-left .b-product-colors select{
-	width: calc(100% - 65px);
+	width: calc(100% - 80px);
 	max-width: 375px;
 }
 .b-product-texture{
