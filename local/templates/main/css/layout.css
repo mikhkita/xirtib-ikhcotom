@@ -482,23 +482,25 @@ h3.b-title{
 		}
 .b-bottom{
 	padding-top: 32px;
-	padding-bottom: 32px;
+	padding-bottom: 27px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 }
 	.b-logo{
-		background-image: url(../i/main-logo.svg);
+		background-image: url(../i/logo.svg);
 		width: 274px;
 		height: 89px;
 		display: inline-block;
 		vertical-align: middle;
+		background-size: contain;
+		background-repeat: no-repeat;
 	}
 	.b-search-form{
 		display: inline-block;
 		width: calc(100% - 500px);
-		margin-top: 5px;
+		margin-top: -7px;
 		vertical-align: middle;
 		position: relative;
 	}
@@ -716,7 +718,7 @@ h3.b-title{
 			
 	.b-control{
 		position: relative;
-		margin-top: 6px;
+		margin-top: -14px;
 		margin-right: 2px;
 		display: inline-block;
 		vertical-align: middle;
@@ -935,6 +937,9 @@ h3.b-title{
 					-o-transform: translate(-50%, -50%);
 					transform: translate(-50%, -50%);
 				}
+.b-bill-btn{
+	margin-top: 20px;
+}
 .b-main-slider{
 	position: relative;
 	border-bottom: 1px solid #EEEEEE;

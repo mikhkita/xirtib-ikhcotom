@@ -69,20 +69,23 @@ foreach ($tmp["properties"] as $key => $arProp) {
 // print_r($props);
 
 ?>
-<? if ($paySystem["BUFFERED_OUTPUT"] && $payment["ID"] == 1){
-	$GLOBALS['APPLICATION']->RestartBuffer();
+<? 
+// if ($paySystem["BUFFERED_OUTPUT"] && $payment["ID"] == 1){
+	// $GLOBALS['APPLICATION']->RestartBuffer();
 ?>
-<div style="display: none;">
+<!-- <div style="display: none;"> -->
 <?
-	$_SESSION['SALE_ORDER_ID'] = array($_REQUEST["ORDER_ID"]);
-	echo $paySystem["BUFFERED_OUTPUT"];
+	// $_SESSION['SALE_ORDER_ID'] = array($_REQUEST["ORDER_ID"]);
+	// echo $paySystem["BUFFERED_OUTPUT"];
 ?>
-</div>
-<script>
-	document.getElementById("pay").submit();
-</script>
-<?	die();
-} ?>
+<!-- </div> -->
+<!-- <script> -->
+	<!-- document.getElementById("pay").submit(); -->
+<!-- </script> -->
+<?	
+// die();
+// } 
+?>
 
 <?
 if (!empty($arResult["ORDER"])){

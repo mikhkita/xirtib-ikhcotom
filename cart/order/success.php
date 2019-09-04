@@ -153,11 +153,12 @@ $APPLICATION->SetTitle("Оформление заказа");
 						$arPaySysAction["ERROR"] = $initResult->getErrorMessages();
 
 					// var_dump($arPaySysAction);
+					// die();
 				}
 			}
 		}
 
-		if( !empty($arPaySysAction["BUFFERED_OUTPUT"]) ){
+		if( !empty($arPaySysAction["BUFFERED_OUTPUT"]) && $arPaySysAction["ID"] != 1 ){
 			$GLOBALS['APPLICATION']->RestartBuffer();?>
 			<div style="display: none;">
 			<?

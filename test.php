@@ -1,6 +1,14 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Моточки - клубочки");
 
+// $arFields["ORDER_ID"] = 52;
+
+
+
+die();
+
+
+
 $arFields["ORDER_ID"] = 22;
 
 $order = Bitrix\Sale\Order::load($arFields["ORDER_ID"]);

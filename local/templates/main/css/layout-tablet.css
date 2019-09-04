@@ -5,6 +5,10 @@
 body {
 	min-width: 750px;
 }
+.b-logo{
+	position: relative;
+	top: 3px;
+}
 .b-block{
 	width: calc(100% - 48px);
 }

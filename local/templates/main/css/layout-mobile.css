@@ -1429,6 +1429,8 @@ body {
 		width: 180px;
 		height: 59px;
 		background-size: contain;
+		position: relative;
+		top: 2px;
 	}
 	.b-tab-wool {
 		width: calc(50% - 4px);

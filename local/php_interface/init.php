@@ -1,5 +1,6 @@
 <?
 
+use Bitrix\Sale;
 
 AddEventHandler("main", "OnEndBufferContent", "replacePlaceholders");
 function replacePlaceholders(&$content){
@@ -33,9 +34,11 @@ class MyEventHandlers
 			$propCollection = $order->getPropertyCollection();
 			$temp = $propCollection->getArray();
 			$arFields['CLIENT_INFO'] = '';
+			$telegramClientInfo = '';
 			foreach ($temp["properties"] as $prop) {
 				if (isset($prop['VALUE'][0])) {
 					$arFields['CLIENT_INFO'] .= "<b>".$prop['NAME'].":</b> ".$prop['VALUE'][0]."<br>";
+					$telegramClientInfo .= "<b>".$prop['NAME'].":</b> ".$prop['VALUE'][0]."\n";
 				}
 			}
 
@@ -69,7 +72,7 @@ class MyEventHandlers
 								 	"<td>Цена&nbsp;со&nbsp;скидкой</td>".
 								 	"<td style='padding-right:0px;'>Сумма</td>".
 								 "</tr>";
-			$arBasketItemsTelegram = "Список товаров:<br>";
+			$arBasketItemsTelegram = "\n<b>Список товаров:</b>\n";
 			$totalSum = 0;
 
 			while ($item = $dbBasketItems->Fetch()){
@@ -91,12 +94,12 @@ class MyEventHandlers
 					"<td style='padding-right:0px;'>".convertPrice($sum)."</td>".
 				"</tr>";
 				$arBasketItemsTelegram .= 
-					"Товар: <a style='color: #77be32;' href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a><br>".
-					"Количество: ".round($item['QUANTITY'])."<br>".
-					"Цена: ".convertPrice($item['BASE_PRICE'])."<br>".
-					"Цена&nbsp;со&nbsp;скидкой: ".$discountPrice."<br>".
-					"Сумма: ".$sum."<br>".
-					"______<br>";
+					"<a style='color: #77be32;' href='http://motochki-klubochki.ru".$item['DETAIL_PAGE_URL']."#".$item['PRODUCT_ID']."'>".$name."</a> ".round($item['QUANTITY'])." шт по ".convertPrice($discountPrice)." руб. = ".convertPrice($sum)." руб.\n";
+					// "Количество: ".round($item['QUANTITY'])."\n".
+					// "Цена: ".convertPrice($item['BASE_PRICE'])."\n".
+					// "Цена со скидкой: ".$discountPrice."\n".
+					// "Сумма: ".$sum."\n".
+					// "______\n";
 			}
 
 			$arBasketItems.= "<tr>".
@@ -112,18 +115,32 @@ class MyEventHandlers
 			$arFields['DELIVERY_NAME'] = $arDelivery['NAME'];
 
 			//Собираем сообщение в телеграм
-			$msgTelegram = "Новый заказ на сайте «Моточки Клубочки»<br>";
-			$msgTelegram .= $arFields['CLIENT_INFO'];
+			$msgTelegram = "Заказ с сайта № ".$arFields["ORDER_ID"]."\n";
+			$msgTelegram .= $telegramClientInfo;
 			$msgTelegram .= $arBasketItemsTelegram;
-			$msgTelegram .= "Способ оплаты: ".$arFields['PAYMENT_INFO']."<br>";
-			$msgTelegram .= "Вид доставки: ".$arFields['DELIVERY_NAME']."<br>";
-			$msgTelegram .= "Стоимость доставки: ".$arFields['DELIVERY_PRICE']."<br>";
+			$msgTelegram .= "\n<b>Способ оплаты:</b> ".$arFields['PAYMENT_INFO']."\n";
+			$msgTelegram .= "<b>Вид доставки:</b> ".$arFields['DELIVERY_NAME']."\n";
+			$msgTelegram .= "<b>Стоимость доставки:</b> ".$arFields['DELIVERY_PRICE']." руб.\n";
 			$msgTelegram .= $arFields['COMMENT'];
 
-			sendMessage($msgTelegram);
+			if( $_SERVER["HTTP_HOST"] == "motochki-klubochki.ru" ){
+				sendMessage($msgTelegram);
+			}
 
 		}
     } 
+}
+
+AddEventHandler("sale", "OnSalePayOrder", "sendResult");
+
+function sendResult($id, $val){
+    $order = Sale\Order::load($id);
+
+    if( $payment = CSalePaySystem::GetByID($order->getField("PAY_SYSTEM_ID")) ){
+        if( $payment["CAN_PRINT_CHECK"] == "Y" && $val == "Y" ){
+            sendMessage("Заказ №".$order->getId()." оплачен.\nТип оплаты: ".$payment["NAME"]);
+        }
+    }
 }
 
 // Для SMTP ----------------------------------------------------------------------
@@ -967,10 +984,9 @@ function includeArea($file){
 	);	
 }
 
-$chatID = "-229348589";
-
 function sendMessage($messaggio) {
-	global $chatID;
+	$chatID = "-1001400160433";
+
     $token = "bot861797122:AAFU5Wfj2F1WdgfSuQSdVnDaaHr1USugXH0";
     $url = "https://api.telegram.org/" . $token . "/sendMessage?chat_id=" . $chatID;
     $url = $url . "&parse_mode=HTML&text=" . urlencode($messaggio);
@@ -981,6 +997,8 @@ function sendMessage($messaggio) {
     );
     curl_setopt_array($ch, $optArray);
     $result = curl_exec($ch);
+    // var_dump($result);
+    // die();
     curl_close($ch);
 }
 
