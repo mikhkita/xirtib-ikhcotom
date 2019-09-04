@@ -937,13 +937,15 @@ h3.b-title{
 				}
 .b-main-slider{
 	position: relative;
+	border-bottom: 1px solid #EEEEEE;
+	background: #EEEEEE;
 }
 .b-main-slider:not(.slick-initialized){
 	max-height: 373px;
 	overflow: hidden;
 }
 	.b-main-slide{
-		background-image: url(../i/slide-1.jpg);
+		/*background-image: url(../i/slide-1.jpg);*/
 		min-height: 373px;
 		background-repeat: no-repeat;
 		background-position: 50% 39%;
@@ -1121,7 +1123,7 @@ h3.b-title{
 				transform: translate(-50%, -50%);
 				min-width: 162px;
 				opacity: 0;
-				padding: 10px 18px 12px 20px;
+				padding: 12px 18px 12px 20px;
 				-webkit-transition: background-color .1s, color .1s;
 				-o-transition: background-color .1s, color .1s;
 				transition: background-color .1s, color .1s;
