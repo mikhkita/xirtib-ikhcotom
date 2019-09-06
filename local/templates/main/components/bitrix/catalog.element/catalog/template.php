@@ -239,7 +239,8 @@ if (count($arResult["OFFERS"]) < 5){
 								data-price="<?=$offer["PRICES"]["PRICE"]["VALUE"]?>" 
 								data-discount-price="<?=$offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]?>" 
 								data-article="<?=$offer["PRODUCT"]["CODE"]?>" 
-								data-quantity="<?=$offer["PRODUCT"]["QUANTITY"]?>" 
+								data-quantity="<?=$offer["PRODUCT"]["QUANTITY"]?>"
+								data-measure="<?=$measures[$offer["ITEM_MEASURE"]["ID"]]?>"
 								<?=$selected?> ><?=$offer['NAME']?></option>
 							<? endforeach; ?>
 						</select>
@@ -295,7 +296,7 @@ if (count($arResult["OFFERS"]) < 5){
 						<div class="b-product-price-total gram">
 							<span id="discount-price"><?=$discountPrice?></span>
 							<span class="icon-ruble-bold"></span>
-							<small><?=$priceType?></small>
+							<small id="measure"><?=$priceType?></small>
 						</div>
 				
 					<?if($quantity <= 0){

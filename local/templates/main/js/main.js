@@ -510,6 +510,7 @@ $(document).ready(function(){
             discountPrice = Number($(this).find(":selected").attr("data-discount-price")),
             article = $(this).find(":selected").attr("data-article"),
             quantity = Number($(this).find(":selected").attr("data-quantity")),
+            measure = $(this).find(":selected").attr("data-measure"),
             inputVal = 1;
 
         if(price != discountPrice){
@@ -538,6 +539,7 @@ $(document).ready(function(){
         $('#article').text(article);
         $('#quantity').text(quantity);
         $('#quantity-info').text(quantity);
+        $('#measure').text(measure);
         $('input[name=count]').val(inputVal);
         $('input[name=count]').attr('data-quantity', quantity);
         $('.b-btn-to-cart').attr("data-id", id);
@@ -615,7 +617,7 @@ $(document).ready(function(){
 
     $(document).on('change', '.b-product-quantity .quantity-input', function(){
         
-        if($(this).val()*1 >= $(this).attr('data-quantity')*1){
+        if($(this).val()*1 > $(this).attr('data-quantity')*1){
             $(this).val(Number($(this).attr('data-quantity')));
             if ($('.b-product-quantity-info').hasClass('hide')) {
                 $('.b-product-quantity-info').removeClass('hide');
