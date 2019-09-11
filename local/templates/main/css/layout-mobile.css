@@ -438,7 +438,7 @@ body {
 	margin: 0 auto;
 }
 	.b-catalog-list .b-product-colors{
-		float: unset;
+		float: none;
 	}
 		.b-product-colors select{
 		    vertical-align: middle;
@@ -506,7 +506,7 @@ body {
 }
 .b-advantage-img-wrapper {
 	height: auto;
-	float: unset;
+	float: none;
 	width: 80px;
 	vertical-align: middle;
 }
