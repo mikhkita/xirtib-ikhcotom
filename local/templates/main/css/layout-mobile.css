@@ -645,8 +645,8 @@ body {
 	.b-control{
 		margin-right: 0;
 	}
-.b-profile {
-	margin-right: 15px;
+.b-fav {
+	margin-left: 15px;
 }
 .b-price-button {
 	vertical-align: middle;

@@ -17,14 +17,14 @@ $GLOBALS['partial'] = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERV
 
 CModule::IncludeModule('iblock');
 
-$arFav = getFavourites();
-$favClass = 'hide';
-$favCount = 0;
+// $arFav = getFavourites();
+// $favClass = 'hide';
+// $favCount = 0;
 
-if ($arFav > 0){
-	$favClass = '';
-	$favCount = count($arFav);
-}
+// if ($arFav > 0){
+// 	$favClass = '';
+// 	$favCount = count($arFav);
+// }
 
 ?>
 <!DOCTYPE html>
@@ -124,6 +124,30 @@ if ($arFav > 0){
 	<? endif; ?>
 </head>
 <body>
+	<?
+	$dynamicArea = new \Bitrix\Main\Page\FrameStatic("get_favourites");
+	$dynamicArea->setAnimation(true);
+	?>
+	<?$dynamicArea->startDynamicArea();?>
+		<?
+		$arResult = array();
+		$arResult["isAuth"] = isAuth();
+		$arResult["arFav"] = getFavourites();
+		$favCount = count($arResult["arFav"]);
+		$arUser = getUserFields();
+		if ($arUser){
+			$arResult["userName"] = $arUser["NAME"];
+		}
+		?>
+		<script type="text/javascript">
+			var isAuth = "<?=$arResult["isAuth"]?>";
+			if(isAuth){
+				document.body.classList.add("auth"); 
+			}else{
+				document.body.classList.add("no-auth"); 
+			}
+		</script>
+	<?$dynamicArea->finishDynamicArea();?>
 	<?$APPLICATION->ShowPanel();?>
 	<div id="mobile-menu" class="mobile-menu b-left-menu hide">
 		<h2 class="b-bottom-border">Меню</h2>
@@ -248,13 +272,10 @@ if ($arFav > 0){
 );?>
 					</div>
 					<div class="b-control">
-						<? if (isAuth()): ?>
-							<a href="/personal/" class="b-profile icon-login"></a>	
-						<? else: ?>
-							<a href="#popup-sign" class="b-profile icon-login fancy"></a>
-						<? endif; ?>
+						<a href="/personal/" class="b-profile b-profile-auth icon-login"></a>
+						<a href="#popup-sign" class="b-profile b-profile-no-auth icon-login fancy"></a>
 						<a href="/personal/?tab=favourite" class="b-fav icon-star">
-							<div class="b-fav-round <?=$favClass?>">
+							<div class="b-fav-round">
 								<span class="b-fav-number"><?=$favCount?></span>
 							</div>
 						</a>
@@ -296,20 +317,64 @@ if ($arFav > 0){
 
 					<? $basketInfo = getBasketCount(); ?>
 
-					<a href='/cart/order/' class="b-price-button" id="b-price-button" <?/*?> style="display: none;"<?*/?>>
-						<span class="b-cart-price icon-ruble-bold" id="b-cart-sum"><?=$basketInfo['sum']?></span>
+					<a href='/cart/order/' class="b-price-button" id="b-price-button" style="<?echo "display: none;"?>">
+						<span class="b-cart-price icon-ruble-bold" id="b-cart-sum">
+
+							<?
+								$dynamicArea = new \Bitrix\Main\Page\FrameStatic("basket_sum");
+								$dynamicArea->setAnimation(true);
+								$dynamicArea->setContainerID("b-cart-sum");
+								?>
+								<script type="text/javascript">
+									var sum = (sum = BX.localStorage.get('sum'))?sum:0;
+									console.log("sum - beginStub : "+sum);
+									document.getElementById("b-cart-sum").innerHTML = sum;
+								</script>
+								<?
+								$dynamicArea->startDynamicArea();
+								$basketInfoDynamic = getBasketCount(); 
+								?>
+									<script type="text/javascript">
+										var sum = "<?=$basketInfoDynamic["sum"]?>";
+										console.log("sum - begin : "+sum);
+										BX.localStorage.set('sum', sum);
+										document.getElementById("b-cart-sum").innerHTML = sum;
+										document.getElementById("b-price-button").style.display = "block";
+									</script>
+								<?	
+								$dynamicArea->finishDynamicArea();
+								?>
+								
+						</span>
 						<span class="b-cart-number-container">
-							<span class="b-cart-number" id="b-cart-count"><?=$basketInfo['count']?></span>
+							<span class="b-cart-number" id="b-cart-count">
+								<?
+								$dynamicArea = new \Bitrix\Main\Page\FrameStatic("basket_count");
+								$dynamicArea->setAnimation(true);
+								$dynamicArea->setContainerID("b-cart-count");
+								?>
+								<script type="text/javascript">
+									var count = (count = BX.localStorage.get('count'))?count:0;
+									console.log("Count - beginStub : "+count);
+									document.getElementById("b-cart-count").innerHTML = count;
+								</script>
+								<?
+								$dynamicArea->startDynamicArea();
+								$basketInfoDynamic = getBasketCount(); 
+								?>
+									<script type="text/javascript">
+										var count = "<?=$basketInfoDynamic["count"]?>";
+										console.log("Count - begin : "+count);
+										BX.localStorage.set('count', count);
+										document.getElementById("b-cart-count").innerHTML = count;
+										document.getElementById("b-price-button").style.display = "block";
+									</script>
+								<?	
+								$dynamicArea->finishDynamicArea();
+								?>
+							</span>
 						</span>
 					</a>
-					<script>
-						// var sum = (sum = Cookies.get('sum'))?sum:0,
-						// 	count = (count = Cookies.get('count'))?count:0;
-
-						// document.getElementById("b-cart-count").innerHTML = count;
-						// document.getElementById("b-cart-sum").innerHTML = sum;
-						// document.getElementById("b-price-button").style.display = 'block';
-					</script>
 				</div>
 			</div>
 		</div>

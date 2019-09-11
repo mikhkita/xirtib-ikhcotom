@@ -421,8 +421,8 @@ body {
 		margin-top: 15px;
 		order: 1;
 	}
-	.b-profile {
-		margin-right: 15px;
+	.b-fav {
+		margin-left: 15px;
 	}
 	.b-price-button {
 		vertical-align: middle;

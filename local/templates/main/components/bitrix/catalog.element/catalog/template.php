@@ -6,6 +6,9 @@ $this->setFrameMode(true);
 // $APPLICATION->SetPageProperty('title', $arResult["NAME"].( ($arResult["PROPERTIES"]["SUBTITLE"]["VALUE"])?(" ".$arResult["PROPERTIES"]["SUBTITLE"]["VALUE"]):"" ));
 ?>
 
+<div id="detail_component">
+<?$frame = $this->createFrame("detail_component", false)->begin();?>
+
 <? 
 
 $arColors = getColors();
@@ -697,4 +700,6 @@ if (count($arResult["OFFERS"]) < 5){
 	)
 	);
 	?>
+</div>
+<?$frame->end();?>
 </div>

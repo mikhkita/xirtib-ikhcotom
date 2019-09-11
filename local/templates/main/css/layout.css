@@ -724,19 +724,37 @@ h3.b-title{
 		vertical-align: middle;
 	}
 		.b-profile{
+			display: none;
 			font-size: 35px;
-			margin-right: 32px;
 			position: relative;
 			vertical-align: top;
-			display: inline-block;
 		}
+			body.auth .b-profile-auth{
+				display: inline-block;
+			}
+			body.auth .b-profile-no-auth{
+				display: none;
+			}
+			body.no-auth .b-profile-auth{
+				display: none;
+			}
+			body.no-auth .b-profile-no-auth{
+				display: inline-block;
+			}
 		.b-fav{
+			display: none;
 			vertical-align: top;
-			display: inline-block;
 			font-size: 32px;
+			margin-left: 32px;
 			margin-top: 1px;
 			position: relative;
 		}
+			body.auth .b-fav{
+				display: inline-block;
+			}
+			body.no-auth .b-fav{
+				display: none;
+			}
 			.b-fav-round{
 				content: " ";
 				position: absolute;
