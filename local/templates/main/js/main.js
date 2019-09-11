@@ -111,7 +111,7 @@ $(document).ready(function(){
         });
     }
 
-    $('.b-product-main').on('init', function(slick){
+    $(document).on('init', '.b-product-main', function(slick){
         // console.log('init');
         setTimeout(selectOffer, 1);
     });
@@ -278,71 +278,6 @@ $(document).ready(function(){
 
     catalogElementSlick();
 
-    function catalogElementSlick(){
-
-        var asNavFor = '.b-product-photo-slider';
-
-        if ($('.b-product-photo-slider').hasClass('no-slider') || $('.b-product-photo-slider').length == 0) {
-            asNavFor = '';
-        }
-
-        $('.b-product-main:not(.slick-initialized)').each(function(){
-            $(this).slick({
-                dots: false,
-                arrows: false,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                asNavFor: asNavFor,
-                swipe: false,
-                cssEase: 'linear',
-                speed: 100,
-                fade: true,
-            });
-        })
-
-        $('.b-product-photo-slider:not(.no-slider)').each(function(){
-            $(this).slick({
-                dots: false,
-                arrows: true,
-                prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
-                nextArrow: '<div class="b-product-arrows icon-arrow-right-bold"></div>',
-                infinite: true,
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                autoplay: false,
-                variableWidth: true,
-                asNavFor: '.b-product-main',
-                focusOnSelect: true,
-                responsive: [
-                    {
-                      breakpoint: 1188,
-                      settings: {
-                        slidesToShow: 3
-                      }
-                    },
-                    {
-                      breakpoint: 768,
-                      settings: {
-                        slidesToShow: 5
-                      }
-                    },
-                    {
-                      breakpoint: 665,
-                      settings: {
-                        slidesToShow: 4
-                      }
-                    },
-                    {
-                      breakpoint: 374,
-                      settings: {
-                        slidesToShow: 3
-                      }
-                    }
-                ]
-            });
-        });
-    }
-
     $('.b-item-cards').each(function(){
         $(this).slick({
             dots: false,
@@ -453,11 +388,6 @@ $(document).ready(function(){
         $(this).addClass("hidden");
         $(this).prev(2).addClass("visible");
     });
-
-    $(".b-item-cards.slick-slider").find(".b-item-card").each(function(){
-        var $height = $(this).parents(".slick-track").innerHeight();
-        $(this).innerHeight($height);
-    })
 
     $(".b-main-article").click(function(){
         window.location = $(this).find(".article-link").attr("href");
@@ -631,7 +561,7 @@ $(document).ready(function(){
     });
 
     //табы
-    $(".tab").click(function(){
+    $(document).on('click', '.tab', function(){
         var $this = $(this);
         $this.parent().find(".tab.active").removeClass("active");
         $this.addClass("active");
@@ -664,7 +594,7 @@ $(document).ready(function(){
         $(this).prevAll(".rating-star").removeClass("highlight-h");
     });
 
-    $(".rating-star").click(function() {
+    $(document).on('click', '.rating-star', function(){
         var $this = $(this);
         //здесь будет ajax-запрос
         $this.parent().find(".rating-star").each(function() {
@@ -677,7 +607,7 @@ $(document).ready(function(){
     if( typeof autosize == "function" )
         autosize(document.querySelectorAll('textarea'));
 
-    $(".go-tab").click(function() {
+    $(document).on('click', '.go-tab', function(){
         $($(this).attr("data-tab")).click();
         $("body, html").animate({scrollTop : $(".b-detail-tabs").offset().top-20}, 300);
         return false;
@@ -935,6 +865,9 @@ $(document).ready(function(){
         $(".b-cart-number").text( count.toLocaleString() );
         $(".b-cart-price").text( sum.toLocaleString() );
 
+        BX.localStorage.set('count', count.toLocaleString());
+        BX.localStorage.set('sum', sum.toLocaleString());
+
         // Cookies.set('count', count.toLocaleString());
         // Cookies.set('sum', sum.toLocaleString());
     }
@@ -1083,6 +1016,7 @@ $(document).ready(function(){
             $this = $(this);
         progress.start(1.5);
 
+        var action = $(this).attr('data-action');
         if ($this.hasClass("active")){
             $this.attr('data-action', 'ADD');
             $this.removeClass("active");
@@ -1099,7 +1033,7 @@ $(document).ready(function(){
                 if( isValidJSON(msg) ){
                     var json = JSON.parse(msg);
                     if( json.result == "success" ){
-                        if ($this.hasClass("active")){
+                        if (action == "REMOVE"){
                             if (Number($('.b-fav-number').text()) != 0) {
                                 $('.b-fav-number').text(Number($('.b-fav-number').text()) - 1);
                             }
@@ -1114,7 +1048,7 @@ $(document).ready(function(){
                         }
                     }
                 }else{
-                    if ($this.hasClass("active")){
+                    if (action == "REMOVE"){
                         $this.removeClass("active");
                         $this.attr('data-action', 'ADD');
                     }else{
@@ -1262,11 +1196,7 @@ $(document).ready(function(){
     bindFancy();
     loadBlock(0);
 
-    if ($('.b-product-main').length) {
-        $(".b-product-main a").fancybox({ 
-            animationEffect : 'fade'
-        }).attr('data-fancybox', 'gallery');
-    }
+
 
     $('.popup-sign-list li a').on('click',function(){
         var el = $(this).attr('href');
@@ -1308,8 +1238,96 @@ $(document).ready(function(){
         $('.b-filter-cont').addClass('no-filter');
     }
 
+    detailInit();
+
     // cardImgHeight();
 });
+
+// Иницализация элементов на детальной
+if (window.frameCacheVars !== undefined && window.frameCacheVars.dynamicBlocks.detail_component !== undefined) {
+    BX.addCustomEvent("onFrameDataReceived", detailInit);
+}
+
+function detailInit() {
+    console.log('detailInit');
+
+    catalogElementSlick();
+
+    if ($('.b-product-main').length) {
+        $(".b-product-main a").fancybox({ 
+            animationEffect : 'fade'
+        }).attr('data-fancybox', 'gallery');
+    }
+    $(".b-item-cards.slick-slider").find(".b-item-card").each(function(){
+        var $height = $(this).parents(".slick-track").innerHeight();
+        $(this).innerHeight($height);
+    });
+}
+
+function catalogElementSlick(){
+
+    var asNavFor = '.b-product-photo-slider';
+
+    if ($('.b-product-photo-slider').hasClass('no-slider') || $('.b-product-photo-slider').length == 0) {
+        asNavFor = '';
+    }
+
+    $('.b-product-main').each(function(){
+        $(this).slick({
+            dots: false,
+            arrows: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            asNavFor: asNavFor,
+            swipe: false,
+            cssEase: 'linear',
+            speed: 100,
+            fade: true,
+        });
+    })
+
+    $('.b-product-photo-slider:not(.no-slider)').each(function(){
+        $(this).slick({
+            dots: false,
+            arrows: true,
+            prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
+            nextArrow: '<div class="b-product-arrows icon-arrow-right-bold"></div>',
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: false,
+            variableWidth: true,
+            asNavFor: '.b-product-main',
+            focusOnSelect: true,
+            responsive: [
+                {
+                  breakpoint: 1188,
+                  settings: {
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 5
+                  }
+                },
+                {
+                  breakpoint: 665,
+                  settings: {
+                    slidesToShow: 4
+                  }
+                },
+                {
+                  breakpoint: 374,
+                  settings: {
+                    slidesToShow: 3
+                  }
+                }
+            ]
+        });
+    });
+}
 
 window.onload = function(){
     cardHeight();
