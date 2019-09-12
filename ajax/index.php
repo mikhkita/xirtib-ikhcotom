@@ -708,6 +708,16 @@ switch ($action) {
 			// returnError(print_r($calcResult->getErrors(), true));
 		}
 		break;
+	case 'COMPOSIT':
+		$arResult = array();
+		$arResult["isAuth"] = isAuth();
+		$arResult["arFav"] = getFavourites();
+		$arUser = getUserFields();
+		if ($arUser){
+			$arResult["userName"] = $arUser["NAME"];
+		}
+		returnSuccess($arResult);
+		break;
 	default:
 		break;
 }

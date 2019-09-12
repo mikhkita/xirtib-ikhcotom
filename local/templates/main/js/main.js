@@ -851,15 +851,6 @@ $(document).ready(function(){
         return false;
     });
 
-    function isValidJSON(src) {
-        var filtered = src+"";
-        filtered = filtered.replace(/\\["\\\/bfnrtu]/g, '@');
-        filtered = filtered.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']');
-        filtered = filtered.replace(/(?:^|:|,)(?:\s*\[)+/g, '');
-
-        return (/^[\],:{}\s]*$/.test(filtered));
-    }
-
     function updateBasket(count, sum){
 
         $(".b-cart-number").text( count.toLocaleString() );
@@ -976,7 +967,7 @@ $(document).ready(function(){
                         }else{
                             $('.b-fav-number').text(Number($('.b-fav-number').text()) + 1);
                         }
-                        BX.localStorage.set('favCount', $('.b-fav-number').text());
+                        BX.localStorage.set('favCount', Number($('.b-fav-number').text()));
 
                         if (Number($('.b-fav-number').text()) == 0) {
                             $('.b-fav-round').addClass('hide');
@@ -1178,6 +1169,44 @@ $(document).ready(function(){
     detailInit();
 
     // cardImgHeight();
+});
+
+function isValidJSON(src) {
+    var filtered = src+"";
+    filtered = filtered.replace(/\\["\\\/bfnrtu]/g, '@');
+    filtered = filtered.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']');
+    filtered = filtered.replace(/(?:^|:|,)(?:\s*\[)+/g, '');
+
+    return (/^[\],:{}\s]*$/.test(filtered));
+}
+
+//Получить избранные товары
+$.ajax({
+    type: "GET",
+    url: "/ajax/index.php?action=FAVOURITE_CC",
+    success: function(msg){
+        if( isValidJSON(msg) ){
+            var json = JSON.parse(msg);
+            if( json.result == "success" ){
+                if(json.result.isAuth){
+                    //сбросить все избранное
+                    $(".b-card-fav").each(function(){
+                        $(this).attr("data-action", "").removeClass("active");
+                    });
+                    //проставить актуальные
+                    json.result.forEach(function(item, i, arr) {
+                        item.attr("data-action", "REMOVE").addClass("active");
+                    });
+                    $("body").addClass("auth");
+                }else{
+                    $("body").addClass("no-auth"); 
+                }
+            }
+        }
+    },
+    error: function(){
+        
+    },
 });
 
 // Иницализация элементов на детальной

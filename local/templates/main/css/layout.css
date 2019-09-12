@@ -756,7 +756,7 @@ h3.b-title{
 			position: relative;
 		}
 			.b-fav-round{
-				display: none;
+				display: block;
 				content: " ";
 				position: absolute;
 				font-size: 0px;
@@ -769,9 +769,9 @@ h3.b-title{
 			    right: -4px;
 			    bottom: -2px;
 			}
-			body.auth .b-fav-round{
+			/*body.auth .b-fav-round{
 				display: block;
-			}
+			}*/
 
 			.b-fav-number{
 				position: absolute;
@@ -909,9 +909,9 @@ h3.b-title{
 			top: 10px;
 			opacity: 0;
 			visibility: hidden;
-			-webkit-transition: background-color .2s, opacity .2s, visibility .2s;
-			-o-transition: background-color .2s, opacity .2s, visibility .2s;
-			transition: background-color .2s, opacity .2s, visibility .2s;
+			-webkit-transition: background-color .1s, opacity .2s, visibility .2s;
+			-o-transition: background-color .1s, opacity .2s, visibility .2s;
+			transition: background-color .1s, opacity .2s, visibility .2s;
 		}
 		.b-price-button.show{
 			opacity: 1;
@@ -1214,16 +1214,22 @@ h3.b-title{
 					z-index: 1;
 				}
 				.b-card-fav{
+					display: none;
 					position: absolute;
 					top: 0px;
 					padding-top: 10px;
 					right: 0px;
 					font-family: icomoon;
-					display: inline-block;
 					color: transparent;
 					width: 36px;
 					height: 36px;
 					z-index: 1;
+				}
+				body.auth .b-card-fav{
+					display: inline-block;
+				}
+				body.no-auth .b-card-fav{
+					display: none;
 				}
 					.b-card-fav.active{
 						color: #CA6460 !important;
@@ -1304,7 +1310,7 @@ h3.b-title{
 				}
 				.has-discount .b-price span:before{
 					font-size: 11px;
-    				top: 7px;
+    				top: 8px;
 				}
 				.has-discount .b-price:after{
 					content: '';

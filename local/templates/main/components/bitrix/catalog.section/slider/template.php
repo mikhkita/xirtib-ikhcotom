@@ -83,7 +83,7 @@ if (isAuth($USER)){
 						<div class="b-discount"><?$label?></div>
 					<? endif;?>
 
-					<? if (isAuth($USER)): ?>
+					<?// if (isAuth($USER)): ?>
 						<? if ($ids != 0): ?>
 							<? $favClass = ""; ?>
 							<? $favAction = "ADD"; ?>
@@ -99,7 +99,7 @@ if (isAuth($USER)){
 							$favAction = "ADD";
 						endif; ?>
 						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>"></a>
-					<? endif; ?>
+					<?// endif; ?>
 
 					<? /* ?>
 					<? $text = "Нет в наличии" ?>
