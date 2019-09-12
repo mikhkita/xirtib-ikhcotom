@@ -872,70 +872,6 @@ $(document).ready(function(){
         // Cookies.set('sum', sum.toLocaleString());
     }
 
-    function bindFancy(){
-        $(".fancy:not(.fancy-binded)").each(function(){
-            var $popup = $($(this).attr("href")),
-                $this = $(this);
-            $this.fancybox({
-                padding : 0,
-                content : $popup,
-                touch: false,
-                helpers: {
-                    overlay: {
-                        locked: true 
-                    }
-                },
-                beforeShow: function(){
-                    $(".fancybox-wrap").addClass("beforeShow");
-                    $popup.find(".custom-field").remove();
-                    if( $this.attr("data-value") ){
-                        var name = getNextField($popup.find("form"));
-                        $popup.find("form").append("<input type='hidden' class='custom-field' name='"+name+"' value='"+$this.attr("data-value")+"'/><input type='hidden' class='custom-field' name='"+name+"-name' value='"+$this.attr("data-name")+"'/>");
-                    }
-                    if( $popup.attr("data-beforeShow") && customHandlers[$popup.attr("data-beforeShow")] ){
-                        customHandlers[$popup.attr("data-beforeShow")]($popup);
-                    }
-                },
-                afterShow: function(){
-                    $(".fancybox-wrap").removeClass("beforeShow");
-                    $(".fancybox-wrap").addClass("afterShow");
-                    if( $popup.attr("data-afterShow") && customHandlers[$popup.attr("data-afterShow")] ){
-                        customHandlers[$popup.attr("data-afterShow")]($popup);
-                    }
-                    $popup.find("input[type='text'],input[type='number'],textarea").eq(0).focus();
-                },
-                beforeClose: function(){
-                    $(".fancybox-wrap").removeClass("afterShow");
-                    $(".fancybox-wrap").addClass("beforeClose");
-                    if( $popup.attr("data-beforeClose") && customHandlers[$popup.attr("data-beforeClose")] ){
-                        customHandlers[$popup.attr("data-beforeClose")]($popup);
-                    }
-                },
-                afterClose: function(){
-                    $(".fancybox-wrap").removeClass("beforeClose");
-                    $(".fancybox-wrap").addClass("afterClose");
-                    if( $popup.attr("data-afterClose") && customHandlers[$popup.attr("data-afterClose")] ){
-                        customHandlers[$popup.attr("data-afterClose")]($popup);
-                    }
-                }
-            });
-            $this.addClass("fancy-binded");
-        });
-
-        $(".fancy-img:not(.fancy-binded)").each(function(){
-            $(this).fancybox({
-                padding : 0,
-                hash : false,
-                clickContent : false,
-                buttons : [
-                    'fullScreen',
-                    'close'
-                ],
-            });
-            $(this).addClass('fancy-binded');
-        });
-    }
-
     $(document).on("click", ".element-view", function(){
         var url = $(this).attr('data-href')+"&element_view=Y";
 
@@ -1040,6 +976,7 @@ $(document).ready(function(){
                         }else{
                             $('.b-fav-number').text(Number($('.b-fav-number').text()) + 1);
                         }
+                        BX.localStorage.set('favCount', $('.b-fav-number').text());
 
                         if (Number($('.b-fav-number').text()) == 0) {
                             $('.b-fav-round').addClass('hide');
@@ -1262,6 +1199,9 @@ function detailInit() {
         var $height = $(this).parents(".slick-track").innerHeight();
         $(this).innerHeight($height);
     });
+
+    bindFancy();
+    loadBlock(0);
 }
 
 function catalogElementSlick(){
@@ -1272,7 +1212,7 @@ function catalogElementSlick(){
         asNavFor = '';
     }
 
-    $('.b-product-main').each(function(){
+    $('.b-product-main:not(.slick-initialized)').each(function(){
         $(this).slick({
             dots: false,
             arrows: false,
@@ -1326,6 +1266,70 @@ function catalogElementSlick(){
                 }
             ]
         });
+    });
+}
+
+function bindFancy(){
+    $(".fancy:not(.fancy-binded)").each(function(){
+        var $popup = $($(this).attr("href")),
+            $this = $(this);
+        $this.fancybox({
+            padding : 0,
+            content : $popup,
+            touch: false,
+            helpers: {
+                overlay: {
+                    locked: true 
+                }
+            },
+            beforeShow: function(){
+                $(".fancybox-wrap").addClass("beforeShow");
+                $popup.find(".custom-field").remove();
+                if( $this.attr("data-value") ){
+                    var name = getNextField($popup.find("form"));
+                    $popup.find("form").append("<input type='hidden' class='custom-field' name='"+name+"' value='"+$this.attr("data-value")+"'/><input type='hidden' class='custom-field' name='"+name+"-name' value='"+$this.attr("data-name")+"'/>");
+                }
+                if( $popup.attr("data-beforeShow") && customHandlers[$popup.attr("data-beforeShow")] ){
+                    customHandlers[$popup.attr("data-beforeShow")]($popup);
+                }
+            },
+            afterShow: function(){
+                $(".fancybox-wrap").removeClass("beforeShow");
+                $(".fancybox-wrap").addClass("afterShow");
+                if( $popup.attr("data-afterShow") && customHandlers[$popup.attr("data-afterShow")] ){
+                    customHandlers[$popup.attr("data-afterShow")]($popup);
+                }
+                $popup.find("input[type='text'],input[type='number'],textarea").eq(0).focus();
+            },
+            beforeClose: function(){
+                $(".fancybox-wrap").removeClass("afterShow");
+                $(".fancybox-wrap").addClass("beforeClose");
+                if( $popup.attr("data-beforeClose") && customHandlers[$popup.attr("data-beforeClose")] ){
+                    customHandlers[$popup.attr("data-beforeClose")]($popup);
+                }
+            },
+            afterClose: function(){
+                $(".fancybox-wrap").removeClass("beforeClose");
+                $(".fancybox-wrap").addClass("afterClose");
+                if( $popup.attr("data-afterClose") && customHandlers[$popup.attr("data-afterClose")] ){
+                    customHandlers[$popup.attr("data-afterClose")]($popup);
+                }
+            }
+        });
+        $this.addClass("fancy-binded");
+    });
+
+    $(".fancy-img:not(.fancy-binded)").each(function(){
+        $(this).fancybox({
+            padding : 0,
+            hash : false,
+            clickContent : false,
+            buttons : [
+                'fullScreen',
+                'close'
+            ],
+        });
+        $(this).addClass('fancy-binded');
     });
 }
 

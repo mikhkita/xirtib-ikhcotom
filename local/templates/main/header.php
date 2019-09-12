@@ -95,7 +95,7 @@ CModule::IncludeModule('iblock');
 		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.validate.min.js");
 		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/KitAnimate.js");
 		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/plupload.full.min.js");
-		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/mask.js");
+		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/imask.min.js");
 		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/KitProgress.js");
 		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/KitSend.js?".$GLOBALS["version"]);
 		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/slick.min.js");
@@ -274,9 +274,25 @@ CModule::IncludeModule('iblock');
 					<div class="b-control">
 						<a href="/personal/" class="b-profile b-profile-auth icon-login"></a>
 						<a href="#popup-sign" class="b-profile b-profile-no-auth icon-login fancy"></a>
-						<a href="/personal/?tab=favourite" class="b-fav icon-star">
+						<a href="/personal/?tab=favourite" class="b-fav icon-star" id="b-fav">
 							<div class="b-fav-round">
-								<span class="b-fav-number"><?=$favCount?></span>
+								<span class="b-fav-number" id="b-fav-number">
+									<script type="text/javascript">
+										document.getElementById("b-fav-number").innerHTML = BX.localStorage.get('favCount')?BX.localStorage.get('favCount'):0;
+									</script>
+								</span>
+								<?$framePrice = new \Bitrix\Main\Page\FrameBuffered("b-fav-number");
+								  $framePrice->begin();?>
+									<?  $arResult["arFav"] = getFavourites();
+										$favCount = count($arResult["arFav"]);?>
+										<script type="text/javascript">
+											var favCount = "<?=$favCount?>";
+											console.log("favCount - ajax : "+favCount);
+											BX.localStorage.set('favCount', favCount);
+											document.getElementById("b-fav-number").innerHTML = favCount;
+										</script>
+								<?$framePrice->beginStub();?>
+								<?$framePrice->end();?>
 							</div>
 						</a>
 					</div>
@@ -317,64 +333,38 @@ CModule::IncludeModule('iblock');
 
 					<? $basketInfo = getBasketCount(); ?>
 
-					<a href='/cart/order/' class="b-price-button" id="b-price-button" style="<?echo "display: none;"?>">
+					<a href='/cart/order/' class="b-price-button" id="b-price-button">
 						<span class="b-cart-price icon-ruble-bold" id="b-cart-sum">
-
-							<?
-								$dynamicArea = new \Bitrix\Main\Page\FrameStatic("basket_sum");
-								$dynamicArea->setAnimation(true);
-								$dynamicArea->setContainerID("b-cart-sum");
-								?>
-								<script type="text/javascript">
-									var sum = (sum = BX.localStorage.get('sum'))?sum:0;
-									console.log("sum - beginStub : "+sum);
-									document.getElementById("b-cart-sum").innerHTML = sum;
-								</script>
-								<?
-								$dynamicArea->startDynamicArea();
-								$basketInfoDynamic = getBasketCount(); 
-								?>
-									<script type="text/javascript">
-										var sum = "<?=$basketInfoDynamic["sum"]?>";
-										console.log("sum - begin : "+sum);
-										BX.localStorage.set('sum', sum);
-										document.getElementById("b-cart-sum").innerHTML = sum;
-										document.getElementById("b-price-button").style.display = "block";
-									</script>
-								<?	
-								$dynamicArea->finishDynamicArea();
-								?>
-								
+							<script type="text/javascript">
+								document.getElementById("b-cart-sum").innerHTML = BX.localStorage.get('sum')?BX.localStorage.get('sum'):0;
+							</script>
 						</span>
 						<span class="b-cart-number-container">
 							<span class="b-cart-number" id="b-cart-count">
-								<?
-								$dynamicArea = new \Bitrix\Main\Page\FrameStatic("basket_count");
-								$dynamicArea->setAnimation(true);
-								$dynamicArea->setContainerID("b-cart-count");
-								?>
 								<script type="text/javascript">
-									var count = (count = BX.localStorage.get('count'))?count:0;
-									console.log("Count - beginStub : "+count);
-									document.getElementById("b-cart-count").innerHTML = count;
+									document.getElementById("b-cart-count").innerHTML = BX.localStorage.get('count')?BX.localStorage.get('count'):0;
+									document.getElementById("b-price-button").classList.add("show"); 
 								</script>
-								<?
-								$dynamicArea->startDynamicArea();
-								$basketInfoDynamic = getBasketCount(); 
-								?>
-									<script type="text/javascript">
-										var count = "<?=$basketInfoDynamic["count"]?>";
-										console.log("Count - begin : "+count);
-										BX.localStorage.set('count', count);
-										document.getElementById("b-cart-count").innerHTML = count;
-										document.getElementById("b-price-button").style.display = "block";
-									</script>
-								<?	
-								$dynamicArea->finishDynamicArea();
-								?>
 							</span>
 						</span>
+						<?$framePrice = new \Bitrix\Main\Page\FrameBuffered("b-price-button");
+						  $framePrice->begin();?>
+							<?$basketInfoDynamic = getBasketCount();?>
+							<script type="text/javascript">
+								var sum = "<?=$basketInfoDynamic["sum"]?>",
+									count = "<?=$basketInfoDynamic["count"]?>";
+								console.log("sum - ajax : "+sum);
+								console.log("count - ajax : "+count);
+								BX.localStorage.set('sum', sum);
+								BX.localStorage.set('count', count);
+								document.getElementById("b-cart-sum").innerHTML = sum;
+								document.getElementById("b-cart-count").innerHTML = count;
+								//document.getElementById("b-price-button").style.display = "block";
+							</script>
+						<?$framePrice->beginStub();?>
+						<?$framePrice->end();?>
 					</a>
+
 				</div>
 			</div>
 		</div>

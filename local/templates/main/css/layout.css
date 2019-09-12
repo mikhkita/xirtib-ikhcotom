@@ -729,6 +729,12 @@ h3.b-title{
 			position: relative;
 			vertical-align: top;
 		}
+			.b-profile-auth{
+				display: inline-block;
+			}
+			.b-profile-no-auth{
+				display: none;
+			}
 			body.auth .b-profile-auth{
 				display: inline-block;
 			}
@@ -742,20 +748,15 @@ h3.b-title{
 				display: inline-block;
 			}
 		.b-fav{
-			display: none;
+			display: inline-block;
 			vertical-align: top;
 			font-size: 32px;
 			margin-left: 32px;
 			margin-top: 1px;
 			position: relative;
 		}
-			body.auth .b-fav{
-				display: inline-block;
-			}
-			body.no-auth .b-fav{
-				display: none;
-			}
 			.b-fav-round{
+				display: none;
 				content: " ";
 				position: absolute;
 				font-size: 0px;
@@ -768,20 +769,24 @@ h3.b-title{
 			    right: -4px;
 			    bottom: -2px;
 			}
-		.b-fav-number{
-			position: absolute;
-			font-family: 'ProximaNova-Regular';
-			font-size: 10px;
-			letter-spacing: 0;
-			right: 50%;
-			-webkit-transform: translateX(50%);
-			-ms-transform: translateX(50%);
-			-o-transform: translateX(50%);
-			transform: translateX(50%);
-			bottom: 8px;
-			z-index: 10;
-			color: #564531;
-		}
+			body.auth .b-fav-round{
+				display: block;
+			}
+
+			.b-fav-number{
+				position: absolute;
+				font-family: 'ProximaNova-Regular';
+				font-size: 10px;
+				letter-spacing: 0;
+				right: 50%;
+				-webkit-transform: translateX(50%);
+				-ms-transform: translateX(50%);
+				-o-transform: translateX(50%);
+				transform: translateX(50%);
+				bottom: 8px;
+				z-index: 10;
+				color: #564531;
+			}
 	.b-main-menu{
 		background-color: #77BE32;
 	}
@@ -902,9 +907,15 @@ h3.b-title{
 			float: right;
 			position: relative;
 			top: 10px;
-			-webkit-transition: background-color .1s;
-			-o-transition: background-color .1s;
-			transition: background-color .1s;
+			opacity: 0;
+			visibility: hidden;
+			-webkit-transition: background-color .2s, opacity .2s, visibility .2s;
+			-o-transition: background-color .2s, opacity .2s, visibility .2s;
+			transition: background-color .2s, opacity .2s, visibility .2s;
+		}
+		.b-price-button.show{
+			opacity: 1;
+			visibility: visible;
 		}
 			.b-price-button:before{
 				content: "\e902";
