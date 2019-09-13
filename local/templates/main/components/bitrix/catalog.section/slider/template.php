@@ -98,7 +98,7 @@ if (isAuth($USER)){
 							$favClass = "";
 							$favAction = "ADD";
 						endif; ?>
-						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>"></a>
+						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>" data-id="<?=$arItem['ID']?>"></a>
 					<?// endif; ?>
 
 					<? /* ?>

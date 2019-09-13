@@ -1124,8 +1124,6 @@ $(document).ready(function(){
     bindFancy();
     loadBlock(0);
 
-
-
     $('.popup-sign-list li a').on('click',function(){
         var el = $(this).attr('href');
 
@@ -1168,6 +1166,11 @@ $(document).ready(function(){
 
     detailInit();
 
+    var favLocalStorage = getFavLocalStorage();
+    if(favLocalStorage){
+        updateFav(favLocalStorage);
+    }
+
     // cardImgHeight();
 });
 
@@ -1180,23 +1183,32 @@ function isValidJSON(src) {
     return (/^[\],:{}\s]*$/.test(filtered));
 }
 
+function updateFav(arFav) {
+    $(".b-card-fav").each(function(){//сбросить все избранное
+        $(this).attr("data-action", "").removeClass("active");
+    });
+    arFav.forEach(function(item, i, arr) {//проставить актуальные
+        $(".b-card-fav[data-id='"+item+"']").attr("data-action", "REMOVE").addClass("active");
+    });
+}
+function getFavLocalStorage() {
+    return JSON.parse(BX.localStorage.get("arFav"));
+}
+function setFavLocalStorage(arFav) {
+    BX.localStorage.set("arFav", JSON.stringify(arFav));
+}
+
 //Получить избранные товары
 $.ajax({
     type: "GET",
-    url: "/ajax/index.php?action=FAVOURITE_CC",
+    url: "/ajax/index.php?action=COMPOSITE",
     success: function(msg){
         if( isValidJSON(msg) ){
             var json = JSON.parse(msg);
             if( json.result == "success" ){
-                if(json.result.isAuth){
-                    //сбросить все избранное
-                    $(".b-card-fav").each(function(){
-                        $(this).attr("data-action", "").removeClass("active");
-                    });
-                    //проставить актуальные
-                    json.result.forEach(function(item, i, arr) {
-                        item.attr("data-action", "REMOVE").addClass("active");
-                    });
+                if(json.isAuth){
+                    setFavLocalStorage(arFav);
+                    updateFav(json.arFav);
                     $("body").addClass("auth");
                 }else{
                     $("body").addClass("no-auth"); 

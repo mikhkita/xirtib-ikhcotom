@@ -708,7 +708,7 @@ switch ($action) {
 			// returnError(print_r($calcResult->getErrors(), true));
 		}
 		break;
-	case 'COMPOSIT':
+	case 'COMPOSITE':
 		$arResult = array();
 		$arResult["isAuth"] = isAuth();
 		$arResult["arFav"] = getFavourites();
