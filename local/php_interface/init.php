@@ -121,6 +121,7 @@ class MyEventHandlers
 			$msgTelegram .= "\n<b>Способ оплаты:</b> ".$arFields['PAYMENT_INFO']."\n";
 			$msgTelegram .= "<b>Вид доставки:</b> ".$arFields['DELIVERY_NAME']."\n";
 			$msgTelegram .= "<b>Стоимость доставки:</b> ".$arFields['DELIVERY_PRICE']." руб.\n";
+			$msgTelegram .= "<b>Итого:</b> ".convertPrice($totalSum)." руб.\n";
 			$msgTelegram .= $arFields['COMMENT'];
 
 			if( $_SERVER["HTTP_HOST"] == "motochki-klubochki.ru" ){
