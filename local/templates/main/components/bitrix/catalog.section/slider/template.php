@@ -39,7 +39,7 @@ if (isAuth($USER)){
 				<? $maxVal = 0; ?>
 
 				<? if($arItem["OFFERS"][0]['PRODUCT']['MEASURE'] == 3): ?>
-					<? $measureText = 'за 1 г.'; ?>
+					<? $measureText = 'за '.$arItem["OFFERS"][0]["CATALOG_MEASURE_RATIO"].' г.'; ?>
 				<? endif; ?>
 				
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
@@ -62,7 +62,7 @@ if (isAuth($USER)){
 				<? endforeach; ?>
 			<? else: ?>
 				<? if ($arItem['PRODUCT']['MEASURE'] == 3): ?>
-					<? $measureText = 'за 1 г.'; ?>
+					<? $measureText = 'за '.$arItem["CATALOG_MEASURE_RATIO"].' г.'; ?>
 				<? endif; ?>
 
 				<? if( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arItem["PRICES"]["PRICE"]["VALUE"] ): ?>
