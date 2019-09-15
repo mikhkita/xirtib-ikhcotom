@@ -31,11 +31,17 @@ if (isAuth($USER)){
 	<div class="b-item-cards">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
 			<? $class = "";?>
+			<? $measureText = ''; ?>
 			<? $minVal = 0; ?>
 			<? $maxVal = 0; ?>
 			<? if ($arItem["OFFERS"]): ?>
 				<? $minVal = 100000; ?>
 				<? $maxVal = 0; ?>
+
+				<? if($arItem["OFFERS"][0]['PRODUCT']['MEASURE'] == 3): ?>
+					<? $measureText = 'за 1 г.'; ?>
+				<? endif; ?>
+				
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
 
 					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
@@ -55,6 +61,9 @@ if (isAuth($USER)){
 					
 				<? endforeach; ?>
 			<? else: ?>
+				<? if ($arItem['PRODUCT']['MEASURE'] == 3): ?>
+					<? $measureText = 'за 1 г.'; ?>
+				<? endif; ?>
 
 				<? if( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arItem["PRICES"]["PRICE"]["VALUE"] ): ?>
 					<? $class = "has-discount"; ?>
@@ -134,9 +143,11 @@ if (isAuth($USER)){
 				<div class="b-price-container <?=$class?>">
 					<div class="b-price">
 						<span class="icon-ruble-bold"><?=$price?></span>
+						<span class="measure-text"><?=$measureText?></span>
 					</div>
 					<div class="b-discount-price">
 						<span class="icon-ruble-bold"><?=$discountPrice?></span>
+						<span class="measure-text"><?=$measureText?></span>
 					</div>
 				</div>
 			</div>
