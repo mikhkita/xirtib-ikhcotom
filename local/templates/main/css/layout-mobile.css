@@ -766,6 +766,9 @@ body {
 .b-btn-container .popup-sign > .popup-img{
 	display: none;
 }
+.b-product-info-text-cont{
+	margin-top: 17px;
+}
 
 @media screen and (max-width: 665px){
 
@@ -802,11 +805,17 @@ body {
 	    display: flex;
 	    flex-wrap: wrap-reverse;
 	}
+	.b-product-info{
+		margin-bottom: 12px;
+	}
 	.b-product-info p {
-	    width: 49%;
+	    width: 100%;
 	    margin-bottom: 12px;
 	    display: inline-block;
 	    vertical-align: top;
+	}
+	.b-product-info p:last-child{
+		width: 100%;
 	}
 	.b-product-texture img{
 
@@ -905,7 +914,7 @@ body {
 	    padding-right: 24px;
 	}
 	.b-product-info{
-		display: none;
+		/*display: none;*/
 	}
 	.b-product-texture {
 	    margin-bottom: 0;

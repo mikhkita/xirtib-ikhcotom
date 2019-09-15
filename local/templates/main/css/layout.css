@@ -1296,6 +1296,10 @@ h3.b-title{
 						font-size: 16px;
 						top: 6px;
 					}
+					.b-price .measure-text{
+						font-family: 'Lora-Regular';
+						font-size: 20px;
+					}
 				.b-discount-price{
 					display: none;
 					color: #CB6163;
@@ -2399,6 +2403,7 @@ h3.b-title{
 				.b-product-main .img-cont {
 					display: table-cell;
 					vertical-align: middle;
+					height: 461px;
 				}
 					.main-photo .b-product-main a img{
 						width: auto;
@@ -2631,6 +2636,7 @@ h3.b-title{
 					}
 					.b-product-colors select{
 						display: none;
+						color: #564531;
 					}
 						.b-product-colors > span{
 							display: inline-block;
@@ -2653,6 +2659,7 @@ h3.b-title{
 						    font-size: 16px;
 						    /*font-family: 'ProximaNova-Regular';*/
 						    padding: 10px 12px;
+						    color: #564531;
 						}
 						.b-product-colors .chosen-container{
 							vertical-align: middle;
@@ -2667,6 +2674,7 @@ h3.b-title{
 							line-height: 20px;
 							box-shadow: none;
 							border: 1px solid #E6E6E6;
+							color: #564531;
 						}
 						.b-catalog-list .b-product-colors .chosen-container-single .chosen-single{
 							/* font-family: 'ProximaNova-Regular'; */

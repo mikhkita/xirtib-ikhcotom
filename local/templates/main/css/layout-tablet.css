@@ -35,7 +35,8 @@ body {
     width: 365px;
 }
 .main-photo,
-.main-photo .b-product-main a{
+.main-photo .b-product-main a,
+.b-product-main .img-cont{
     height: 365px;
 }
 .b-product-content {
@@ -203,6 +204,10 @@ body {
 
 
 @media screen and (max-width: 1024px){
+	
+	.b-product-colors{
+	    justify-content: left;
+	}
 
 	.b-card-top img{
 		/*width: auto;*/
@@ -215,10 +220,13 @@ body {
 	    margin-bottom: 24px;
 	}
 	.b-product-info p {
-	    width: 49%;
+	    width: 100%;
 	    margin-bottom: 12px;
 	    display: inline-block;
 	    vertical-align: top;
+	}
+	.b-product-info p:last-child{
+		width: 100%;
 	}
 	.texture-list {
 	    max-height: 56px;

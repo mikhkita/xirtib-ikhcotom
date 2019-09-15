@@ -263,28 +263,34 @@ if (count($arResult["OFFERS"]) < 5){
 						<? endif; ?>
 					<? endif; ?>
 					<div class="b-product-info">
-						<p><b>Артикул:</b> <span id="article"><?=$article?></span></p>
-						<p><b>В наличии:</b> <span id="quantity"><?=$quantity?></span></p>
-						<? if ($arResult["PROPERTIES"]["TYPE"]["VALUE"]): ?>
-							<p><b>Вид:</b> 
-							<? foreach($arResult["PROPERTIES"]["TYPE"]["VALUE"] as $key => $type):
-								echo mb_strtolower($type);
-								if ($key != count($arResult["PROPERTIES"]["TYPE"]["VALUE"]) - 1):
-									echo ', ';
-								endif;
-							endforeach; ?>
-							</p>
-						<? endif; ?>
-						<? if ($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] != 0): ?>
-							<p><b>Состав:</b> 
-								<? foreach($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] as $key => $structure):
-									echo mb_strtolower($structure);
-									if ($key != count($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"]) - 1):
+						<div class="b-product-info-text-cont">
+							<p><b>Артикул:</b> <span id="article"><?=$article?></span></p>
+							<p><b>В наличии:</b> <span id="quantity"><?=$quantity?></span></p>
+							
+							<?/*?>
+							<? if ($arResult["PROPERTIES"]["TYPE"]["VALUE"]): ?>
+								<p><b>Вид:</b> 
+								<? foreach($arResult["PROPERTIES"]["TYPE"]["VALUE"] as $key => $type):
+									echo mb_strtolower($type);
+									if ($key != count($arResult["PROPERTIES"]["TYPE"]["VALUE"]) - 1):
 										echo ', ';
 									endif;
 								endforeach; ?>
-							</p>
-						<? endif; ?>
+								</p>
+							<? endif; ?>
+							<?*/?>
+
+							<? if ($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] != 0): ?>
+								<p><b>Состав:</b> 
+									<? foreach($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] as $key => $structure):
+										echo mb_strtolower($structure);
+										if ($key != count($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"]) - 1):
+											echo ', ';
+										endif;
+									endforeach; ?>
+								</p>
+							<? endif; ?>
+						</div>
 						<? if ($_REQUEST['element_view'] != "Y"): ?>
 						<a href="#" class="dashed go-tab" data-tab=".tab-spec">Все характеристики</a>
 						<? endif; ?>
