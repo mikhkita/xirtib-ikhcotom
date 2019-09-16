@@ -11,6 +11,10 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+?>
+<div id="blog_component">
+<?$frame = $this->createFrame("blog_component", false)->begin();?>
+<?
 
 if(count($arResult["ITEMS"])): ?>
 	<ul class="b-blog-list">
@@ -51,3 +55,6 @@ if(count($arResult["ITEMS"])): ?>
 		<?=$arResult["NAV_STRING"];?>
 	<?endif;?>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

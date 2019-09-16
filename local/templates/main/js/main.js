@@ -116,7 +116,7 @@ $(document).ready(function(){
         setTimeout(selectOffer, 1);
     });
 
-    $('.edit-checkbox').on('change', function(){
+    $(document).on('change', '.edit-checkbox', function(){
         if ($('.edit-pass-cont').hasClass('hide')) {
             $('.edit-pass-cont').removeClass('hide');
         } else {
@@ -141,7 +141,7 @@ $(document).ready(function(){
     $('.mobile-menu').removeClass("hide");
     $('.filter-mobile').removeClass("hide");
 
-    $('.mobile-btn').click(function() {
+    $(document).on('click', '.mobile-btn', function(){
         menuSlideout.open();
         $('.mobile-menu').show();
         $('.filter-mobile').hide();
@@ -149,7 +149,7 @@ $(document).ready(function(){
         return false;
     });
 
-    $('.catalog-mobile-filter').click(function() {
+    $(document).on('click', '.catalog-mobile-filter', function(){
         filterSlideout.open();
         $('.filter-mobile').show();
         $('.mobile-menu').hide();
@@ -157,7 +157,7 @@ $(document).ready(function(){
         return false;
     });
 
-    $('.b-menu-overlay').click(function() {
+    $(document).on('click', '.b-menu-overlay', function(){
         menuSlideout.close();
         if ($('#b-filter-panel').length){
             $('.filter-mobile').removeClass('show-btn');
@@ -212,8 +212,7 @@ $(document).ready(function(){
         $('.filter-mobile').after('<div class="b-btn-container"><a href="#" class="b-filter-submit b-btn">Применить</a></div>');
     }
 
-    $('.b-share-link a').on('click',function(){
-        
+    $(document).on('click', '.b-share-link a', function(){ 
         startOffsetY = window.pageYOffset;
 
         if ($('.b-share-link').hasClass('hover')) {
@@ -277,47 +276,7 @@ $(document).ready(function(){
     });
 
     catalogElementSlick();
-
-    $('.b-item-cards').each(function(){
-        $(this).slick({
-            dots: false,
-            arrows: true,
-            prevArrow: '<div class="icon-arrow-left"></div>',
-            nextArrow: '<div class="icon-arrow-right"></div>',
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            autoplay: true,
-            autoplaySpeed: getRandomInt(3000, 5000),
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                },
-                {
-                    breakpoint: 450,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-    });
-
-    function getRandomInt(min, max) {
-        return Math.round(Math.random() * (max - min)) + min;
-    }
+    bindItemCards();
 
     $('.b-im-block').slick({
         dots: false,
@@ -384,12 +343,12 @@ $(document).ready(function(){
         ]
     });
 
-    $(".b-show-more").click(function(){
+    $(document).on('click', '.b-show-more', function(){
         $(this).addClass("hidden");
         $(this).prev(2).addClass("visible");
     });
 
-    $(".b-main-article").click(function(){
+    $(document).on('click', '.b-main-article', function(){
         window.location = $(this).find(".article-link").attr("href");
     });
 
@@ -572,7 +531,7 @@ $(document).ready(function(){
         return false;
     });
 
-    $('.lenght-input').on('change', function(){
+    $(document).on('change', '.lenght-input', function(){
         var min = $('.lenght-input:checked').attr('data-min'),
             max = $('.lenght-input:checked').attr('data-max');
 
@@ -618,7 +577,7 @@ $(document).ready(function(){
             $(this).children(".b-filter-toggle").slideUp(0);
         }
     });
-    $(".b-filter-tab").click(function() {
+    $(document).on('click', '.b-filter-tab', function(){
         if(!$(this).hasClass("sliding")){
             var $this = $(this);
             $this.addClass("sliding");
@@ -670,7 +629,7 @@ $(document).ready(function(){
     });
 
     var filterInterval = null;
-    $('.b-filter').on('change', function(){
+    $(document).on('change', '.b-filter', function(){
         if (isDesktop) {
 
             if( filterInterval !== null ){
@@ -714,6 +673,10 @@ $(document).ready(function(){
                 block.find('.b-catalog-list-cont').html(msg);
                 cardHeight();
                 bindFancy();
+                var favLocalStorage = getFavLocalStorage();
+                if(favLocalStorage){
+                    updateFav(favLocalStorage);
+                }
             },
             error: function(){
 
@@ -729,7 +692,7 @@ $(document).ready(function(){
 
     }
 
-    $('.range-from, .range-to').on('change', function(){
+    $(document).on('change', '.range-from, .range-to', function(){
         var count = $(this).val()*1,
             $slider = $(this).parents(".b-filter-item-range").find(".slider-range");
             from = Number($slider.attr("data-range-from"));
@@ -856,8 +819,8 @@ $(document).ready(function(){
         $(".b-cart-number").text( count.toLocaleString() );
         $(".b-cart-price").text( sum.toLocaleString() );
 
-        BX.localStorage.set('count', count.toLocaleString());
-        BX.localStorage.set('sum', sum.toLocaleString());
+        localStorage.setItem('count', count.toLocaleString());
+        localStorage.setItem('sum', sum.toLocaleString());
 
         // Cookies.set('count', count.toLocaleString());
         // Cookies.set('sum', sum.toLocaleString());
@@ -889,7 +852,7 @@ $(document).ready(function(){
         });
     })
 
-    $('.b-catalog-list .b-product-colors select').on('change', function(){
+    $(document).on('change', '.b-catalog-list .b-product-colors select', function(){
         $('.b-filter input[name=SORT_FIELD]').val($(this).find('option:selected').val());
         $('.b-filter input[name=SORT_TYPE]').val($(this).find('option:selected').attr('data-type'));
         // $('.b-filter').change();
@@ -967,7 +930,8 @@ $(document).ready(function(){
                         }else{
                             $('.b-fav-number').text(Number($('.b-fav-number').text()) + 1);
                         }
-                        BX.localStorage.set('favCount', Number($('.b-fav-number').text()));
+                        localStorage.setItem('favCount', Number($('.b-fav-number').text()));
+                        setFavLocalStorage(json.arFav);
 
                         if (Number($('.b-fav-number').text()) == 0) {
                             $('.b-fav-round').addClass('hide');
@@ -1057,7 +1021,7 @@ $(document).ready(function(){
     }
 
     $('.fancybox-a').fancybox({'loop': true});
-    $('.b-reviews-list .review-more-a').on('click',function(){
+    $(document).on('click', '.b-reviews-list .review-more-a', function(){
         var el = $(this).attr('href');
         var popup = $(el).attr('href');
         var src = $(this).parents('li').find('.review-img').attr('src');
@@ -1124,7 +1088,7 @@ $(document).ready(function(){
     bindFancy();
     loadBlock(0);
 
-    $('.popup-sign-list li a').on('click',function(){
+    $(document).on('click', '.popup-sign-list li a', function(){
         var el = $(this).attr('href');
 
         if ( !$(this).hasClass('active') ){
@@ -1184,18 +1148,18 @@ function isValidJSON(src) {
 }
 
 function updateFav(arFav) {
-    $(".b-card-fav").each(function(){//сбросить все избранное
-        $(this).attr("data-action", "").removeClass("active");
+    $(".fav-link").each(function(){//сбросить все избранное
+        $(this).attr("data-action", "ADD").removeClass("active");
     });
     arFav.forEach(function(item, i, arr) {//проставить актуальные
-        $(".b-card-fav[data-id='"+item+"']").attr("data-action", "REMOVE").addClass("active");
+        $(".fav-link[data-id='"+item+"']").attr("data-action", "REMOVE").addClass("active");
     });
 }
 function getFavLocalStorage() {
-    return JSON.parse(BX.localStorage.get("arFav"));
+    return JSON.parse(localStorage.getItem("arFav"));
 }
 function setFavLocalStorage(arFav) {
-    BX.localStorage.set("arFav", JSON.stringify(arFav));
+    localStorage.setItem("arFav", JSON.stringify(arFav));
 }
 
 //Получить избранные товары
@@ -1207,7 +1171,7 @@ $.ajax({
             var json = JSON.parse(msg);
             if( json.result == "success" ){
                 if(json.isAuth){
-                    setFavLocalStorage(arFav);
+                    setFavLocalStorage(json.arFav);
                     updateFav(json.arFav);
                     $("body").addClass("auth");
                 }else{
@@ -1221,6 +1185,16 @@ $.ajax({
     },
 });
 
+// Иницализация элементов на каталоге на главной
+if (window.frameCacheVars !== undefined && window.frameCacheVars.dynamicBlocks.slider_component_1 !== undefined) {
+    BX.addCustomEvent("onFrameDataReceived", mainCatalogInit);
+}
+
+function mainCatalogInit() {
+    console.log('mainCatalogInit');
+    bindItemCards();
+}
+
 // Иницализация элементов на детальной
 if (window.frameCacheVars !== undefined && window.frameCacheVars.dynamicBlocks.detail_component !== undefined) {
     BX.addCustomEvent("onFrameDataReceived", detailInit);
@@ -1230,6 +1204,7 @@ function detailInit() {
     console.log('detailInit');
 
     catalogElementSlick();
+    bindItemCards();
 
     if ($('.b-product-main').length) {
         $(".b-product-main a").fancybox({ 
@@ -1243,6 +1218,11 @@ function detailInit() {
 
     bindFancy();
     loadBlock(0);
+
+    var favLocalStorage = getFavLocalStorage();
+    if(favLocalStorage){
+        updateFav(favLocalStorage);
+    }
 }
 
 function catalogElementSlick(){
@@ -1308,6 +1288,48 @@ function catalogElementSlick(){
             ]
         });
     });
+}
+
+function bindItemCards() {
+    $('.b-item-cards:not(.slick-initialized)').each(function(){
+        $(this).slick({
+            dots: false,
+            arrows: true,
+            prevArrow: '<div class="icon-arrow-left"></div>',
+            nextArrow: '<div class="icon-arrow-right"></div>',
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay: true,
+            autoplaySpeed: getRandomInt(3000, 5000),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 450,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    });
+}
+function getRandomInt(min, max) {
+    return Math.round(Math.random() * (max - min)) + min;
 }
 
 function bindFancy(){

@@ -2500,6 +2500,9 @@ h3.b-title{
 							font-size: 22px;
 							color: #564531;
 						}
+						.b-product-actions li .active .icon-star:before{
+							display: none;
+						}
 						.b-product-actions li .active .icon-star{
 							left: 1px;
 							background-image: url(../i/icon-star-fill.svg);
@@ -2508,9 +2511,7 @@ h3.b-title{
 							background-size: 22px;
 							display: block;
 						}
-						.b-product-actions li .active .icon-star:before{
-							display: none;
-						}
+
 						/*.b-product-actions li a:hover .icon-star-green{
 							display: block;
 						}*/

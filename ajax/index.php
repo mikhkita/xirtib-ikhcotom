@@ -50,6 +50,7 @@ switch ($action) {
 
 	    		if( $USER->Update($idUser, Array("UF_FAVOURITE" => serialize($arElements))) ){
 	    			$arFavourites = getFavourites();
+	    			$arResult['arFav'] = $arFavourites;
 		    		$arResult['COUNT'] = count($arFavourites);
 	    			returnSuccess($arResult);
 	    		}else{
@@ -77,6 +78,7 @@ switch ($action) {
 
 	    		if( $USER->Update($idUser, array("UF_FAVOURITE" => serialize($arElements))) ){
 	    			$arFavourites = getFavourites();
+	    			$arResult['arFav'] = $arFavourites;
 		    		$arResult['COUNT'] = count($arFavourites);
 	    			returnSuccess($arResult);
 	    		}else{

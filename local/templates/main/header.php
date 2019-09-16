@@ -259,7 +259,7 @@ CModule::IncludeModule('iblock');
 								<span class="b-fav-number" id="b-fav-number"><?=$favCount?></span>
 								<script type="text/javascript">
 									var favCount = Number('<?=$favCount?>');
-									BX.localStorage.set('favCount', favCount);
+									localStorage.setItem('favCount', favCount);
 									if (favCount > 0) {
 			                            document.getElementById("b-fav-round").classList.remove("hide");
 			                        } else {
@@ -269,8 +269,8 @@ CModule::IncludeModule('iblock');
 							</div>
 						  <?$framePrice->end();?>
 						  <script type="text/javascript">
-						  	if(BX.localStorage.get('favCount') > 0){
-								document.getElementById("b-fav-number").innerHTML = BX.localStorage.get('favCount');
+						  	if(localStorage.getItem('favCount') > 0){
+								document.getElementById("b-fav-number").innerHTML = localStorage.getItem('favCount');
 								document.getElementById("b-fav-round").classList.remove("hide");
 						  	}else{
 						  		document.getElementById("b-fav-number").innerHTML = 0;
@@ -327,14 +327,14 @@ CModule::IncludeModule('iblock');
 							<script type="text/javascript">
 								//console.log('<?=$basketInfoDynamic["sum"]?>');
 								//console.log('<?=$basketInfoDynamic["count"]?>');
-								BX.localStorage.set('sum', '<?=$basketInfoDynamic["sum"]?>');
-								BX.localStorage.set('count', '<?=$basketInfoDynamic["count"]?>');
+								localStorage.setItem('sum', '<?=$basketInfoDynamic["sum"]?>');
+								localStorage.setItem('count', '<?=$basketInfoDynamic["count"]?>');
 							</script>
 						<?$framePrice->end();?>
 					</a>
 					<script type="text/javascript">
-						document.getElementById("b-cart-sum").innerHTML = BX.localStorage.get('sum')?BX.localStorage.get('sum'):0;
-						document.getElementById("b-cart-count").innerHTML = BX.localStorage.get('count')?BX.localStorage.get('count'):0;
+						document.getElementById("b-cart-sum").innerHTML = localStorage.getItem('sum')?localStorage.getItem('sum'):0;
+						document.getElementById("b-cart-count").innerHTML = localStorage.getItem('count')?localStorage.getItem('count'):0;
 						document.getElementById("b-price-button").classList.add("show"); 
 					</script>
 				</div>
