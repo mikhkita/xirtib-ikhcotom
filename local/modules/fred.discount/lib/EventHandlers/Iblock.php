@@ -97,7 +97,7 @@ class Iblock
                     break;
             }
 
-            $productName = sprintf('[%d] %s', $arFields['ID'], $arFields['NAME']);
+            $productName = "[".$arFields['ID']."] Discount";
 
             $arPrice = \CPrice::GetBasePrice($arFields['ID']);
 
@@ -151,7 +151,8 @@ class Iblock
                     'CURRENCY' => $arPrice['CURRENCY'],
                     'CONDITIONS' => $rules,
                     'ACTIONS' => $rules,
-                    'USER_GROUPS' => is_array(explode(",", $USER_GROUPS)) ? explode(",", $USER_GROUPS) : [$USER_GROUPS]
+                    'USER_GROUPS' => is_array(explode(",", $USER_GROUPS)) ? explode(",", $USER_GROUPS) : [$USER_GROUPS],
+                    'LAST_DISCOUNT' => 'N'
                 ];
 
                 $dbDiscount = \CSaleDiscount::GetList(
