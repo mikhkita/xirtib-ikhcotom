@@ -111,9 +111,11 @@ CModule::IncludeModule('iblock');
 			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.sticky-kit.min.js");
 			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/address.js?".$GLOBALS["version"]);
 			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/AddressDeliveryClass.js?".$GLOBALS["version"]);
-			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/app-order.js?".$GLOBALS["version"]);
 		}
 		$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/main.js?".$GLOBALS["version"]);
+		if($urlArr[1] == "cart" && $urlArr[2] == "order"){
+			$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/app-order.js?".$GLOBALS["version"]);
+		}
 	?>
 
 	<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
@@ -257,15 +259,6 @@ CModule::IncludeModule('iblock');
 				  	  	  	<?  $arResult["arFav"] = getFavourites();
 								$favCount = count($arResult["arFav"]);?>
 								<span class="b-fav-number" id="b-fav-number"><?=$favCount?></span>
-								<script type="text/javascript">
-									var favCount = Number('<?=$favCount?>');
-									localStorage.setItem('favCount', favCount);
-									if (favCount > 0) {
-			                            document.getElementById("b-fav-round").classList.remove("hide");
-			                        } else {
-			                            document.getElementById("b-fav-round").classList.add("hide");
-			                        }
-								</script>
 							</div>
 						  <?$framePrice->end();?>
 						  <script type="text/javascript">
@@ -314,23 +307,11 @@ CModule::IncludeModule('iblock');
 						);?>
 					</div>
 
-					<? $basketInfo = getBasketCount(); ?>
-
 					<a href='/cart/order/' class="b-price-button" id="b-price-button">
-						<!-- <?$framePrice = new \Bitrix\Main\Page\FrameBuffered("b-price-button");
-					  	  $framePrice->begin();?>
-							<?$basketInfoDynamic = getBasketCount();?> -->
-							<span class="b-cart-price icon-ruble-bold" id="b-cart-sum"><?=$basketInfoDynamic["sum"]?></span>
-							<span class="b-cart-number-container">
-								<span class="b-cart-number" id="b-cart-count"><?=$basketInfoDynamic["count"]?></span>
-							</span>
-							<script type="text/javascript">
-								//console.log('<?=$basketInfoDynamic["sum"]?>');
-								//console.log('<?=$basketInfoDynamic["count"]?>');
-								localStorage.setItem('sum', '<?=$basketInfoDynamic["sum"]?>');
-								localStorage.setItem('count', '<?=$basketInfoDynamic["count"]?>');
-							</script>
-						<!-- <?$framePrice->end();?> -->
+						<span class="b-cart-price icon-ruble-bold" id="b-cart-sum">0</span>
+						<span class="b-cart-number-container">
+							<span class="b-cart-number" id="b-cart-count">0</span>
+						</span>
 					</a>
 					<script type="text/javascript">
 						document.getElementById("b-cart-sum").innerHTML = localStorage.getItem('sum')?localStorage.getItem('sum'):0;

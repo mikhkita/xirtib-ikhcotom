@@ -8,17 +8,6 @@ $(document).ready(function(){
         isMobile = false,
         isMobileSmall = false;
         startOffsetY = window.pageYOffset;
-
-    function supportedEvent(eventName) {
-        var e;
-        if(typeof(Event) === 'function') {
-            e = new Event(eventName);
-        }else{
-            e = document.createEvent('Event');
-            e.initEvent(eventName, true, true);
-        }
-        return e;
-    }
     
     function resize(){
        if( typeof( window.innerWidth ) == 'number' ) {
@@ -814,18 +803,6 @@ $(document).ready(function(){
         return false;
     });
 
-    function updateBasket(count, sum){
-
-        $(".b-cart-number").text( count.toLocaleString() );
-        $(".b-cart-price").text( sum.toLocaleString() );
-
-        localStorage.setItem('count', count.toLocaleString());
-        localStorage.setItem('sum', sum.toLocaleString());
-
-        // Cookies.set('count', count.toLocaleString());
-        // Cookies.set('sum', sum.toLocaleString());
-    }
-
     $(document).on("click", ".element-view", function(){
         var url = $(this).attr('data-href')+"&element_view=Y";
 
@@ -1138,6 +1115,24 @@ $(document).ready(function(){
     // cardImgHeight();
 });
 
+function supportedEvent(eventName) {
+    var e;
+    if(typeof(Event) === 'function') {
+        e = new Event(eventName);
+    }else{
+        e = document.createEvent('Event');
+        e.initEvent(eventName, true, true);
+    }
+    return e;
+}
+
+function updateBasket(count, sum){
+    $(".b-cart-number").text( count.toLocaleString() );
+    $(".b-cart-price").text( sum.toLocaleString() );
+    localStorage.setItem('count', count.toLocaleString());
+    localStorage.setItem('sum', sum.toLocaleString());
+}
+
 function isValidJSON(src) {
     var filtered = src+"";
     filtered = filtered.replace(/\\["\\\/bfnrtu]/g, '@');
@@ -1172,6 +1167,15 @@ $.ajax({
             if( json.result == "success" ){
                 if(json.isAuth){
                     setFavLocalStorage(json.arFav);
+                    localStorage.setItem('sum', json.sum);
+                    localStorage.setItem('count', json.count);
+                    var favCount = json.favCount;
+                    localStorage.setItem('favCount', favCount);
+                    if (favCount > 0) {
+                        $(".b-fav-round").removeClass("hide");
+                    } else {
+                        $(".b-fav-round").addClass("hide");
+                    }
                     updateFav(json.arFav);
                     $("body").addClass("auth");
                 }else{
