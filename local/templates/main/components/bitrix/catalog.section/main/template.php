@@ -12,6 +12,9 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);?>
 
+<div id="catalog_section_component">
+<?$frame = $this->createFrame("catalog_section_component", false)->begin();?>
+
 <? 
 
 if (isAuth($USER)){
@@ -25,12 +28,18 @@ if (isAuth($USER)){
 if(count($arResult["ITEMS"])): ?>
 	<div class="b-catalog-inner clearfix">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
-			<? $class = "";?>
+			<? $class = ""; ?>
+			<? $measureText = ''; ?>
 			<? $minVal = 0; ?>
 			<? $maxVal = 0; ?>
 			<? if ($arItem["OFFERS"]): ?>
 				<? $minVal = 100000; ?>
 				<? $maxVal = 0; ?>
+
+				<? if($arItem["OFFERS"][0]['PRODUCT']['MEASURE'] == 3): ?>
+					<? $measureText = 'за '.$arItem["OFFERS"][0]["CATALOG_MEASURE_RATIO"].' г.'; ?>
+				<? endif; ?>
+
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
 
 					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
@@ -50,6 +59,9 @@ if(count($arResult["ITEMS"])): ?>
 
 				<? endforeach; ?>
 			<? else: ?>
+				<? if ($arItem['PRODUCT']['MEASURE'] == 3): ?>
+					<? $measureText = 'за '.$arItem["CATALOG_MEASURE_RATIO"].' г.'; ?>
+				<? endif; ?>
 
 				<? if( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arItem["PRICES"]["PRICE"]["VALUE"] ): ?>
 					<? $class = "has-discount"; ?>
@@ -126,9 +138,11 @@ if(count($arResult["ITEMS"])): ?>
 				<div class="b-price-container <?=$class?>">
 					<div class="b-price">
 						<span class="icon-ruble-bold"><?=$price?></span>
+						<span class="measure-text"><?=$measureText?></span>
 					</div>
 					<div class="b-discount-price">
 						<span class="icon-ruble-bold"><?=$discountPrice?></span>
+						<span class="measure-text"><?=$measureText?></span>
 					</div>
 				</div>
 			</div>
@@ -147,3 +161,6 @@ if(count($arResult["ITEMS"])): ?>
 		<? endif; ?>
 	</div>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

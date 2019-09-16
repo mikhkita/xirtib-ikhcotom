@@ -11,7 +11,10 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-
+?>
+<div id="index_blog_component">
+<?$frame = $this->createFrame("index_blog_component", false)->begin();?>
+<?
 if(count($arResult["ITEMS"])): ?>
 	<div class="b-main-articles clearfix">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
@@ -41,3 +44,5 @@ if(count($arResult["ITEMS"])): ?>
 		<?=$arResult["NAV_STRING"];?>
 	<?endif;?>
 <? endif; ?>
+<?$frame->end();?>
+</div>

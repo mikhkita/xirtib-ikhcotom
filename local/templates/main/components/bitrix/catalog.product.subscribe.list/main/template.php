@@ -9,6 +9,7 @@ use Bitrix\Main\Localization\Loc;
 
 CJSCore::init(array('popup'));
 
+
 $randomString = $this->randString();
 
 $APPLICATION->setTitle(Loc::getMessage('CPSL_SUBSCRIBE_TITLE_NEW'));

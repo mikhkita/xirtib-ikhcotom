@@ -12,6 +12,13 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
+?>
+
+<div id="reviews_component">
+<?$frame = $this->createFrame("reviews_component", false)->begin();?>
+
+<? 
+
 if(count($arResult["ITEMS"])): ?>
 	<ul class="b-reviews-list">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
@@ -45,3 +52,6 @@ if(count($arResult["ITEMS"])): ?>
 		<?=$arResult["NAV_STRING"];?>
 	<?endif;?>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

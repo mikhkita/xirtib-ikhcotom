@@ -12,6 +12,10 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+
+<div id="catalog_section_sub_component">
+<?$frame = $this->createFrame("catalog_section_sub_component", false)->begin();?>
+
 <?if( count($arResult["SECTIONS"]) ): ?>
 	<div class="b-category-tiles">
 		<?foreach($arResult["SECTIONS"] as $key => $arItem):?>
@@ -23,3 +27,6 @@ $this->setFrameMode(true);
 		<?endforeach;?>
 	</div>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

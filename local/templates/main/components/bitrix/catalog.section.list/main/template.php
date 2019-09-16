@@ -13,6 +13,9 @@
 $this->setFrameMode(true);
 
 ?>
+<div id="catalog_section_list_component">
+<?$frame = $this->createFrame("catalog_section_list_component", false)->begin();?>
+
 <?if( count($arResult["SECTIONS"]) ): ?>
 	<div class="b-section clearfix">
 		<?foreach($arResult["SECTIONS"] as $key => $arItem):?>
@@ -28,3 +31,6 @@ $this->setFrameMode(true);
 		<?endforeach;?>
 	</ul>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

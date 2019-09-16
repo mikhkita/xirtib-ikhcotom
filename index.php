@@ -214,6 +214,7 @@ $APPLICATION->SetTitle("Интернет-магазин пряжи Моточк�
 					"USE_MAIN_ELEMENT_SECTION" => "N",
 					"USE_PRICE_COUNT" => "N",
 					"USE_PRODUCT_QUANTITY" => "Y",
+					"COMPOSITE_ID" => "slider_component_1"
 				),
 			false,
 			Array(
@@ -325,6 +326,7 @@ $APPLICATION->SetTitle("Интернет-магазин пряжи Моточк�
 					"USE_MAIN_ELEMENT_SECTION" => "N",
 					"USE_PRICE_COUNT" => "N",
 					"USE_PRODUCT_QUANTITY" => "Y",
+					"COMPOSITE_ID" => "slider_component_2"
 				),
 			false,
 			Array(

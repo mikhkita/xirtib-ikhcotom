@@ -17,6 +17,7 @@ CJSCore::init(array('popup', 'ajax'));
 
 $this->setFrameMode(true);
 
+
 $strMainId = $this->getEditAreaId($arResult['PRODUCT_ID']);
 $jsObject = 'ob'.preg_replace("/[^a-zA-Z0-9_]/", "x", $strMainId);
 $paramsForJs = array(
@@ -77,4 +78,4 @@ if($showSubscribe):?>
 
 		var <?=$jsObject?> = new JCCatalogProductSubscribe(<?=CUtil::phpToJSObject($paramsForJs, false, true)?>);
 	</script>
-<?endif;
+<?endif;?>
