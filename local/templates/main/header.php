@@ -317,9 +317,9 @@ CModule::IncludeModule('iblock');
 					<? $basketInfo = getBasketCount(); ?>
 
 					<a href='/cart/order/' class="b-price-button" id="b-price-button">
-						<?$framePrice = new \Bitrix\Main\Page\FrameBuffered("b-price-button");
+						<!-- <?$framePrice = new \Bitrix\Main\Page\FrameBuffered("b-price-button");
 					  	  $framePrice->begin();?>
-							<?$basketInfoDynamic = getBasketCount();?>
+							<?$basketInfoDynamic = getBasketCount();?> -->
 							<span class="b-cart-price icon-ruble-bold" id="b-cart-sum"><?=$basketInfoDynamic["sum"]?></span>
 							<span class="b-cart-number-container">
 								<span class="b-cart-number" id="b-cart-count"><?=$basketInfoDynamic["count"]?></span>
@@ -330,7 +330,7 @@ CModule::IncludeModule('iblock');
 								localStorage.setItem('sum', '<?=$basketInfoDynamic["sum"]?>');
 								localStorage.setItem('count', '<?=$basketInfoDynamic["count"]?>');
 							</script>
-						<?$framePrice->end();?>
+						<!-- <?$framePrice->end();?> -->
 					</a>
 					<script type="text/javascript">
 						document.getElementById("b-cart-sum").innerHTML = localStorage.getItem('sum')?localStorage.getItem('sum'):0;
