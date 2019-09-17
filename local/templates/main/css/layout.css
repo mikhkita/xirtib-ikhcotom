@@ -735,16 +735,42 @@ h3.b-title{
 			.b-profile-no-auth{
 				display: none;
 			}
-			body.auth .b-profile-auth{
+			/*Мобильное меню*/
+			.b-profile-auth-mobile,
+			.b-profile-no-auth-mobile{
+				display: none;
+			}
+			body.auth .b-profile-auth-mobile,
+			body.auth-before .b-profile-auth-mobile{
+				display: block;
+			}
+			body.auth .b-profile-no-auth-mobile,
+			body.auth-before .b-profile-no-auth-mobile{
+				display: none;
+			}
+			body.no-auth .b-profile-auth-mobile,
+			body.no-auth-before .b-profile-auth-mobile{
+				display: none;
+			}
+			body.no-auth .b-profile-no-auth-mobile,
+			body.no-auth-before .b-profile-no-auth-mobile{
+				display: block;
+			}
+			/*В хедере*/
+			body.auth .b-profile-auth,
+			body.auth-before .b-profile-auth{
 				display: inline-block;
 			}
-			body.auth .b-profile-no-auth{
+			body.auth .b-profile-no-auth,
+			body.auth-before .b-profile-no-auth{
 				display: none;
 			}
-			body.no-auth .b-profile-auth{
+			body.no-auth .b-profile-auth,
+			body.no-auth-before .b-profile-auth{
 				display: none;
 			}
-			body.no-auth .b-profile-no-auth{
+			body.no-auth .b-profile-no-auth,
+			body.no-auth-before .b-profile-no-auth{
 				display: inline-block;
 			}
 		.b-fav{
@@ -1225,10 +1251,12 @@ h3.b-title{
 					height: 36px;
 					z-index: 1;
 				}
-				body.auth .b-card-fav{
+				body.auth .b-card-fav,
+				body.auth-before .b-card-fav{
 					display: inline-block;
 				}
-				body.no-auth .b-card-fav{
+				body.no-auth .b-card-fav,
+				body.no-auth-before .b-card-fav{
 					display: none;
 				}
 					.b-card-fav.active{
