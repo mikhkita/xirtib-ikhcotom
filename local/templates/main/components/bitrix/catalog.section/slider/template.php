@@ -89,7 +89,7 @@ if (isAuth($USER)){
 					<div class="b-card-top-img" style="background-image: url('<?=$renderImage['src']?>');"></div>
 
 					<? if( $label = getItemLabel($arItem) ): ?>
-						<div class="b-discount"><?$label?></div>
+						<div class="b-discount"><?=$label?></div>
 					<? endif;?>
 
 					<?// if (isAuth($USER)): ?>

@@ -4,6 +4,7 @@ $APPLICATION->SetTitle("Каталог");?>
 <? if($_REQUEST["SECTION_CODE"] || $_REQUEST['TAGS'] || $_REQUEST['SECTION_CODE_CUSTOM']):
 
 	$code = isset($_REQUEST['SECTION_CODE_CUSTOM']) ? $_REQUEST['SECTION_CODE_CUSTOM'] : $_REQUEST['SECTION_CODE'];
+	$isNew = false;
 	
 	$arSelect = Array("ID", "IBLOCK_ID", "NAME", "DATE_ACTIVE_FROM","PROPERTY_*", 'PREVIEW_TEXT');
 	$arFilter = Array("IBLOCK_ID"=>1, "ACTIVE_DATE"=>"Y", "ACTIVE"=>"Y", 'CODE' => $code);
@@ -14,6 +15,12 @@ $APPLICATION->SetTitle("Каталог");?>
 		$seoSectoinTitle = $arFields['NAME'];
 		$seoText = $arFields['DESCRIPTION'];
 	}
+
+	if ($_REQUEST['SECTION_CODE'] == 'novoe-postuplenie'):
+		$GLOBALS['arrFilter'][] = array('PROPERTY_NEW_VALUE' => 'Y');
+		$_REQUEST['SECTION_CODE'] = '';
+		$isNew = true;
+	endif;
 
 
 	$sortList = array(
@@ -111,7 +118,7 @@ $APPLICATION->SetTitle("Каталог");?>
 		?>
 
 		<div class="b-catalog-list after-load">
-			<? if (!$_REQUEST['TAGS']):?>
+			<? if (!$_REQUEST['TAGS'] && !$isNew):?>
 				<?$APPLICATION->IncludeComponent("redder:catalog.section.list", "subcategories", Array(
 					"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
 						"CACHE_GROUPS" => "Y",	// Учитывать права доступа

@@ -16,10 +16,9 @@ switch ($action) {
 
 		if (CModule::IncludeModule("catalog")){
 		    if (($action == "ADD2BASKET" || $action == "BUY")){
-		    	Add2BasketByProductID($productId,$quantity);
+		    	Add2BasketByProductID($productId, $quantity);
 				if($ex = $APPLICATION->GetException()){
       				$strError = $ex->GetString();
-      				//vardump($strError);
       				returnError("Ошибка! ".$strError);
       			}
 		    }

@@ -1164,6 +1164,10 @@ $(document).ready(function(){
         $('.b-filter-cont').addClass('no-filter');
     }
 
+    if (($('#SECTION_CODE').val() == 'novoe-postuplenie') || ($('#SECTION_CODE').val() == 'aktsii-i-skidki')) {
+        $('.catalog-mobile-filter').addClass('no-filter');
+    }
+
     detailInit();
 
     var favLocalStorage = getFavLocalStorage();
