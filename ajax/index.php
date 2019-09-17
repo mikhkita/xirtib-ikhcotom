@@ -718,9 +718,7 @@ switch ($action) {
 		$arResult["sum"] = $basketInfo["sum"];
 		$arResult["count"] = $basketInfo["count"];
 		$arUser = getUserFields();
-		if ($arUser){
-			$arResult["userName"] = $arUser["NAME"];
-		}
+		$arResult["userName"] = ($arUser && $arUser["NAME"]) ? $arUser["NAME"] : "";
 		returnSuccess($arResult);
 		break;
 	default:

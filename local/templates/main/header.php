@@ -130,15 +130,15 @@ CModule::IncludeModule('iblock');
 	<div id="mobile-menu" class="mobile-menu b-left-menu hide">
 		<h2 class="b-bottom-border">Меню</h2>
 		<div class="mobile-menu-login">
-			<?$arUser = getUserFields();?>
-			<? if ($arUser): ?>
-				<p class="mobile-menu-user"><?=$arUser["NAME"]?></p>
+			<div class="b-profile-auth-mobile">
+				<p class="mobile-menu-user"></p>
 				<a href="/personal/">Перейти в кабинет</a><br>
 				<a href="?logout=yes">Выйти</a>
-			<? else: ?>
+			</div>
+			<div class="b-profile-no-auth-mobile">
 				<a href="/personal/">Войти</a><br>
 				<a href="/personal/">Регистрация</a>
-			<? endif; ?>
+			</div>
 		</div>
 		<div class="mobile-menu-wrap">
 			<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "mobile_categories", Array(
