@@ -466,11 +466,7 @@ body {
 		.b-product-colors:before {
 			font-family: 'icomoon';
 			position: absolute;
-		    top: 50%;
-		    -webkit-transform: translateY(-50%);
-		    -ms-transform: translateY(-50%);
-		    -o-transform: translateY(-50%);
-		    transform: translateY(-50%);
+		    top: 56%;
 		    right: 17px;
 		    display: inline-block;
 		    content: "\e910";
@@ -737,6 +733,7 @@ body {
 }
 .b-product-params-left .b-product-colors{
 	max-width: 375px;
+	margin-bottom: 10px;
 }
 .b-product-params-left .b-product-colors .chosen-container{
 	max-width: 440px;
@@ -747,8 +744,10 @@ body {
 	margin-bottom: 24px;
 }
 .b-product-params-left .b-product-colors select{
-	width: calc(100% - 80px);
+	width: 100%;
+	margin-left: 0;
 	max-width: 375px;
+	margin-top: 5px;
 }
 .b-product-texture{
 	width: 100%;

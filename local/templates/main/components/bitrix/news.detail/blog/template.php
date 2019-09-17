@@ -13,6 +13,9 @@
 $this->setFrameMode(true);
 ?>
 
+<div id="detail_blog_component">
+<?$frame = $this->createFrame("detail_blog_component", false)->begin();?>
+
 <? if ($arResult): ?>
 	<? $arDate = explode('.', $arResult['CREATED_DATE']); ?>
 	<? $date = $arDate[2].'.'.$arDate[1].'.'.$arDate[0]; ?>
@@ -226,3 +229,6 @@ $this->setFrameMode(true);
 		</div>
 	</div>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

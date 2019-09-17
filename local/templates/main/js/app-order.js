@@ -26,17 +26,6 @@
         }
     };
 
-    function supportedEvent(eventName) {
-        var e;
-        if(typeof(Event) === 'function') {
-            e = new Event(eventName);
-        }else{
-            e = document.createEvent('Event');
-            e.initEvent(eventName, true, true);
-        }
-        return e;
-    }
-
     // ===== Дерево компонентов =====
 
     // v-order
@@ -313,6 +302,7 @@
                 if(self.timeoutQuantity){
                     clearTimeout(self.timeoutQuantity);
                 }
+                updateBasket(self.orders.length, self.rawTotal);
                 self.timeoutQuantity = setTimeout(function () {
                     self.countQueue++;
                     $.ajax({
@@ -326,6 +316,7 @@
                                 if(self.countQueue == 0){
                                     self.orders.filter(function(v) {return v.id === data.id})[0].quantity = data.quantity;
                                 }
+                                updateBasket(self.orders.length, self.rawTotal);
                             }else{
                                 alert("Ошибка изменения количеста, пожалуйста, обновите страницу");
                             }
@@ -351,6 +342,7 @@
                     selfTotal = self.orders[index].totalPriceForOne;
                 self.orders[index].basePriceForOne = 0;//обнулить стоимость (чтобы сразу обновить общую стоимость)
                 self.orders[index].totalPriceForOne = 0;
+                updateBasket(self.orders.length, self.rawTotal);
                 $.ajax({
                     type: "get",
                     url: "/ajax/index.php",
@@ -370,11 +362,13 @@
                           self.orders[index].totalPriceForOne = selfTotal;
                           alert("Не удалось удалить товар из корзины");
                       }
+                      updateBasket(self.orders.length, self.rawTotal);
                     },
                     error: function(){
                         self.orders[index].visible = true;
                         self.orders[index].basePriceForOne = selfBase;
                         self.orders[index].totalPriceForOne = selfTotal;
+                        updateBasket(self.orders.length, self.rawTotal);
                         alert("Не удалось удалить товар из корзины");
                     },
                     complete: function(){

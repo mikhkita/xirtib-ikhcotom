@@ -12,6 +12,9 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);?>
 
+<div id="catalog_section_component">
+<?$frame = $this->createFrame("catalog_section_component", false)->begin();?>
+
 <? 
 
 if (isAuth($USER)){
@@ -158,3 +161,6 @@ if(count($arResult["ITEMS"])): ?>
 		<? endif; ?>
 	</div>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

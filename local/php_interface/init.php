@@ -10,6 +10,31 @@ function replacePlaceholders(&$content){
 	// $content = str_replace("#YEAR#", $year, $content);
 }
 
+AddEventHandler("main", "OnAdminListDisplay", "MyOnAdminListDisplay");
+function MyOnAdminListDisplay(&$list)
+{
+    if ($list->table_id=="tbl_sale_order") {
+       //  foreach ($list->aRows as $row){ // здесь мы вклиниваемся в контекстное меню каждой строки таблицы
+       //      $row->aActions["all_orders"]["ICON"] = "";
+       //      $row->aActions["all_orders"]["TEXT"] = "Переотправить заказ на почту";
+       //      $row->aActions["all_orders"]["ACTION"] = "javascript:sendTo1C(".$row->id.")";  // здесь мы объявляем действие - js-функция orders_ms(), в которую будем передавать параметр (в данном случае id заказа)  
+      	// }  
+      	unset($list->arActions["cancel"]);
+      	unset($list->arActions["cancel_n"]);
+      	unset($list->arActions["allow_delivery"]);
+      	unset($list->arActions["allow_delivery_n"]);
+      	unset($list->arActions["update_payment_status"]);
+      	unset($list->arActions["paid"]);
+      	unset($list->arActions["paid_n"]);
+      	unset($list->arActions["delivery_requests"]);
+      	unset($list->arActions["archive"]);
+      	unset($list->arActions["status_N"]);
+      	unset($list->arActions["status_F"]);
+      	unset($list->arActions["export_commerceml"]);
+      	unset($list->arActions["export_commerceml2"]);
+    }
+} 
+
 // #CLIENT_INFO#
 
 // #ITEMS_INFO#

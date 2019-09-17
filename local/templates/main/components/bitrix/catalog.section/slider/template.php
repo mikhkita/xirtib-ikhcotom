@@ -12,6 +12,20 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);?>
 
+<?
+$compID = "";
+if(isset($arParams["COMPOSITE_ID"])){
+	$compID = $arParams["COMPOSITE_ID"];
+}
+?>
+<?if(!empty($compID)):?>
+	<div id="<?=$compID?>">
+	<?$frame = $this->createFrame($compID, false)->begin();?>
+<?else:?>
+	<div id="slider_component">
+	<?$frame = $this->createFrame("slider_component", false)->begin();?>
+<?endif;?>
+
 <? if(count($arResult["ITEMS"])): ?>
 
 <? 
@@ -168,3 +182,6 @@ if (isAuth($USER)){
 	</div>
 <?*/?>
 <? endif; ?>
+
+<?$frame->end();?>
+</div>

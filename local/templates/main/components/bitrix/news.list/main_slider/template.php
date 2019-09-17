@@ -11,8 +11,10 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-
-if(count($arResult["ITEMS"])): ?>
+?>
+<div id="main_slider_component">
+<?$frame = $this->createFrame("main_slider_component", false)->begin();?>
+<?if(count($arResult["ITEMS"])): ?>
 	<div class="b-main-slider">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
 			<?$renderImage = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], Array("width" => 2050, "height" => 1048), BX_RESIZE_IMAGE_EXACT, false, false, false, 50);?>
@@ -22,3 +24,5 @@ if(count($arResult["ITEMS"])): ?>
 		<?endforeach;?>
 	</div>
 <? endif; ?>
+<?$frame->end();?>
+</div>

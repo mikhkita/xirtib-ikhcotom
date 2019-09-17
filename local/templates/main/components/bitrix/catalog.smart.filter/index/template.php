@@ -11,6 +11,12 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+?>
+
+<div id="smart_filter_component">
+<?$frame = $this->createFrame("smart_filter_component", false)->begin();?>
+
+<?
 
 $arColors = array();
 $arStructure = array();
@@ -83,4 +89,7 @@ foreach($arResult["ITEMS"] as $arItem){
 		</div>
 	</div>
 	<input class="b-btn b-filter-submit" type="submit" id="set_filter" name="set_filter" value="Подобрать"/>
+</div>
+
+<?$frame->end();?>
 </div>

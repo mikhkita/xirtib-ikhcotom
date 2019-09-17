@@ -191,7 +191,7 @@ if (count($arResult["OFFERS"]) < 5){
 				<ul class="b-product-actions clearfix">
 					<li>
 						<? if (isAuth($USER)): ?>
-							<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-action="<?=$favAction?>">
+							<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-id="<?=$arResult['ID']?>" data-action="<?=$favAction?>">
 								<span class="icon icon-star"></span>
 								В избранное
 							</a>

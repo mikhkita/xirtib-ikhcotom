@@ -14,6 +14,7 @@ use \Bitrix\Main;
  */
 
 $this->setFrameMode(true);
+
 if (isset($arResult['ITEM']))
 {
 
@@ -292,3 +293,4 @@ if (isset($arResult['ITEM']))
 	<?
 	unset($item, $actualItem, $minOffer, $itemIds, $jsParams);
 }
+?>
