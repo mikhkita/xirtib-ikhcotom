@@ -713,7 +713,7 @@ switch ($action) {
 		$arResult = array();
 		$arResult["isAuth"] = isAuth();
 		$arResult["arFav"] = getFavourites();
-		$arResult["favCount"] = count($arResult["arFav"]);
+		$arResult["favCount"] = (!empty($arResult["arFav"])) ? count($arResult["arFav"]) : 0;
 		$basketInfo = getBasketCount();
 		$arResult["sum"] = $basketInfo["sum"];
 		$arResult["count"] = $basketInfo["count"];
