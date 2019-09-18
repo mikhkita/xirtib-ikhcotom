@@ -585,11 +585,11 @@ if (count($arResult["OFFERS"]) < 5){
 							<textarea rows="2" name="comment" required placeholder="Отзывы могут оставлять только авторизованные пользователи"></textarea>
 						</div>
 						<input type="text" name="MAIL">
-						<? if (isAuth()): ?>
-							<a href="#" class="b-btn ajax">Оставить отзыв</a>
-						<? else: ?>
-							<a href="#popup-sign" class="b-btn fancy">Войти</a>
-						<? endif; ?>
+						
+						<a href="#" class="b-btn b-btn-review-auth ajax">Оставить отзыв</a>
+					
+						<a href="#popup-sign" class="b-btn b-btn-review-no-auth fancy">Войти</a>
+						
 						<a href="#b-popup-review-success" class="b-thanks-link fancy" style="display:none;"></a>
 						<a href="#b-popup-error-reg" class="b-error-link fancy" style="display:none;"></a>
 					</form>

@@ -2391,6 +2391,27 @@ h3.b-title{
 
 /*=======Детальная======*/
 
+.b-btn-review-auth,
+.b-btn-review-no-auth{
+	display: none;
+}
+body.auth .b-btn-review-auth,
+body.auth-before .b-btn-review-auth{
+	display: inline-block;
+}
+body.auth .b-btn-review-no-auth,
+body.auth-before .b-btn-review-no-auth{
+	display: none;
+}
+body.no-auth .b-btn-review-auth,
+body.no-auth-before .b-btn-review-auth{
+	display: none;
+}
+body.no-auth .b-btn-review-no-auth,
+body.no-auth-before .b-btn-review-no-auth{
+	display: inline-block;
+}
+
 .b-detail{
 	margin-top: 40px;
 }
