@@ -13,28 +13,28 @@ $this->setFrameMode(true);
 
 $arColors = getColors();
 
-if (isAuth($USER)){
-	$ids = getFavourites();
+// if (isAuth($USER)){
+// 	$ids = getFavourites();
 
-	if( empty($ids) || !count($ids) ){
-		$ids = 0;
-	}
-}
+// 	if( empty($ids) || !count($ids) ){
+// 		$ids = 0;
+// 	}
+// }
 
-if ($ids != 0){
-	foreach ($ids as $key => $value) {
-		$favClass = "";
-		$favAction = "ADD";
-		if ($value == $arResult['ID']) {
-			$favClass = "active";
-			$favAction = "REMOVE";
-			break;
-		} 
-	}
-} else{
-	$favClass = "";
-	$favAction = "ADD";
-}
+// if ($ids != 0){
+// 	foreach ($ids as $key => $value) {
+// 		$favClass = "";
+// 		$favAction = "ADD";
+// 		if ($value == $arResult['ID']) {
+// 			$favClass = "active";
+// 			$favAction = "REMOVE";
+// 			break;
+// 		} 
+// 	}
+// } else{
+// 	$favClass = "";
+// 	$favAction = "ADD";
+// }
 
 $GLOBALS["arProductReviews"] = array("PROPERTY_PRODUCT_ID" => $arResult["ID"]);
 $GLOBALS['arModelsFilter'] = array('PROPERTY_MATERIALS' => $arResult['ID']);
@@ -190,7 +190,7 @@ if (count($arResult["OFFERS"]) < 5){
 			<div class="b-product-actions-wrap">
 				<ul class="b-product-actions clearfix">
 					<li class="detail-fav-link">
-						<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-id="<?=$arResult['ID']?>" data-action="<?=$favAction?>">
+						<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link" data-id="<?=$arResult['ID']?>">
 							<span class="icon icon-star"></span>
 							В избранное
 						</a>
