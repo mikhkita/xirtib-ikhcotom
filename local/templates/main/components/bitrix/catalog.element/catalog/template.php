@@ -101,8 +101,8 @@ if ($arResult["OFFERS"]){
 			$zoomClass = '';
 		}
 		if ($key == 0){
-			$price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]);
-			$discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]);
+			// $price = convertPrice($offer["PRICES"]["PRICE"]["VALUE"]);
+			// $discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]);
 			$price = $offer["PRICES"]["PRICE"]["VALUE"];
 			$discountPrice = $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"];
 			$priceType = $measures[$offer["ITEM_MEASURE"]["ID"]];
@@ -138,8 +138,8 @@ if ($arResult["OFFERS"]){
 	$priceType = $measures[$arResult["ITEM_MEASURE"]["ID"]];
 	// $price = number_format( $arResult["PRICES"]["PRICE"]["VALUE"], 0, ',', ' ' );
 	// $discountPrice = number_format( $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"], 0, ',', ' ' );
-	$price = convertPrice($arResult["PRICES"]["PRICE"]["VALUE"]);
-	$discountPrice = convertPrice($arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"]);
+	$price = $arResult["PRICES"]["PRICE"]["VALUE"];
+	$discountPrice = $arResult["PRICES"]["PRICE"]["DISCOUNT_VALUE"];
 }
 
 if ($price != $discountPrice){
@@ -297,11 +297,11 @@ if (count($arResult["OFFERS"]) < 5){
 				
 					<div class="b-product-params-right<? if ($discount): ?> has-discount<? endif; ?>">
 						<div class="b-product-price-base">
-							<span id="price"><? if ($discount): ?><?=$price?><? endif; ?></span>
+							<span id="price"><? if ($discount): ?><?=convertPrice($price)?><? endif; ?></span>
 							<span class="icon-ruble"></span>
 						</div>
 						<div class="b-product-price-total gram">
-							<span id="discount-price"><?=$discountPrice?></span>
+							<span id="discount-price"><?=convertPrice($discountPrice)?></span>
 							<span class="icon-ruble-bold"></span>
 							<small id="measure"><?=$priceType?></small>
 						</div>
