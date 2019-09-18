@@ -1326,9 +1326,13 @@ h3.b-title{
 						font-size: 16px;
 						top: 6px;
 					}
-					.b-price .measure-text{
+					.b-price span.measure-text{
+						padding-right: 0;
 						font-family: 'Lora-Regular';
 						font-size: 20px;
+					}
+					.has-discount .b-price span.measure-text{
+						padding-right: 0;
 					}
 				.b-discount-price{
 					display: none;
