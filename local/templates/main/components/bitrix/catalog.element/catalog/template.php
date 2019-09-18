@@ -13,28 +13,28 @@ $this->setFrameMode(true);
 
 $arColors = getColors();
 
-if (isAuth($USER)){
-	$ids = getFavourites();
+// if (isAuth($USER)){
+// 	$ids = getFavourites();
 
-	if( empty($ids) || !count($ids) ){
-		$ids = 0;
-	}
-}
+// 	if( empty($ids) || !count($ids) ){
+// 		$ids = 0;
+// 	}
+// }
 
-if ($ids != 0){
-	foreach ($ids as $key => $value) {
-		$favClass = "";
-		$favAction = "ADD";
-		if ($value == $arResult['ID']) {
-			$favClass = "active";
-			$favAction = "REMOVE";
-			break;
-		} 
-	}
-} else{
-	$favClass = "";
-	$favAction = "ADD";
-}
+// if ($ids != 0){
+// 	foreach ($ids as $key => $value) {
+// 		$favClass = "";
+// 		$favAction = "ADD";
+// 		if ($value == $arResult['ID']) {
+// 			$favClass = "active";
+// 			$favAction = "REMOVE";
+// 			break;
+// 		} 
+// 	}
+// } else{
+// 	$favClass = "";
+// 	$favAction = "ADD";
+// }
 
 $GLOBALS["arProductReviews"] = array("PROPERTY_PRODUCT_ID" => $arResult["ID"]);
 $GLOBALS['arModelsFilter'] = array('PROPERTY_MATERIALS' => $arResult['ID']);
@@ -189,13 +189,11 @@ if (count($arResult["OFFERS"]) < 5){
 			<h1 class="b-product-name"><?=(($arResult['PROPERTIES']['TITLE']['VALUE'])?($arResult['PROPERTIES']['TITLE']['VALUE']):($arResult['NAME']))?> <span><?=$arResult['PROPERTIES']['SUBTITLE']['VALUE']?></span></h1>
 			<div class="b-product-actions-wrap">
 				<ul class="b-product-actions clearfix">
-					<li>
-						<? if (isAuth($USER)): ?>
-							<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-id="<?=$arResult['ID']?>" data-action="<?=$favAction?>">
-								<span class="icon icon-star"></span>
-								В избранное
-							</a>
-						<? endif; ?>
+					<li class="detail-fav-link">
+						<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link" data-id="<?=$arResult['ID']?>">
+							<span class="icon icon-star"></span>
+							В избранное
+						</a>
 					</li>
 					<li class="b-share-link">
 						<a href="#">
@@ -587,11 +585,11 @@ if (count($arResult["OFFERS"]) < 5){
 							<textarea rows="2" name="comment" required placeholder="Отзывы могут оставлять только авторизованные пользователи"></textarea>
 						</div>
 						<input type="text" name="MAIL">
-						<? if (isAuth()): ?>
-							<a href="#" class="b-btn ajax">Оставить отзыв</a>
-						<? else: ?>
-							<a href="#popup-sign" class="b-btn fancy">Войти</a>
-						<? endif; ?>
+						
+						<a href="#" class="b-btn b-btn-review-auth ajax">Оставить отзыв</a>
+					
+						<a href="#popup-sign" class="b-btn b-btn-review-no-auth fancy">Войти</a>
+						
 						<a href="#b-popup-review-success" class="b-thanks-link fancy" style="display:none;"></a>
 						<a href="#b-popup-error-reg" class="b-error-link fancy" style="display:none;"></a>
 					</form>
