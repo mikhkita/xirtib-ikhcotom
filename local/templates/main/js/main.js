@@ -353,13 +353,6 @@ $(document).ready(function(){
         $('.b-product-main').slick('slickGoTo',parseInt(slickID));
     }
 
-    function chosenElementInit(){
-        $(".colors-select").chosen({
-            width: "193px",
-            disable_search_threshold: 10000
-        });
-    }
-
     $(".sort-select").chosen({
         width: "193px",
         disable_search_threshold: 10000
@@ -1235,6 +1228,7 @@ function detailInit() {
 
     catalogElementSlick();
     bindItemCards();
+    chosenElementInit();
 
     if ($('.b-product-main').length) {
         $(".b-product-main a").fancybox({ 
@@ -1357,6 +1351,13 @@ function bindItemCards() {
 }
 function getRandomInt(min, max) {
     return Math.round(Math.random() * (max - min)) + min;
+}
+
+function chosenElementInit(){
+    $(".colors-select").chosen({
+        width: "193px",
+        disable_search_threshold: 10000
+    });
 }
 
 function bindFancy(){
