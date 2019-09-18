@@ -157,11 +157,15 @@ if (isAuth($USER)){
 				<div class="b-price-container <?=$class?>">
 					<div class="b-price">
 						<span class="icon-ruble-bold"><?=$price?></span>
-						<span class="measure-text"><?=$measureText?></span>
+						<? if (!empty($measureText)): ?>
+							<span class="measure-text"><?=$measureText?></span>
+						<? endif; ?>
 					</div>
 					<div class="b-discount-price">
 						<span class="icon-ruble-bold"><?=$discountPrice?></span>
-						<span class="measure-text"><?=$measureText?></span>
+						<? if (!empty($measureText)): ?>
+							<span class="measure-text"><?=$measureText?></span>
+						<? endif; ?>
 					</div>
 				</div>
 			</div>
