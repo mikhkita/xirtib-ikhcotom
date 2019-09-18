@@ -7,9 +7,18 @@ if( !$_REQUEST["USER_LOGIN"] ){
 }elseif( !$_REQUEST["USER_PASSWORD"] ){
 	echo json_encode(array('result' => 'error', 'message' => 'Вы не ввели пароль.<br>', "action" => "messageError"));
 }elseif( !$arResult["ERROR"] ){
+	$arResult = array();
+	$arResult["isAuth"] = true;
+	$arFav = getFavourites();
+	$arResult["favCount"] = (!empty($arFav)) ? count($arFav) : 0;
+	$basketInfo = getBasketCount();
+	$arResult["sum"] = $basketInfo["sum"];
+	$arResult["count"] = $basketInfo["count"];
+
 	echo json_encode(array(
 		'result' => "success", 
-		'action' => 'reload'
+		'action' => 'reload',
+		'userData' => $arResult
 	));
 }else{
 	echo json_encode(array(
