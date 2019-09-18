@@ -45,7 +45,8 @@ $this->setFrameMode(true);?>
 
 				<div class="b-order-item clearfix">
 					<div class="b-order-item-left">
-						<img src="<?=$renderImage['src']?>">
+						<div class="b-order-item-image" style="background-image: url('<?=$renderImage['src']?>');"></div>
+						<?/*?><img src="<?=$renderImage['src']?>"><?*/?>
 						<div class="b-order-item-name">
 							<a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><?=$arItem['NAME']?></a>
 							<div class="meters">

@@ -639,7 +639,7 @@ $(document).ready(function(){
     function ajaxFilter(form){
 
         $('#PAGEN').val('1');
-        window.history.replaceState(null , null, form.serialize()+"&set_filter=1");
+        window.history.replaceState(null , null, '?' + form.serialize() + "&set_filter=1");
 
         var url = window.location.href,
             block = $('.b-catalog-list');

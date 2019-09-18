@@ -1307,6 +1307,8 @@ h3.b-title{
 					position: absolute;
 					bottom: 11px;
 					text-align: left;
+					width: calc(100% - 24px);
+    				padding-right: 60px;
 				}
 				.b-price{
 					display: inline-block;
@@ -1326,13 +1328,14 @@ h3.b-title{
 						font-size: 16px;
 						top: 6px;
 					}
-					.b-price span.measure-text{
+					.measure-text{
 						padding-right: 0;
 						font-family: 'Lora-Regular';
-						font-size: 20px;
-					}
-					.has-discount .b-price span.measure-text{
-						padding-right: 0;
+						font-size: 16px;
+						color: #999;
+						position: absolute;
+						right: 13px;
+						bottom: 13px;
 					}
 				.b-discount-price{
 					display: none;
@@ -2159,7 +2162,9 @@ h3.b-title{
 					margin-bottom: 24px;
 				}
 					.b-order-item-left{
-						float: left;
+						display: inline-block;
+						vertical-align: top;
+						width: calc(100% - 180px);
 					}
 						.b-order-item .b-order-item-img-inner{
 							display: inline-block;
@@ -2204,7 +2209,9 @@ h3.b-title{
 								color: rgba(62, 50, 36, 0.5);
 							}
 					.b-order-item-right{
-						float: right;
+						display: inline-block;
+						width: 175px;
+						text-align: right;
 					}
 						.b-order-item-price{
 							display: inline-block;

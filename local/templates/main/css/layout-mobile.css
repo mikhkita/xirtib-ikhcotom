@@ -314,9 +314,9 @@ body {
 	    padding-top: 0px;
 	}
 
-	.b-order-item-left {
+	/*.b-order-item-left {
 	    width: calc(100% - 180px);
-	}
+	}*/
 	.order-header-right{
 		padding-right: 0;
 	}
@@ -354,9 +354,9 @@ body {
 	.catalog-element-img{
 		height: 300px;
 	}
-	.b-order-item-left {
+	/*.b-order-item-left {
 	    width: calc(100% - 152px);
-	}
+	}*/
 	.b-order-item-price {
 	    width: 110px;
 	}
@@ -768,6 +768,7 @@ body {
 .b-product-info-text-cont{
 	margin-top: 17px;
 }
+
 
 @media screen and (max-width: 665px){
 
@@ -1468,6 +1469,7 @@ body {
 	}
 	.b-item-card:not(.slick-slide) .b-price-container{
 	    left: 164px;
+	    width: calc(100% - 176px);
 	}
 	.b-category-tiles .b-tile-item{
 		width: 100%;
@@ -1552,6 +1554,7 @@ body {
 	}
 	.b-item-card:not(.slick-slide) .b-price-container{
 		left: 118px;
+	    width: calc(100% - 124px);
 	}
 	.b-price span, .b-discount-price span{
 		font-size: 20px;
