@@ -228,6 +228,7 @@ $APPLICATION->SetTitle("Интернет-магазин пряжи Моточк�
 		<div class="b-block">
 			<h2 class="b-title"><?includeArea("b-main-title-2")?></h2>
 			<?
+			$GLOBALS['arNewFilter'] = array('PROPERTY_NEW_VALUE' => 'Y');
 			$APPLICATION->IncludeComponent(
 				"bitrix:catalog.section",
 				"slider",
@@ -259,7 +260,7 @@ $APPLICATION->SetTitle("Интернет-магазин пряжи Моточк�
 					"ELEMENT_SORT_FIELD2" => "id",
 					"ELEMENT_SORT_ORDER" => $_REQUEST['SORT_TYPE'],
 					"ELEMENT_SORT_ORDER2" => "DESC",
-					"FILTER_NAME" => "",
+					"FILTER_NAME" => "arNewFilter",
 					"HIDE_NOT_AVAILABLE" => "Y",
 					"IBLOCK_ID" => "1",
 					"IBLOCK_TYPE" => "catalog",

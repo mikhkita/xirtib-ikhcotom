@@ -662,10 +662,7 @@ $(document).ready(function(){
                 block.find('.b-catalog-list-cont').html(msg);
                 cardHeight();
                 bindFancy();
-                var favLocalStorage = getFavLocalStorage();
-                if(favLocalStorage){
-                    updateFav(favLocalStorage);
-                }
+                updateFavFromLS();
             },
             error: function(){
 
@@ -852,7 +849,8 @@ $(document).ready(function(){
                         if (Number($('.b-fav-number').text()) != 0) {
                             $('.b-fav-number').text(Number($('.b-fav-number').text()) - 1);
                         }
-
+                        localStorage.setItem('favCount', Number($('.b-fav-number').text()));
+                        setFavLS(json.arFav);
                         $this.parents('.b-order-item').remove();
 
                         if (Number($('.b-fav-number').text()) == 0) {
@@ -908,7 +906,7 @@ $(document).ready(function(){
                             $('.b-fav-number').text(Number($('.b-fav-number').text()) + 1);
                         }
                         localStorage.setItem('favCount', Number($('.b-fav-number').text()));
-                        setFavLocalStorage(json.arFav);
+                        setFavLS(json.arFav);
 
                         if (Number($('.b-fav-number').text()) == 0) {
                             $('.b-fav-round').addClass('hide');
@@ -1105,12 +1103,13 @@ $(document).ready(function(){
         $('.b-filter-cont').addClass('no-filter');
     }
 
+    if (($('#SECTION_CODE').val() == 'novoe-postuplenie') || ($('#SECTION_CODE').val() == 'aktsii-i-skidki')) {
+        $('.catalog-mobile-filter').addClass('no-filter');
+    }
+
     detailInit();
 
-    var favLocalStorage = getFavLocalStorage();
-    if(favLocalStorage){
-        updateFav(favLocalStorage);
-    }
+    updateFavFromLS();
 
     // cardImgHeight();
 });
@@ -1150,11 +1149,29 @@ function updateFav(arFav) {
         $(".fav-link[data-id='"+item+"']").attr("data-action", "REMOVE").addClass("active");
     });
 }
-function getFavLocalStorage() {
+function updateFavFromLS() {
+    var favLocalStorage = getFavLS();
+    if(favLocalStorage){
+        updateFav(favLocalStorage);
+    }
+}
+function getFavLS() {
     return JSON.parse(localStorage.getItem("arFav"));
 }
-function setFavLocalStorage(arFav) {
+function setFavLS(arFav) {
     localStorage.setItem("arFav", JSON.stringify(arFav));
+}
+
+if(localStorage.getItem('auth') && localStorage.getItem('auth') === "true"){
+    $("body").addClass("auth-before");
+}else{
+    $("body").addClass("no-auth-before");
+}
+
+if(localStorage.getItem('userName') && localStorage.getItem('userName') !== ""){
+    $(".mobile-menu-user").text(localStorage.getItem('userName'));
+}else{
+    $(".mobile-menu-user").text("");
 }
 
 //Получить избранные товары
@@ -1166,7 +1183,7 @@ $.ajax({
             var json = JSON.parse(msg);
             if( json.result == "success" ){
                 if(json.isAuth){
-                    setFavLocalStorage(json.arFav);
+                    setFavLS(json.arFav);
                     localStorage.setItem('sum', json.sum);
                     localStorage.setItem('count', json.count);
                     $("#b-cart-sum").val(json.sum);
@@ -1178,10 +1195,14 @@ $.ajax({
                     } else {
                         $(".b-fav-round").addClass("hide");
                     }
+                    localStorage.setItem('userName', json.userName);
+                    $(".mobile-menu-user").text(json.userName);
                     updateFav(json.arFav);
-                    $("body").addClass("auth");
+                    $("body").addClass("auth").removeClass("auth-before no-auth-before");
+                    localStorage.setItem('auth', true);
                 }else{
-                    $("body").addClass("no-auth"); 
+                    $("body").addClass("no-auth").removeClass("auth-before no-auth-before");
+                    localStorage.setItem('auth', false);
                 }
             }
         }
@@ -1225,10 +1246,7 @@ function detailInit() {
     bindFancy();
     loadBlock(0);
 
-    var favLocalStorage = getFavLocalStorage();
-    if(favLocalStorage){
-        updateFav(favLocalStorage);
-    }
+    updateFavFromLS();
 }
 
 function catalogElementSlick(){

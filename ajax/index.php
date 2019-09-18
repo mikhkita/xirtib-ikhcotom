@@ -16,10 +16,9 @@ switch ($action) {
 
 		if (CModule::IncludeModule("catalog")){
 		    if (($action == "ADD2BASKET" || $action == "BUY")){
-		    	Add2BasketByProductID($productId,$quantity);
+		    	Add2BasketByProductID($productId, $quantity);
 				if($ex = $APPLICATION->GetException()){
       				$strError = $ex->GetString();
-      				//vardump($strError);
       				returnError("Ошибка! ".$strError);
       			}
 		    }
@@ -719,9 +718,7 @@ switch ($action) {
 		$arResult["sum"] = $basketInfo["sum"];
 		$arResult["count"] = $basketInfo["count"];
 		$arUser = getUserFields();
-		if ($arUser){
-			$arResult["userName"] = $arUser["NAME"];
-		}
+		$arResult["userName"] = ($arUser && $arUser["NAME"]) ? $arUser["NAME"] : "";
 		returnSuccess($arResult);
 		break;
 	default:

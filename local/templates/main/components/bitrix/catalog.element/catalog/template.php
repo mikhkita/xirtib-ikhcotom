@@ -241,7 +241,7 @@ if (count($arResult["OFFERS"]) < 5){
 								data-color-id="<?=$offer['ID']?>" 
 								data-price="<?=$offer["PRICES"]["PRICE"]["VALUE"]?>" 
 								data-discount-price="<?=$offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]?>" 
-								data-article="<?=$offer["PRODUCT"]["CODE"]?>" 
+								data-article="<?=$offer["CODE"]?>" 
 								data-quantity="<?=$offer["PRODUCT"]["QUANTITY"]?>"
 								data-measure="<?=$measures[$offer["ITEM_MEASURE"]["ID"]]?>"
 								<?=$selected?> ><?=$offer['NAME']?></option>
@@ -373,7 +373,7 @@ if (count($arResult["OFFERS"]) < 5){
 			<div class="tabs-content spec-block b-text hide">
 				<div class="spec-block-left">
 					<? foreach ($arResult["PROPERTIES"] as $key => $arProp) {
-						if( empty($arProp["VALUE"]) || (is_array($arProp["VALUE"]) && count($arProp["VALUE"]) == 0) || in_array($arProp["CODE"], array("ARTICLE", "DISCOUNT")) ){
+						if( empty($arProp["VALUE"]) || (is_array($arProp["VALUE"]) && count($arProp["VALUE"]) == 0) || in_array($arProp["CODE"], array("ARTICLE", "DISCOUNT", "NEW")) ){
 							continue;
 						}
 						?>

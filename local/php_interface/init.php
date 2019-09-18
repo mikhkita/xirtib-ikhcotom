@@ -912,8 +912,9 @@ function getLocationByZIP($zip){
 
 function getItemLabel($arItem){
 	$days = 14; // Если товар выложен меньше, чем столько дней назад, то это новинка
+	$isNew = ($arItem['PROPERTIES']['NEW']['VALUE'] == 'Y');
 
-	if( time() - strtotime($arItem["DATE_CREATE"]) <= $days*24*60*60 ){
+	if( $isNew ){
 		return "Новинка";
 	}else{
 		return false;

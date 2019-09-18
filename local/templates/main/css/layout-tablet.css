@@ -452,8 +452,8 @@ body {
 	}
 
 	.catalog-mobile-filter {
-	display: block;
-}
+		display: block;
+	}
 	.b-filter {
 		display: none;
 		width: 300px;
