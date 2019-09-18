@@ -1182,19 +1182,20 @@ $.ajax({
         if( isValidJSON(msg) ){
             var json = JSON.parse(msg);
             if( json.result == "success" ){
+                localStorage.setItem('sum', json.sum);
+                localStorage.setItem('count', json.count);
+                var favCount = json.favCount;
+                localStorage.setItem('favCount', favCount);
+                if (favCount > 0) {
+                    $(".b-fav-round").removeClass("hide");
+                } else {
+                    $(".b-fav-round").addClass("hide");
+                }
+                $("#b-cart-sum").val(json.sum);
+                $("#b-cart-count").val(json.count);
+                updateBasket(json.count, json.sum);
                 if(json.isAuth){
                     setFavLS(json.arFav);
-                    localStorage.setItem('sum', json.sum);
-                    localStorage.setItem('count', json.count);
-                    $("#b-cart-sum").val(json.sum);
-                    $("#b-cart-count").val(json.count);
-                    var favCount = json.favCount;
-                    localStorage.setItem('favCount', favCount);
-                    if (favCount > 0) {
-                        $(".b-fav-round").removeClass("hide");
-                    } else {
-                        $(".b-fav-round").addClass("hide");
-                    }
                     localStorage.setItem('userName', json.userName);
                     $(".mobile-menu-user").text(json.userName);
                     updateFav(json.arFav);
