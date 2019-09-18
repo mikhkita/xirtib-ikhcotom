@@ -294,6 +294,12 @@ $(document).ready(function(){
 						var json = JSON.parse(msg);
 
 						if( json.result == "success" ){
+							if(json.userData){
+								localStorage.setItem('count', json.userData.count);
+    							localStorage.setItem('sum', json.userData.sum);
+    							localStorage.setItem('favCount', json.userData.favCount);
+    							localStorage.setItem('auth', json.userData.isAuth);
+							}
 				            switch (json.action) {
 				                case "reload":
 				                    document.location.reload(true);

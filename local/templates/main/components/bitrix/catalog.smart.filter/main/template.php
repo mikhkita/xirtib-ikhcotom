@@ -12,10 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-?>
-<div id="catalog_smart_filter_component">
-<?$frame = $this->createFrame("catalog_smart_filter_component", false)->begin();?>
-<?
 
 $templateData = array(
 	'TEMPLATE_CLASS' => 'bx-'.$arParams['TEMPLATE_THEME']
@@ -544,6 +540,3 @@ if(count($arResult["ITEMS"]) <= 2){
 		}
 	?>
 </form>
-
-<?$frame->end();?>
-</div>
