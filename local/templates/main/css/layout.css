@@ -1251,12 +1251,19 @@ h3.b-title{
 					height: 36px;
 					z-index: 1;
 				}
+				.detail-fav-link{
+					display: none;
+				}
 				body.auth .b-card-fav,
-				body.auth-before .b-card-fav{
+				body.auth-before .b-card-fav,
+				body.auth .detail-fav-link,
+				body.auth-before .detail-fav-link{
 					display: inline-block;
 				}
 				body.no-auth .b-card-fav,
-				body.no-auth-before .b-card-fav{
+				body.no-auth-before .b-card-fav,
+				body.no-auth .detail-fav-link,
+				body.no-auth-before .detail-fav-link{
 					display: none;
 				}
 					.b-card-fav.active{

@@ -9,11 +9,13 @@ if( !$_REQUEST["USER_LOGIN"] ){
 }elseif( !$arResult["ERROR"] ){
 	$arResult = array();
 	$arResult["isAuth"] = true;
-	$arFav = getFavourites();
-	$arResult["favCount"] = (!empty($arFav)) ? count($arFav) : 0;
+	$arResult["arFav"] = getFavourites();
+	$arResult["favCount"] = (!empty($arResult["arFav"])) ? count($arResult["arFav"]) : 0;
 	$basketInfo = getBasketCount();
 	$arResult["sum"] = $basketInfo["sum"];
 	$arResult["count"] = $basketInfo["count"];
+	$arUser = getUserFields();
+	$arResult["userName"] = ($arUser && $arUser["NAME"]) ? $arUser["NAME"] : "";
 
 	echo json_encode(array(
 		'result' => "success", 

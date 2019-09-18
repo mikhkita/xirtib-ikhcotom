@@ -299,6 +299,10 @@ $(document).ready(function(){
     							localStorage.setItem('sum', json.userData.sum);
     							localStorage.setItem('favCount', json.userData.favCount);
     							localStorage.setItem('auth', json.userData.isAuth);
+    							if(json.userData.arFav){
+    								localStorage.setItem("arFav", JSON.stringify(json.userData.arFav));
+    							}
+                    			localStorage.setItem('userName', json.userData.userName);
 							}
 				            switch (json.action) {
 				                case "reload":

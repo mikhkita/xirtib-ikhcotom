@@ -189,13 +189,11 @@ if (count($arResult["OFFERS"]) < 5){
 			<h1 class="b-product-name"><?=(($arResult['PROPERTIES']['TITLE']['VALUE'])?($arResult['PROPERTIES']['TITLE']['VALUE']):($arResult['NAME']))?> <span><?=$arResult['PROPERTIES']['SUBTITLE']['VALUE']?></span></h1>
 			<div class="b-product-actions-wrap">
 				<ul class="b-product-actions clearfix">
-					<li>
-						<? if (isAuth($USER)): ?>
-							<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-id="<?=$arResult['ID']?>" data-action="<?=$favAction?>">
-								<span class="icon icon-star"></span>
-								В избранное
-							</a>
-						<? endif; ?>
+					<li class="detail-fav-link">
+						<a href="/ajax/?ID=<?=$arResult['ID']?>" class="fav-link <?=$favClass?>" data-id="<?=$arResult['ID']?>" data-action="<?=$favAction?>">
+							<span class="icon icon-star"></span>
+							В избранное
+						</a>
 					</li>
 					<li class="b-share-link">
 						<a href="#">

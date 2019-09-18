@@ -1259,7 +1259,7 @@ function catalogElementSlick(){
     }
 
     $('.b-product-main:not(.slick-initialized)').each(function(){
-        $(this).slick({
+        $(this).not('.slick-initialized').slick({
             dots: false,
             arrows: false,
             slidesToShow: 1,
@@ -1273,7 +1273,7 @@ function catalogElementSlick(){
     })
 
     $('.b-product-photo-slider:not(.no-slider)').each(function(){
-        $(this).slick({
+        $(this).not('.slick-initialized').slick({
             dots: false,
             arrows: true,
             prevArrow: '<div class="b-product-arrows icon-arrow-left-bold"></div>',
