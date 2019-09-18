@@ -1169,6 +1169,8 @@ $.ajax({
                     setFavLocalStorage(json.arFav);
                     localStorage.setItem('sum', json.sum);
                     localStorage.setItem('count', json.count);
+                    $("#b-cart-sum").val(json.sum);
+                    $("#b-cart-count").val(json.count);
                     var favCount = json.favCount;
                     localStorage.setItem('favCount', favCount);
                     if (favCount > 0) {
