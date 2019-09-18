@@ -3491,7 +3491,7 @@ body.no-auth-before .b-btn-review-no-auth{
     			padding-top: 3px;
 			}
 			.b-filter-checkbox-list.open{
-				max-height: 1500px;
+				/*max-height: 1500px;*/
 			}	
 				.b-filter-checkbox-list li:nth-child(n+6){
 					display: none;
