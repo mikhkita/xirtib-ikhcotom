@@ -1216,6 +1216,12 @@ if (window.frameCacheVars !== undefined && window.frameCacheVars.dynamicBlocks.s
 function mainCatalogInit() {
     console.log('mainCatalogInit');
     bindItemCards();
+    cardHeight();
+
+    $(".b-item-cards.slick-slider").find(".b-item-card").each(function(){
+        var $height = $(this).parents(".slick-track").innerHeight();
+        $(this).innerHeight($height);
+    });
 }
 
 // Иницализация элементов на детальной
