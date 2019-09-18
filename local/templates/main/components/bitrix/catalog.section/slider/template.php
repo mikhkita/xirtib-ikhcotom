@@ -51,10 +51,6 @@ if (isAuth($USER)){
 			<? if ($arItem["OFFERS"]): ?>
 				<? $minVal = 100000; ?>
 				<? $maxVal = 0; ?>
-
-				<? if($arItem["OFFERS"][0]['PRODUCT']['MEASURE'] == 3): ?>
-					<? $measureText = 'за '.$arItem["OFFERS"][0]["CATALOG_MEASURE_RATIO"].' г.'; ?>
-				<? endif; ?>
 				
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
 
@@ -74,9 +70,23 @@ if (isAuth($USER)){
 					<? $discountPrice = convertPrice($offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"]); ?>
 					
 				<? endforeach; ?>
+
+				<? if($arItem["OFFERS"][0]['PRODUCT']['MEASURE'] == 3): ?>
+					<? $measureText = 'за '.$arItem["OFFERS"][0]["CATALOG_MEASURE_RATIO"].' г.'; ?>
+				<? else: ?>
+					<? if (($minVal == $maxVal) && isset($arItem["OFFERS"][0]['PRODUCT']['WEIGHT']) && !empty($arItem["OFFERS"][0]['PRODUCT']['WEIGHT'])): ?>
+							<? $measureText = $arItem["OFFERS"][0]['PRODUCT']['WEIGHT'].' гр.'; ?>
+					<? endif; ?>
+				<? endif; ?>
+
 			<? else: ?>
+
 				<? if ($arItem['PRODUCT']['MEASURE'] == 3): ?>
 					<? $measureText = 'за '.$arItem["CATALOG_MEASURE_RATIO"].' г.'; ?>
+				<? else: ?>
+					<? if (isset($arItem['PRODUCT']['WEIGHT'])): ?>
+						<? $measureText = $arItem['PRODUCT']['WEIGHT'].' гр.'; ?>
+					<? endif; ?>
 				<? endif; ?>
 
 				<? if( $arItem["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $arItem["PRICES"]["PRICE"]["VALUE"] ): ?>
@@ -148,26 +158,25 @@ if (isAuth($USER)){
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=(($arItem['PROPERTIES']['TITLE']['VALUE'])?($arItem['PROPERTIES']['TITLE']['VALUE']):($arItem['NAME']))?></a>
 					<h5 class="b-item-subname"><?=$arItem['PROPERTIES']['SUBTITLE']['VALUE']?></h5>
 				</div>
+				<? $differentPriceClass = ''; ?>
 				<? if ($minVal != $maxVal): ?>
 					<? $minVal = convertPrice($minVal); ?>
 					<? $maxVal = convertPrice($maxVal); ?>
 					<? $price = $minVal.'</span> - <span class="icon-ruble-bold">'.$maxVal ?>
+					<? $differentPriceClass = 'different-price'; ?>
 					<? $class = ''; ?>
 				<? endif; ?>
-				<div class="b-price-container <?=$class?>">
+				<div class="b-price-container <?=$class?> <?=$differentPriceClass?>">
 					<div class="b-price">
 						<span class="icon-ruble-bold"><?=$price?></span>
-						<? if (!empty($measureText)): ?>
-							<span class="measure-text"><?=$measureText?></span>
-						<? endif; ?>
 					</div>
 					<div class="b-discount-price">
 						<span class="icon-ruble-bold"><?=$discountPrice?></span>
-						<? if (!empty($measureText)): ?>
-							<span class="measure-text"><?=$measureText?></span>
-						<? endif; ?>
 					</div>
 				</div>
+				<? if (!empty($measureText)): ?>
+					<div class="measure-text"><?=$measureText?></div>
+				<? endif; ?>
 			</div>
 		<? endforeach; ?>
 	</div>

@@ -633,13 +633,15 @@ $(document).ready(function(){
 
     $(document).on('change', '.sort-select', function(){
         var form = isDesktop ? $('.b-filter') : $('.filter-mobile');
+        form.find('[name=SORT_FIELD]').val($(this).val());
+        form.find('[name=SORT_TYPE]').val($(this).attr('data-type'));
         ajaxFilter(form);
     });
 
     function ajaxFilter(form){
 
         $('#PAGEN').val('1');
-        window.history.replaceState(null , null, form.serialize()+"&set_filter=1");
+        window.history.replaceState(null , null, '?' + form.serialize() + "&set_filter=1");
 
         var url = window.location.href,
             block = $('.b-catalog-list');
