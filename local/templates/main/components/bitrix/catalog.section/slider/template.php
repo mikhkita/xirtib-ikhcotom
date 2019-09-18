@@ -158,13 +158,15 @@ if (isAuth($USER)){
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=(($arItem['PROPERTIES']['TITLE']['VALUE'])?($arItem['PROPERTIES']['TITLE']['VALUE']):($arItem['NAME']))?></a>
 					<h5 class="b-item-subname"><?=$arItem['PROPERTIES']['SUBTITLE']['VALUE']?></h5>
 				</div>
+				<? $differentPriceClass = ''; ?>
 				<? if ($minVal != $maxVal): ?>
 					<? $minVal = convertPrice($minVal); ?>
 					<? $maxVal = convertPrice($maxVal); ?>
 					<? $price = $minVal.'</span> - <span class="icon-ruble-bold">'.$maxVal ?>
+					<? $differentPriceClass = 'different-price'; ?>
 					<? $class = ''; ?>
 				<? endif; ?>
-				<div class="b-price-container <?=$class?>">
+				<div class="b-price-container <?=$class?> <?=$differentPriceClass?>">
 					<div class="b-price">
 						<span class="icon-ruble-bold"><?=$price?></span>
 					</div>
