@@ -28,17 +28,6 @@ if(isset($arParams["COMPOSITE_ID"])){
 
 <? if(count($arResult["ITEMS"])): ?>
 
-<? 
-
-if (isAuth($USER)){
-	$ids = getFavourites();
-
-	if( empty($ids) || !count($ids) ){
-		$ids = 0;
-	}
-}
-
-?>
 	<?if ($arParams['CUSTOM_HEADER']): ?>
 		<h3 class="b-title"><?=$arParams['CUSTOM_HEADER']?></h3>
 	<? endif ?>
@@ -116,23 +105,7 @@ if (isAuth($USER)){
 						<div class="b-discount"><?=$label?></div>
 					<? endif;?>
 
-					<?// if (isAuth($USER)): ?>
-						<? if ($ids != 0): ?>
-							<? $favClass = ""; ?>
-							<? $favAction = "ADD"; ?>
-							<? foreach ($ids as $key => $value) {
-								if ($value == $arItem['ID']) {
-									$favClass = "active";
-									$favAction = "REMOVE";
-									break;
-								} 
-							}
-						else:
-							$favClass = "";
-							$favAction = "ADD";
-						endif; ?>
-						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>" data-id="<?=$arItem['ID']?>"></a>
-					<?// endif; ?>
+					<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart" data-id="<?=$arItem['ID']?>"></a>
 
 					<? /* ?>
 					<? $text = "Нет в наличии" ?>

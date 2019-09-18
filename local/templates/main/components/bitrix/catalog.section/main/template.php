@@ -16,15 +16,6 @@ $this->setFrameMode(true);?>
 <?$frame = $this->createFrame("catalog_section_component", false)->begin();?>
 
 <? 
-
-if (isAuth($USER)){
-	$ids = getFavourites();
-
-	if( empty($ids) || !count($ids) ){
-		$ids = 0;
-	}
-}
-
 if(count($arResult["ITEMS"])): ?>
 	<div class="b-catalog-inner clearfix">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
@@ -98,41 +89,8 @@ if(count($arResult["ITEMS"])): ?>
 						<div class="b-discount"><?=$label?></div>
 					<? endif;?>
 
-					<?// if (isAuth($USER)): ?>
-						<? if ($ids != 0): ?>
-							<? $favClass = ""; ?>
-							<? $favAction = "ADD"; ?>
-							<? foreach ($ids as $key => $value) {
-								if ($value == $arItem['ID']) {
-									$favClass = "active";
-									$favAction = "REMOVE";
-									break;
-								} 
-							}
-						else:
-							$favClass = "";
-							$favAction = "ADD";
-						endif; ?>
-						<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart <?=$favClass?>" data-action="<?=$favAction?>" data-id="<?=$arItem['ID']?>"></a>
-					<?// endif; ?>
+					<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart" data-id="<?=$arItem['ID']?>"></a>
 
-					<? /* ?>
-					<? $text = "Нет в наличии" ?>
-					<? if ($arItem['OFFERS']): ?>
-						<? foreach ($arItem['OFFERS'] as $offer): ?>
-							<? if ($offer['PRODUCT']['QUANTITY'] != 0): ?>
-								<? $text = 'В наличии'?>
-								<? break; ?>
-							<? endif ?>
-						<? endforeach ?>
-					<? else: ?>
-						<? if ($arItem['QUANTITY'] != 0): ?>
-							<? $text = 'В наличии'?>
-						<? endif ?>
-					<? endif ?>
-
-					<div class="b-in-stock"><?=$text?></div>
-					<? */ ?>
 					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-top-dark"></a>
 					<a href="#element_view" data-href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="element-view b-card-top-hover fancy">Быстрый просмотр</a>
 				</div>
