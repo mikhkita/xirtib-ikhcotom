@@ -4,8 +4,9 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 use Bitrix\Sale,
 	Bitrix\Sale\PaySystem;
 
+CModule::IncludeModule('sale');
 
-$order = Sale\Order::load($_REQUEST["ORDER_ID"]);
+$order = Bitrix\Sale\Order::load($_REQUEST["ORDER_ID"]);
 
 if( !$order || !isset($_REQUEST["ORDER_ID"]) ){
 	LocalRedirect("/cart/order/");

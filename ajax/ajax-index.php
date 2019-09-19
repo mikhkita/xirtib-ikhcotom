@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 // use Bitrix\Sale;
+CModule::IncludeModule('sale');
 
 \Bitrix\Main\Data\StaticHtmlCache::getInstance()->markNonCacheable();
 
