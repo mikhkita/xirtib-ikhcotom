@@ -107,11 +107,12 @@ $APPLICATION->SetTitle("Каталог");?>
 			// 		break;
 			// 	}
 			// }
+
 			$_REQUEST['TAGS'] = trim($_REQUEST['TAGS']);
 			$tagName = mb_strtoupper(mb_substr($_REQUEST['TAGS'], 0, 1)).mb_substr($_REQUEST['TAGS'], 1);
 			$APPLICATION->SetTitle($tagName);
 
-			$GLOBALS['arrFilter'] = array("TAGS" => $_REQUEST['TAGS']);
+			$GLOBALS['arrFilter'][] = array("?TAGS" => $_REQUEST['TAGS']);
 			$_REQUEST["SECTION_CODE"] = '';
 		}
 
@@ -179,6 +180,10 @@ $APPLICATION->SetTitle("Каталог");?>
 							),
 						); 
 					?>
+				<? endif; ?>
+
+				<? if (isset($GLOBALS['arrFilter']['FACET_OPTIONS'])): ?>
+					<?unset($GLOBALS['arrFilter']['FACET_OPTIONS'])?>
 				<? endif; ?>
 
 				<?$APPLICATION->IncludeComponent(

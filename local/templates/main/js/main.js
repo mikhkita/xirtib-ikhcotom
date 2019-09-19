@@ -146,7 +146,7 @@ $(document).ready(function(){
         return false;
     });
 
-    $(document).on('click', '.b-menu-overlay', function(){
+    $(document).on('click, tap', '#b-menu-overlay', function(){
         menuSlideout.close();
         if ($('#b-filter-panel').length){
             $('.filter-mobile').removeClass('show-btn');

@@ -281,7 +281,7 @@ if (count($arResult["OFFERS"]) < 5){
 							<? if ($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] != 0): ?>
 								<p><b>Состав:</b> 
 									<? foreach($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"] as $key => $structure):
-										echo mb_strtolower($structure);
+										echo trim(mb_strtolower($structure));
 										if ($key != count($arResult["PROPERTIES"]["STRUCTURE"]["VALUE"]) - 1):
 											echo ', ';
 										endif;

@@ -466,7 +466,7 @@ body {
 		.b-product-colors:before {
 			font-family: 'icomoon';
 			position: absolute;
-		    top: 56%;
+		    top: 40%;
 		    right: 17px;
 		    display: inline-block;
 		    content: "\e910";
@@ -672,6 +672,10 @@ body {
 	display: block;
 	width: 100%;
 }
+	.b-footer-top-input .b-btn{
+		padding: 18px 20px;
+		font-size: 18px;
+	}
 .b-footer-bottom-left, .b-footer-bottom-middle {
 	width: calc(50% - 20px);
 }
@@ -768,6 +772,9 @@ body {
 .b-product-info-text-cont{
 	margin-top: 17px;
 }
+	.b-product-info p b{
+		line-height: 16px;
+	}
 
 
 @media screen and (max-width: 665px){
