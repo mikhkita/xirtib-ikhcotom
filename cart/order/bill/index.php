@@ -4,6 +4,8 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 use Bitrix\Sale,
 	Bitrix\Sale\PaySystem;
 
+CModule::IncludeModule('sale');
+
 $data = base64_decode($_REQUEST["HASH"]);
 
 $orderId = array_pop(explode("-", $data));

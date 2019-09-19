@@ -1226,7 +1226,9 @@ function mainCatalogInit() {
 
 // Иницализация элементов на детальной
 if (window.frameCacheVars !== undefined && window.frameCacheVars.dynamicBlocks.detail_component !== undefined) {
-    BX.addCustomEvent("onFrameDataReceived", detailInit);
+    BX.addCustomEvent("onFrameDataReceived", function(json){
+        setTimeout(detailInit, 10);
+    });
 }
 
 function detailInit() {

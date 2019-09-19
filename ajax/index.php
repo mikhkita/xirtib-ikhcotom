@@ -3,6 +3,8 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $GLOBALS['APPLICATION']->RestartBuffer();
 
+CModule::IncludeModule('sale');
+
 $action = (isset($_GET["action"]))?$_GET["action"]:NULL;
 $action = (isset($_GET["actions"]))?$_GET["actions"]:$action;
 $isBasket = isset($_GET["basket"]);

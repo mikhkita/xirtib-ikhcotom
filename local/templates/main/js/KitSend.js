@@ -210,153 +210,155 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".ajax, .not-ajax").parents("form").submit(function(){
-		var $form = $(this);
+	$("body").on("submit", "form", function(){
+		if( $(this).find(".ajax, .not-ajax").length ){
+			var $form = $(this);
 
-		$(".b-postamat-error").remove();
+			$(".b-postamat-error").remove();
 
-		if ($form.attr('id') == 'editForm') {
+			if ($form.attr('id') == 'editForm') {
 
-			$form.find('.b-btn-save').parent().addClass('after-load');
+				$form.find('.b-btn-save').parent().addClass('after-load');
 
-			if ($('#change_pass').prop('checked') == true){
-				$form.find('.pass-error').addClass('hide').html('');
-				var html = '';
-				var error = false;
+				if ($('#change_pass').prop('checked') == true){
+					$form.find('.pass-error').addClass('hide').html('');
+					var html = '';
+					var error = false;
 
-				if($form.find("#pass").val() !== $form.find("#confpass").val()){
-					error = true;
-					$form.find("#confpass").addClass('error');
-					html = '<p>Введённые пароли не&nbsp;совпадают</p>';
+					if($form.find("#pass").val() !== $form.find("#confpass").val()){
+						error = true;
+						$form.find("#confpass").addClass('error');
+						html = '<p>Введённые пароли не&nbsp;совпадают</p>';
+					}
+
+					if($form.find("#pass").val().length < 6){
+						error = true;
+						$form.find("#pass").addClass('error');
+						html = '<p>Минимальная длина пароля - 6&nbsp;символов</p>' + html;
+					}
+
+					if (error) {
+						$form.find('.pass-error').removeClass('hide').html(html);
+						$form.find('.b-btn-save').parent().removeClass('after-load');
+					}
+				} else {
+					$form.find('.pass-error').addClass('hide');
 				}
-
-				if($form.find("#pass").val().length < 6){
-					error = true;
-					$form.find("#pass").addClass('error');
-					html = '<p>Минимальная длина пароля - 6&nbsp;символов</p>' + html;
-				}
-
-				if (error) {
-					$form.find('.pass-error').removeClass('hide').html(html);
-					$form.find('.b-btn-save').parent().removeClass('after-load');
-				}
-			} else {
-				$form.find('.pass-error').addClass('hide');
-			}
-		}
-
-		// if( $form.hasClass("b-data-order-form") && $(".b-pickpoint").is(":visible") && !$(".pickpointaddr").length ){
-		// 	$(".b-add-postamat").after("<p class='red b-postamat-error'>Вам нужно выбрать постамат, в котором вы хотите получить вашу посылку.</p>");
-		// }
-		// alert($form.is("#b-order-form"));
-		// alert($("input[name='delivery']:cheched").val());
-		// alert($(".cdekaddr").length);
-
-
-		if( $form.is("#b-order-form") && $("input[name='delivery']:cheched").val() == "15" && !$(".cdekaddr").length ){
-			$(".b-cdek-punkt").after("<p class='red b-postamat-error'>Вам нужно выбрать пункт самовывоза, в котором вы хотите получить вашу посылку.</p>");
-		}
-
-  		if( $(this).find("input.error,select.error,textarea.error,.b-postamat-error").length == 0 ){
-  			var $this = $(this),
-  				$thanks = $($this.attr("data-block"));
-
-  			if( $(this).find(".not-ajax").length ){
-  				if( $("select#date").length ){
-  					$("select#date").prop("disabled", false);
-  				}
-  				if( $(this).is("#ORDER_FORM") ){
-  					// alert();
-  					$(".basket-checkout-block-btn").addClass("loading");
-  					$("#b-basket-checkout-button").after("<p class='b-order-submit-message'>Подождите, идет создание заказа</p>");
-  				}
-  				return true;
-  			}
-
-  			$this.find(".ajax").attr("onclick", "return false;");
-
-  			if( $this.attr("data-beforeAjax") && customHandlers[$this.attr("data-beforeAjax")] ){
-				customHandlers[$this.attr("data-beforeAjax")]($this);
 			}
 
-			if( $this.attr("data-goal") && typeof ym != "undefined" ){
-				ym(36653305, 'reachGoal', $(this).attr("data-goal"));
+			// if( $form.hasClass("b-data-order-form") && $(".b-pickpoint").is(":visible") && !$(".pickpointaddr").length ){
+			// 	$(".b-add-postamat").after("<p class='red b-postamat-error'>Вам нужно выбрать постамат, в котором вы хотите получить вашу посылку.</p>");
+			// }
+			// alert($form.is("#b-order-form"));
+			// alert($("input[name='delivery']:cheched").val());
+			// alert($(".cdekaddr").length);
+
+
+			if( $form.is("#b-order-form") && $("input[name='delivery']:cheched").val() == "15" && !$(".cdekaddr").length ){
+				$(".b-cdek-punkt").after("<p class='red b-postamat-error'>Вам нужно выбрать пункт самовывоза, в котором вы хотите получить вашу посылку.</p>");
 			}
 
-  			$.ajax({
-			  	type: $(this).attr("method"),
-			  	url: $(this).attr("action"),
-			  	data:  $this.serialize(),
-				success: function(msg){
+	  		if( $(this).find("input.error,select.error,textarea.error,.b-postamat-error").length == 0 ){
+	  			var $this = $(this),
+	  				$thanks = $($this.attr("data-block"));
 
-					if( isValidJSON(msg) && msg != "1" && msg != "0" && msg !=''){
+	  			if( $(this).find(".not-ajax").length ){
+	  				if( $("select#date").length ){
+	  					$("select#date").prop("disabled", false);
+	  				}
+	  				if( $(this).is("#ORDER_FORM") ){
+	  					// alert();
+	  					$(".basket-checkout-block-btn").addClass("loading");
+	  					$("#b-basket-checkout-button").after("<p class='b-order-submit-message'>Подождите, идет создание заказа</p>");
+	  				}
+	  				return true;
+	  			}
 
-						var json = JSON.parse(msg);
+	  			$this.find(".ajax").attr("onclick", "return false;");
 
-						if( json.result == "success" ){
-							if(json.userData){
-								localStorage.setItem('count', json.userData.count);
-    							localStorage.setItem('sum', json.userData.sum);
-    							localStorage.setItem('favCount', json.userData.favCount);
-    							localStorage.setItem('auth', json.userData.isAuth);
-    							if(json.userData.arFav){
-    								localStorage.setItem("arFav", JSON.stringify(json.userData.arFav));
-    							}
-                    			localStorage.setItem('userName', json.userData.userName);
-							}
-				            switch (json.action) {
-				                case "reload":
-				                    document.location.reload(true);
-				                    $.fancybox.close();
-				                break;
-				                case "redirect":
-				                    document.location.href = json.redirect;
-				                    $.fancybox.close();
-				                break;
-				            }
-				        }else{
-				        	$form.find(".b-popup-error").html(json.error);
-				        	switch (json.action) {
-				                case "messageError":
-				                    $form.find(".b-popup-error").html(json.message);
-				                break;
-				            }
-				        }
+	  			if( $this.attr("data-beforeAjax") && customHandlers[$this.attr("data-beforeAjax")] ){
+					customHandlers[$this.attr("data-beforeAjax")]($this);
+				}
 
-					}else{
-						if( msg == "1" ){
-							$link = $this.find(".b-thanks-link");
+				if( $this.attr("data-goal") && typeof ym != "undefined" ){
+					ym(36653305, 'reachGoal', $(this).attr("data-goal"));
+				}
+
+	  			$.ajax({
+				  	type: $(this).attr("method"),
+				  	url: $(this).attr("action"),
+				  	data:  $this.serialize(),
+					success: function(msg){
+
+						if( isValidJSON(msg) && msg != "1" && msg != "0" && msg !=''){
+
+							var json = JSON.parse(msg);
+
+							if( json.result == "success" ){
+								if(json.userData){
+									localStorage.setItem('count', json.userData.count);
+	    							localStorage.setItem('sum', json.userData.sum);
+	    							localStorage.setItem('favCount', json.userData.favCount);
+	    							localStorage.setItem('auth', json.userData.isAuth);
+	    							if(json.userData.arFav){
+	    								localStorage.setItem("arFav", JSON.stringify(json.userData.arFav));
+	    							}
+	                    			localStorage.setItem('userName', json.userData.userName);
+								}
+					            switch (json.action) {
+					                case "reload":
+					                    document.location.reload(true);
+					                    $.fancybox.close();
+					                break;
+					                case "redirect":
+					                    document.location.href = json.redirect;
+					                    $.fancybox.close();
+					                break;
+					            }
+					        }else{
+					        	$form.find(".b-popup-error").html(json.error);
+					        	switch (json.action) {
+					                case "messageError":
+					                    $form.find(".b-popup-error").html(json.message);
+					                break;
+					            }
+					        }
+
 						}else{
-							if ($form.attr('id') == 'editForm') {
-								$form.find('.b-btn-save').parent().removeClass('after-load');
+							if( msg == "1" ){
+								$link = $this.find(".b-thanks-link");
+							}else{
+								if ($form.attr('id') == 'editForm') {
+									$form.find('.b-btn-save').parent().removeClass('after-load');
+								}
+								$link = $this.find(".b-error-link");
 							}
-							$link = $this.find(".b-error-link");
-						}
 
-						if( $this.attr("data-afterAjax") && customHandlers[$this.attr("data-afterAjax")] ){
-							customHandlers[$this.attr("data-afterAjax")]($this);
-						}
+							if( $this.attr("data-afterAjax") && customHandlers[$this.attr("data-afterAjax")] ){
+								customHandlers[$this.attr("data-afterAjax")]($this);
+							}
 
+							$.fancybox.close();
+							$link.click();
+						}
+					},
+					error: function(){
 						$.fancybox.close();
-						$link.click();
+						$this.find(".b-error-link").click();
+					},
+					complete: function(){
+						$this.find(".ajax").removeAttr("onclick");
+						if( !$this.is("#b-form-auth") && !$this.is("#editForm") && !$this.is("#regForm") ){
+							$this.find("input[type=text],textarea").val("");
+						}
 					}
-				},
-				error: function(){
-					$.fancybox.close();
-					$this.find(".b-error-link").click();
-				},
-				complete: function(){
-					$this.find(".ajax").removeAttr("onclick");
-					if( !$this.is("#b-form-auth") && !$this.is("#editForm") && !$this.is("#regForm") ){
-						$this.find("input[type=text],textarea").val("");
-					}
-				}
-			});
-  		}else{
-  			$(this).find("input.error,select.error,textarea.error").eq(0).focus();
-  		}
-  		return false;
-  	});
+				});
+	  		}else{
+	  			$(this).find("input.error,select.error,textarea.error").eq(0).focus();
+	  		}
+	  		return false;
+		}
+	});
 
 	$("body").on("click", ".ajax, .not-ajax", function(){
 		$(this).parents("form").submit();
