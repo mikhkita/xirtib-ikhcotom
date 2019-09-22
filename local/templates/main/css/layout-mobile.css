@@ -466,7 +466,11 @@ body {
 		.b-product-colors:before {
 			font-family: 'icomoon';
 			position: absolute;
-		    top: 40%;
+		    top: 50%;
+		    -webkit-transform: translateY(-50%);
+		    -ms-transform: translateY(-50%);
+		    -o-transform: translateY(-50%);
+		    transform: translateY(-50%);
 		    right: 17px;
 		    display: inline-block;
 		    content: "\e910";
