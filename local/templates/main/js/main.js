@@ -626,8 +626,8 @@ $(document).ready(function(){
 
     $(document).on('change', '.sort-select', function(){
         var form = isDesktop ? $('.b-filter') : $('.filter-mobile');
-        form.find('[name=SORT_FIELD]').val($(this).val());
-        form.find('[name=SORT_TYPE]').val($(this).attr('data-type'));
+        form.find('input[name=SORT_FIELD]').val($(this).val());
+        form.find('input[name=SORT_TYPE]').val($(this).find('option:selected').attr('data-type'));
         ajaxFilter(form);
     });
 

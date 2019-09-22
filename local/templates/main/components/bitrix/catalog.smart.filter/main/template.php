@@ -44,7 +44,7 @@ if(count($arResult["ITEMS"]) <= 2){
 	<? endif;?>
 
 	<? if ($arItem["CONTROL_NAME"] == 'SORT_TYPE'): ?>
-		<? $isSortField = true; ?>
+		<? $isSortType = true; ?>
 	<? endif;?>
 
 	<? if (strpos($arItem["CONTROL_NAME"], "PAGEN") !== false): ?>
