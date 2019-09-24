@@ -106,8 +106,7 @@ class MyEventHandlers
 				$el = CIBlockElement::GetByID($mxResult['ID']);
 				$arElement = $el->fetch();
 				$name = is_array($mxResult) ? $arElement['NAME']." (".$item['NAME'].")" : $item['NAME'];
-
-				$discountPrice = (intval($item['DISCOUNT_PRICE']) == 0) ? $item['BASE_PRICE'] : $item['BASE_PRICE'] - $item['DISCOUNT_PRICE'];
+				$discountPrice = ($item['DISCOUNT_PRICE'] == 0) ? $item['BASE_PRICE'] : $item['BASE_PRICE'] - $item['DISCOUNT_PRICE'];
 				$sum = $item['QUANTITY'] * $discountPrice;
 				$totalSum += $sum;
 
