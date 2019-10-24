@@ -477,6 +477,9 @@ body {
 		    font-size: 9px;
 		    color: #564531;
 		}
+		.b-product-params-left .b-product-colors:before{
+			top: calc(50% + 17px);
+		}
 	.b-category-tiles .b-tile-item{
 		width: calc(100%/2 - 6px);
 	}
@@ -779,7 +782,6 @@ body {
 	.b-product-info p b{
 		line-height: 16px;
 	}
-
 
 @media screen and (max-width: 665px){
 
@@ -1089,7 +1091,18 @@ body {
 		width: calc(100%/3 - 12px);
 	}
 	#SDEK_info {
-	    display: none;
+	    /*display: none;*/
+	    top: 0;
+		float: none;
+	}
+	#SDEK_head{
+		display: none;
+	}
+	#SDEK_title{
+		border-bottom: 0;
+	}
+	#SDEK_map{
+		display: none;
 	}
 	#SDEK_map .ymaps-2-1-74-controls__control {
 	    left: 16px !important;

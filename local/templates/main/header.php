@@ -5,7 +5,7 @@ $curPage = $APPLICATION->GetCurPage();
 $urlArr = $GLOBALS["urlArr"] = explode("/", $curPage);
 $page = $GLOBALS["page"] = ( $urlArr[2] == null || $urlArr[2] == "" )?$urlArr[1]:$urlArr[2];
 $lighthouse = $GLOBALS["lighthouse"] = strpos($_SERVER['HTTP_USER_AGENT'], "Lighthouse");
-$GLOBALS["version"] = 81;
+$GLOBALS["version"] = 83;
 $is404 = defined('ERROR_404') && ERROR_404=='Y' && !defined('ADMIN_SECTION');
 $arPage = ( isset($arPages[$urlArr[2]]) )?$arPages[$urlArr[2]]:$arPages[$urlArr[1]];
 
