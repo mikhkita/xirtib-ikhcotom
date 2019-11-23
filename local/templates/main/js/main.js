@@ -113,8 +113,6 @@ $(document).ready(function(){
         }
     });
 
-
-
     function selectOffer(){
         // console.log('select');
         var url = window.location.href.split('/');
@@ -499,6 +497,35 @@ $(document).ready(function(){
             }
         }
 
+    });
+
+    $(".b-filter-texture-list input[type=radio]").click(function(){
+
+        var previousValue = $(this).attr('previousValue');
+        var name = $(this).attr('name');
+    
+        if (previousValue == 'checked'){
+          
+            $(this).removeAttr('checked');
+            $(this).attr('previousValue', false);
+            $(this).prop('checked', false);
+
+            $(this).siblings('input').removeAttr('checked');
+            $(this).siblings('input').attr('previousValue', false);
+            $(this).siblings('input').prop('checked', false);
+
+            $(this).parents('form').trigger('change');
+    
+        }else{
+          
+            $(".b-filter-texture-list input").attr('previousValue', false);
+            $(this).attr('previousValue', 'checked');
+            $(this).prop('checked', true);
+
+            $(this).siblings('input').attr('previousValue', 'checked')
+            $(this).siblings('input').prop('checked', true);
+
+        }
     });
 
     //табы

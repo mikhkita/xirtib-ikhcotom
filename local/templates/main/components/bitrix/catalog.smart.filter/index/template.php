@@ -40,7 +40,7 @@ foreach($arResult["ITEMS"] as $arItem){
 			<? foreach ($arColors[0]['VALUES'] as $xmlID => $color): ?>
 				<?$renderImage = CFile::ResizeImageGet($color["FILE"], Array("width" => 61, "height" => 61), BX_RESIZE_IMAGE_PROPORTIONAL, false, $arFilters );?>
 				<div class="b-filter-color-item">
-					<input class="main-texture" type="checkbox" name="<?=$color["CONTROL_NAME"]?>" id="<?=$color["CONTROL_ID"]?>" value="<?=$color["HTML_VALUE"]?>">
+					<input class="main-texture" type="radio" name="arrFilter_4" id="<?=$color["CONTROL_ID"]?>" value="<?=$color["HTML_VALUE_ALT"]?>">
 					<label for="<?=$color["CONTROL_ID"]?>"><img src="<?=$renderImage['src']?>"></label>
 				</div>
 			<? endforeach; ?>

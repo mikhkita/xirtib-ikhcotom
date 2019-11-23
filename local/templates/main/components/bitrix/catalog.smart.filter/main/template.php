@@ -197,9 +197,10 @@ if(count($arResult["ITEMS"]) <= 2){
 							</label>
 						</li>
 						<?endforeach?>
-					</div>
-					<?
-					break;
+					</ul>
+				</div>
+				<?
+				break;
 				case "H"://CHECKBOXES_WITH_PICTURES_AND_LABELS
 				?>
 				<div class="col-xs-12">
@@ -385,42 +386,21 @@ if(count($arResult["ITEMS"]) <= 2){
 					break;
 				case "K"://RADIO_BUTTONS
 				?>
-				<div class="col-xs-12">
-					<div class="radio">
-						<label class="bx-filter-param-label" for="<? echo "all_".$arCur["CONTROL_ID"] ?>">
-							<span class="bx-filter-input-checkbox">
-								<input
-								type="radio"
-								value=""
-								name="<? echo $arCur["CONTROL_NAME_ALT"] ?>"
-								id="<? echo "all_".$arCur["CONTROL_ID"] ?>"
-								onclick="smartFilter.click(this)"
-								/>
-								<span class="bx-filter-param-text"><? echo GetMessage("CT_BCSF_FILTER_ALL"); ?></span>
-							</span>
-						</label>
-					</div>
-					<?foreach($arItem["VALUES"] as $val => $ar):?>
-					<div class="radio">
-						<label data-role="label_<?=$ar["CONTROL_ID"]?>" class="bx-filter-param-label" for="<? echo $ar["CONTROL_ID"] ?>">
-							<span class="bx-filter-input-checkbox <? echo $ar["DISABLED"] ? 'disabled': '' ?>">
-								<input
-								type="radio"
-								value="<? echo $ar["HTML_VALUE_ALT"] ?>"
-								name="<? echo $ar["CONTROL_NAME_ALT"] ?>"
-								id="<? echo $ar["CONTROL_ID"] ?>"
-								<? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
-								onclick="smartFilter.click(this)"
-								/>
-								<span class="bx-filter-param-text" title="<?=$ar["VALUE"];?>"><?=$ar["VALUE"];?><?
-								if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
-									?>&nbsp;(<span data-role="count_<?=$ar["CONTROL_ID"]?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)<?
-									endif;?></span>
-								</span>
-							</label>
-						</div>
+				<div class="b-filter-toggle">
+					<ul class="b-filter-more b-filter-texture-list clearfix">
+						<?foreach($arItem["VALUES"] as $val => $ar):?>
+							<li>
+								<input type="radio" name="COLOR" value="<?=$ar['URL_ID']?>" class="<?=$ar["CONTROL_ID"]?>">
+								<input type="radio" value="<? echo $ar["HTML_VALUE_ALT"] ?>" name="<? echo $ar["CONTROL_NAME_ALT"] ?>" id="<? echo $ar["CONTROL_ID"] ?>" <? echo $ar["CHECKED"]? 'checked="checked"': '' ?> />
+								<label for="<?=$ar["CONTROL_ID"]?>" onclick="BX.toggleClass(this, 'bx-active');">
+									<?if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])):?>
+									<img src="<?=$ar["FILE"]["SRC"]?>">
+									<?endif?>
+								</label>
+							</li>
 						<?endforeach;?>
-					</div>
+					</ul>
+				</div>
 					<?
 					break;
 				case "U"://CALENDAR

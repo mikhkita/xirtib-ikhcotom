@@ -202,7 +202,7 @@ if (count($arResult["OFFERS"]) < 5){
 						</a>
 						<script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
 						<script src="https://yastatic.net/share2/share.js"></script>
-						<div class="ya-share2" data-url="<?=$shareLink?>"  data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>
+						<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>
 					</li>
 					<li>
 						<? if ($_REQUEST['element_view'] == "Y"): ?>

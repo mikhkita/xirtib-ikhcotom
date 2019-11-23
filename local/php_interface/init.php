@@ -927,50 +927,74 @@ function getElementImages($arResult, $isList = false){
 		'COLOR_PHOTO' => array(),
 	);
 
-	if ($arResult["OFFERS"]){
-		$flag = false;
+	$colorImg = false;
+
+	if ($isList && $_REQUEST['arrFilter_4']) {
 		foreach ($arResult["OFFERS"] as $key => $offer) {
-			
-			if ($offer["DETAIL_PICTURE"]){
-				$arDetailPhoto = resizePhotos($offer["DETAIL_PICTURE"], $isList);
-				$flag = true;
-			} else {
-				if ($offer["PREVIEW_PICTURE"]) {
-					$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
+			if ($_REQUEST['COLOR'] == $offer['PROPERTIES']['COLOR']['VALUE']) {
+				
+				$colorImg = true;
+				if ($offer["DETAIL_PICTURE"]){
+					$arDetailPhoto = resizePhotos($offer["DETAIL_PICTURE"], $isList);
+				} else {
+					if ($offer["PREVIEW_PICTURE"]) {
+						$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
+					} else {
+						$arDetailPhoto['ORIGINAL'] = $arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+					}
+				}
+
+				array_push($arImg['DETAIL_PHOTO'], $arDetailPhoto);
+			}
+		}		
+	}
+
+	if (!$colorImg){
+		if ($arResult["OFFERS"]){
+			$flag = false;
+			foreach ($arResult["OFFERS"] as $key => $offer) {
+				
+				if ($offer["DETAIL_PICTURE"]){
+					$arDetailPhoto = resizePhotos($offer["DETAIL_PICTURE"], $isList);
 					$flag = true;
 				} else {
-					$arDetailPhoto['ORIGINAL'] = $arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+					if ($offer["PREVIEW_PICTURE"]) {
+						$arDetailPhoto = resizePhotos($offer["PREVIEW_PICTURE"], $isList);
+						$flag = true;
+					} else {
+						$arDetailPhoto['ORIGINAL'] = $arDetailPhoto['BIG'] = $arDetailPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+					}
+				}
+
+				if ($offer["PREVIEW_PICTURE"]) {
+					$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"], false, true);
+					$colorFlag = true;
+				} else {
+					$arColorPhoto['ORIGINAL'] = $arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+				}	
+
+				array_push($arImg['DETAIL_PHOTO'], $arDetailPhoto);
+				array_push($arImg['COLOR_PHOTO'], $arColorPhoto);
+			}
+
+			if (!$flag && $arResult["DETAIL_PICTURE"]) {
+				$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"], $isList);
+				foreach ($arImg['DETAIL_PHOTO'] as $key => $value) {
+					$arImg['DETAIL_PHOTO'][$key] = $arPhoto;
 				}
 			}
 
-			if ($offer["PREVIEW_PICTURE"]) {
-				$arColorPhoto = resizePhotos($offer["PREVIEW_PICTURE"], false, true);
-				$colorFlag = true;
-			} else {
-				$arColorPhoto['ORIGINAL'] = $arColorPhoto['BIG'] = $arColorPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
-			}	
-
-			array_push($arImg['DETAIL_PHOTO'], $arDetailPhoto);
-			array_push($arImg['COLOR_PHOTO'], $arColorPhoto);
-		}
-
-		if (!$flag && $arResult["DETAIL_PICTURE"]) {
-			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"], $isList);
-			foreach ($arImg['DETAIL_PHOTO'] as $key => $value) {
-				$arImg['DETAIL_PHOTO'][$key] = $arPhoto;
+			if (!$colorFlag) {
+				unset($arImg['COLOR_PHOTO']);
 			}
-		}
-
-		if (!$colorFlag) {
-			unset($arImg['COLOR_PHOTO']);
-		}
-	} else {
-		if ($arResult["DETAIL_PICTURE"]){
-			$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"], $isList);
 		} else {
-			$arPhoto['ORIGINAL'] = $arPhoto['BIG'] = $arPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+			if ($arResult["DETAIL_PICTURE"]){
+				$arPhoto = resizePhotos($arResult["DETAIL_PICTURE"], $isList);
+			} else {
+				$arPhoto['ORIGINAL'] = $arPhoto['BIG'] = $arPhoto['SMALL'] = SITE_TEMPLATE_PATH.'/i/hank.svg';
+			}
+			array_push($arImg['DETAIL_PHOTO'], $arPhoto);
 		}
-		array_push($arImg['DETAIL_PHOTO'], $arPhoto);
 	}
 
 	return $arImg;

@@ -782,6 +782,13 @@ body {
 	.b-product-info p b{
 		line-height: 16px;
 	}
+.sdek-error {
+	margin-left: 0;
+	margin-top: 20px;
+	display: block;
+	text-align: center;
+}
+
 
 @media screen and (max-width: 665px){
 
@@ -1091,9 +1098,16 @@ body {
 		width: calc(100%/3 - 12px);
 	}
 	#SDEK_info {
-	    /*display: none;*/
 	    top: 0;
 		float: none;
+		width: 100%;
+		left: 0;
+		box-shadow: none;
+		border: 1px solid #e3e3e3;
+		height: auto;
+	}
+	#SDEK_wrapper{
+		width: 100%;
 	}
 	#SDEK_head{
 		display: none;
@@ -1106,6 +1120,9 @@ body {
 	}
 	#SDEK_map .ymaps-2-1-74-controls__control {
 	    left: 16px !important;
+	}
+	#SDEK_ten{
+		display: none;
 	}
 }
 

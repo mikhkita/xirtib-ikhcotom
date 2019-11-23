@@ -414,7 +414,23 @@
                 this.couponList = coupons;
             },
             validationForm: function () {
-                if(this.formValid){
+
+                var sdek_success = false;
+                if ($('.sdek-error').length) {
+                    $('.b-order').find('.sdek-error').each(function(){
+                        $(this).remove();
+                    })
+                }
+
+                if($('input[name=delivery]:checked').val() == '15'){
+                    if ($('.jspPane').find('.sdek_chosen').length == '1'){
+                        sdek_success = true;
+                    }
+                } else {
+                    sdek_success = true;
+                }
+
+                if(this.formValid && sdek_success){
                     this.form.nowSubmit = true;
                     if( typeof ym != "undefined" ){
                         ym(36653305, 'reachGoal', 'order');
@@ -431,6 +447,11 @@
                         }else{
                             $("#app-order").find("input.error,select.error,textarea.error").eq(0).focus();
                         }
+
+                        if (!sdek_success) {
+                            $('.b-btn-order-submit').after('<p class="red sdek-error">Укажите пункт самовывоза СДЕК</p>')
+                        }
+
                     }, 10);
                 }
             },
@@ -536,6 +557,11 @@
                 return (res > 0) ? +res.toFixed(1) : 0;
             },
             delivery: function () {
+                if ($('.sdek-error').length) {
+                    $('.b-order').find('.sdek-error').each(function(){
+                        $(this).remove();
+                    })
+                }
                 var active = this.form.deliveryActive;
                 return this.form.deliveryList.filter(function(v) {return v.id === active})[0].cost;
             },

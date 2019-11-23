@@ -364,7 +364,6 @@ h3.b-title{
 }
 .slideout-menu h2{
 	font-size: 28px;
-    font-family: 'Lora-Bold';
 }
 .b-text{
 	font-size: 16px;
@@ -3608,7 +3607,8 @@ body.no-auth-before .b-btn-review-no-auth{
 					.b-filter-texture-list li input{
 						display: none;
 					}
-					.b-filter-texture-list li input[type="checkbox"]:checked + label{
+					.b-filter-texture-list li input[type="checkbox"]:checked + label,
+					.b-filter-texture-list li input[type="radio"]:checked + label{
 						border: 2px solid #77BE32;
 					}
 					.b-filter-texture-list li label{
@@ -5723,6 +5723,10 @@ textarea:-moz-placeholder {
 	}
 .pass-error p{
 	color: #F00;
+}
+.sdek-error{
+	display: inline-block;
+	margin-left: 20px;
 }
 /*------hover--------*/
 @media screen and (min-width: 1024px){

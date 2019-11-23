@@ -15,8 +15,7 @@ $this->setFrameMode(true);?>
 <div id="catalog_section_component">
 <?$frame = $this->createFrame("catalog_section_component", false)->begin();?>
 
-<? 
-if(count($arResult["ITEMS"])): ?>
+<? if(count($arResult["ITEMS"])): ?>
 	<div class="b-catalog-inner clearfix">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
 
@@ -29,6 +28,10 @@ if(count($arResult["ITEMS"])): ?>
 				<? $maxVal = 0; ?>
 
 				<? foreach ($arItem["OFFERS"] as $offer): ?>
+
+					<? if($offer['PROPERTIES']['COLOR']['VALUE'] == $_REQUEST['COLOR']): ?>
+						<? $select_offer = '#'.$offer['ID']; ?>
+					<? endif; ?>	
 
 					<? if( $offer["PRICES"]["PRICE"]["DISCOUNT_VALUE"] != $offer["PRICES"]["PRICE"]["VALUE"] ): ?>
 						<? $class = "has-discount"; ?>
@@ -79,7 +82,7 @@ if(count($arResult["ITEMS"])): ?>
 			?>
 
 			<div class="b-item-card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-				<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-hover-frame"></a>
+				<a href="<?=$arItem["DETAIL_PAGE_URL"]?><?=$select_offer?>" class="b-card-hover-frame"></a>
 				<div class="b-card-top">
 					<? $images = getElementImages($arItem, true);?>
 					<? $renderImage['src'] = $images["DETAIL_PHOTO"][0]["SMALL"]; ?>
@@ -91,11 +94,11 @@ if(count($arResult["ITEMS"])): ?>
 
 					<a href="/ajax/?ID=<?=$arItem['ID']?>" class="fav-link b-card-fav icon-fav-heart" data-id="<?=$arItem['ID']?>"></a>
 
-					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-card-top-dark"></a>
+					<a href="<?=$arItem["DETAIL_PAGE_URL"]?><?=$select_offer?>" class="b-card-top-dark"></a>
 					<a href="#element_view" data-href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="element-view b-card-top-hover fancy">Быстрый просмотр</a>
 				</div>
 				<div class="b-card-bottom">
-					<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="b-item-name"><?=(($arItem['PROPERTIES']['TITLE']['VALUE'])?($arItem['PROPERTIES']['TITLE']['VALUE']):($arItem['NAME']))?></a>
+					<a href="<?=$arItem["DETAIL_PAGE_URL"]?><?=$select_offer?>" class="b-item-name"><?=(($arItem['PROPERTIES']['TITLE']['VALUE'])?($arItem['PROPERTIES']['TITLE']['VALUE']):($arItem['NAME']))?></a>
 					<h5 class="b-item-subname"><?=$arItem['PROPERTIES']['SUBTITLE']['VALUE']?></h5>
 				</div>
 				<? $differentPriceClass = ''; ?>
