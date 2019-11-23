@@ -1009,6 +1009,9 @@ function resizePhotos($photo, $isList = false, $isColor = false){
 	$arPhoto['ORIGINAL'] = $tmpOriginal['src'];
 	$arPhoto['BIG'] = $tmpBig['src'];
 	$arPhoto['SMALL'] = $tmpSmall['src'];
+
+	// vardump($photo['ALT']);
+
 	return $arPhoto;
 }
 

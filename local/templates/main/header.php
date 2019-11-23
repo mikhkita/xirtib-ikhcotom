@@ -64,6 +64,11 @@ CModule::IncludeModule('iblock');
 	    }
 	?>
 
+	<meta property="og:url" content="<?=$_SERVER["HTTP_HOST"]?>">
+    <meta property="og:title" content="<?$APPLICATION->ShowTitle()?>">
+    <meta property="og:description" content="<?$APPLICATION->ShowProperty("description")?>">
+	<!-- <meta property="og:image" content="https://motochki-klubochki.ru/upload/resize_cache/iblock/2ca/692_692_1/2ca52c51a29a0dc8d33b51939076c513.jpeg"> -->
+
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png" />
@@ -77,13 +82,16 @@ CModule::IncludeModule('iblock');
 	<link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32" />
 	<link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16" />
 	<link rel="icon" type="image/png" href="/favicon/favicon-128.png" sizes="128x128" />
-	<meta name="application-name" content="Моточки Клубочки"/>
 	<meta name="msapplication-TileColor" content="#" />
+	<meta name="application-name" content="Моточки-Клубочки"/>
+
+	<?/*?>
 	<meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png" />
 	<meta name="msapplication-square70x70logo" content="/favicon/mstile-70x70.png" />
 	<meta name="msapplication-square150x150logo" content="/favicon/mstile-150x150.png" />
 	<meta name="msapplication-wide310x150logo" content="/favicon/mstile-310x150.png" />
 	<meta name="msapplication-square310x310logo" content="/favicon/mstile-310x310.png" />
+	<?*/?>
 
 	<?$APPLICATION->ShowHeadStrings();?>
 
@@ -331,6 +339,6 @@ CModule::IncludeModule('iblock');
 					"SITE_ID" => "s1",
 				),false );?>	
 				<? if (!$isDetail): ?>
-					<h1 class="b-title"><?$APPLICATION->ShowTitle();?></h1>
+					<h1 class="b-title"><?$APPLICATION->ShowTitle(false);?></h1>
 				<? endif; ?>
 		<? endif; ?>

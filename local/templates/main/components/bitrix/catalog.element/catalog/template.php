@@ -151,6 +151,8 @@ if (count($arResult["OFFERS"]) < 5){
 }
 
 ?>
+<!-- <meta property="og:image" content="https://<?=$_SERVER["HTTP_HOST"]?><?=$bigImage?>"> -->
+
 <div class="b-detail">
 	<? if ($_REQUEST['element_view'] == "Y"): ?>
 		<? $GLOBALS['APPLICATION']->RestartBuffer(); ?>
@@ -164,7 +166,7 @@ if (count($arResult["OFFERS"]) < 5){
 						<? foreach ($arResult["OFFERS"] as $key => $offer): ?>
 							<a class="fancy-img" href="<?=$arImg["DETAIL_PHOTO"][$key]["ORIGINAL"]?>" data-color-id="<?=$offer['ID']?>" data-fancybox="gallery-1">
 								<div class="img-cont">
-									<img src="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" alt="<?=$arResult['NAME']?> <?=$offer['NAME']?>" title="<?=$arResult['NAME']?> <?=$offer['NAME']?>">
+									<img src="<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>" alt="<?=$arResult["IPROPERTY_VALUES"]['ELEMENT_DETAIL_PICTURE_FILE_ALT']?>" title="<?=$arResult["IPROPERTY_VALUES"]['ELEMENT_DETAIL_PICTURE_FILE_TITLE']?>">
 								</div>
 								<!-- <div class="catalog-element-img" style="background-image: url('<?=$arImg["DETAIL_PHOTO"][$key]["BIG"]?>');"></div> -->
 							</a>
@@ -202,7 +204,8 @@ if (count($arResult["OFFERS"]) < 5){
 						</a>
 						<script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
 						<script src="https://yastatic.net/share2/share.js"></script>
-						<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram"></div>
+						<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,whatsapp,telegram" 
+						data-image='http://<?=$_SERVER["HTTP_HOST"]?><?=$bigImage?>' data-title="<?$APPLICATION->ShowTitle()?>" data-description='<?$APPLICATION->ShowProperty("description")?>'></div>
 					</li>
 					<li>
 						<? if ($_REQUEST['element_view'] == "Y"): ?>

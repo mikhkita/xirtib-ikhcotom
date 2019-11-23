@@ -12,7 +12,7 @@ $APPLICATION->SetTitle("Каталог");?>
 	
 	while($ob = $res->GetNextElement()){ 
 		$arFields = $ob->GetFields(); 
-		$seoSectoinTitle = $arFields['NAME'];
+		$seoSectionTitle = $arFields['NAME'];
 		$seoText = $arFields['DESCRIPTION'];
 	}
 
@@ -166,8 +166,7 @@ $APPLICATION->SetTitle("Каталог");?>
 
 				<? if ($_REQUEST["SECTION_CODE"] == "aktsii-i-skidki"): ?>
 					<? $_REQUEST["SECTION_CODE"] = ''; ?>
-					<? 
-					$APPLICATION->SetTitle($arFields["NAME"]);
+					<? $APPLICATION->SetTitle($arFields["NAME"]);
 
 					$GLOBALS['arrFilter'][] = array(
 							"LOGIC" => "OR", 
@@ -301,7 +300,7 @@ $APPLICATION->SetTitle("Каталог");?>
 		</div>
 	</div>
 	<? if ($seoText): ?>
-		<?$APPLICATION->SetTitle($seoSectoinTitle);?>
+		<?$APPLICATION->SetTitle($seoSectionTitle);?>
 		<div class="b-text b-seo">
 			<br>
 			<br>
